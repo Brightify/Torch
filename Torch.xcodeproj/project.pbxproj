@@ -11,6 +11,8 @@
 		183D04061C4691C600EBAEF3 /* Torch.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 183D03FB1C4691C600EBAEF3 /* Torch.framework */; };
 		DC5A3A5D1CF6F8D600F520E3 /* Torch.podspec in Resources */ = {isa = PBXBuildFile; fileRef = DC5A3A5C1CF6F8D600F520E3 /* Torch.podspec */; };
 		DC8B9F2A1D3E26C100E3B9DE /* ApiDraft.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC8B9F291D3E26C100E3B9DE /* ApiDraft.swift */; };
+		DC8B9F2F1D3EB4AE00E3B9DE /* TorchTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC8B9F2B1D3EB41F00E3B9DE /* TorchTest.swift */; };
+		DC8B9F321D3EC18D00E3B9DE /* TorchTests.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = DC8B9F301D3EC18D00E3B9DE /* TorchTests.xcdatamodeld */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -27,10 +29,12 @@
 		183D03FB1C4691C600EBAEF3 /* Torch.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Torch.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		183D03FE1C4691C600EBAEF3 /* Torch.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Torch.h; sourceTree = "<group>"; };
 		183D04001C4691C600EBAEF3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		183D04051C4691C600EBAEF3 /* Torch.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Torch.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		183D04051C4691C600EBAEF3 /* TorchTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TorchTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		183D040C1C4691C600EBAEF3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DC5A3A5C1CF6F8D600F520E3 /* Torch.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Torch.podspec; sourceTree = "<group>"; };
-		DC8B9F291D3E26C100E3B9DE /* ApiDraft.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiDraft.swift; sourceTree = "<group>"; };
+		DC8B9F291D3E26C100E3B9DE /* ApiDraft.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = ApiDraft.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		DC8B9F2B1D3EB41F00E3B9DE /* TorchTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TorchTest.swift; sourceTree = "<group>"; };
+		DC8B9F311D3EC18D00E3B9DE /* TorchTests.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TorchTests.xcdatamodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,7 +70,7 @@
 			isa = PBXGroup;
 			children = (
 				183D03FB1C4691C600EBAEF3 /* Torch.framework */,
-				183D04051C4691C600EBAEF3 /* Torch.xctest */,
+				183D04051C4691C600EBAEF3 /* TorchTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -87,6 +91,8 @@
 				183D040C1C4691C600EBAEF3 /* Info.plist */,
 				DC70D0D01D2B006200014C5F /* Generated */,
 				DC70D0B91D2AF3FA00014C5F /* Source */,
+				DC8B9F2B1D3EB41F00E3B9DE /* TorchTest.swift */,
+				DC8B9F301D3EC18D00E3B9DE /* TorchTests.xcdatamodeld */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -152,7 +158,7 @@
 			);
 			name = TorchTests;
 			productName = MockeryTests;
-			productReference = 183D04051C4691C600EBAEF3 /* Torch.xctest */;
+			productReference = 183D04051C4691C600EBAEF3 /* TorchTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -222,6 +228,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DC8B9F321D3EC18D00E3B9DE /* TorchTests.xcdatamodeld in Sources */,
+				DC8B9F2F1D3EB4AE00E3B9DE /* TorchTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -382,7 +390,7 @@
 				INFOPLIST_FILE = Tests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = org.brightify.TorchTests;
-				PRODUCT_NAME = Torch;
+				PRODUCT_NAME = TorchTests;
 			};
 			name = Debug;
 		};
@@ -392,7 +400,7 @@
 				INFOPLIST_FILE = Tests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = org.brightify.TorchTests;
-				PRODUCT_NAME = Torch;
+				PRODUCT_NAME = TorchTests;
 			};
 			name = Release;
 		};
@@ -427,6 +435,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		DC8B9F301D3EC18D00E3B9DE /* TorchTests.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				DC8B9F311D3EC18D00E3B9DE /* TorchTests.xcdatamodel */,
+			);
+			currentVersion = DC8B9F311D3EC18D00E3B9DE /* TorchTests.xcdatamodel */;
+			path = TorchTests.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 183D03F21C4691C600EBAEF3 /* Project object */;
 }
