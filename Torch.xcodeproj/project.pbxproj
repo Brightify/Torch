@@ -10,6 +10,7 @@
 		183D03FF1C4691C600EBAEF3 /* Torch.h in Headers */ = {isa = PBXBuildFile; fileRef = 183D03FE1C4691C600EBAEF3 /* Torch.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		183D04061C4691C600EBAEF3 /* Torch.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 183D03FB1C4691C600EBAEF3 /* Torch.framework */; };
 		DC5A3A5D1CF6F8D600F520E3 /* Torch.podspec in Resources */ = {isa = PBXBuildFile; fileRef = DC5A3A5C1CF6F8D600F520E3 /* Torch.podspec */; };
+		DC8B9F2A1D3E26C100E3B9DE /* ApiDraft.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC8B9F291D3E26C100E3B9DE /* ApiDraft.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -29,6 +30,7 @@
 		183D04051C4691C600EBAEF3 /* Torch.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Torch.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		183D040C1C4691C600EBAEF3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DC5A3A5C1CF6F8D600F520E3 /* Torch.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Torch.podspec; sourceTree = "<group>"; };
+		DC8B9F291D3E26C100E3B9DE /* ApiDraft.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiDraft.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,6 +76,7 @@
 			children = (
 				183D03FE1C4691C600EBAEF3 /* Torch.h */,
 				183D04001C4691C600EBAEF3 /* Info.plist */,
+				DC8B9F291D3E26C100E3B9DE /* ApiDraft.swift */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -211,6 +214,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DC8B9F2A1D3E26C100E3B9DE /* ApiDraft.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
