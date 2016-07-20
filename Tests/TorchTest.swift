@@ -16,8 +16,9 @@ class TorchTest: XCTestCase {
     
     override func setUp() {
         super.setUp()
-
-        torch = UnsafeTorch(store: inMemoryStore, entities: Data.registration(), OtherData.registration())
+        
+        let inMemoryStore = StoreConfiguration(storeType: NSInMemoryStoreType, configuration: nil, storeURL: nil, options: nil)
+        torch = UnsafeTorch(store: inMemoryStore, entities: Data.self, OtherData.self)
     }
     
     func testSave() {
@@ -94,13 +95,13 @@ extension Data {
         object.setValue(id, forKey: "id")
         object.setValue(x, forKey: "x")
         object.setValue(y, forKey: "y")
-        object.setValue(try torch.managedObject(for: &otherDatum), forKey: "otherDatum")
+        object.setValue(try torch.getManagedObject(for:  &otherDatum), forKey: "otherDatum")
 
         var newOtherData: [OtherData] = []
         var otherDataObjects = Set<NSManagedObject>()
         for d in otherData {
             var mutableD = d
-            otherDataObjects.insert(try torch.managedObject(for: &mutableD))
+            otherDataObjects.insert(try torch.getManagedObject(for: &mutableD))
             newOtherData.append(mutableD)
         }
         otherData = newOtherData
