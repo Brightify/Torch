@@ -12,13 +12,38 @@ import CoreData
 
 class TorchTest: XCTestCase {
     
-    func testSave() {
+    private var torch: UnsafeTorch!
+    
+    override func setUp() {
+        super.setUp()
+        
         let modelURL =  NSBundle(forClass: TorchTest.self).URLForResource("TorchTests", withExtension: "momd")!
         let managedObjectModel = NSManagedObjectModel(contentsOfURL: modelURL)!
         let coordinator = NSPersistentStoreCoordinator(managedObjectModel: managedObjectModel)
         try! coordinator.addPersistentStoreWithType(NSInMemoryStoreType, configuration: nil, URL: nil, options: nil)
-        let torch = UnsafeTorch(persistentStoreCoordinator: coordinator)
-
+        torch = UnsafeTorch(persistentStoreCoordinator: coordinator)
+    }
+    
+    func testSave() {
+        saveData()
+        
+        let data: [Data] = torch.load(Data.self)
+        XCTAssertEqual(data.count, 3)
+        XCTAssertEqual(data.filter { (x: Data) in x.id == 0 && x.x == "a" && x.y == 10 }.count, 1)
+        XCTAssertEqual(data.filter { (x: Data) in x.id == 10 && x.x == "b" && x.y == 30 }.count, 1)
+        XCTAssertEqual(data.filter { (x: Data) in x.id == 11 && x.x == "c" && x.y == 100 }.count, 1)
+    }
+    
+    
+    func testPredicate() {
+        saveData()
+        
+        let loadedA: [Data] = torch.load(Data.self, where: Data.id.equalTo(0))
+        XCTAssertEqual(loadedA.count, 1)
+        XCTAssertEqual(loadedA.first?.x, "a")
+    }
+    
+    private func saveData() {
         var a = Data(id: nil, x: "a", y: 10)
         var b = Data(id: 10, x: "b", y: 30)
         var c = Data(id: nil, x: "c", y: 100)
@@ -26,12 +51,6 @@ class TorchTest: XCTestCase {
         torch.write {
             torch.save(&a).save(&b).save(&c)
         }
-        
-        let data: [Data] = torch.load(Data.self)
-
-        XCTAssertEqual(data.filter { (x: Data) in x.id == 0 && x.x == "a" && x.y == 10 }.count, 1)
-        XCTAssertEqual(data.filter { (x: Data) in x.id == 10 && x.x == "b" && x.y == 30 }.count, 1)
-        XCTAssertEqual(data.filter { (x: Data) in x.id == 11 && x.x == "c" && x.y == 100 }.count, 1)
     }
 }
 
@@ -40,10 +59,13 @@ struct Data: TorchEntity {
     var id: Int?
     let x: String
     let y: Int
-    
 }
 
 extension Data {
+    
+    static let id = OptionalProperty<Data, Int>(name: "id")
+    static let x = Property<Data, String>(name: "x")
+    static let y = Property<Data, Int>(name: "y")
     
     init(fromManagedObject object: NSManagedObject) {
         id = object.valueForKey("id") as! Int?

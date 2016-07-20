@@ -20,9 +20,9 @@ public class Torch {
     }
     
     // TODO Default values
-    public func load<T: TorchEntity>(type: T.Type, where predicate: PredicateConvertible = PredicateConvertible(), orderBy: SortDescriptor = SortDescriptor()) throws -> [T] {
+    public func load<T: TorchEntity>(type: T.Type, where predicate: PredicateConvertible<T> = PredicateConvertible(value: true), orderBy: SortDescriptor = SortDescriptor()) throws -> [T] {
         let request = NSFetchRequest(entityName: getEntityName(type))
-        request.predicate = predicate.toPredicate()
+        request.predicate = predicate.predicate
         request.sortDescriptors = orderBy.toSortDescriptors()
         let entities = try context.executeFetchRequest(request) as! [NSManagedObject]
         return entities.map { T(fromManagedObject: $0) }
@@ -59,9 +59,9 @@ public class Torch {
         return self
     }
     
-    public func delete<T: TorchEntity>(type: T.Type, where predicate: PredicateConvertible) throws -> Torch {
+    public func delete<T: TorchEntity>(type: T.Type, where predicate: PredicateConvertible<T>) throws -> Torch {
         let request = NSFetchRequest(entityName: getEntityName(type))
-        request.predicate = predicate.toPredicate()
+        request.predicate = predicate.predicate
         (try context.executeFetchRequest(request) as! [NSManagedObject]).forEach {
             context.deleteObject($0)
         }
@@ -69,8 +69,7 @@ public class Torch {
     }
     
     public func deleteAll<T: TorchEntity>(type: T.Type) throws -> Torch {
-        // TODO Correct PredicateConvertible
-        return try delete(type, where: PredicateConvertible())
+        return try delete(type, where: PredicateConvertible(value: true))
     }
     
     public func rollback() -> Torch {
@@ -139,7 +138,7 @@ public class UnsafeTorch {
     
     // TODO Default values
     // TODO Add proper error handling
-    public func load<T: TorchEntity>(type: T.Type, where predicate: PredicateConvertible = PredicateConvertible(), orderBy: SortDescriptor = SortDescriptor()) -> [T] {
+    public func load<T: TorchEntity>(type: T.Type, where predicate: PredicateConvertible<T> = PredicateConvertible(value: true), orderBy: SortDescriptor = SortDescriptor()) -> [T] {
         return try! torch.load(type, where: predicate, orderBy: orderBy)
     }
     
@@ -158,7 +157,7 @@ public class UnsafeTorch {
         return self
     }
     
-    public func delete<T: TorchEntity>(type: T.Type, where predicate: PredicateConvertible) -> UnsafeTorch {
+    public func delete<T: TorchEntity>(type: T.Type, where predicate: PredicateConvertible<T>) -> UnsafeTorch {
         try! torch.delete(type, where: predicate)
         return self
     }
@@ -194,12 +193,191 @@ public protocol TorchEntity {
     func updateManagedObject(object: NSManagedObject)
 }
 
-public struct PredicateConvertible {
+public struct PredicateConvertible<PARENT: TorchEntity> {
     
-    func toPredicate() -> NSPredicate {
-        return NSPredicate(value: true)
+    public let predicate: NSPredicate
+    
+    public init(predicate: NSPredicate) {
+        self.predicate = predicate
+    }
+    
+    public init(value: Bool) {
+        predicate = NSPredicate(value: value)
+    }
+
+    public init(block: (AnyObject, [String : AnyObject]?) -> Bool) {
+        predicate = NSPredicate(block: block)
+    }
+    
+    public func or(predicate: PredicateConvertible<PARENT>) -> PredicateConvertible<PARENT> {
+        return PredicateConvertible { object, substitutionVariables in
+            self.predicate.evaluateWithObject(object, substitutionVariables: substitutionVariables) ||
+                predicate.predicate.evaluateWithObject(object, substitutionVariables: substitutionVariables)
+        }
+    }
+    
+    public func and(predicate: PredicateConvertible<PARENT>) -> PredicateConvertible<PARENT> {
+        return PredicateConvertible { object, substitutionVariables in
+            self.predicate.evaluateWithObject(object, substitutionVariables: substitutionVariables) &&
+                predicate.predicate.evaluateWithObject(object, substitutionVariables: substitutionVariables)
+        }
     }
 }
+
+public func ||<PARENT: TorchEntity>(lhs: PredicateConvertible<PARENT>, rhs: PredicateConvertible<PARENT>) -> PredicateConvertible<PARENT> {
+    return lhs.or(rhs)
+}
+
+public func &&<PARENT: TorchEntity>(lhs: PredicateConvertible<PARENT>, rhs: PredicateConvertible<PARENT>) -> PredicateConvertible<PARENT>  {
+    return lhs.and(rhs)
+}
+
+
+
+
+
+public struct Property<PARENT: TorchEntity, T> {
+    public let name: String
+}
+
+private extension Property {
+    
+    private func getComparablePredicate(value: T, compareFunction: (T, T) -> Bool) -> PredicateConvertible<PARENT> {
+        return PredicateConvertible { object, _ in
+            // FIXME !
+            if let variable = (object as? NSObject)?.valueForKey(self.name) as? T {
+                return compareFunction(variable, value)
+            } else {
+                return false
+            }
+        }
+    }
+}
+
+public extension Property where T: Equatable {
+    
+    public func equalTo(value: T) -> PredicateConvertible<PARENT> {
+        return getComparablePredicate(value, compareFunction: ==)
+    }
+}
+
+public extension Property where T: Comparable {
+    
+    public func lessThan(value: T) -> PredicateConvertible<PARENT> {
+        return getComparablePredicate(value, compareFunction: <)
+    }
+    
+    public func lessThanOrEqualTo(value: T) -> PredicateConvertible<PARENT> {
+        return getComparablePredicate(value, compareFunction: <=)
+    }
+    
+    public func greaterThanOrEqualTo(value: T) -> PredicateConvertible<PARENT> {
+        return getComparablePredicate(value, compareFunction: >=)
+    }
+    
+    public func greaterThan(value: T) -> PredicateConvertible<PARENT> {
+        return getComparablePredicate(value, compareFunction: >)
+    }
+}
+
+public func ==<PARENT: TorchEntity, T: Equatable>(lhs: Property<PARENT, T>, rhs: T) -> PredicateConvertible<PARENT> {
+    return lhs.equalTo(rhs)
+}
+
+public func <<PARENT: TorchEntity, T: Comparable>(lhs: Property<PARENT, T>, rhs: T) -> PredicateConvertible<PARENT> {
+    return lhs.lessThan(rhs)
+}
+
+public func <=<PARENT: TorchEntity, T: Comparable>(lhs: Property<PARENT, T>, rhs: T) -> PredicateConvertible<PARENT> {
+    return lhs.lessThanOrEqualTo(rhs)
+}
+
+public func >=<PARENT: TorchEntity, T: Comparable>(lhs: Property<PARENT, T>, rhs: T) -> PredicateConvertible<PARENT> {
+    return lhs.greaterThanOrEqualTo(rhs)
+}
+
+public func ><PARENT: TorchEntity, T: Comparable>(lhs: Property<PARENT, T>, rhs: T) -> PredicateConvertible<PARENT> {
+    return lhs.greaterThan(rhs)
+}
+
+
+
+
+
+
+
+public struct OptionalProperty<PARENT: TorchEntity, T> {
+    public let name: String
+}
+
+private extension OptionalProperty {
+    
+    private func getComparablePredicate(value: T?, compareFunction: (T?, T?) -> Bool) -> PredicateConvertible<PARENT> {
+        return PredicateConvertible { object, _ in
+            // FIXME !
+            return compareFunction((object as? NSObject)?.valueForKey(self.name) as? T, value)
+        }
+    }
+}
+
+public extension OptionalProperty where T: Equatable {
+    
+    public func equalTo(value: T?) -> PredicateConvertible<PARENT> {
+        return getComparablePredicate(value, compareFunction: ==)
+    }
+}
+
+public extension OptionalProperty where T: Comparable {
+    
+    public func lessThan(value: T?) -> PredicateConvertible<PARENT> {
+        return getComparablePredicate(value, compareFunction: <)
+    }
+    
+    public func lessThanOrEqualTo(value: T?) -> PredicateConvertible<PARENT> {
+        return getComparablePredicate(value, compareFunction: <=)
+    }
+    
+    public func greaterThanOrEqualTo(value: T?) -> PredicateConvertible<PARENT> {
+        return getComparablePredicate(value, compareFunction: >=)
+    }
+    
+    public func greaterThan(value: T?) -> PredicateConvertible<PARENT> {
+        return getComparablePredicate(value, compareFunction: >)
+    }
+}
+
+public func ==<PARENT: TorchEntity, T: Equatable>(lhs: OptionalProperty<PARENT, T>, rhs: T?) -> PredicateConvertible<PARENT> {
+    return lhs.equalTo(rhs)
+}
+
+public func <<PARENT: TorchEntity, T: Comparable>(lhs: OptionalProperty<PARENT, T>, rhs: T?) -> PredicateConvertible<PARENT> {
+    return lhs.lessThan(rhs)
+}
+
+public func <=<PARENT: TorchEntity, T: Comparable>(lhs: OptionalProperty<PARENT, T>, rhs: T?) -> PredicateConvertible<PARENT> {
+    return lhs.lessThanOrEqualTo(rhs)
+}
+
+public func >=<PARENT: TorchEntity, T: Comparable>(lhs: OptionalProperty<PARENT, T>, rhs: T?) -> PredicateConvertible<PARENT> {
+    return lhs.greaterThanOrEqualTo(rhs)
+}
+
+public func ><PARENT: TorchEntity, T: Comparable>(lhs: OptionalProperty<PARENT, T>, rhs: T?) -> PredicateConvertible<PARENT> {
+    return lhs.greaterThan(rhs)
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 public struct SortDescriptor {
     
@@ -207,44 +385,6 @@ public struct SortDescriptor {
         return []
     }
 }
-
-
-
-/*
-
-
-struct Property<PARENT: TorchEntity, T> {
-    let name: String
-    
-    func equalTo(value: T) -> TypedFilter<T>
-}
-
-struct EqualToFilter<T>: PredicateConvertible {
-    let property: Property<T>
-    let value: T
-    
-    func asPredicate() -> String {
-        return "\(property.name) = \(value)"
-    }
-}
-
-extension Property where T: Equatable {
-    func equalTo(value: T)
-}
-
-extension Property where T: Comparable {
-    func greaterThan(value: T)
-    func lessThan(value: T)
-}
-
-
-
-
-*/
-
-
-
-
 
 
 
