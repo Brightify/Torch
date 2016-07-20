@@ -23,10 +23,10 @@ public class UnsafeTorch {
     }
     
     public func load<T: TorchEntity>(type: T.Type) -> [T] {
-        return load(type, where: BoolPredicate(value: true))
+        return load(type, where: TorchPredicate(value: true))
     }
     
-    public func load<T: TorchEntity, P: PredicateConvertible where T == P.ParentType>(type: T.Type, where predicate: P, orderBy: SortDescriptor = SortDescriptor()) -> [T] {
+    public func load<T: TorchEntity>(type: T.Type, where predicate: TorchPredicate<T>, orderBy: SortDescriptor = SortDescriptor()) -> [T] {
         do {
             return try torch.load(type, where: predicate, orderBy: orderBy)
         } catch {
@@ -57,7 +57,7 @@ public class UnsafeTorch {
         return self
     }
     
-    public func delete<T: TorchEntity, P: PredicateConvertible where T == P.ParentType>(type: T.Type, where predicate: P) -> UnsafeTorch {
+    public func delete<T: TorchEntity>(type: T.Type, where predicate: TorchPredicate<T>) -> UnsafeTorch {
         do {
             try torch.delete(type, where: predicate)
         } catch {

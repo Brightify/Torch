@@ -15,7 +15,7 @@
 		DC32A1031D3FF22C008E3A4E /* StoreConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC32A1021D3FF22C008E3A4E /* StoreConfiguration.swift */; };
 		DC32A10B1D40142C008E3A4E /* TorchMetadata.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC32A10A1D40142C008E3A4E /* TorchMetadata.swift */; };
 		DC32A10E1D401439008E3A4E /* TorchProperty.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC32A10D1D401439008E3A4E /* TorchProperty.swift */; };
-		DC32A1101D401443008E3A4E /* PredicateConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC32A10F1D401443008E3A4E /* PredicateConvertible.swift */; };
+		DC32A1101D401443008E3A4E /* TorchPredicate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC32A10F1D401443008E3A4E /* TorchPredicate.swift */; };
 		DC32A1141D40144B008E3A4E /* EntityRegistry.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC32A1111D40144B008E3A4E /* EntityRegistry.swift */; };
 		DC32A1161D40144B008E3A4E /* PropertyRegistry.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC32A1131D40144B008E3A4E /* PropertyRegistry.swift */; };
 		DC32A1181D401470008E3A4E /* NSConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC32A1171D401470008E3A4E /* NSConvertible.swift */; };
@@ -48,7 +48,7 @@
 		DC32A1021D3FF22C008E3A4E /* StoreConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoreConfiguration.swift; sourceTree = "<group>"; };
 		DC32A10A1D40142C008E3A4E /* TorchMetadata.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TorchMetadata.swift; path = Utils/TorchMetadata.swift; sourceTree = "<group>"; };
 		DC32A10D1D401439008E3A4E /* TorchProperty.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TorchProperty.swift; path = Property/TorchProperty.swift; sourceTree = "<group>"; };
-		DC32A10F1D401443008E3A4E /* PredicateConvertible.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PredicateConvertible.swift; path = Predicate/PredicateConvertible.swift; sourceTree = "<group>"; };
+		DC32A10F1D401443008E3A4E /* TorchPredicate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TorchPredicate.swift; path = Predicate/TorchPredicate.swift; sourceTree = "<group>"; };
 		DC32A1111D40144B008E3A4E /* EntityRegistry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EntityRegistry.swift; path = EntityRegistration/EntityRegistry.swift; sourceTree = "<group>"; };
 		DC32A1131D40144B008E3A4E /* PropertyRegistry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PropertyRegistry.swift; path = EntityRegistration/PropertyRegistry.swift; sourceTree = "<group>"; };
 		DC32A1171D401470008E3A4E /* NSConvertible.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NSConvertible.swift; path = Property/NSConvertible.swift; sourceTree = "<group>"; };
@@ -138,7 +138,7 @@
 		DC32A1071D40134B008E3A4E /* Predicate */ = {
 			isa = PBXGroup;
 			children = (
-				DC32A10F1D401443008E3A4E /* PredicateConvertible.swift */,
+				DC32A10F1D401443008E3A4E /* TorchPredicate.swift */,
 				DC32A1191D401566008E3A4E /* PropertyPredicates.swift */,
 			);
 			name = Predicate;
@@ -297,7 +297,7 @@
 				DC32A10B1D40142C008E3A4E /* TorchMetadata.swift in Sources */,
 				DC32A11C1D401681008E3A4E /* OptionalType.swift in Sources */,
 				DC32A0F31D3FF011008E3A4E /* UnsafeTorch.swift in Sources */,
-				DC32A1101D401443008E3A4E /* PredicateConvertible.swift in Sources */,
+				DC32A1101D401443008E3A4E /* TorchPredicate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

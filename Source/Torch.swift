@@ -27,11 +27,11 @@ public class Torch {
     }
     
     public func load<T: TorchEntity>(type: T.Type) throws -> [T] {
-        return try load(type, where: BoolPredicate(value: true))
+        return try load(type, where: TorchPredicate(value: true))
     }
     
     // TODO Default values
-    public func load<T: TorchEntity, P: PredicateConvertible where T == P.ParentType>(type: T.Type, where predicate: P, orderBy: SortDescriptor = SortDescriptor()) throws -> [T] {
+    public func load<T: TorchEntity>(type: T.Type, where predicate: TorchPredicate<T>, orderBy: SortDescriptor = SortDescriptor()) throws -> [T] {
         let request = NSFetchRequest(entityName: type.torch_name)
         request.predicate = predicate.toPredicate()
         request.sortDescriptors = orderBy.toSortDescriptors()
@@ -57,7 +57,7 @@ public class Torch {
         return self
     }
     
-    public func delete<T: TorchEntity, P: PredicateConvertible where T == P.ParentType>(type: T.Type, where predicate: P) throws -> Torch {
+    public func delete<T: TorchEntity>(type: T.Type, where predicate: TorchPredicate<T>) throws -> Torch {
         let request = NSFetchRequest(entityName: type.torch_name)
         request.predicate = predicate.toPredicate()
         (try context.executeFetchRequest(request) as! [NSManagedObject]).forEach {
@@ -67,7 +67,7 @@ public class Torch {
     }
     
     public func deleteAll<T: TorchEntity>(type: T.Type) throws -> Torch {
-        return try delete(type, where: BoolPredicate(value: true))
+        return try delete(type, where: TorchPredicate(value: true))
     }
     
     public func rollback() -> Torch {
