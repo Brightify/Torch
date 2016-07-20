@@ -16,12 +16,8 @@ class TorchTest: XCTestCase {
     
     override func setUp() {
         super.setUp()
-        
-        let modelURL =  NSBundle(forClass: TorchTest.self).URLForResource("TorchTests", withExtension: "momd")!
-        let managedObjectModel = NSManagedObjectModel(contentsOfURL: modelURL)!
-        let coordinator = NSPersistentStoreCoordinator(managedObjectModel: managedObjectModel)
-        try! coordinator.addPersistentStoreWithType(NSInMemoryStoreType, configuration: nil, URL: nil, options: nil)
-        torch = UnsafeTorch(persistentStoreCoordinator: coordinator)
+
+        torch = UnsafeTorch(store: inMemoryStore, entities: Data.registration(), OtherData.registration())
     }
     
     func testSave() {
@@ -44,10 +40,10 @@ class TorchTest: XCTestCase {
     }
     
     private func saveData() {
-        var a = Data(id: nil, x: "a", y: 10)
-        var b = Data(id: 10, x: "b", y: 30)
-        var c = Data(id: nil, x: "c", y: 100)
-        
+        var a = Data(id: nil, x: "a", y: 10, otherDatum: OtherData(id: nil, name: "OtherData1"), otherData: [])
+        var b = Data(id: 10, x: "b", y: 30, otherDatum: OtherData(id: nil, name: "OtherData2"), otherData: [])
+        var c = Data(id: nil, x: "c", y: 100, otherDatum: OtherData(id: nil, name: "OtherData3"), otherData: [])
+
         torch.write {
             torch.save(&a).save(&b).save(&c)
         }
@@ -55,27 +51,98 @@ class TorchTest: XCTestCase {
 }
 
 struct Data: TorchEntity {
-    
     var id: Int?
-    let x: String
-    let y: Int
+    var x: String
+    var y: Int
+    var otherDatum: OtherData
+    var otherData: [OtherData]
 }
 
 extension Data {
-    
-    static let id = OptionalProperty<Data, Int>(name: "id")
-    static let x = Property<Data, String>(name: "x")
-    static let y = Property<Data, Int>(name: "y")
-    
-    init(fromManagedObject object: NSManagedObject) {
+
+    static var torch_name: String {
+        return "TorchRegistration.Data"
+    }
+
+    static var torch_properties: [AnyProperty<Data>] {
+        return [
+            id.typeErased(),
+            x.typeErased(),
+            y.typeErased(),
+            otherDatum.typeErased(),
+            otherData.typeErased()
+        ]
+    }
+
+    static let id = ScalarProperty<Data, Int?>(name: "id")
+    static let x = ScalarProperty<Data, String>(name: "x")
+    static let y = ScalarProperty<Data, Int>(name: "y")
+    static let otherDatum = ToOneRelationProperty<Data, OtherData>(name: "otherDatum")
+    static let otherData = ToManyRelationProperty<Data, [OtherData]>(name: "otherData")
+
+    init(fromManagedObject object: NSManagedObject, torch: Torch) throws {
         id = object.valueForKey("id") as! Int?
         x = object.valueForKey("x") as! String
         y = object.valueForKey("y") as! Int
+
+        otherDatum = try OtherData(fromManagedObject: object.valueForKey("otherDatum") as! NSManagedObject, torch: torch)
+
+        otherData = try (object.valueForKey("otherData") as! Set<NSManagedObject>).map { try OtherData(fromManagedObject: $0, torch: torch) }
     }
-    
-    func updateManagedObject(object: NSManagedObject) {
+
+    mutating func torch_updateManagedObject(object: NSManagedObject, torch: Torch) throws {
         object.setValue(id, forKey: "id")
         object.setValue(x, forKey: "x")
         object.setValue(y, forKey: "y")
+        object.setValue(try torch.managedObject(for: &otherDatum), forKey: "otherDatum")
+
+        var newOtherData: [OtherData] = []
+        var otherDataObjects = Set<NSManagedObject>()
+        for d in otherData {
+            var mutableD = d
+            otherDataObjects.insert(try torch.managedObject(for: &mutableD))
+            newOtherData.append(mutableD)
+        }
+        otherData = newOtherData
+        object.setValue(otherDataObjects, forKey: "otherData")
+    }
+
+    static func torch_describe(to registry: EntityRegistry) {
+        registry.description(of: Data.self)
+    }
+}
+
+struct OtherData: TorchEntity {
+    var id: Int?
+    var name: String?
+}
+
+extension OtherData {
+    static var torch_name: String {
+        return "TorchRegistration.OtherData"
+    }
+
+    static var torch_properties: [AnyProperty<OtherData>] {
+        return [
+            id.typeErased(),
+            name.typeErased()
+        ]
+    }
+
+    static let id = ScalarProperty<OtherData, Int?>(name: "id")
+    static let name = ScalarProperty<OtherData, String?>(name: "name")
+
+    init(fromManagedObject object: NSManagedObject, torch: Torch) throws {
+        id = object.valueForKey("id") as! Int?
+        name = object.valueForKey("name") as! String?
+    }
+
+    mutating func torch_updateManagedObject(object: NSManagedObject, torch: Torch) throws {
+        object.setValue(id, forKey: "id")
+        object.setValue(name, forKey: "name")
+    }
+
+    static func torch_describe(to registry: EntityRegistry) {
+        registry.description(of: OtherData.self)
     }
 }
