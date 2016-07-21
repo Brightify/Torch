@@ -9,6 +9,7 @@
 import CoreData
 
 public class Database {
+    
     private let context = NSManagedObjectContext(concurrencyType: .MainQueueConcurrencyType)
     
     public convenience init(store: StoreConfiguration, entities: TorchEntityDescription.Type...) throws {
@@ -24,6 +25,7 @@ public class Database {
         context.persistentStoreCoordinator = coordinator
         
         try registerMetadata(entities.map { $0.torch_name })
+        
     }
     
     public func load<T: TorchEntity>(type: T.Type) throws -> [T] {
@@ -36,11 +38,36 @@ public class Database {
         request.predicate = predicate.toPredicate()
         request.sortDescriptors = orderBy.toSortDescriptors()
         let entities = try context.executeFetchRequest(request) as! [NSManagedObject]
-        return try entities.map { try T(fromManagedObject: $0, database: self) }
+        return try entities.map { try T(fromManagedObject: ManagedObject(object: $0, database: self)) }
     }
     
-    public func save<T: TorchEntity>(inout entity: T) throws -> Database {
+    /**
+        Saves object current state to database. Creates new object in database if necessery (id doesn`t exist yet or is nil).
+        If object doesn`t have id it is not possible to use it afterwards (next invocation of save will create new object).
+        If you do want to continue using the same object without loading it from database you can use `create` instead.
+    */
+    public func save<T: TorchEntity>(entities: T...) throws -> Database {
+        return try save(entities)
+    }
+    
+    public func save<T: TorchEntity>(entities: [T]) throws -> Database {
+        var mutableEntities = entities
+        try create(&mutableEntities)
+        return self
+    }
+    
+    /**
+        Same as `save` except it is possible to set entity new id. This allows to use the same object after it was created. If object has id this method acts as `save`.
+     */
+    public func create<T: TorchEntity>(inout entity: T) throws -> Database {
         try getManagedObject(for: &entity)
+        return self
+    }
+    
+    public func create<T: TorchEntity>(inout entities: [T]) throws -> Database {
+        for i in entities.indices {
+            try create(&entities[i])
+        }
         return self
     }
     
@@ -81,13 +108,12 @@ public class Database {
         return self
     }
     
-    // Public because needed in generated code.
-    public func getManagedObject<T: TorchEntity>(inout for entity: T) throws -> NSManagedObject {
+    func getManagedObject<T: TorchEntity>(inout for entity: T) throws -> NSManagedObject {
         if entity.id == nil {
             entity.id = try getNextId(T)
         }
         let managedObject = try loadManagedObject(entity) ?? createManagedObject(T)
-        try entity.torch_updateManagedObject(managedObject, database: self)
+        try entity.torch_updateManagedObject(ManagedObject(object: managedObject, database: self))
         try updateLastAssignedId(entity)
         return managedObject
     }

@@ -34,9 +34,33 @@ public class UnsafeDatabase {
         }
     }
     
-    public func save<T: TorchEntity>(inout entity: T) -> UnsafeDatabase {
+    /// See `Database.save`
+    public func save<T: TorchEntity>(entities: T...) -> UnsafeDatabase {
+        return save(entities)
+    }
+    
+    public func save<T: TorchEntity>(entities: [T]) -> UnsafeDatabase {
         do {
-            try database.save(&entity)
+            try database.save(entities)
+        } catch {
+            fatalError(String(error))
+        }
+        return self
+    }
+    
+    /// See `Database.create`
+    public func create<T: TorchEntity>(inout entity: T) -> UnsafeDatabase {
+        do {
+            try database.create(&entity)
+        } catch {
+            fatalError(String(error))
+        }
+        return self
+    }
+    
+    public func create<T: TorchEntity>(inout entities: [T]) -> UnsafeDatabase {
+        do {
+            try database.create(&entities)
         } catch {
             fatalError(String(error))
         }

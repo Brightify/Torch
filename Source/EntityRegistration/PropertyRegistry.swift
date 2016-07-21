@@ -72,6 +72,7 @@ public class PropertyRegistry {
         relationship.optional = optional
         relationship.minCount = minCount
         relationship.maxCount = maxCount
+        relationship.ordered = true
         registeredProperties[name] = relationship
     }
 }

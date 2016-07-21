@@ -41,13 +41,11 @@ class TorchTest: XCTestCase {
     }
     
     private func saveData() {
-        var a = Data(id: nil, x: "a", y: 10, otherDatum: OtherData(id: nil, name: "OtherData1"), otherData: [])
-        var b = Data(id: 10, x: "b", y: 30, otherDatum: OtherData(id: nil, name: "OtherData2"), otherData: [])
-        var c = Data(id: nil, x: "c", y: 100, otherDatum: OtherData(id: nil, name: "OtherData3"), otherData: [])
+        let a = Data(id: nil, x: "a", y: 10, otherDatum: OtherData(id: nil, name: "OtherData1"), otherData: [])
+        let b = Data(id: 10, x: "b", y: 30, otherDatum: OtherData(id: nil, name: "OtherData2"), otherData: [])
+        let c = Data(id: nil, x: "c", y: 100, otherDatum: OtherData(id: nil, name: "OtherData3"), otherData: [])
 
-        database.write {
-            database.save(&a).save(&b).save(&c)
-        }
+        database.save(a, b, c).write()
     }
 }
 
@@ -81,31 +79,20 @@ extension Data {
     static let otherDatum = ToOneRelationProperty<Data, OtherData>(name: "otherDatum")
     static let otherData = ToManyRelationProperty<Data, [OtherData]>(name: "otherData")
 
-    init(fromManagedObject object: NSManagedObject, database: Database) throws {
-        id = object.valueForKey("id") as! Int?
-        x = object.valueForKey("x") as! String
-        y = object.valueForKey("y") as! Int
-
-        otherDatum = try OtherData(fromManagedObject: object.valueForKey("otherDatum") as! NSManagedObject, database: database)
-
-        otherData = try (object.valueForKey("otherData") as! Set<NSManagedObject>).map { try OtherData(fromManagedObject: $0, database: database) }
+    init(fromManagedObject object: ManagedObject) throws {
+        id = object.getValue("id")
+        x = object.getValue("x")
+        y = object.getValue("y")
+        otherDatum = try object.getValue("otherDatum")
+        otherData = try object.getValue("otherData")
     }
 
-    mutating func torch_updateManagedObject(object: NSManagedObject, database: Database) throws {
-        object.setValue(id, forKey: "id")
-        object.setValue(x, forKey: "x")
-        object.setValue(y, forKey: "y")
-        object.setValue(try database.getManagedObject(for:  &otherDatum), forKey: "otherDatum")
-
-        var newOtherData: [OtherData] = []
-        var otherDataObjects = Set<NSManagedObject>()
-        for d in otherData {
-            var mutableD = d
-            otherDataObjects.insert(try database.getManagedObject(for: &mutableD))
-            newOtherData.append(mutableD)
-        }
-        otherData = newOtherData
-        object.setValue(otherDataObjects, forKey: "otherData")
+    mutating func torch_updateManagedObject(object: ManagedObject) throws {
+        object.setValue(id, "id")
+        object.setValue(x, "x")
+        object.setValue(y, "y")
+        try object.setValue(&otherDatum, "otherDatum")
+        try object.setValue(&otherData, "otherData")
     }
 
     static func torch_describe(to registry: EntityRegistry) {
@@ -133,14 +120,14 @@ extension OtherData {
     static let id = ScalarProperty<OtherData, Int?>(name: "id")
     static let name = ScalarProperty<OtherData, String?>(name: "name")
 
-    init(fromManagedObject object: NSManagedObject, database: Database) throws {
-        id = object.valueForKey("id") as! Int?
-        name = object.valueForKey("name") as! String?
+    init(fromManagedObject object: ManagedObject) throws {
+        id = object.getValue("id")
+        name = object.getValue("name")
     }
 
-    mutating func torch_updateManagedObject(object: NSManagedObject, database: Database) throws {
-        object.setValue(id, forKey: "id")
-        object.setValue(name, forKey: "name")
+    mutating func torch_updateManagedObject(object: ManagedObject) throws {
+        object.setValue(id, "id")
+        object.setValue(name, "name")
     }
 
     static func torch_describe(to registry: EntityRegistry) {

@@ -21,6 +21,7 @@
 		DC32A1181D401470008E3A4E /* NSConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC32A1171D401470008E3A4E /* NSConvertible.swift */; };
 		DC32A11A1D401566008E3A4E /* PropertyPredicates.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC32A1191D401566008E3A4E /* PropertyPredicates.swift */; };
 		DC32A11C1D401681008E3A4E /* OptionalType.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC32A11B1D401681008E3A4E /* OptionalType.swift */; };
+		DC49D2201D41544A00EECA2F /* ManagedObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC49D21F1D41544A00EECA2F /* ManagedObject.swift */; };
 		DC5A3A5D1CF6F8D600F520E3 /* Torch.podspec in Resources */ = {isa = PBXBuildFile; fileRef = DC5A3A5C1CF6F8D600F520E3 /* Torch.podspec */; };
 		DC8B9F2A1D3E26C100E3B9DE /* ApiDraft.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC8B9F291D3E26C100E3B9DE /* ApiDraft.swift */; };
 		DC8B9F2F1D3EB4AE00E3B9DE /* TorchTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC8B9F2B1D3EB41F00E3B9DE /* TorchTest.swift */; };
@@ -54,6 +55,7 @@
 		DC32A1171D401470008E3A4E /* NSConvertible.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NSConvertible.swift; path = Property/NSConvertible.swift; sourceTree = "<group>"; };
 		DC32A1191D401566008E3A4E /* PropertyPredicates.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PropertyPredicates.swift; path = Predicate/PropertyPredicates.swift; sourceTree = "<group>"; };
 		DC32A11B1D401681008E3A4E /* OptionalType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = OptionalType.swift; path = Property/OptionalType.swift; sourceTree = "<group>"; };
+		DC49D21F1D41544A00EECA2F /* ManagedObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManagedObject.swift; sourceTree = "<group>"; };
 		DC5A3A5C1CF6F8D600F520E3 /* Torch.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Torch.podspec; sourceTree = "<group>"; };
 		DC8B9F291D3E26C100E3B9DE /* ApiDraft.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = ApiDraft.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		DC8B9F2B1D3EB41F00E3B9DE /* TorchTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TorchTest.swift; sourceTree = "<group>"; };
@@ -103,8 +105,9 @@
 				183D03FE1C4691C600EBAEF3 /* Torch.h */,
 				183D04001C4691C600EBAEF3 /* Info.plist */,
 				DC8B9F291D3E26C100E3B9DE /* ApiDraft.swift */,
-				DC32A1021D3FF22C008E3A4E /* StoreConfiguration.swift */,
 				DC32A0F01D3FEFE6008E3A4E /* Database.swift */,
+				DC49D21F1D41544A00EECA2F /* ManagedObject.swift */,
+				DC32A1021D3FF22C008E3A4E /* StoreConfiguration.swift */,
 				DC32A0F61D3FF06E008E3A4E /* TorchEntity.swift */,
 				DC32A0F21D3FF011008E3A4E /* UnsafeDatabase.swift */,
 				DC32A1061D40133E008E3A4E /* EntityRegistration */,
@@ -295,6 +298,7 @@
 				DC32A1161D40144B008E3A4E /* PropertyRegistry.swift in Sources */,
 				DC8B9F2A1D3E26C100E3B9DE /* ApiDraft.swift in Sources */,
 				DC32A10B1D40142C008E3A4E /* TorchMetadata.swift in Sources */,
+				DC49D2201D41544A00EECA2F /* ManagedObject.swift in Sources */,
 				DC32A11C1D401681008E3A4E /* OptionalType.swift in Sources */,
 				DC32A0F31D3FF011008E3A4E /* UnsafeDatabase.swift in Sources */,
 				DC32A1101D401443008E3A4E /* TorchPredicate.swift in Sources */,

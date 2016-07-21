@@ -22,11 +22,9 @@ public class EntityRegistry {
         entity.name = entityType.torch_name
 
         let propertyRegistry = PropertyRegistry(entityRegistry: self)
-
         for property in entityType.torch_properties {
             property.describe(to: propertyRegistry)
         }
-        
         entity.properties = Array(propertyRegistry.registeredProperties.values)
         
         describe(entityType.torch_name, as: entity)
