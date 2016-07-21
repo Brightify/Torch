@@ -1,0 +1,11 @@
+language: objective-c
+osx_image: xcode7.3
+xcode_project: Torch.xcodeproj
+xcode_scheme: Torch
+xcode_sdk: macosx
+
+script:
+    - travis_wait xctool -project Torch.xcodeproj -scheme Torch -sdk macosx build test
+
+after_script:
+    - sleep 5
