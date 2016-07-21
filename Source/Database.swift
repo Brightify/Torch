@@ -38,7 +38,7 @@ public class Database {
         request.predicate = predicate.toPredicate()
         request.sortDescriptors = orderBy.toSortDescriptors()
         let entities = try context.executeFetchRequest(request) as! [NSManagedObject]
-        return try entities.map { try T(fromManagedObject: ManagedObject(object: $0, database: self)) }
+        return try entities.map { try T(fromManagedObject: NSManagedObjectWrapper(object: $0, database: self)) }
     }
     
     /**
@@ -113,7 +113,7 @@ public class Database {
             entity.id = try getNextId(T)
         }
         let managedObject = try loadManagedObject(entity) ?? createManagedObject(T)
-        try entity.torch_updateManagedObject(ManagedObject(object: managedObject, database: self))
+        try entity.torch_updateManagedObject(NSManagedObjectWrapper(object: managedObject, database: self))
         try updateLastAssignedId(entity)
         return managedObject
     }

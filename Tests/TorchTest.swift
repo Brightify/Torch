@@ -79,7 +79,7 @@ extension Data {
     static let otherDatum = ToOneRelationProperty<Data, OtherData>(name: "otherDatum")
     static let otherData = ToManyRelationProperty<Data, [OtherData]>(name: "otherData")
 
-    init(fromManagedObject object: ManagedObject) throws {
+    init(fromManagedObject object: NSManagedObjectWrapper) throws {
         id = object.getValue("id")
         x = object.getValue("x")
         y = object.getValue("y")
@@ -87,7 +87,7 @@ extension Data {
         otherData = try object.getValue("otherData")
     }
 
-    mutating func torch_updateManagedObject(object: ManagedObject) throws {
+    mutating func torch_updateManagedObject(object: NSManagedObjectWrapper) throws {
         object.setValue(id, "id")
         object.setValue(x, "x")
         object.setValue(y, "y")
@@ -120,12 +120,12 @@ extension OtherData {
     static let id = ScalarProperty<OtherData, Int?>(name: "id")
     static let name = ScalarProperty<OtherData, String?>(name: "name")
 
-    init(fromManagedObject object: ManagedObject) throws {
+    init(fromManagedObject object: NSManagedObjectWrapper) throws {
         id = object.getValue("id")
         name = object.getValue("name")
     }
 
-    mutating func torch_updateManagedObject(object: ManagedObject) throws {
+    mutating func torch_updateManagedObject(object: NSManagedObjectWrapper) throws {
         object.setValue(id, "id")
         object.setValue(name, "name")
     }
