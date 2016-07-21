@@ -1,5 +1,5 @@
 //
-//  Torch.swift
+//  Database.swift
 //  Torch
 //
 //  Created by Filip Dolnik on 20.07.16.
@@ -8,7 +8,7 @@
 
 import CoreData
 
-public class Torch {
+public class Database {
     private let context = NSManagedObjectContext(concurrencyType: .MainQueueConcurrencyType)
     
     public convenience init(store: StoreConfiguration, entities: TorchEntityDescription.Type...) throws {
@@ -36,19 +36,19 @@ public class Torch {
         request.predicate = predicate.toPredicate()
         request.sortDescriptors = orderBy.toSortDescriptors()
         let entities = try context.executeFetchRequest(request) as! [NSManagedObject]
-        return try entities.map { try T(fromManagedObject: $0, torch: self) }
+        return try entities.map { try T(fromManagedObject: $0, database: self) }
     }
     
-    public func save<T: TorchEntity>(inout entity: T) throws -> Torch {
+    public func save<T: TorchEntity>(inout entity: T) throws -> Database {
         try getManagedObject(for: &entity)
         return self
     }
     
-    public func delete<T: TorchEntity>(entities: T...) throws -> Torch {
+    public func delete<T: TorchEntity>(entities: T...) throws -> Database {
         return try delete(entities)
     }
     
-    public func delete<T: TorchEntity>(entities: [T]) throws -> Torch {
+    public func delete<T: TorchEntity>(entities: [T]) throws -> Database {
         try entities.forEach {
             if let managedObject = try loadManagedObject($0) {
                 context.deleteObject(managedObject)
@@ -57,7 +57,7 @@ public class Torch {
         return self
     }
     
-    public func delete<T: TorchEntity>(type: T.Type, where predicate: TorchPredicate<T>) throws -> Torch {
+    public func delete<T: TorchEntity>(type: T.Type, where predicate: TorchPredicate<T>) throws -> Database {
         let request = NSFetchRequest(entityName: type.torch_name)
         request.predicate = predicate.toPredicate()
         (try context.executeFetchRequest(request) as! [NSManagedObject]).forEach {
@@ -66,16 +66,16 @@ public class Torch {
         return self
     }
     
-    public func deleteAll<T: TorchEntity>(type: T.Type) throws -> Torch {
+    public func deleteAll<T: TorchEntity>(type: T.Type) throws -> Database {
         return try delete(type, where: TorchPredicate(value: true))
     }
     
-    public func rollback() -> Torch {
+    public func rollback() -> Database {
         context.rollback()
         return self
     }
     
-    public func write(@noescape closure: () throws -> Void = {}) throws -> Torch {
+    public func write(@noescape closure: () throws -> Void = {}) throws -> Database {
         try closure()
         try context.save()
         return self
@@ -87,7 +87,7 @@ public class Torch {
             entity.id = try getNextId(T)
         }
         let managedObject = try loadManagedObject(entity) ?? createManagedObject(T)
-        try entity.torch_updateManagedObject(managedObject, torch: self)
+        try entity.torch_updateManagedObject(managedObject, database: self)
         try updateLastAssignedId(entity)
         return managedObject
     }

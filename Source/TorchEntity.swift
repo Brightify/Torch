@@ -19,9 +19,9 @@ public protocol TorchEntity: TorchEntityDescription {
     
     var id: Int? { get set }
     
-    init(fromManagedObject object: NSManagedObject, torch: Torch) throws
+    init(fromManagedObject object: NSManagedObject, database: Database) throws
     
-    mutating func torch_updateManagedObject(object: NSManagedObject, torch: Torch) throws
+    mutating func torch_updateManagedObject(object: NSManagedObject, database: Database) throws
     
     static var torch_properties: [AnyProperty<Self>] { get }
 }

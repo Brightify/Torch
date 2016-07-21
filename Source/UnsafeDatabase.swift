@@ -1,14 +1,14 @@
 //
-//  UnsafeTorch.swift
+//  UnsafeDatabase.swift
 //  Torch
 //
 //  Created by Filip Dolnik on 20.07.16.
 //  Copyright © 2016 Brightify. All rights reserved.
 //
 
-public class UnsafeTorch {
+public class UnsafeDatabase {
     
-    private let torch: Torch
+    private let database: Database
     
     public convenience init(store: StoreConfiguration, entities: TorchEntityDescription.Type...) {
         self.init(store: store, entities: entities)
@@ -16,7 +16,7 @@ public class UnsafeTorch {
  
     public init(store: StoreConfiguration, entities: [TorchEntityDescription.Type]) {
         do {
-            torch = try Torch(store: store, entities: entities)
+            database = try Database(store: store, entities: entities)
         } catch {
             fatalError(String(error))
         }
@@ -28,61 +28,61 @@ public class UnsafeTorch {
     
     public func load<T: TorchEntity>(type: T.Type, where predicate: TorchPredicate<T>, orderBy: SortDescriptor = SortDescriptor()) -> [T] {
         do {
-            return try torch.load(type, where: predicate, orderBy: orderBy)
+            return try database.load(type, where: predicate, orderBy: orderBy)
         } catch {
             fatalError(String(error))
         }
     }
     
-    public func save<T: TorchEntity>(inout entity: T) -> UnsafeTorch {
+    public func save<T: TorchEntity>(inout entity: T) -> UnsafeDatabase {
         do {
-            try torch.save(&entity)
+            try database.save(&entity)
         } catch {
             fatalError(String(error))
         }
         return self
     }
     
-    public func delete<T: TorchEntity>(entities: T...) -> UnsafeTorch {
+    public func delete<T: TorchEntity>(entities: T...) -> UnsafeDatabase {
         delete(entities)
         return self
     }
     
-    public func delete<T: TorchEntity>(entities: [T]) -> UnsafeTorch {
+    public func delete<T: TorchEntity>(entities: [T]) -> UnsafeDatabase {
         do {
-            try torch.delete(entities)
+            try database.delete(entities)
         } catch {
             fatalError(String(error))
         }
         return self
     }
     
-    public func delete<T: TorchEntity>(type: T.Type, where predicate: TorchPredicate<T>) -> UnsafeTorch {
+    public func delete<T: TorchEntity>(type: T.Type, where predicate: TorchPredicate<T>) -> UnsafeDatabase {
         do {
-            try torch.delete(type, where: predicate)
+            try database.delete(type, where: predicate)
         } catch {
             fatalError(String(error))
         }
         return self
     }
     
-    public func deleteAll<T: TorchEntity>(type: T.Type) -> UnsafeTorch {
+    public func deleteAll<T: TorchEntity>(type: T.Type) -> UnsafeDatabase {
         do {
-            try torch.deleteAll(type)
+            try database.deleteAll(type)
         } catch {
             fatalError(String(error))
         }
         return self
     }
     
-    public func rollback() -> UnsafeTorch {
-        torch.rollback()
+    public func rollback() -> UnsafeDatabase {
+        database.rollback()
         return self
     }
     
-    public func write(@noescape closure: () -> () = {}) -> UnsafeTorch {
+    public func write(@noescape closure: () -> () = {}) -> UnsafeDatabase {
         do {
-            try torch.write(closure)
+            try database.write(closure)
         } catch {
             fatalError(String(error))
         }

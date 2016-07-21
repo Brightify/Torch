@@ -9,8 +9,8 @@
 /* Begin PBXBuildFile section */
 		183D03FF1C4691C600EBAEF3 /* Torch.h in Headers */ = {isa = PBXBuildFile; fileRef = 183D03FE1C4691C600EBAEF3 /* Torch.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		183D04061C4691C600EBAEF3 /* Torch.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 183D03FB1C4691C600EBAEF3 /* Torch.framework */; };
-		DC32A0F11D3FEFE6008E3A4E /* Torch.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC32A0F01D3FEFE6008E3A4E /* Torch.swift */; };
-		DC32A0F31D3FF011008E3A4E /* UnsafeTorch.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC32A0F21D3FF011008E3A4E /* UnsafeTorch.swift */; };
+		DC32A0F11D3FEFE6008E3A4E /* Database.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC32A0F01D3FEFE6008E3A4E /* Database.swift */; };
+		DC32A0F31D3FF011008E3A4E /* UnsafeDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC32A0F21D3FF011008E3A4E /* UnsafeDatabase.swift */; };
 		DC32A0F71D3FF06E008E3A4E /* TorchEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC32A0F61D3FF06E008E3A4E /* TorchEntity.swift */; };
 		DC32A1031D3FF22C008E3A4E /* StoreConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC32A1021D3FF22C008E3A4E /* StoreConfiguration.swift */; };
 		DC32A10B1D40142C008E3A4E /* TorchMetadata.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC32A10A1D40142C008E3A4E /* TorchMetadata.swift */; };
@@ -42,8 +42,8 @@
 		183D04001C4691C600EBAEF3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		183D04051C4691C600EBAEF3 /* TorchTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TorchTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		183D040C1C4691C600EBAEF3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		DC32A0F01D3FEFE6008E3A4E /* Torch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Torch.swift; sourceTree = "<group>"; };
-		DC32A0F21D3FF011008E3A4E /* UnsafeTorch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnsafeTorch.swift; sourceTree = "<group>"; };
+		DC32A0F01D3FEFE6008E3A4E /* Database.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Database.swift; sourceTree = "<group>"; };
+		DC32A0F21D3FF011008E3A4E /* UnsafeDatabase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnsafeDatabase.swift; sourceTree = "<group>"; };
 		DC32A0F61D3FF06E008E3A4E /* TorchEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TorchEntity.swift; sourceTree = "<group>"; };
 		DC32A1021D3FF22C008E3A4E /* StoreConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoreConfiguration.swift; sourceTree = "<group>"; };
 		DC32A10A1D40142C008E3A4E /* TorchMetadata.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TorchMetadata.swift; path = Utils/TorchMetadata.swift; sourceTree = "<group>"; };
@@ -104,9 +104,9 @@
 				183D04001C4691C600EBAEF3 /* Info.plist */,
 				DC8B9F291D3E26C100E3B9DE /* ApiDraft.swift */,
 				DC32A1021D3FF22C008E3A4E /* StoreConfiguration.swift */,
-				DC32A0F01D3FEFE6008E3A4E /* Torch.swift */,
+				DC32A0F01D3FEFE6008E3A4E /* Database.swift */,
 				DC32A0F61D3FF06E008E3A4E /* TorchEntity.swift */,
-				DC32A0F21D3FF011008E3A4E /* UnsafeTorch.swift */,
+				DC32A0F21D3FF011008E3A4E /* UnsafeDatabase.swift */,
 				DC32A1061D40133E008E3A4E /* EntityRegistration */,
 				DC32A1071D40134B008E3A4E /* Predicate */,
 				DC32A1081D40135A008E3A4E /* Property */,
@@ -289,14 +289,14 @@
 				DC32A1181D401470008E3A4E /* NSConvertible.swift in Sources */,
 				DC32A1141D40144B008E3A4E /* EntityRegistry.swift in Sources */,
 				DC32A0F71D3FF06E008E3A4E /* TorchEntity.swift in Sources */,
-				DC32A0F11D3FEFE6008E3A4E /* Torch.swift in Sources */,
+				DC32A0F11D3FEFE6008E3A4E /* Database.swift in Sources */,
 				DC32A10E1D401439008E3A4E /* TorchProperty.swift in Sources */,
 				DC32A1031D3FF22C008E3A4E /* StoreConfiguration.swift in Sources */,
 				DC32A1161D40144B008E3A4E /* PropertyRegistry.swift in Sources */,
 				DC8B9F2A1D3E26C100E3B9DE /* ApiDraft.swift in Sources */,
 				DC32A10B1D40142C008E3A4E /* TorchMetadata.swift in Sources */,
 				DC32A11C1D401681008E3A4E /* OptionalType.swift in Sources */,
-				DC32A0F31D3FF011008E3A4E /* UnsafeTorch.swift in Sources */,
+				DC32A0F31D3FF011008E3A4E /* UnsafeDatabase.swift in Sources */,
 				DC32A1101D401443008E3A4E /* TorchPredicate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
