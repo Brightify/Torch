@@ -1,9 +1,11 @@
 #!/usr/bin/env bash
 
+SCRIPT_PATH="$(dirname \"$0\")"
 FILE_NAME=torch_generator.app
+FILE_PATH=$SCRIPT_PATH/Generator/$FILE_NAME
 
-if [ ! -e $FILE_NAME ]; then
+if [ ! -e $FILE_PATH ]; then
 	sh build_generator
 fi
 
-$FILE_NAME/Contents/MacOS/torch "$@"
+$FILE_PATH/Contents/MacOS/torch "$@"
