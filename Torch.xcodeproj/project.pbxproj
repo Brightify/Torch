@@ -141,8 +141,8 @@
 		DC32A1071D40134B008E3A4E /* Predicate */ = {
 			isa = PBXGroup;
 			children = (
-				DC32A10F1D401443008E3A4E /* TorchPredicate.swift */,
 				DC32A1191D401566008E3A4E /* PropertyPredicates.swift */,
+				DC32A10F1D401443008E3A4E /* TorchPredicate.swift */,
 			);
 			name = Predicate;
 			sourceTree = "<group>";
@@ -151,8 +151,8 @@
 			isa = PBXGroup;
 			children = (
 				DC32A1171D401470008E3A4E /* NSConvertible.swift */,
-				DC32A10D1D401439008E3A4E /* TorchProperty.swift */,
 				DC32A11B1D401681008E3A4E /* OptionalType.swift */,
+				DC32A10D1D401439008E3A4E /* TorchProperty.swift */,
 			);
 			name = Property;
 			sourceTree = "<group>";

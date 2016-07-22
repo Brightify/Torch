@@ -8,26 +8,26 @@
 
 public extension TypedTorchProperty where ValueType: NSObjectConvertible {
     public func equalTo(value: ValueType) -> TorchPredicate<ParentType> {
-        return TorchPredicate(propertyName: name, operatorString: "==", value: value.toNSObject())
+        return TorchPredicate(torchName: torchName, operatorString: "==", value: value.toNSObject())
     }
 }
 
 public extension TypedTorchProperty where ValueType: NSNumberConvertible {
     
     public func lessThan(value: ValueType) -> TorchPredicate<ParentType> {
-        return TorchPredicate(propertyName: name, operatorString: "<", value: value.toNSNumber())
+        return TorchPredicate(torchName: torchName, operatorString: "<", value: value.toNSNumber())
     }
     
     public func lessThanOrEqualTo(value: ValueType) -> TorchPredicate<ParentType> {
-        return TorchPredicate(propertyName: name, operatorString: "<=", value: value.toNSNumber())
+        return TorchPredicate(torchName: torchName, operatorString: "<=", value: value.toNSNumber())
     }
     
     public func greaterThanOrEqualTo(value: ValueType) -> TorchPredicate<ParentType> {
-        return TorchPredicate(propertyName: name, operatorString: ">=", value: value.toNSNumber())
+        return TorchPredicate(torchName: torchName, operatorString: ">=", value: value.toNSNumber())
     }
     
     public func greaterThan(value: ValueType) -> TorchPredicate<ParentType> {
-        return TorchPredicate(propertyName: name, operatorString: ">", value: value.toNSNumber())
+        return TorchPredicate(torchName: torchName, operatorString: ">", value: value.toNSNumber())
     }
 }
 
@@ -53,6 +53,6 @@ public func > <P1: TypedTorchProperty where P1.ValueType: NSNumberConvertible>(l
 
 public extension TypedTorchProperty where ValueType: OptionalType, ValueType.WrappedType: NSObjectConvertible {
     public func equalTo(value: ValueType) -> TorchPredicate<ParentType> {
-        return TorchPredicate(propertyName: name, operatorString: "==", value: value.value?.toNSObject())
+        return TorchPredicate(torchName: torchName, operatorString: "==", value: value.value?.toNSObject())
     }
 }

@@ -19,27 +19,27 @@ public struct NSManagedObjectWrapper {
     }
     
     public func getValue<P: TypedTorchProperty>(property: P) -> P.ValueType {
-        return object.valueForKey(property.name) as! P.ValueType
+        return object.valueForKey(property.torchName) as! P.ValueType
     }
     
     public func setValue<P: TypedTorchProperty>(value: P.ValueType, for property: P) {
         guard let value = value as? NSObject else {
             fatalError("Cannot convert type \(P.ValueType.self) to NSObject!")
         }
-        object.setValue(value, forKey: property.name)
+        object.setValue(value, forKey: property.torchName)
     }
 
     public func getValue<P: TypedTorchProperty where P.ValueType: TorchEntity>(property: P) throws -> P.ValueType {
-        let managedObject = NSManagedObjectWrapper(object: object.valueForKey(property.name) as! NSManagedObject, database: database)
+        let managedObject = NSManagedObjectWrapper(object: object.valueForKey(property.torchName) as! NSManagedObject, database: database)
         return try P.ValueType(fromManagedObject: managedObject)
     }
     
     public func setValue<P: TypedTorchProperty where P.ValueType: TorchEntity>(inout value: P.ValueType, for property: P) throws {
-        object.setValue(try database.getManagedObject(for: &value), forKey: property.name)
+        object.setValue(try database.getManagedObject(for: &value), forKey: property.torchName)
     }
     
     public func getValue<T: TorchEntity, P: TypedTorchProperty where P.ValueType == Array<T>>(property: P) throws -> P.ValueType {
-        return try (object.valueForKey(property.name) as! NSOrderedSet).map {
+        return try (object.valueForKey(property.torchName) as! NSOrderedSet).map {
             try P.ValueType.Generator.Element(fromManagedObject: NSManagedObjectWrapper(object: $0 as! NSManagedObject, database: database))
         } 
     }
@@ -49,6 +49,6 @@ public struct NSManagedObjectWrapper {
         for i in values.indices {
             set.addObject(try database.getManagedObject(for: &values[i]))
         }
-        object.setValue(set, forKey: property.name)
+        object.setValue(set, forKey: property.torchName)
     }
 }

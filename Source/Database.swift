@@ -10,6 +10,8 @@ import CoreData
 
 public class Database {
     
+    static let COLUMN_PREFIX = "torch_"
+    
     private let context = NSManagedObjectContext(concurrencyType: .MainQueueConcurrencyType)
     
     public convenience init(store: StoreConfiguration, entities: TorchEntityDescription.Type...) throws {
@@ -120,7 +122,7 @@ public class Database {
     private func loadManagedObject<T: TorchEntity>(entity: T) throws -> NSManagedObject? {
         if let id = entity.id {
             let request = NSFetchRequest(entityName: T.torch_name)
-            request.predicate = NSPredicate(format: "id = %@", id as NSNumber)
+            request.predicate = NSPredicate(format: "\(Database.COLUMN_PREFIX)id = %@", id as NSNumber)
             return (try context.executeFetchRequest(request) as! [NSManagedObject]).first
         } else {
             return nil

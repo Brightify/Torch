@@ -20,12 +20,12 @@ public struct TorchPredicate<PARENT: TorchEntity> {
         predicate = NSPredicate(value: value)
     }
     
-    public init(propertyName: String, operatorString: String, value: NSObject) {
-        self.init(propertyName: propertyName, operatorString: operatorString, value: value as NSObject?)
+    public init(torchName: String, operatorString: String, value: NSObject) {
+        self.init(torchName: torchName, operatorString: operatorString, value: value as NSObject?)
     }
     
-    public init(propertyName: String, operatorString: String, value: NSObject?) {
-        predicate = NSPredicate(format: "%K \(operatorString) %@", propertyName, value ?? NSNull())
+    public init(torchName: String, operatorString: String, value: NSObject?) {
+        predicate = NSPredicate(format: "%K \(operatorString) %@", torchName, value ?? NSNull())
     }
     
     public func toPredicate() -> NSPredicate {

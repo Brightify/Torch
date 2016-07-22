@@ -33,27 +33,27 @@ public class PropertyRegistry {
     }
     
     public func attribute<P: TypedTorchProperty>(property: P) {
-        registerAttribute(property.name, type: P.ValueType.self, optional: false)
+        registerAttribute(property.torchName, type: P.ValueType.self, optional: false)
     }
     
     public func attribute<P: TypedTorchProperty where P.ValueType: OptionalType>(property: P) {
-        registerAttribute(property.name, type: P.ValueType.WrappedType.self, optional: true)
+        registerAttribute(property.torchName, type: P.ValueType.WrappedType.self, optional: true)
     }
     
     public func relationship<P: TypedTorchProperty where P.ValueType: TorchEntity>(property: P) {
-        registerRelationship(property.name, type: P.ValueType.self, optional: false, minCount: 1, maxCount: 1)
+        registerRelationship(property.torchName, type: P.ValueType.self, optional: false, minCount: 1, maxCount: 1)
     }
     
     public func relationship<P: TypedTorchProperty where P.ValueType: OptionalType, P.ValueType.WrappedType: TorchEntity>(property: P) {
-        registerRelationship(property.name, type: P.ValueType.WrappedType.self, optional: true, minCount: 1, maxCount: 1)
+        registerRelationship(property.torchName, type: P.ValueType.WrappedType.self, optional: true, minCount: 1, maxCount: 1)
     }
     
     public func relationship<P: TypedTorchProperty where P.ValueType: SequenceType, P.ValueType.Generator.Element: TorchEntity>(property: P) {
-        registerRelationship(property.name, type: P.ValueType.Generator.Element.self, optional: false, minCount: 0, maxCount: 0)
+        registerRelationship(property.torchName, type: P.ValueType.Generator.Element.self, optional: false, minCount: 0, maxCount: 0)
     }
     
     public func relationship<P: TypedTorchProperty where P.ValueType: OptionalType, P.ValueType.WrappedType: SequenceType, P.ValueType.WrappedType.Generator.Element: TorchEntity>(property: P) {
-        registerRelationship(property.name, type: P.ValueType.WrappedType.Generator.Element.self, optional: true, minCount: 0, maxCount: 0)
+        registerRelationship(property.torchName, type: P.ValueType.WrappedType.Generator.Element.self, optional: true, minCount: 0, maxCount: 0)
     }
     
     private func registerAttribute<T>(name: String, type: T.Type, optional: Bool) {

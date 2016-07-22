@@ -17,6 +17,10 @@ public protocol TorchProperty {
 }
 
 extension TorchProperty {
+    var torchName: String {
+        return Database.COLUMN_PREFIX + name
+    }
+    
     public func typeErased() -> AnyProperty<ParentType> {
         return AnyProperty(name: name, describeFunction: describe)
     }
