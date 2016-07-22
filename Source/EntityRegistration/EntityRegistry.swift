@@ -9,9 +9,7 @@
 import CoreData
 
 public class EntityRegistry {
-    public private(set) var registeredEntities: [String: NSEntityDescription] = [:]
-    
-    public init() { }
+    private(set) var registeredEntities: [String: NSEntityDescription] = [:]
     
     public func description<E: TorchEntity>(of entityType: E.Type) -> NSEntityDescription {
         if let registeredEntity = registeredEntities[entityType.torch_name] {
@@ -25,13 +23,13 @@ public class EntityRegistry {
         for property in entityType.torch_properties {
             property.describe(to: propertyRegistry)
         }
-        entity.properties = Array(propertyRegistry.registeredProperties.values)
+        entity.properties = propertyRegistry.registeredProperties
         
         describe(entityType.torch_name, as: entity)
         return entity
     }
     
-    public func describe(entityName: String, as description: NSEntityDescription) {
+    func describe(entityName: String, as description: NSEntityDescription) {
         if registeredEntities[entityName] == nil {
             registeredEntities[entityName] = description
         }

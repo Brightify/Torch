@@ -13,4 +13,11 @@ public struct StoreConfiguration {
     public let configuration: String?
     public let storeURL: NSURL?
     public let options: [NSObject : AnyObject]?
+    
+    public init(storeType: String, configuration:String?, storeURL: NSURL?, options: [NSObject : AnyObject]?) {
+        self.storeType = storeType
+        self.configuration = configuration
+        self.storeURL = storeURL
+        self.options = options
+    }
 }

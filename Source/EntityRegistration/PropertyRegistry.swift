@@ -24,11 +24,11 @@ public class PropertyRegistry {
         return mutableAccumulator
     }
     
-    let entityRegistry: EntityRegistry
+    private let entityRegistry: EntityRegistry
     
-    public private(set) var registeredProperties: [String: NSPropertyDescription] = [:]
+    private(set) var registeredProperties: [NSPropertyDescription] = []
     
-    public init(entityRegistry: EntityRegistry) {
+    init(entityRegistry: EntityRegistry) {
         self.entityRegistry = entityRegistry
     }
     
@@ -61,7 +61,7 @@ public class PropertyRegistry {
         attribute.name = name
         attribute.attributeType = PropertyRegistry.types[ObjectIdentifier(type)] ?? NSAttributeType.UndefinedAttributeType
         attribute.optional = optional
-        registeredProperties[name] = attribute
+        registeredProperties.append(attribute)
     }
     
     private func registerRelationship<T: TorchEntity>(name: String, type: T.Type, optional: Bool, minCount: Int, maxCount: Int) {
@@ -73,6 +73,6 @@ public class PropertyRegistry {
         relationship.minCount = minCount
         relationship.maxCount = maxCount
         relationship.ordered = true
-        registeredProperties[name] = relationship
+        registeredProperties.append(relationship)
     }
 }
