@@ -31,7 +31,6 @@ class TorchTest: XCTestCase {
         XCTAssertEqual(data.filter { (x: Data) in x.id == 11 && x.x == "c" && x.y == 100 }.count, 1)
     }
     
-    
     func testPredicate() {
         saveData()
         
@@ -80,19 +79,19 @@ extension Data {
     static let otherData = ToManyRelationProperty<Data, [OtherData]>(name: "otherData")
 
     init(fromManagedObject object: NSManagedObjectWrapper) throws {
-        id = object.getValue("id")
-        x = object.getValue("x")
-        y = object.getValue("y")
-        otherDatum = try object.getValue("otherDatum")
-        otherData = try object.getValue("otherData")
+        id = object.getValue(Data.id)
+        x = object.getValue(Data.x)
+        y = object.getValue(Data.y)
+        otherDatum = try object.getValue(Data.otherDatum)
+        otherData = try object.getValue(Data.otherData)
     }
 
     mutating func torch_updateManagedObject(object: NSManagedObjectWrapper) throws {
-        object.setValue(id, "id")
-        object.setValue(x, "x")
-        object.setValue(y, "y")
-        try object.setValue(&otherDatum, "otherDatum")
-        try object.setValue(&otherData, "otherData")
+        object.setValue(id, for: Data.id)
+        object.setValue(x, for: Data.x)
+        object.setValue(y, for: Data.y)
+        try object.setValue(&otherDatum, for: Data.otherDatum)
+        try object.setValue(&otherData, for: Data.otherData)
     }
 
     static func torch_describe(to registry: EntityRegistry) {
@@ -121,13 +120,13 @@ extension OtherData {
     static let name = ScalarProperty<OtherData, String?>(name: "name")
 
     init(fromManagedObject object: NSManagedObjectWrapper) throws {
-        id = object.getValue("id")
-        name = object.getValue("name")
+        id = object.getValue(OtherData.id)
+        name = object.getValue(OtherData.name)
     }
 
     mutating func torch_updateManagedObject(object: NSManagedObjectWrapper) throws {
-        object.setValue(id, "id")
-        object.setValue(name, "name")
+        object.setValue(id, for: OtherData.id)
+        object.setValue(name, for: OtherData.name)
     }
 
     static func torch_describe(to registry: EntityRegistry) {
