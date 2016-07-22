@@ -239,6 +239,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 183D04121C4691C600EBAEF3 /* Build configuration list for PBXNativeTarget "TorchTests" */;
 			buildPhases = (
+				DC49D2401D42BF2800EECA2F /* Generate extensions */,
 				183D04011C4691C600EBAEF3 /* Sources */,
 				183D04021C4691C600EBAEF3 /* Frameworks */,
 				183D04031C4691C600EBAEF3 /* Resources */,
@@ -306,6 +307,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		DC49D2401D42BF2800EECA2F /* Generate extensions */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Generate extensions";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "./run generate --output \"$PROJECT_DIR/Tests/Generated/ModelExtensions.swift\" \"$PROJECT_DIR/Tests/Source\"";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		183D03F61C4691C600EBAEF3 /* Sources */ = {
