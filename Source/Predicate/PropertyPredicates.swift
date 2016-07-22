@@ -7,8 +7,13 @@
 //
 
 public extension TorchProperty where T: NSObjectConvertible {
+    
     public func equalTo(value: T) -> TorchPredicate<PARENT> {
         return TorchPredicate(torchName: torchName, operatorString: "==", value: value.toNSObject())
+    }
+    
+    public func notEqualTo(value: T) -> TorchPredicate<PARENT> {
+        return TorchPredicate(torchName: torchName, operatorString: "!=", value: value.toNSObject())
     }
 }
 
@@ -33,6 +38,10 @@ public extension TorchProperty where T: NSNumberConvertible {
 
 public func == <PARENT: TorchEntity, T: NSObjectConvertible>(lhs: TorchProperty<PARENT, T>, rhs: T) -> TorchPredicate<PARENT> {
     return lhs.equalTo(rhs)
+}
+
+public func != <PARENT: TorchEntity, T: NSObjectConvertible>(lhs: TorchProperty<PARENT, T>, rhs: T) -> TorchPredicate<PARENT> {
+    return lhs.notEqualTo(rhs)
 }
 
 public func < <PARENT: TorchEntity, T: NSNumberConvertible>(lhs: TorchProperty<PARENT, T>, rhs: T) -> TorchPredicate<PARENT> {

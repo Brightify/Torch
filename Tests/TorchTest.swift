@@ -23,17 +23,20 @@ class TorchTest: XCTestCase {
     
     func testPersistance() {
         let otherData = OtherData(id: 0, text: "other")
-        let data = Data(id: 0, number: 7, optionalNumber: nil, numbers: [1, 1, 2], text: "text",
+        let data = Data(id: 0, number: 7, optionalNumber: 10, numbers: [1, 1, 2], text: "text",
+                        float: 1.1, double: 1.2, bool: true, relation: otherData, optionalRelation: otherData,
+                        arrayWithRelation: [otherData], readOnly: "read only")
+        let dataWithOptionals = Data(id: 1, number: 7, optionalNumber: nil, numbers: [1, 1, 2], text: "text",
                         float: 1.1, double: 1.2, bool: true, relation: otherData, optionalRelation: nil,
                         arrayWithRelation: [otherData], readOnly: "read only")
         
-        database.save(data).write()
+        database.save(data, dataWithOptionals).write()
         
-        let loadedData = database.load(Data.self)
         let loadedOtherData = database.load(OtherData.self)
-        XCTAssertEqual(1, loadedData.count)
+        XCTAssertEqual(2, database.load(Data.self).count)
         XCTAssertEqual(1, loadedOtherData.count)
-        XCTAssertEqual(String(data), String(loadedData.first!))
+        XCTAssertEqual(String(data), String(database.load(Data.self, where: Data.id == 0).first!))
+        XCTAssertEqual(String(dataWithOptionals), String(database.load(Data.self, where: Data.id == 1).first!))
         XCTAssertEqual(String(otherData), String(loadedOtherData.first!))
     }
     

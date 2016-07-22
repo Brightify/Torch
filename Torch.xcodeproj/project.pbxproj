@@ -28,6 +28,7 @@
 		DC49D2351D42902000EECA2F /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC49D2341D42902000EECA2F /* Models.swift */; };
 		DC49D2371D42904700EECA2F /* ModelExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC49D2361D42904700EECA2F /* ModelExtensions.swift */; };
 		DC49D23A1D42A18C00EECA2F /* OptionalPropertyPredicates.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC49D2381D42A17600EECA2F /* OptionalPropertyPredicates.swift */; };
+		DC49D23C1D42B2BE00EECA2F /* PredicateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC49D23B1D42B2BE00EECA2F /* PredicateTests.swift */; };
 		DC5A3A5D1CF6F8D600F520E3 /* Torch.podspec in Resources */ = {isa = PBXBuildFile; fileRef = DC5A3A5C1CF6F8D600F520E3 /* Torch.podspec */; };
 		DC8B9F2A1D3E26C100E3B9DE /* ApiDraft.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC8B9F291D3E26C100E3B9DE /* ApiDraft.swift */; };
 		DC8B9F2F1D3EB4AE00E3B9DE /* TorchTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC8B9F2B1D3EB41F00E3B9DE /* TorchTest.swift */; };
@@ -68,6 +69,7 @@
 		DC49D2341D42902000EECA2F /* Models.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Models.swift; path = Source/Models.swift; sourceTree = "<group>"; };
 		DC49D2361D42904700EECA2F /* ModelExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ModelExtensions.swift; path = Generated/ModelExtensions.swift; sourceTree = "<group>"; };
 		DC49D2381D42A17600EECA2F /* OptionalPropertyPredicates.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = OptionalPropertyPredicates.swift; path = Predicate/OptionalPropertyPredicates.swift; sourceTree = "<group>"; };
+		DC49D23B1D42B2BE00EECA2F /* PredicateTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PredicateTests.swift; sourceTree = "<group>"; };
 		DC5A3A5C1CF6F8D600F520E3 /* Torch.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Torch.podspec; sourceTree = "<group>"; };
 		DC8B9F291D3E26C100E3B9DE /* ApiDraft.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = ApiDraft.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		DC8B9F2B1D3EB41F00E3B9DE /* TorchTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TorchTest.swift; sourceTree = "<group>"; };
@@ -137,6 +139,7 @@
 				DC70D0D01D2B006200014C5F /* Generated */,
 				DC70D0B91D2AF3FA00014C5F /* Source */,
 				DC8B9F2B1D3EB41F00E3B9DE /* TorchTest.swift */,
+				DC49D23B1D42B2BE00EECA2F /* PredicateTests.swift */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -334,6 +337,7 @@
 				DC8B9F2F1D3EB4AE00E3B9DE /* TorchTest.swift in Sources */,
 				DC49D2371D42904700EECA2F /* ModelExtensions.swift in Sources */,
 				DC49D2351D42902000EECA2F /* Models.swift in Sources */,
+				DC49D23C1D42B2BE00EECA2F /* PredicateTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
