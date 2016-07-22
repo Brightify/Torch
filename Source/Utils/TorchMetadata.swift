@@ -15,7 +15,7 @@ class TorchMetadata: NSManagedObject, TorchEntityDescription {
         return "TorchSwift.TorchMetadata"
     }
     
-    @NSManaged var entityName: String
+    @NSManaged var torchEntityName: String
     @NSManaged var lastAssignedId: NSNumber
     
     static func torch_describe(to registry: EntityRegistry) {
@@ -24,7 +24,7 @@ class TorchMetadata: NSManagedObject, TorchEntityDescription {
         entity.managedObjectClassName = String(TorchMetadata)
         
         let name = NSAttributeDescription()
-        name.name = "entityName"
+        name.name = "torchEntityName"
         name.attributeType = .StringAttributeType
         name.optional = false
         

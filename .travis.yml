@@ -5,7 +5,7 @@ xcode_scheme: Torch
 xcode_sdk: macosx
 
 script:
-    - travis_wait xctool -project Torch.xcodeproj -scheme Torch -sdk macosx build test
+    - travis_wait xctool -project Torch.xcodeproj -scheme Torch -sdk macosx test
 
 after_script:
     - sleep 5

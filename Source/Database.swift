@@ -25,7 +25,6 @@ public class Database {
         context.persistentStoreCoordinator = coordinator
         
         try registerMetadata(entities.map { $0.torch_name })
-        
     }
     
     public func load<T: TorchEntity>(type: T.Type) throws -> [T] {
@@ -149,7 +148,7 @@ public class Database {
     
     private func getMetadata(entityName: String) throws -> TorchMetadata {
         let request = NSFetchRequest(entityName: TorchMetadata.torch_name)
-        request.predicate = NSPredicate(format: "entityName = %@", entityName)
+        request.predicate = NSPredicate(format: "torchEntityName = %@", entityName)
         guard let metadata = (try context.executeFetchRequest(request) as? [TorchMetadata])?.first else {
             fatalError("Could not load metadata for entity \(entityName)!")
         }
@@ -175,12 +174,12 @@ public class Database {
         }
 
         for entityName in entityNames {
-            if allMetadata.contains({ $0.entityName == entityName }) {
+            if allMetadata.contains({ $0.torchEntityName == entityName }) {
                 continue
             }
 
             let metadata = TorchMetadata(entity: description, insertIntoManagedObjectContext: context)
-            metadata.entityName = entityName
+            metadata.torchEntityName = entityName
             metadata.lastAssignedId = -1
             allMetadata.append(metadata)
         }
