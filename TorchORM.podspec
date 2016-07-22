@@ -1,5 +1,5 @@
 Pod::Spec.new do |s|
-  s.name             = "Torch"
+  s.name             = "TorchORM"
   s.version          = "0.1.0"
   s.summary          = "Torch - Boilerplate-free CoreData bridge."
   s.description      = <<-DESC
