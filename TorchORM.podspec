@@ -20,6 +20,7 @@ Pod::Spec.new do |s|
   s.tvos.deployment_target      = '9.0'
   s.source_files                = ['Source/**/*.swift']
   s.preserve_paths              = ['Generator/**/*', 'run']
+  s.prepare_command             = './build_generator'
   s.frameworks                  = 'CoreData'
   s.module_name                 = 'Torch'
   s.requires_arc                = true

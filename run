@@ -1,23 +1,9 @@
 #!/usr/bin/env bash
-VERSION=0.1.0
-FILE_NAME=torch_generator_$VERSION.app
-FILE_PATH=.build/TorchGenerator/$FILE_NAME
-if [ ! -e $FILE_PATH ]; then
-	mkdir .build 2>/dev/null
-	cd .build
-	mkdir TorchGenerator 2>/dev/null
-	cd TorchGenerator
-	rm -rf Build
-	mkdir Build
-	cd Build
-	git clone https://github.com/SwiftKit/TorchGenerator.git
-	cd TorchGenerator
-	git checkout $VERSION
-	git submodule update --init --recursive
-	env -i PATH=${PATH}, HOME=${HOME} xcodebuild -project 'TorchGenerator.xcodeproj' -scheme 'TorchGenerator' -configuration 'Release' CONFIGURATION_BUILD_DIR=$(pwd)/.. clean build
-	cd ../..
-	mv Build/torch.app $FILE_NAME
-	rm -rf Build
-	cd ../..
+
+FILE_NAME=torch_generator.app
+
+if [ ! -e $FILE_NAME ]; then
+	sh build_generator
 fi
-$FILE_PATH/Contents/MacOS/torch "$@"
+
+$FILE_NAME/Contents/MacOS/torch "$@"
