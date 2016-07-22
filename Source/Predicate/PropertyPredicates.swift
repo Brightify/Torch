@@ -50,9 +50,3 @@ public func >= <PARENT: TorchEntity, T: NSNumberConvertible>(lhs: TorchProperty<
 public func > <PARENT: TorchEntity, T: NSNumberConvertible>(lhs: TorchProperty<PARENT, T>, rhs: T) -> TorchPredicate<PARENT> {
     return lhs.greaterThan(rhs)
 }
-
-public extension TorchProperty where T: TorchPropertyOptionalType, T.Wrapped: NSObjectConvertible {
-    public func equalTo(value: T) -> TorchPredicate<PARENT> {
-        return TorchPredicate(torchName: torchName, operatorString: "==", value: value.value?.toNSObject())
-    }
-}

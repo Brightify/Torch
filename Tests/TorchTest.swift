@@ -8,7 +8,7 @@
 
 import XCTest
 import CoreData
-@testable import Torch
+import Torch
 
 class TorchTest: XCTestCase {
     
@@ -21,111 +21,140 @@ class TorchTest: XCTestCase {
         database = UnsafeDatabase(store: inMemoryStore, entities: Data.self, OtherData.self)
     }
     
-    func testSave() {
-        saveData()
+    func testPersistance() {
+        let otherData = OtherData(id: 0, text: "other")
+        let data = Data(id: 0, number: 7, optionalNumber: nil, numbers: [1, 1, 2], text: "text",
+                        float: 1.1, double: 1.2, bool: true, relation: otherData, optionalRelation: nil,
+                        arrayWithRelation: [otherData], readOnly: "read only")
         
-        let data: [Data] = database.load(Data.self)
-        XCTAssertEqual(data.count, 3)
-        XCTAssertEqual(data.filter { (x: Data) in x.id == 0 && x.x == "a" && x.y == 10 }.count, 1)
-        XCTAssertEqual(data.filter { (x: Data) in x.id == 10 && x.x == "b" && x.y == 30 }.count, 1)
-        XCTAssertEqual(data.filter { (x: Data) in x.id == 11 && x.x == "c" && x.y == 100 }.count, 1)
-    }
-    
-    func testPredicate() {
-        saveData()
+        database.save(data).write()
         
-        let loadedA: [Data] = database.load(Data.self, where: Data.id.equalTo(0))
-        XCTAssertEqual(loadedA.count, 1)
-        XCTAssertEqual(loadedA.first?.x, "a")
+        let loadedData = database.load(Data.self)
+        let loadedOtherData = database.load(OtherData.self)
+        XCTAssertEqual(1, loadedData.count)
+        XCTAssertEqual(1, loadedOtherData.count)
+        XCTAssertEqual(String(data), String(loadedData.first!))
+        XCTAssertEqual(String(otherData), String(loadedOtherData.first!))
     }
     
-    private func saveData() {
-        let a = Data(id: nil, x: "a", y: 10, otherDatum: OtherData(id: nil, name: "OtherData1"), otherData: [])
-        let b = Data(id: 10, x: "b", y: 30, otherDatum: OtherData(id: nil, name: "OtherData2"), otherData: [])
-        let c = Data(id: nil, x: "c", y: 100, otherDatum: OtherData(id: nil, name: "OtherData3"), otherData: [])
-
-        database.save(a, b, c).write()
-    }
-}
-
-struct Data: TorchEntity {
-    var id: Int?
-    var x: String
-    var y: Int
-    var otherDatum: OtherData
-    var otherData: [OtherData]
-}
-
-extension Data {
-
-    static var torch_name: String {
-        return "TorchRegistration.Data"
-    }
-
-    static let id = TorchProperty<Data, Int?>(name: "id")
-    static let x = TorchProperty<Data, String>(name: "x")
-    static let y = TorchProperty<Data, Int>(name: "y")
-    static let otherDatum = TorchProperty<Data, OtherData>(name: "otherDatum")
-    static let otherData = TorchProperty<Data, [OtherData]>(name: "otherData")
-
-    init(fromManagedObject object: NSManagedObjectWrapper) throws {
-        id = object.getValue(Data.id)
-        x = object.getValue(Data.x)
-        y = object.getValue(Data.y)
-        otherDatum = try object.getValue(Data.otherDatum)
-        otherData = try object.getValue(Data.otherData)
-    }
-
-    mutating func torch_updateManagedObject(object: NSManagedObjectWrapper) throws {
-        object.setValue(id, for: Data.id)
-        object.setValue(x, for: Data.x)
-        object.setValue(y, for: Data.y)
-        try object.setValue(&otherDatum, for: Data.otherDatum)
-        try object.setValue(&otherData, for: Data.otherData)
-    }
-
-    static func torch_describeEntity(to registry: EntityRegistry) {
-        registry.description(of: Data.self)
+    func testIdAssignment() {
+        let data0 = OtherData(id: nil, text: "0")
+        let data10 = OtherData(id: 10, text: "10")
+        let data11 = OtherData(id: nil, text: "11")
+        
+        database.write {
+            database.save(data0, data10, data11)
+        }
+        
+        let loadedData = database.load(OtherData.self)
+        XCTAssertEqual(3, loadedData.count)
+        loadedData.map { (expected: Int($0.text), actual: $0.id) }.forEach {
+            XCTAssertEqual($0.expected, $0.actual)
+        }
     }
     
-    static func torch_describeProperties(to registry: PropertyRegistry) {
-        registry.description(of: Data.id)
-        registry.description(of: Data.x)
-        registry.description(of: Data.y)
-        registry.description(of: Data.otherDatum)
-        registry.description(of: Data.otherData)
-    }
-}
-
-struct OtherData: TorchEntity {
-    var id: Int?
-    var name: String?
-}
-
-extension OtherData {
-    static var torch_name: String {
-        return "TorchRegistration.OtherData"
-    }
-
-    static let id = TorchProperty<OtherData, Int?>(name: "id")
-    static let name = TorchProperty<OtherData, String?>(name: "name")
-
-    init(fromManagedObject object: NSManagedObjectWrapper) throws {
-        id = object.getValue(OtherData.id)
-        name = object.getValue(OtherData.name)
-    }
-
-    mutating func torch_updateManagedObject(object: NSManagedObjectWrapper) throws {
-        object.setValue(id, for: OtherData.id)
-        object.setValue(name, for: OtherData.name)
-    }
-
-    static func torch_describeEntity(to registry: EntityRegistry) {
-        registry.description(of: OtherData.self)
+    func testCreate() {
+        var mutableData = OtherData(id: nil, text: "var")
+        let data = OtherData(id: nil, text: "let")
+        
+        database.write {
+            database.create(&mutableData)
+            database.create(&mutableData)
+            database.save(mutableData)
+            
+            database.save(data)
+            database.save(data)
+        }
+        
+        XCTAssertEqual(1, database.load(OtherData.self, where: OtherData.text == "var").count)
+        XCTAssertEqual(2, database.load(OtherData.self, where: OtherData.text == "let").count)
     }
     
-    static func torch_describeProperties(to registry: PropertyRegistry) {
-        registry.description(of: OtherData.id)
-        registry.description(of: OtherData.name)
+    func testCreateArray() {
+        let data = OtherData(id: nil, text: "let")
+        var array = [OtherData(id: nil, text: "array"), data]
+        
+        database.write {
+            database.create(&array)
+            database.create(&array[0])
+            database.create(&array[1])
+            database.save(array)
+            database.save(array[0])
+            database.save(array[1])
+            
+            database.save(data)
+        }
+        
+        XCTAssertEqual(1, database.load(OtherData.self, where: OtherData.text == "array").count)
+        XCTAssertEqual(2, database.load(OtherData.self, where: OtherData.text == "let").count)
+    }
+    
+    func testModification() {
+        var data = OtherData(id: nil, text: "let")
+        var mutableData = OtherData(id: nil, text: "var")
+        
+        database.write {
+            database.create(&mutableData)
+            database.save(data)
+            
+            mutableData.text = "mutated var"
+            data.text = "mutated let"
+            
+            database.save(data, mutableData)
+        }
+        
+        XCTAssertEqual(1, database.load(OtherData.self, where: OtherData.text == "mutated var").count)
+        XCTAssertEqual(1, database.load(OtherData.self, where: OtherData.text == "let").count)
+        XCTAssertEqual(1, database.load(OtherData.self, where: OtherData.text == "mutated let").count)
+    }
+    
+    func testRollback() {
+        let data = OtherData(id: nil, text: "")
+        database.save(data)
+        XCTAssertEqual(1, database.load(OtherData.self).count)
+        
+        database.rollback()
+        
+        XCTAssertEqual(0, database.load(OtherData.self).count)
+    }
+    
+    func testWrite() {
+        let data = OtherData(id: nil, text: "")
+        database.save(data).write()
+        XCTAssertEqual(1, database.load(OtherData.self).count)
+        
+        database.rollback()
+        
+        XCTAssertEqual(1, database.load(OtherData.self).count)
+    }
+    
+    func testDelete() {
+        var data = OtherData(id: nil, text: "")
+        var secondData = OtherData(id: nil, text: "")
+        database.create(&data).create(&secondData).write()
+        
+        database.delete(data, secondData)
+        
+        XCTAssertEqual(0, database.load(OtherData.self).count)
+    }
+    
+    func testDeleteTypeWithPredicate() {
+        let data = OtherData(id: 0, text: "")
+        let secondData = OtherData(id: 1, text: "")
+        database.save(data, secondData).write()
+        
+        database.delete(OtherData.self, where: OtherData.id == 1)
+        
+        XCTAssertEqual(1, database.load(OtherData.self).count)
+    }
+    
+    func testDeleteAll() {
+        let data = OtherData(id: 0, text: "")
+        let secondData = OtherData(id: 1, text: "")
+        database.save(data, secondData).write()
+        
+        database.deleteAll(OtherData.self)
+        
+        XCTAssertEqual(0, database.load(OtherData.self).count)
     }
 }

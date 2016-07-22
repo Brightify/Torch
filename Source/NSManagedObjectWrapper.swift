@@ -35,11 +35,21 @@ public struct NSManagedObjectWrapper {
     }
     
     public func setValue<PARENT: TorchEntity, T: TorchPropertyOptionalType where T.Wrapped: NSObjectConvertible>(value: T, for property: TorchProperty<PARENT, T>) {
-        object.setValue(value.value?.toNSObject() ?? NSNull(), forKey: property.torchName)
+        object.setValue(value.value?.toNSObject() ?? nil, forKey: property.torchName)
     }
 
-    // TODO Add support for arrays
-
+    public func getValue<PARENT: TorchEntity, T: TorchPropertyArrayType where T.Element: NSObjectConvertible>(property: TorchProperty<PARENT, T>) -> [T.Element] {
+        return (object.valueForKey(property.torchName) as! NSArray).map { T.Element(fromObject: $0)! }
+    }
+    
+    public func setValue<PARENT: TorchEntity, T: TorchPropertyArrayType where T.Element: NSObjectConvertible>(values: T, for property: TorchProperty<PARENT, T>) {
+        let set = NSMutableArray()
+        for value in values.values {
+            set.addObject(value.toNSObject())
+        }
+        object.setValue(set, forKey: property.torchName)
+    }
+    
     public func getValue<PARENT: TorchEntity, T: TorchEntity>(property: TorchProperty<PARENT, T>) throws -> T {
         let managedObject = NSManagedObjectWrapper(object: object.valueForKey(property.torchName) as! NSManagedObject, database: database)
         return try T(fromManagedObject: managedObject)
@@ -49,10 +59,26 @@ public struct NSManagedObjectWrapper {
         object.setValue(try database.getManagedObject(for: &value), forKey: property.torchName)
     }
     
-    // TODO Add support for optional
-
+    public func getValue<PARENT: TorchEntity, T: TorchPropertyOptionalType where T.Wrapped: TorchEntity>(property: TorchProperty<PARENT, T>) throws -> T.Wrapped? {
+        if let managedObject = object.valueForKey(property.torchName) as! NSManagedObject? {
+            return try T.Wrapped(fromManagedObject: NSManagedObjectWrapper(object: managedObject , database: database))
+        } else {
+            return nil
+        }
+    }
+    
+    public func setValue<PARENT: TorchEntity, T: TorchPropertyOptionalType where T.Wrapped: TorchEntity>(inout value: T, for property: TorchProperty<PARENT, T>) throws {
+        if var mutableValue = value.value {
+            let managedObject = try database.getManagedObject(for: &mutableValue)
+            value.value = mutableValue
+            object.setValue(managedObject, forKey: property.torchName)
+        } else {
+            object.setValue(nil, forKey: property.torchName)
+        }
+    }
+    
     public func getValue<PARENT: TorchEntity, T: TorchPropertyArrayType where T.Element: TorchEntity>(property: TorchProperty<PARENT, T>) throws -> [T.Element] {
-        return try (object.valueForKey(property.torchName) as! NSOrderedSet).map {
+        return try (object.valueForKey(property.torchName) as! NSMutableOrderedSet).map {
             try T.Element(fromManagedObject: NSManagedObjectWrapper(object: $0 as! NSManagedObject, database: database))
         } 
     }

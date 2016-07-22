@@ -15,6 +15,13 @@ public protocol NSObjectConvertible: TorchPropertyType {
     func toNSObject() -> NSObject
 }
 
+extension NSObjectConvertible {
+    
+    public func toNSObject() -> NSObject {
+        return self as! NSObject
+    }
+}
+
 extension String: NSObjectConvertible {
     
     public init?(fromObject object: AnyObject) {
@@ -24,8 +31,15 @@ extension String: NSObjectConvertible {
             return nil
         }
     }
+}
+
+extension Bool: NSObjectConvertible {
     
-    public func toNSObject() -> NSObject {
-        return self as NSString
+    public init?(fromObject object: AnyObject) {
+        if let bool = object as? Bool {
+            self = bool
+        } else {
+            return nil
+        }
     }
 }

@@ -11,8 +11,11 @@ import CoreData
 public class PropertyRegistry {
     // TODO Add rest of types
     private static let typesArray: [(Any.Type, NSAttributeType)] = [
-        (Int.self, NSAttributeType.Integer64AttributeType),
-        (String.self, NSAttributeType.StringAttributeType)
+        (Int.self, .Integer64AttributeType),
+        (String.self, .StringAttributeType),
+        (Float.self, .FloatAttributeType),
+        (Double.self, .DoubleAttributeType),
+        (Bool.self, .BooleanAttributeType)
         ]
     
     private static let types: [ObjectIdentifier: NSAttributeType] = typesArray.reduce([:]) { acc, item in

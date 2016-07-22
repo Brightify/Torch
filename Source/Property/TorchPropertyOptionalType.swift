@@ -10,12 +10,16 @@ public protocol TorchPropertyOptionalType: TorchPropertyType {
     
     associatedtype Wrapped
     
-    var value: Wrapped? { get }
+    var value: Wrapped? { get set }
 }
 
 extension Optional: TorchPropertyOptionalType {
     
     public var value: Wrapped? {
-        return self
+        get {
+            return self
+        } set {
+            self = newValue
+        }
     }
 }

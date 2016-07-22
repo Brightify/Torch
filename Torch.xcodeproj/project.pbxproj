@@ -25,6 +25,9 @@
 		DC49D22F1D42870900EECA2F /* NSNumberConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC49D22E1D42870900EECA2F /* NSNumberConvertible.swift */; };
 		DC49D2311D42874400EECA2F /* TorchPropertyArrayType.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC49D2301D42874400EECA2F /* TorchPropertyArrayType.swift */; };
 		DC49D2331D42877E00EECA2F /* TorchPropertyOptionalType.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC49D2321D42877E00EECA2F /* TorchPropertyOptionalType.swift */; };
+		DC49D2351D42902000EECA2F /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC49D2341D42902000EECA2F /* Models.swift */; };
+		DC49D2371D42904700EECA2F /* ModelExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC49D2361D42904700EECA2F /* ModelExtensions.swift */; };
+		DC49D23A1D42A18C00EECA2F /* OptionalPropertyPredicates.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC49D2381D42A17600EECA2F /* OptionalPropertyPredicates.swift */; };
 		DC5A3A5D1CF6F8D600F520E3 /* Torch.podspec in Resources */ = {isa = PBXBuildFile; fileRef = DC5A3A5C1CF6F8D600F520E3 /* Torch.podspec */; };
 		DC8B9F2A1D3E26C100E3B9DE /* ApiDraft.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC8B9F291D3E26C100E3B9DE /* ApiDraft.swift */; };
 		DC8B9F2F1D3EB4AE00E3B9DE /* TorchTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC8B9F2B1D3EB41F00E3B9DE /* TorchTest.swift */; };
@@ -62,6 +65,9 @@
 		DC49D22E1D42870900EECA2F /* NSNumberConvertible.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NSNumberConvertible.swift; path = Property/NSNumberConvertible.swift; sourceTree = "<group>"; };
 		DC49D2301D42874400EECA2F /* TorchPropertyArrayType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TorchPropertyArrayType.swift; path = Property/TorchPropertyArrayType.swift; sourceTree = "<group>"; };
 		DC49D2321D42877E00EECA2F /* TorchPropertyOptionalType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TorchPropertyOptionalType.swift; path = Property/TorchPropertyOptionalType.swift; sourceTree = "<group>"; };
+		DC49D2341D42902000EECA2F /* Models.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Models.swift; path = Source/Models.swift; sourceTree = "<group>"; };
+		DC49D2361D42904700EECA2F /* ModelExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ModelExtensions.swift; path = Generated/ModelExtensions.swift; sourceTree = "<group>"; };
+		DC49D2381D42A17600EECA2F /* OptionalPropertyPredicates.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = OptionalPropertyPredicates.swift; path = Predicate/OptionalPropertyPredicates.swift; sourceTree = "<group>"; };
 		DC5A3A5C1CF6F8D600F520E3 /* Torch.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Torch.podspec; sourceTree = "<group>"; };
 		DC8B9F291D3E26C100E3B9DE /* ApiDraft.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = ApiDraft.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		DC8B9F2B1D3EB41F00E3B9DE /* TorchTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TorchTest.swift; sourceTree = "<group>"; };
@@ -147,6 +153,7 @@
 		DC32A1071D40134B008E3A4E /* Predicate */ = {
 			isa = PBXGroup;
 			children = (
+				DC49D2381D42A17600EECA2F /* OptionalPropertyPredicates.swift */,
 				DC32A1191D401566008E3A4E /* PropertyPredicates.swift */,
 				DC32A10F1D401443008E3A4E /* TorchPredicate.swift */,
 			);
@@ -156,12 +163,12 @@
 		DC32A1081D40135A008E3A4E /* Property */ = {
 			isa = PBXGroup;
 			children = (
-				DC32A10D1D401439008E3A4E /* TorchProperty.swift */,
-				DC49D22A1D42654200EECA2F /* TorchPropertyType.swift */,
-				DC49D22C1D4286E500EECA2F /* NSObjectConvertible.swift */,
 				DC49D22E1D42870900EECA2F /* NSNumberConvertible.swift */,
+				DC49D22C1D4286E500EECA2F /* NSObjectConvertible.swift */,
+				DC32A10D1D401439008E3A4E /* TorchProperty.swift */,
 				DC49D2301D42874400EECA2F /* TorchPropertyArrayType.swift */,
 				DC49D2321D42877E00EECA2F /* TorchPropertyOptionalType.swift */,
+				DC49D22A1D42654200EECA2F /* TorchPropertyType.swift */,
 			);
 			name = Property;
 			sourceTree = "<group>";
@@ -177,6 +184,7 @@
 		DC70D0B91D2AF3FA00014C5F /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				DC49D2341D42902000EECA2F /* Models.swift */,
 			);
 			name = Source;
 			sourceTree = "<group>";
@@ -184,6 +192,7 @@
 		DC70D0D01D2B006200014C5F /* Generated */ = {
 			isa = PBXGroup;
 			children = (
+				DC49D2361D42904700EECA2F /* ModelExtensions.swift */,
 			);
 			name = Generated;
 			sourceTree = "<group>";
@@ -303,6 +312,7 @@
 				DC49D2331D42877E00EECA2F /* TorchPropertyOptionalType.swift in Sources */,
 				DC32A0F71D3FF06E008E3A4E /* TorchEntity.swift in Sources */,
 				DC32A0F11D3FEFE6008E3A4E /* Database.swift in Sources */,
+				DC49D23A1D42A18C00EECA2F /* OptionalPropertyPredicates.swift in Sources */,
 				DC49D22D1D4286E500EECA2F /* NSObjectConvertible.swift in Sources */,
 				DC32A10E1D401439008E3A4E /* TorchProperty.swift in Sources */,
 				DC32A1031D3FF22C008E3A4E /* StoreConfiguration.swift in Sources */,
@@ -322,6 +332,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				DC8B9F2F1D3EB4AE00E3B9DE /* TorchTest.swift in Sources */,
+				DC49D2371D42904700EECA2F /* ModelExtensions.swift in Sources */,
+				DC49D2351D42902000EECA2F /* Models.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -28,6 +28,10 @@ extension NSNumberConvertible {
     public func toNSObject() -> NSObject {
         return toNSNumber()
     }
+    
+    public func toNSNumber() -> NSNumber {
+        return self as! NSNumber
+    }
 }
 
 extension Int: NSNumberConvertible {
@@ -35,8 +39,18 @@ extension Int: NSNumberConvertible {
     public init?(fromNSNumber number: NSNumber) {
         self = number.longValue
     }
+}
+
+extension Float: NSNumberConvertible {
     
-    public func toNSNumber() -> NSNumber {
-        return self as NSNumber
+    public init?(fromNSNumber number: NSNumber) {
+        self = number.floatValue
+    }
+}
+
+extension Double: NSNumberConvertible {
+    
+    public init?(fromNSNumber number: NSNumber) {
+        self = number.doubleValue
     }
 }
