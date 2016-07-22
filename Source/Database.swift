@@ -14,11 +14,11 @@ public class Database {
     
     private let context = NSManagedObjectContext(concurrencyType: .MainQueueConcurrencyType)
     
-    public convenience init(store: StoreConfiguration, entities: TorchEntityDescription.Type...) throws {
+    public convenience init(store: StoreConfiguration, entities: TorchEntity.Type...) throws {
         try self.init(store: store, entities: entities)
     }
     
-    public init(store: StoreConfiguration, entities: [TorchEntityDescription.Type]) throws {
+    public init(store: StoreConfiguration, entities: [TorchEntity.Type]) throws {
         let managedObjectModel = NSManagedObjectModel()
         registerEntities(entities, managedObjectModel: managedObjectModel)
         
@@ -26,7 +26,7 @@ public class Database {
         try coordinator.addPersistentStoreWithType(store.storeType, configuration: store.configuration, URL: store.storeURL, options: store.options)
         context.persistentStoreCoordinator = coordinator
         
-        try registerMetadata(entities.map { $0.torch_name })
+        try createMetadata(entities.map { $0.torch_name })
     }
     
     public func load<T: TorchEntity>(type: T.Type) throws -> [T] {
@@ -149,7 +149,7 @@ public class Database {
     }
     
     private func getMetadata(entityName: String) throws -> TorchMetadata {
-        let request = NSFetchRequest(entityName: TorchMetadata.torch_name)
+        let request = NSFetchRequest(entityName: TorchMetadata.NAME)
         request.predicate = NSPredicate(format: "torchEntityName = %@", entityName)
         guard let metadata = (try context.executeFetchRequest(request) as? [TorchMetadata])?.first else {
             fatalError("Could not load metadata for entity \(entityName)!")
@@ -157,19 +157,19 @@ public class Database {
         return metadata
     }
     
-    private func registerEntities(entities: [TorchEntityDescription.Type], managedObjectModel: NSManagedObjectModel) {
+    private func registerEntities(entities: [TorchEntity.Type], managedObjectModel: NSManagedObjectModel) {
         let entityRegistry = EntityRegistry()
-        TorchMetadata.torch_describe(to: entityRegistry)
+        TorchMetadata.describeEntity(to: entityRegistry)
         for registration in entities {
-            registration.torch_describe(to: entityRegistry)
+            registration.torch_describeEntity(to: entityRegistry)
         }
         managedObjectModel.entities = Array(entityRegistry.registeredEntities.values)
     }
     
-    private func registerMetadata(entityNames: [String]) throws {
-        let request = NSFetchRequest(entityName: TorchMetadata.torch_name)
-        guard let description = NSEntityDescription.entityForName(TorchMetadata.torch_name, inManagedObjectContext: context) else {
-            fatalError("Entity \(TorchMetadata.torch_name) is not registered!")
+    private func createMetadata(entityNames: [String]) throws {
+        let request = NSFetchRequest(entityName: TorchMetadata.NAME)
+        guard let description = NSEntityDescription.entityForName(TorchMetadata.NAME, inManagedObjectContext: context) else {
+            fatalError("Entity \(TorchMetadata.NAME) is not registered!")
         }
         guard var allMetadata = try context.executeFetchRequest(request) as? [TorchMetadata] else {
             fatalError("Could not load metadata!")

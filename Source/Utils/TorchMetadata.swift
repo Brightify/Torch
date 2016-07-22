@@ -9,18 +9,16 @@
 import CoreData
 
 @objc(TorchMetadata)
-class TorchMetadata: NSManagedObject, TorchEntityDescription {
+class TorchMetadata: NSManagedObject {
 
-    static var torch_name: String {
-        return "TorchSwift.TorchMetadata"
-    }
+    static let NAME = "TorchSwift.TorchMetadata"
     
     @NSManaged var torchEntityName: String
     @NSManaged var lastAssignedId: NSNumber
     
-    static func torch_describe(to registry: EntityRegistry) {
+    static func describeEntity(to registry: EntityRegistry) {
         let entity = NSEntityDescription()
-        entity.name = torch_name
+        entity.name = NAME
         entity.managedObjectClassName = String(TorchMetadata)
         
         let name = NSAttributeDescription()
@@ -35,6 +33,6 @@ class TorchMetadata: NSManagedObject, TorchEntityDescription {
 
         entity.properties = [name, id]
         
-        registry.describe(torch_name, as: entity)
+        registry.describe(NAME, as: entity)
     }
 }

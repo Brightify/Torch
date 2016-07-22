@@ -6,53 +6,53 @@
 //  Copyright © 2016 Brightify. All rights reserved.
 //
 
-public extension TypedTorchProperty where ValueType: NSObjectConvertible {
-    public func equalTo(value: ValueType) -> TorchPredicate<ParentType> {
+public extension TorchProperty where T: NSObjectConvertible {
+    public func equalTo(value: T) -> TorchPredicate<PARENT> {
         return TorchPredicate(torchName: torchName, operatorString: "==", value: value.toNSObject())
     }
 }
 
-public extension TypedTorchProperty where ValueType: NSNumberConvertible {
+public extension TorchProperty where T: NSNumberConvertible {
     
-    public func lessThan(value: ValueType) -> TorchPredicate<ParentType> {
+    public func lessThan(value: T) -> TorchPredicate<PARENT> {
         return TorchPredicate(torchName: torchName, operatorString: "<", value: value.toNSNumber())
     }
     
-    public func lessThanOrEqualTo(value: ValueType) -> TorchPredicate<ParentType> {
+    public func lessThanOrEqualTo(value: T) -> TorchPredicate<PARENT> {
         return TorchPredicate(torchName: torchName, operatorString: "<=", value: value.toNSNumber())
     }
     
-    public func greaterThanOrEqualTo(value: ValueType) -> TorchPredicate<ParentType> {
+    public func greaterThanOrEqualTo(value: T) -> TorchPredicate<PARENT> {
         return TorchPredicate(torchName: torchName, operatorString: ">=", value: value.toNSNumber())
     }
     
-    public func greaterThan(value: ValueType) -> TorchPredicate<ParentType> {
+    public func greaterThan(value: T) -> TorchPredicate<PARENT> {
         return TorchPredicate(torchName: torchName, operatorString: ">", value: value.toNSNumber())
     }
 }
 
-public func == <P1: TypedTorchProperty where P1.ValueType: NSObjectConvertible>(lhs: P1, rhs: P1.ValueType) -> TorchPredicate<P1.ParentType> {
+public func == <PARENT: TorchEntity, T: NSObjectConvertible>(lhs: TorchProperty<PARENT, T>, rhs: T) -> TorchPredicate<PARENT> {
     return lhs.equalTo(rhs)
 }
 
-public func < <P1: TypedTorchProperty where P1.ValueType: NSNumberConvertible>(lhs: P1, rhs: P1.ValueType) -> TorchPredicate<P1.ParentType> {
+public func < <PARENT: TorchEntity, T: NSNumberConvertible>(lhs: TorchProperty<PARENT, T>, rhs: T) -> TorchPredicate<PARENT> {
     return lhs.lessThan(rhs)
 }
 
-public func <= <P1: TypedTorchProperty where P1.ValueType: NSNumberConvertible>(lhs: P1, rhs: P1.ValueType) -> TorchPredicate<P1.ParentType> {
+public func <= <PARENT: TorchEntity, T: NSNumberConvertible>(lhs: TorchProperty<PARENT, T>, rhs: T) -> TorchPredicate<PARENT> {
     return lhs.lessThanOrEqualTo(rhs)
 }
 
-public func >= <P1: TypedTorchProperty where P1.ValueType: NSNumberConvertible>(lhs: P1, rhs: P1.ValueType) -> TorchPredicate<P1.ParentType> {
+public func >= <PARENT: TorchEntity, T: NSNumberConvertible>(lhs: TorchProperty<PARENT, T>, rhs: T) -> TorchPredicate<PARENT> {
     return lhs.greaterThanOrEqualTo(rhs)
 }
 
-public func > <P1: TypedTorchProperty where P1.ValueType: NSNumberConvertible>(lhs: P1, rhs: P1.ValueType) -> TorchPredicate<P1.ParentType> {
+public func > <PARENT: TorchEntity, T: NSNumberConvertible>(lhs: TorchProperty<PARENT, T>, rhs: T) -> TorchPredicate<PARENT> {
     return lhs.greaterThan(rhs)
 }
 
-public extension TypedTorchProperty where ValueType: OptionalType, ValueType.WrappedType: NSObjectConvertible {
-    public func equalTo(value: ValueType) -> TorchPredicate<ParentType> {
+public extension TorchProperty where T: TorchPropertyOptionalType, T.Wrapped: NSObjectConvertible {
+    public func equalTo(value: T) -> TorchPredicate<PARENT> {
         return TorchPredicate(torchName: torchName, operatorString: "==", value: value.value?.toNSObject())
     }
 }

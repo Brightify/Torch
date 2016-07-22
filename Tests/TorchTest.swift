@@ -62,21 +62,11 @@ extension Data {
         return "TorchRegistration.Data"
     }
 
-    static var torch_properties: [AnyProperty<Data>] {
-        return [
-            id.typeErased(),
-            x.typeErased(),
-            y.typeErased(),
-            otherDatum.typeErased(),
-            otherData.typeErased()
-        ]
-    }
-
-    static let id = ScalarProperty<Data, Int?>(name: "id")
-    static let x = ScalarProperty<Data, String>(name: "x")
-    static let y = ScalarProperty<Data, Int>(name: "y")
-    static let otherDatum = ToOneRelationProperty<Data, OtherData>(name: "otherDatum")
-    static let otherData = ToManyRelationProperty<Data, [OtherData]>(name: "otherData")
+    static let id = TorchProperty<Data, Int?>(name: "id")
+    static let x = TorchProperty<Data, String>(name: "x")
+    static let y = TorchProperty<Data, Int>(name: "y")
+    static let otherDatum = TorchProperty<Data, OtherData>(name: "otherDatum")
+    static let otherData = TorchProperty<Data, [OtherData]>(name: "otherData")
 
     init(fromManagedObject object: NSManagedObjectWrapper) throws {
         id = object.getValue(Data.id)
@@ -94,8 +84,16 @@ extension Data {
         try object.setValue(&otherData, for: Data.otherData)
     }
 
-    static func torch_describe(to registry: EntityRegistry) {
+    static func torch_describeEntity(to registry: EntityRegistry) {
         registry.description(of: Data.self)
+    }
+    
+    static func torch_describeProperties(to registry: PropertyRegistry) {
+        registry.description(of: Data.id)
+        registry.description(of: Data.x)
+        registry.description(of: Data.y)
+        registry.description(of: Data.otherDatum)
+        registry.description(of: Data.otherData)
     }
 }
 
@@ -109,15 +107,8 @@ extension OtherData {
         return "TorchRegistration.OtherData"
     }
 
-    static var torch_properties: [AnyProperty<OtherData>] {
-        return [
-            id.typeErased(),
-            name.typeErased()
-        ]
-    }
-
-    static let id = ScalarProperty<OtherData, Int?>(name: "id")
-    static let name = ScalarProperty<OtherData, String?>(name: "name")
+    static let id = TorchProperty<OtherData, Int?>(name: "id")
+    static let name = TorchProperty<OtherData, String?>(name: "name")
 
     init(fromManagedObject object: NSManagedObjectWrapper) throws {
         id = object.getValue(OtherData.id)
@@ -129,7 +120,12 @@ extension OtherData {
         object.setValue(name, for: OtherData.name)
     }
 
-    static func torch_describe(to registry: EntityRegistry) {
+    static func torch_describeEntity(to registry: EntityRegistry) {
         registry.description(of: OtherData.self)
+    }
+    
+    static func torch_describeProperties(to registry: PropertyRegistry) {
+        registry.description(of: OtherData.id)
+        registry.description(of: OtherData.name)
     }
 }

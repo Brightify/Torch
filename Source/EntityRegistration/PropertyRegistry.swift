@@ -12,10 +12,7 @@ public class PropertyRegistry {
     // TODO Add rest of types
     private static let typesArray: [(Any.Type, NSAttributeType)] = [
         (Int.self, NSAttributeType.Integer64AttributeType),
-        (String.self, NSAttributeType.StringAttributeType),
-        
-        (Optional<Int>.self, NSAttributeType.Integer64AttributeType),
-        (Optional<String>.self, NSAttributeType.StringAttributeType),
+        (String.self, NSAttributeType.StringAttributeType)
         ]
     
     private static let types: [ObjectIdentifier: NSAttributeType] = typesArray.reduce([:]) { acc, item in
@@ -32,34 +29,46 @@ public class PropertyRegistry {
         self.entityRegistry = entityRegistry
     }
     
-    public func attribute<P: TypedTorchProperty>(property: P) {
-        registerAttribute(property.torchName, type: P.ValueType.self, optional: false)
+    public func description<PARENT: TorchEntity, T: TorchPropertyType>(of property: TorchProperty<PARENT, T>) {
+        fatalError("Unsupported type \(String(T)). Consider extending it with `NSObjectConvertible` or add new overload for this method with correct implementation.")
     }
     
-    public func attribute<P: TypedTorchProperty where P.ValueType: OptionalType>(property: P) {
-        registerAttribute(property.torchName, type: P.ValueType.WrappedType.self, optional: true)
+    public func description<PARENT: TorchEntity, T: NSObjectConvertible>(of property: TorchProperty<PARENT, T>) {
+        registerAttribute(property.torchName, type: T.self, optional: false)
     }
     
-    public func relationship<P: TypedTorchProperty where P.ValueType: TorchEntity>(property: P) {
-        registerRelationship(property.torchName, type: P.ValueType.self, optional: false, minCount: 1, maxCount: 1)
+    // TODO maybe conversion needed
+    public func description<PARENT: TorchEntity, T: TorchPropertyArrayType where T.Element: NSObjectConvertible>(of property: TorchProperty<PARENT, T>) {
+        registerAttribute(property.torchName, type: T.self, optional: false, isArray: true)
     }
     
-    public func relationship<P: TypedTorchProperty where P.ValueType: OptionalType, P.ValueType.WrappedType: TorchEntity>(property: P) {
-        registerRelationship(property.torchName, type: P.ValueType.WrappedType.self, optional: true, minCount: 1, maxCount: 1)
+    public func description<PARENT: TorchEntity, T: TorchPropertyOptionalType where T.Wrapped: NSObjectConvertible>(of property: TorchProperty<PARENT, T>) {
+        registerAttribute(property.torchName, type: T.Wrapped.self, optional: true)
     }
     
-    public func relationship<P: TypedTorchProperty where P.ValueType: SequenceType, P.ValueType.Generator.Element: TorchEntity>(property: P) {
-        registerRelationship(property.torchName, type: P.ValueType.Generator.Element.self, optional: false, minCount: 0, maxCount: 0)
+    public func description<PARENT: TorchEntity, T: TorchEntity>(of property: TorchProperty<PARENT, T>) {
+        registerRelationship(property.torchName, type: T.self, optional: false, minCount: 1, maxCount: 1)
     }
     
-    public func relationship<P: TypedTorchProperty where P.ValueType: OptionalType, P.ValueType.WrappedType: SequenceType, P.ValueType.WrappedType.Generator.Element: TorchEntity>(property: P) {
-        registerRelationship(property.torchName, type: P.ValueType.WrappedType.Generator.Element.self, optional: true, minCount: 0, maxCount: 0)
+    public func description<PARENT: TorchEntity, T: TorchPropertyArrayType where T.Element: TorchEntity>(of property: TorchProperty<PARENT, T>) {
+        registerRelationship(property.torchName, type: T.Element.self, optional: false, minCount: 0, maxCount: 0)
     }
     
-    private func registerAttribute<T>(name: String, type: T.Type, optional: Bool) {
+    public func description<PARENT: TorchEntity, T: TorchPropertyOptionalType where T.Wrapped: TorchEntity>(of property: TorchProperty<PARENT, T>) {
+        registerRelationship(property.torchName, type: T.Wrapped.self, optional: true, minCount: 1, maxCount: 1)
+    }
+    
+    private func registerAttribute<T>(name: String, type: T.Type, optional: Bool, isArray: Bool = false) {
+        let attributeType: NSAttributeType
+        if isArray {
+            attributeType = .TransformableAttributeType
+        } else {
+            attributeType = PropertyRegistry.types[ObjectIdentifier(T)] ?? .TransformableAttributeType
+        }
+        
         let attribute = NSAttributeDescription()
         attribute.name = name
-        attribute.attributeType = PropertyRegistry.types[ObjectIdentifier(type)] ?? NSAttributeType.UndefinedAttributeType
+        attribute.attributeType = attributeType
         attribute.optional = optional
         registeredProperties.append(attribute)
     }

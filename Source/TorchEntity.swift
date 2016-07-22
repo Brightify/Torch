@@ -8,14 +8,9 @@
 
 import CoreData
 
-public protocol TorchEntityDescription {
+public protocol TorchEntity: TorchPropertyType {
     
     static var torch_name: String { get }
-    
-    static func torch_describe(to registry: EntityRegistry)
-}
-
-public protocol TorchEntity: TorchEntityDescription {
     
     var id: Int? { get set }
     
@@ -23,5 +18,7 @@ public protocol TorchEntity: TorchEntityDescription {
     
     mutating func torch_updateManagedObject(object: NSManagedObjectWrapper) throws
     
-    static var torch_properties: [AnyProperty<Self>] { get }
+    static func torch_describeEntity(to registry: EntityRegistry)
+    
+    static func torch_describeProperties(to registry: PropertyRegistry)
 }

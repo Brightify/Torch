@@ -10,11 +10,11 @@ public class UnsafeDatabase {
     
     private let database: Database
     
-    public convenience init(store: StoreConfiguration, entities: TorchEntityDescription.Type...) {
+    public convenience init(store: StoreConfiguration, entities: TorchEntity.Type...) {
         self.init(store: store, entities: entities)
     }
  
-    public init(store: StoreConfiguration, entities: [TorchEntityDescription.Type]) {
+    public init(store: StoreConfiguration, entities: [TorchEntity.Type]) {
         do {
             database = try Database(store: store, entities: entities)
         } catch {

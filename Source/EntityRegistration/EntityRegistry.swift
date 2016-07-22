@@ -11,7 +11,7 @@ import CoreData
 public class EntityRegistry {
     private(set) var registeredEntities: [String: NSEntityDescription] = [:]
     
-    public func description<E: TorchEntity>(of entityType: E.Type) -> NSEntityDescription {
+    public func description(of entityType: TorchEntity.Type) -> NSEntityDescription {
         if let registeredEntity = registeredEntities[entityType.torch_name] {
             return registeredEntity
         }
@@ -20,9 +20,7 @@ public class EntityRegistry {
         entity.name = entityType.torch_name
 
         let propertyRegistry = PropertyRegistry(entityRegistry: self)
-        for property in entityType.torch_properties {
-            property.describe(to: propertyRegistry)
-        }
+        entityType.torch_describeProperties(to: propertyRegistry)
         entity.properties = propertyRegistry.registeredProperties
         
         describe(entityType.torch_name, as: entity)
