@@ -25,13 +25,13 @@ class PredicateTests: XCTestCase {
             database.save(OtherData(id: 1, text: "b"))
             database.save(OtherData(id: 2, text: "b"))
             database.save(Data(id: nil, number: 7, optionalNumber: nil, numbers: [1, 1, 2], text: "a",
-                float: 1.1, double: 1.2, bool: true, relation: otherData, optionalRelation: nil,
+                float: 1.1, double: 1.2, bool: true, set: [1, 2], relation: otherData, optionalRelation: nil,
                 arrayWithRelation: [], readOnly: "ra"))
             database.save(Data(id: nil, number: 8, optionalNumber: 1, numbers: [1, 1, 2], text: "b",
-                float: 1.2, double: 1.3, bool: true, relation: otherData, optionalRelation: otherData,
+                float: 1.2, double: 1.3, bool: true, set: [1, 2], relation: otherData, optionalRelation: otherData,
                 arrayWithRelation: [], readOnly: "b"))
             database.save(Data(id: nil, number: 8, optionalNumber: 1, numbers: [1, 1, 2], text: "b",
-                float: 1.2, double: 1.3, bool: false, relation: otherData, optionalRelation: nil,
+                float: 1.2, double: 1.3, bool: false, set: [1, 2], relation: otherData, optionalRelation: nil,
                 arrayWithRelation: [], readOnly: "c"))
         }
     }

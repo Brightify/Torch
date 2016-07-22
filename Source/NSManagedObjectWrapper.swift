@@ -50,6 +50,20 @@ public struct NSManagedObjectWrapper {
         object.setValue(set, forKey: property.torchName)
     }
     
+    public func getValue<PARENT: TorchEntity, T: TorchPropertySetType where T.Element: NSObjectConvertible>(property: TorchProperty<PARENT, T>) -> Set<T.Element> {
+        var result = Set<T.Element>()
+        (object.valueForKey(property.torchName) as! NSSet).forEach { result.insert(T.Element(fromObject: $0)!) }
+        return result
+    }
+    
+    public func setValue<PARENT: TorchEntity, T: TorchPropertySetType where T.Element: NSObjectConvertible>(values: T, for property: TorchProperty<PARENT, T>) {
+        let set = NSMutableSet()
+        for value in values.values {
+            set.addObject(value.toNSObject())
+        }
+        object.setValue(set, forKey: property.torchName)
+    }
+    
     public func getValue<PARENT: TorchEntity, T: TorchEntity>(property: TorchProperty<PARENT, T>) throws -> T {
         let managedObject = NSManagedObjectWrapper(object: object.valueForKey(property.torchName) as! NSManagedObject, database: database)
         return try T(fromManagedObject: managedObject)

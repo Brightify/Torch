@@ -20,6 +20,8 @@ struct Data: TorchEntity {
     var double: Double
     var bool: Bool
     
+    var set: Set<Int>
+    
     var relation: OtherData
     var optionalRelation: OtherData?
     var arrayWithRelation: [OtherData]

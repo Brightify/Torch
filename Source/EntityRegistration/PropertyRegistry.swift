@@ -40,9 +40,12 @@ public class PropertyRegistry {
         registerAttribute(property.torchName, type: T.self, optional: false)
     }
     
-    // TODO maybe conversion needed
     public func description<PARENT: TorchEntity, T: TorchPropertyArrayType where T.Element: NSObjectConvertible>(of property: TorchProperty<PARENT, T>) {
-        registerAttribute(property.torchName, type: T.self, optional: false, isArray: true)
+        registerAttribute(property.torchName, type: T.self, optional: false, forceTransformable: true)
+    }
+    
+    public func description<PARENT: TorchEntity, T: TorchPropertySetType where T.Element: NSObjectConvertible>(of property: TorchProperty<PARENT, T>) {
+        registerAttribute(property.torchName, type: T.self, optional: false, forceTransformable: true)
     }
     
     public func description<PARENT: TorchEntity, T: TorchPropertyOptionalType where T.Wrapped: NSObjectConvertible>(of property: TorchProperty<PARENT, T>) {
@@ -61,9 +64,9 @@ public class PropertyRegistry {
         registerRelationship(property.torchName, type: T.Wrapped.self, optional: true, minCount: 1, maxCount: 1)
     }
     
-    private func registerAttribute<T>(name: String, type: T.Type, optional: Bool, isArray: Bool = false) {
+    private func registerAttribute<T>(name: String, type: T.Type, optional: Bool, forceTransformable: Bool = false) {
         let attributeType: NSAttributeType
-        if isArray {
+        if forceTransformable {
             attributeType = .TransformableAttributeType
         } else {
             attributeType = PropertyRegistry.types[ObjectIdentifier(T)] ?? .TransformableAttributeType

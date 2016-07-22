@@ -8,6 +8,7 @@
 
 import CoreData
 
+// TODO Finish
 public struct SortDescriptor {
     
     func toSortDescriptors() -> [NSSortDescriptor] {
