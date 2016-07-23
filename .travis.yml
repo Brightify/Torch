@@ -4,7 +4,12 @@ xcode_project: Torch.xcodeproj
 xcode_scheme: Torch
 xcode_sdk: macosx
 
+before_script:
+    - gem install cucumber
+    - gem install aruba
+
 script:
+    - bash run_tests.sh
     - travis_wait xctool -project Torch.xcodeproj -scheme Torch -sdk macosx test
 
 after_script:
