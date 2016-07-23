@@ -9,7 +9,9 @@ before_script:
     - gem install aruba
 
 script:
+    - cd Generator
     - bash run_tests.sh
+    - cd ..
     - travis_wait xctool -project Torch.xcodeproj -scheme Torch -sdk macosx test
 
 after_script:
