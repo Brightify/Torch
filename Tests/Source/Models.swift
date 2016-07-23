@@ -25,6 +25,7 @@ struct Data: TorchEntity {
     var relation: OtherData
     var optionalRelation: OtherData?
     var arrayWithRelation: [OtherData]
+    var manualEntityRelation: ManualData
     
     let readOnly: String
 }
@@ -32,4 +33,37 @@ struct Data: TorchEntity {
 struct OtherData: TorchEntity {
     var id: Int?
     var text: String
+}
+
+struct ManualData: ManualTorchEntity {
+    var id: Int?
+    var text: String
+}
+
+extension ManualData {
+    static var torch_name: String {
+        return "TorchEntity.ManualData"
+    }
+
+    static let id = Torch.TorchProperty<ManualData, Int?>(name: "id")
+    static let text = Torch.TorchProperty<ManualData, String>(name: "text")
+
+    init(fromManagedObject object: NSManagedObjectWrapper) throws {
+        id = object.getValue(ManualData.id)
+        text = object.getValue(ManualData.text)
+    }
+
+    mutating func torch_updateManagedObject(object: Torch.NSManagedObjectWrapper) throws {
+        object.setValue(id, for: ManualData.id)
+        object.setValue(text, for: ManualData.text)
+    }
+
+    static func torch_describeEntity(to registry: Torch.EntityRegistry) {
+        registry.description(of: ManualData.self)
+    }
+
+    static func torch_describeProperties(to registry: Torch.PropertyRegistry) {
+        registry.description(of: ManualData.id)
+        registry.description(of: ManualData.text)
+    }
 }

@@ -18,21 +18,23 @@ class PredicateTests: XCTestCase {
         super.setUp()
         
         let inMemoryStore = StoreConfiguration(storeType: NSInMemoryStoreType, configuration: nil, storeURL: nil, options: nil)
-        database = UnsafeDatabase(store: inMemoryStore, entities: Data.self, OtherData.self)
+        database = UnsafeDatabase(store: inMemoryStore, entities: Data.self, OtherData.self, ManualData.self)
         database.write {
             let otherData = OtherData(id: 0, text: "a")
+            let manualData = ManualData(id: 0, text: "aa")
             database.save(otherData)
+            database.save(manualData)
             database.save(OtherData(id: 1, text: "b"))
             database.save(OtherData(id: 2, text: "b"))
             database.save(Data(id: nil, number: 7, optionalNumber: nil, numbers: [1, 1, 2], text: "a",
                 float: 1.1, double: 1.2, bool: true, set: [1, 2], relation: otherData, optionalRelation: nil,
-                arrayWithRelation: [], readOnly: "ra"))
+                arrayWithRelation: [], manualEntityRelation: manualData, readOnly: "ra"))
             database.save(Data(id: nil, number: 8, optionalNumber: 1, numbers: [1, 1, 2], text: "b",
                 float: 1.2, double: 1.3, bool: true, set: [1, 2], relation: otherData, optionalRelation: otherData,
-                arrayWithRelation: [], readOnly: "b"))
+                arrayWithRelation: [], manualEntityRelation: manualData, readOnly: "b"))
             database.save(Data(id: nil, number: 8, optionalNumber: 1, numbers: [1, 1, 2], text: "b",
                 float: 1.2, double: 1.3, bool: false, set: [1, 2], relation: otherData, optionalRelation: nil,
-                arrayWithRelation: [], readOnly: "c"))
+                arrayWithRelation: [], manualEntityRelation: manualData, readOnly: "c"))
         }
     }
     

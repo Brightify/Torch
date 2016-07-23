@@ -1,4 +1,4 @@
-// MARK: - Torch entity extensions generated from file: Tests/Source/Models.swift at 2016-07-23 12:35:45 AM +0000
+// MARK: - Torch entity extensions generated from file: Tests/Source/Models.swift at 2016-07-23 10:54:32 AM +0000
 
 import Torch
 import CoreData
@@ -8,6 +8,7 @@ extension Data {
     static var torch_name: String {
         return "TorchEntity.Data"
     }
+    
     
     static let id = Torch.TorchProperty<Data, Int?>(name: "id")
     static let number = Torch.TorchProperty<Data, Int>(name: "number")
@@ -21,7 +22,9 @@ extension Data {
     static let relation = Torch.TorchProperty<Data, OtherData>(name: "relation")
     static let optionalRelation = Torch.TorchProperty<Data, OtherData?>(name: "optionalRelation")
     static let arrayWithRelation = Torch.TorchProperty<Data, [OtherData]>(name: "arrayWithRelation")
+    static let manualEntityRelation = Torch.TorchProperty<Data, ManualData>(name: "manualEntityRelation")
     static let readOnly = Torch.TorchProperty<Data, String>(name: "readOnly")
+    
     
     init(fromManagedObject object: Torch.NSManagedObjectWrapper) throws {
         id = object.getValue(Data.id)
@@ -36,8 +39,10 @@ extension Data {
         relation = try object.getValue(Data.relation)
         optionalRelation = try object.getValue(Data.optionalRelation)
         arrayWithRelation = try object.getValue(Data.arrayWithRelation)
+        manualEntityRelation = try object.getValue(Data.manualEntityRelation)
         readOnly = object.getValue(Data.readOnly)
     }
+    
     
     mutating func torch_updateManagedObject(object: Torch.NSManagedObjectWrapper) throws {
         object.setValue(id, for: Data.id)
@@ -52,12 +57,15 @@ extension Data {
         try object.setValue(&relation, for: Data.relation)
         try object.setValue(&optionalRelation, for: Data.optionalRelation)
         try object.setValue(&arrayWithRelation, for: Data.arrayWithRelation)
+        try object.setValue(&manualEntityRelation, for: Data.manualEntityRelation)
         object.setValue(readOnly, for: Data.readOnly)
     }
+    
     
     static func torch_describeEntity(to registry: Torch.EntityRegistry) {
         registry.description(of: Data.self)
     }
+    
     
     static func torch_describeProperties(to registry: Torch.PropertyRegistry) {
         registry.description(of: Data.id)
@@ -72,9 +80,12 @@ extension Data {
         registry.description(of: Data.relation)
         registry.description(of: Data.optionalRelation)
         registry.description(of: Data.arrayWithRelation)
+        registry.description(of: Data.manualEntityRelation)
         registry.description(of: Data.readOnly)
     }
+    
 }
+
 
 extension OtherData {
     
@@ -82,25 +93,33 @@ extension OtherData {
         return "TorchEntity.OtherData"
     }
     
+    
     static let id = Torch.TorchProperty<OtherData, Int?>(name: "id")
     static let text = Torch.TorchProperty<OtherData, String>(name: "text")
+    
     
     init(fromManagedObject object: Torch.NSManagedObjectWrapper) throws {
         id = object.getValue(OtherData.id)
         text = object.getValue(OtherData.text)
     }
     
+    
     mutating func torch_updateManagedObject(object: Torch.NSManagedObjectWrapper) throws {
         object.setValue(id, for: OtherData.id)
         object.setValue(text, for: OtherData.text)
     }
     
+    
     static func torch_describeEntity(to registry: Torch.EntityRegistry) {
         registry.description(of: OtherData.self)
     }
+    
     
     static func torch_describeProperties(to registry: Torch.PropertyRegistry) {
         registry.description(of: OtherData.id)
         registry.description(of: OtherData.text)
     }
+    
 }
+
+

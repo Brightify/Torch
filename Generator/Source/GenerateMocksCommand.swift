@@ -36,7 +36,7 @@ public struct GenerateMocksCommand: CommandType {
     private func generateFilesContent(parsedFiles: [FileRepresentation], options: Options) -> [String] {
         var allEntities: [StructDeclaration] = []
         func registerEntities(tokens: [Token], inout to array: [StructDeclaration]) {
-            tokens.flatMap { $0 as? StructDeclaration }.filter { $0.isTorchEntity }.forEach {
+            tokens.flatMap { $0 as? StructDeclaration }.filter { $0.isEntityToken }.forEach {
                 array.append($0)
                 // Look for nested entities
                 registerEntities($0.children, to: &array)

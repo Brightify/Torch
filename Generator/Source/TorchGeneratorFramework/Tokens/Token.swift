@@ -6,4 +6,6 @@
 //  Copyright © 2016 Brightify. All rights reserved.
 //
 
-public protocol Token { }
+public protocol Token {
+    var isEntityToken: Bool { get }
+}

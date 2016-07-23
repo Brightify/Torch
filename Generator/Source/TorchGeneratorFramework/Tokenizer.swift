@@ -8,11 +8,10 @@
 
 import SourceKittenFramework
 
-public class Tokenizer {
+public struct Tokenizer {
     private let file: File
     private let source: String
-    private var containsTorchEntity = false
-    
+
     public init(sourceFile: File) {
         self.file = sourceFile
         
@@ -24,7 +23,7 @@ public class Tokenizer {
         
         let declarations = tokenize(structure.dictionary[Key.Substructure.rawValue] as? [SourceKitRepresentable] ?? [])
         
-        return FileRepresentation(sourceFile: file, declarations: declarations, containsTorchEntity: containsTorchEntity)
+        return FileRepresentation(sourceFile: file, declarations: declarations)
     }
     
     private func tokenize(representables: [SourceKitRepresentable]) -> [Token] {
@@ -48,17 +47,20 @@ public class Tokenizer {
             
             let inheritedTypes = dictionary[Key.InheritedTypes.rawValue] as? [SourceKitRepresentable] ?? []
             let inheritedTypeNames = inheritedTypes.flatMap { $0 as? [String: SourceKitRepresentable] }.flatMap { $0[Key.Name.rawValue] as? String }
-            let isTorchEntity = inheritedTypeNames.contains("TorchEntity")
-            
-            if isTorchEntity {
-                containsTorchEntity = true
+            let structKind: StructKind
+            if inheritedTypeNames.contains(StructKind.TorchEntity.rawValue) {
+                structKind = .TorchEntity
+            } else if inheritedTypeNames.contains(StructKind.ManualTorchEntity.rawValue) {
+                structKind = .ManualTorchEntity
+            } else {
+                structKind = .Plain
             }
             
             return StructDeclaration(
                 name: name,
                 accessibility: accesibility!,
                 children: children,
-                isTorchEntity: isTorchEntity
+                kind: structKind
             )
         case Kinds.InstanceVariable.rawValue:
             return InstanceVariable(

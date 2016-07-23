@@ -18,17 +18,18 @@ class TorchTest: XCTestCase {
         super.setUp()
         
         let inMemoryStore = StoreConfiguration(storeType: NSInMemoryStoreType, configuration: nil, storeURL: nil, options: nil)
-        database = UnsafeDatabase(store: inMemoryStore, entities: Data.self, OtherData.self)
+        database = UnsafeDatabase(store: inMemoryStore, entities: Data.self, OtherData.self, ManualData.self)
     }
     
     func testPersistance() {
+        let manualData = ManualData(id: 0, text: "manual")
         let otherData = OtherData(id: 0, text: "other")
         let data = Data(id: 0, number: 7, optionalNumber: 10, numbers: [1, 1, 2], text: "text",
                         float: 1.1, double: 1.2, bool: true, set: [1, 2], relation: otherData, optionalRelation: otherData,
-                        arrayWithRelation: [otherData], readOnly: "read only")
+                        arrayWithRelation: [otherData], manualEntityRelation: manualData, readOnly: "read only")
         let dataWithOptionals = Data(id: 1, number: 7, optionalNumber: nil, numbers: [1, 2], text: "text",
                         float: 1.1, double: 1.2, bool: true, set: [1, 2], relation: otherData, optionalRelation: nil,
-                        arrayWithRelation: [otherData], readOnly: "read only")
+                        arrayWithRelation: [otherData], manualEntityRelation: manualData, readOnly: "read only")
         
         database.save(data, dataWithOptionals).write()
         

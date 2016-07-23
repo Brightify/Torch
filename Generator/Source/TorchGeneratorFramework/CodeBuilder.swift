@@ -6,30 +6,53 @@
 //  Copyright © 2016 Brightify. All rights reserved.
 //
 
-public class CodeBuilder {
-    private static let Tab = "    "
+public struct CodeBuilder {
+    private static let tab = "    "
 
     public private(set) var code = ""
     
     private var nesting = 0
+
+    private var nest: String {
+        return (0 ..< nesting).reduce("") { acc, _ in acc + CodeBuilder.tab }
+    }
     
-    public func clear() {
+    public mutating func clear() {
         code = ""
     }
     
-    public func nest(@noescape closure: () -> ()) {
+    public mutating func nest(@noescape closure: () -> ()) {
         nesting += 1
         closure()
         nesting -= 1
     }
     
-    public func nest(line: String) {
+    public mutating func nest(line: String) {
         nest { self += line }
+    }
+
+    public mutating func append(line line: String) {
+        code += "\(nest)\(line)\n"
+    }
+
+    public mutating func append(lines lines: [String]) {
+        lines.forEach { append(line: $0) }
+    }
+
+    public mutating func append(builder subbuilder: CodeBuilder) {
+        let lines = subbuilder.code.characters
+            .split(allowEmptySlices: true) { $0 == "\n" || $0 == "\r\n" }
+            .map(String.init)
+        append(lines: lines)
     }
 }
 
-public func +=(left: CodeBuilder, right: String) {
-    (0..<left.nesting).forEach { _ in left.code += CodeBuilder.Tab }
-    left.code += right
-    left.code += "\n"
+
+
+public func +=(inout builder: CodeBuilder, string: String) {
+    builder.append(line: string)
+}
+
+public func +=(inout builder: CodeBuilder, subbuilder: CodeBuilder) {
+    builder.append(builder: subbuilder)
 }

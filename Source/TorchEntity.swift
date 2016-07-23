@@ -22,3 +22,10 @@ public protocol TorchEntity: TorchPropertyType {
     
     static func torch_describeProperties(to registry: PropertyRegistry)
 }
+
+/** 
+ In the case of Generator not being able to describe your entity properly,
+ you can implement this protocol instead and write the description yourself.
+ Torch will then treat the type as any other entity.
+ */
+public protocol ManualTorchEntity: TorchEntity { }

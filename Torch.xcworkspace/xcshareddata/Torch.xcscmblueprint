@@ -1,0 +1,86 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "DAE76EA82CAFA2CC0F913C7B06B4469CFBE15929+++3D69E76",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "64ACE19A884E8C30BC53E2E0CE86010ECED70B5A+++034E1A5" : 0,
+    "956D2B21DD155C49504BB67697A67F7C5351A353+++1C78424" : 0,
+    "FD7DA18210A2C280E9107E37D7344F243FEE5F75+++F45B9D2" : 0,
+    "E084C86B03F81D63323C9E7510697EA528A758C7+++A44A252" : 0,
+    "E084C86B03F81D63323C9E7510697EA528A758C7+++806FF41" : 0,
+    "E084C86B03F81D63323C9E7510697EA528A758C7+++2C6F4E0" : 0,
+    "EB2210CFD48672E403BED699D5D7F01B844069CF+++C5C04EC" : 0,
+    "E111B14063EC98ABE518A93E1C4498F4167C2DEE+++322EAEC" : 0,
+    "D23C0CEAADB77074FDA4459000068A7940EB7AD0+++57FD98A" : 0,
+    "DAE76EA82CAFA2CC0F913C7B06B4469CFBE15929+++3D69E76" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "4B61B055-0BF5-47B6-A594-EAF10E19DF9B",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "64ACE19A884E8C30BC53E2E0CE86010ECED70B5A+++034E1A5" : "Torch\/Generator\/Dependencies\/FileKit\/",
+    "956D2B21DD155C49504BB67697A67F7C5351A353+++1C78424" : "Torch\/Generator\/Dependencies\/SourceKitten\/Carthage\/Checkouts\/Commandant\/Carthage\/Checkouts\/Result\/",
+    "FD7DA18210A2C280E9107E37D7344F243FEE5F75+++F45B9D2" : "Torch\/Generator\/Dependencies\/SourceKitten\/",
+    "E084C86B03F81D63323C9E7510697EA528A758C7+++A44A252" : "Torch\/Generator\/Dependencies\/SourceKitten\/Carthage\/Checkouts\/Commandant\/Carthage\/Checkouts\/xcconfigs\/",
+    "E084C86B03F81D63323C9E7510697EA528A758C7+++806FF41" : "Torch\/Generator\/Dependencies\/SourceKitten\/Carthage\/Checkouts\/Commandant\/Carthage\/Checkouts\/xcconfigs\/",
+    "E084C86B03F81D63323C9E7510697EA528A758C7+++2C6F4E0" : "Torch\/Generator\/Dependencies\/SourceKitten\/Carthage\/Checkouts\/xcconfigs\/",
+    "EB2210CFD48672E403BED699D5D7F01B844069CF+++C5C04EC" : "Torch\/Generator\/Dependencies\/SourceKitten\/Carthage\/Checkouts\/SWXMLHash\/",
+    "E111B14063EC98ABE518A93E1C4498F4167C2DEE+++322EAEC" : "Torch\/Generator\/Dependencies\/SourceKitten\/Carthage\/Checkouts\/YamlSwift\/",
+    "D23C0CEAADB77074FDA4459000068A7940EB7AD0+++57FD98A" : "Torch\/Generator\/Dependencies\/SourceKitten\/Carthage\/Checkouts\/Commandant\/",
+    "DAE76EA82CAFA2CC0F913C7B06B4469CFBE15929+++3D69E76" : "Torch\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "Torch",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "Torch.xcworkspace",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/nvzqz\/FileKit",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "64ACE19A884E8C30BC53E2E0CE86010ECED70B5A+++034E1A5"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/antitypical\/Result.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "956D2B21DD155C49504BB67697A67F7C5351A353+++1C78424"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/Carthage\/Commandant.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "D23C0CEAADB77074FDA4459000068A7940EB7AD0+++57FD98A"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/SwiftKit\/Torch",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "DAE76EA82CAFA2CC0F913C7B06B4469CFBE15929+++3D69E76"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/jspahrsummers\/xcconfigs.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "E084C86B03F81D63323C9E7510697EA528A758C7+++2C6F4E0"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/jspahrsummers\/xcconfigs.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "E084C86B03F81D63323C9E7510697EA528A758C7+++806FF41"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/jspahrsummers\/xcconfigs.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "E084C86B03F81D63323C9E7510697EA528A758C7+++A44A252"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/behrang\/YamlSwift.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "E111B14063EC98ABE518A93E1C4498F4167C2DEE+++322EAEC"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/drmohundro\/SWXMLHash.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "EB2210CFD48672E403BED699D5D7F01B844069CF+++C5C04EC"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/jpsim\/SourceKitten",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "FD7DA18210A2C280E9107E37D7344F243FEE5F75+++F45B9D2"
+    }
+  ]
+}

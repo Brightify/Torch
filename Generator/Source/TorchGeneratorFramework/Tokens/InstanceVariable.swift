@@ -31,4 +31,8 @@ public struct InstanceVariable: Token {
         }
         return result
     }
+
+    public var isEntityToken: Bool {
+        return false
+    }
 }

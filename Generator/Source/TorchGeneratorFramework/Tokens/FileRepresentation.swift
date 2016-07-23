@@ -11,5 +11,10 @@ import SourceKittenFramework
 public struct FileRepresentation {
     public let sourceFile: File
     public let declarations: [Token]
-    public let containsTorchEntity: Bool
+}
+
+extension FileRepresentation {
+    public var containsTorchEntity: Bool {
+        return declarations.reduce(false) { $0 || $1.isEntityToken }
+    }
 }

@@ -10,7 +10,8 @@
     "D23C0CEAADB77074FDA4459000068A7940EB7AD0" : 0,
     "64ACE19A884E8C30BC53E2E0CE86010ECED70B5A" : 0,
     "FD7DA18210A2C280E9107E37D7344F243FEE5F75" : 0,
-    "EB2210CFD48672E403BED699D5D7F01B844069CF" : 0
+    "EB2210CFD48672E403BED699D5D7F01B844069CF" : 0,
+    "E084C86B03F81D63323C9E7510697EA528A758C7" : 0
   },
   "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "C1A6341A-490C-4C2E-9E7A-EF19EDE651A9",
   "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
@@ -20,7 +21,8 @@
     "D23C0CEAADB77074FDA4459000068A7940EB7AD0" : "Torch\/Generator\/Dependencies\/SourceKitten\/Carthage\/Checkouts\/Commandant\/",
     "64ACE19A884E8C30BC53E2E0CE86010ECED70B5A" : "Torch\/Generator\/Dependencies\/FileKit\/",
     "FD7DA18210A2C280E9107E37D7344F243FEE5F75" : "Torch\/Generator\/Dependencies\/SourceKitten\/",
-    "EB2210CFD48672E403BED699D5D7F01B844069CF" : "Torch\/Generator\/Dependencies\/SourceKitten\/Carthage\/Checkouts\/SWXMLHash\/"
+    "EB2210CFD48672E403BED699D5D7F01B844069CF" : "Torch\/Generator\/Dependencies\/SourceKitten\/Carthage\/Checkouts\/SWXMLHash\/",
+    "E084C86B03F81D63323C9E7510697EA528A758C7" : "Torch\/Generator\/Dependencies\/SourceKitten\/Carthage\/Checkouts\/xcconfigs\/"
   },
   "DVTSourceControlWorkspaceBlueprintNameKey" : "TorchGenerator",
   "DVTSourceControlWorkspaceBlueprintVersion" : 204,
@@ -45,6 +47,16 @@
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/SwiftKit\/Torch",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "DAE76EA82CAFA2CC0F913C7B06B4469CFBE15929"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/jspahrsummers\/xcconfigs.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "E084C86B03F81D63323C9E7510697EA528A758C7"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/jspahrsummers\/xcconfigs.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "E084C86B03F81D63323C9E7510697EA528A758C7"
     },
     {
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/behrang\/YamlSwift.git",

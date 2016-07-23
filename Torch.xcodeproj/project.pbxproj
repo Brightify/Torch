@@ -42,6 +42,27 @@
 			remoteGlobalIDString = 183D03FA1C4691C600EBAEF3;
 			remoteInfo = Mockery;
 		};
+		18EE0B031D437B04001215B1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 18EE0AFE1D437B03001215B1 /* TorchGenerator.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 1808B1601C4575AA0036E924;
+			remoteInfo = TorchGenerator;
+		};
+		18EE0B051D437B04001215B1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 18EE0AFE1D437B03001215B1 /* TorchGenerator.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 18E16D661C45D8280084EF54;
+			remoteInfo = TorchGeneratorFramework;
+		};
+		18EE0B071D437B0B001215B1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 18EE0AFE1D437B03001215B1 /* TorchGenerator.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 1808B15F1C4575AA0036E924;
+			remoteInfo = TorchGenerator;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -50,6 +71,7 @@
 		183D04001C4691C600EBAEF3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		183D04051C4691C600EBAEF3 /* TorchTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TorchTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		183D040C1C4691C600EBAEF3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		18EE0AFE1D437B03001215B1 /* TorchGenerator.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = TorchGenerator.xcodeproj; path = Generator/TorchGenerator.xcodeproj; sourceTree = "<group>"; };
 		DC32A0F01D3FEFE6008E3A4E /* Database.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Database.swift; sourceTree = "<group>"; };
 		DC32A0F21D3FF011008E3A4E /* UnsafeDatabase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnsafeDatabase.swift; sourceTree = "<group>"; };
 		DC32A0F61D3FF06E008E3A4E /* TorchEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TorchEntity.swift; sourceTree = "<group>"; };
@@ -102,6 +124,7 @@
 				183D03FD1C4691C600EBAEF3 /* Source */,
 				183D04091C4691C600EBAEF3 /* Tests */,
 				183D03FC1C4691C600EBAEF3 /* Products */,
+				18EE0B0A1D437B7F001215B1 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -143,6 +166,23 @@
 				DC49D23B1D42B2BE00EECA2F /* PredicateTests.swift */,
 			);
 			path = Tests;
+			sourceTree = "<group>";
+		};
+		18EE0AFF1D437B03001215B1 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				18EE0B041D437B04001215B1 /* torch.app */,
+				18EE0B061D437B04001215B1 /* TorchGeneratorFramework.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		18EE0B0A1D437B7F001215B1 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				18EE0AFE1D437B03001215B1 /* TorchGenerator.xcodeproj */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		DC32A1061D40133E008E3A4E /* EntityRegistration */ = {
@@ -246,6 +286,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				18EE0B081D437B0B001215B1 /* PBXTargetDependency */,
 				183D04081C4691C600EBAEF3 /* PBXTargetDependency */,
 			);
 			name = TorchTests;
@@ -281,6 +322,12 @@
 			mainGroup = 183D03F11C4691C600EBAEF3;
 			productRefGroup = 183D03FC1C4691C600EBAEF3 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 18EE0AFF1D437B03001215B1 /* Products */;
+					ProjectRef = 18EE0AFE1D437B03001215B1 /* TorchGenerator.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				183D03FA1C4691C600EBAEF3 /* Torch */,
@@ -288,6 +335,23 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		18EE0B041D437B04001215B1 /* torch.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = torch.app;
+			remoteRef = 18EE0B031D437B04001215B1 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		18EE0B061D437B04001215B1 /* TorchGeneratorFramework.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = TorchGeneratorFramework.framework;
+			remoteRef = 18EE0B051D437B04001215B1 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		183D03F91C4691C600EBAEF3 /* Resources */ = {
@@ -319,7 +383,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "./run generate --output \"$PROJECT_DIR/Tests/Generated/ModelExtensions.swift\" \"$PROJECT_DIR/Tests/Source\"";
+			shellScript = "$BUILD_DIR/$CONFIGURATION/torch.app/Contents/MacOS/torch generate --output \"$PROJECT_DIR/Tests/Generated/ModelExtensions.swift\" \"$PROJECT_DIR/Tests/Source\"";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -368,6 +432,11 @@
 			isa = PBXTargetDependency;
 			target = 183D03FA1C4691C600EBAEF3 /* Torch */;
 			targetProxy = 183D04071C4691C600EBAEF3 /* PBXContainerItemProxy */;
+		};
+		18EE0B081D437B0B001215B1 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = TorchGenerator;
+			targetProxy = 18EE0B071D437B0B001215B1 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
