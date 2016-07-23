@@ -5,5 +5,5 @@ cd Generator
 rm -rf Build
 rm -rf $FILE_NAME
 env -i PATH=${PATH}, HOME=${HOME} xcodebuild -project 'TorchGenerator.xcodeproj' -scheme 'TorchGenerator' -configuration 'Release' CONFIGURATION_BUILD_DIR=$(pwd)/Build clean build
-mv Build/torch.app $FILE_NAME
+mv Build/torch_generator.app $FILE_NAME
 cd ..

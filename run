@@ -8,4 +8,4 @@ if [ ! -e $FILE_PATH ]; then
 	$SCRIPT_PATH/build_generator
 fi
 
-$FILE_PATH/Contents/MacOS/torch "$@"
+$FILE_PATH/Contents/MacOS/torch_generator "$@"

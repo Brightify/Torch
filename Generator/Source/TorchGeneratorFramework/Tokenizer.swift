@@ -38,7 +38,7 @@ public struct Tokenizer {
         let accesibility = (dictionary[Key.Accessibility.rawValue] as? String).flatMap { Accessibility(rawValue: $0) }
         
         switch kind {
-        case Kinds.StructDeclaration.rawValue:
+        case Kinds.StructDeclaration.rawValue, Kinds.EnumDeclaration.rawValue:
             if accesibility == .Private {
                 return nil
             }

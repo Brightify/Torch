@@ -19,6 +19,6 @@ public struct StructDeclaration: Token {
     public let kind: StructKind
 
     public var isEntityToken: Bool {
-        return kind != .Plain
+        return kind != .Plain || children.reduce(false) { $0 || $1.isEntityToken }
     }
 }

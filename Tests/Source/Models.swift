@@ -35,9 +35,8 @@ struct OtherData: TorchEntity {
     var text: String
 }
 
-struct ManualData: ManualTorchEntity {
-    var id: Int?
-    var text: String
+enum ManualData: ManualTorchEntity {
+    case Test(id: Int?, text: String)
 }
 
 extension ManualData {
@@ -48,14 +47,33 @@ extension ManualData {
     static let id = Torch.TorchProperty<ManualData, Int?>(name: "id")
     static let text = Torch.TorchProperty<ManualData, String>(name: "text")
 
+    var id: Int? {
+        get {
+            switch self {
+            case .Test(let id, _):
+                return id
+            }
+        }
+        set {
+            switch self {
+            case .Test(_, let text):
+                self = .Test(id: newValue, text: text)
+            }
+        }
+    }
+
     init(fromManagedObject object: NSManagedObjectWrapper) throws {
-        id = object.getValue(ManualData.id)
-        text = object.getValue(ManualData.text)
+        let id = object.getValue(ManualData.id)
+        let text = object.getValue(ManualData.text)
+
+        self = .Test(id: id, text: text)
     }
 
     mutating func torch_updateManagedObject(object: Torch.NSManagedObjectWrapper) throws {
-        object.setValue(id, for: ManualData.id)
-        object.setValue(text, for: ManualData.text)
+        if case .Test(let id, let text) = self {
+            object.setValue(id, for: ManualData.id)
+            object.setValue(text, for: ManualData.text)
+        }
     }
 
     static func torch_describeEntity(to registry: Torch.EntityRegistry) {

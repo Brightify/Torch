@@ -298,7 +298,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		1808B1601C4575AA0036E924 /* torch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = torch.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		1808B1601C4575AA0036E924 /* torch_generator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = torch_generator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1808B16A1C4575AA0036E924 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1808B1AA1C4581070036E924 /* main.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		18B9F0831D43A3EA00F1C922 /* runtorch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = runtorch; sourceTree = "<group>"; };
@@ -388,7 +388,7 @@
 		1808B1611C4575AA0036E924 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				1808B1601C4575AA0036E924 /* torch.app */,
+				1808B1601C4575AA0036E924 /* torch_generator.app */,
 				18E16D661C45D8280084EF54 /* TorchGeneratorFramework.framework */,
 			);
 			name = Products;
@@ -660,7 +660,7 @@
 			);
 			name = TorchGenerator;
 			productName = "Mockery-Generator";
-			productReference = 1808B1601C4575AA0036E924 /* torch.app */;
+			productReference = 1808B1601C4575AA0036E924 /* torch_generator.app */;
 			productType = "com.apple.product-type.application";
 		};
 		18E16D651C45D8280084EF54 /* TorchGeneratorFramework */ = {
@@ -1126,7 +1126,7 @@
 				INFOPLIST_FILE = "Source/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks/TorchGeneratorFramework.framework/Versions/Current/Frameworks @executable_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = org.brightify.TorchGenerator;
-				PRODUCT_NAME = torch;
+				PRODUCT_NAME = torch_generator;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
@@ -1144,7 +1144,7 @@
 				INFOPLIST_FILE = "Source/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks/TorchGeneratorFramework.framework/Versions/Current/Frameworks @executable_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = org.brightify.TorchGenerator;
-				PRODUCT_NAME = torch;
+				PRODUCT_NAME = torch_generator;
 			};
 			name = Release;
 		};

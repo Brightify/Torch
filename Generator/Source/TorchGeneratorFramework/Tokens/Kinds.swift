@@ -8,5 +8,6 @@
 
 public enum Kinds: String {
     case StructDeclaration = "source.lang.swift.decl.struct"
+    case EnumDeclaration = "source.lang.swift.decl.enum"
     case InstanceVariable = "source.lang.swift.decl.var.instance"
 }
