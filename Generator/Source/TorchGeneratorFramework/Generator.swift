@@ -82,7 +82,7 @@ public struct Generator {
     private func generateName(entity: StructDeclaration) -> CodeBuilder {
         var builder = CodeBuilder()
         builder += "\(entity.accessibility.sourceName) static var torch_name: String {"
-        builder.nest("return \"\(moduleName).\(entity.name)\"")
+        builder.nest("return \"\(moduleName)_\(entity.name)\"")
         builder += "}"
         return builder
     }
