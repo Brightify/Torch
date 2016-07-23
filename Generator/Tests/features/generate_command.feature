@@ -7,8 +7,9 @@ Feature: Generate command
 		Then the file "../SourceFiles/Expected/MultipleData.swift" should be equal to file "GeneratedTorchEntityExtensions.swift"
 	Scenario: in directory
 		When I run `runtorch generate --no-timestamp --output .  ../SourceFiles/Directory`
-		Then the file "../SourceFiles/Expected/Data.swift" should be equal to file "Data.swift"
-		And the file "../SourceFiles/Expected/Data2.swift" should be equal to file "Data2.swift"
+		Then the file "../SourceFiles/Expected/StandaloneData.swift" should be equal to file "Data+Torch.swift"
+		And the file "../SourceFiles/Expected/StandaloneData2.swift" should be equal to file "Data2+Torch.swift"
+        And the file "../SourceFiles/Expected/StandaloneEntityBundle.swift" should be equal to file "UserProjectEntityBundle.swift"
 	Scenario: output specified
 		When I run `runtorch generate --no-timestamp --output Actual.swift ../SourceFiles/MultipleData.swift`
 		Then the file "../SourceFiles/Expected/MultipleData.swift" should be equal to file "Actual.swift"
@@ -29,10 +30,11 @@ Feature: Generate command
 		Then the file "../SourceFiles/Expected/Data.swift" should be equal to file "Actual.swift"
 	Scenario: in directory with file-prefix
 		When I run `runtorch generate --no-timestamp --file-prefix Torch --output . ../SourceFiles/Directory`
-		Then the file "../SourceFiles/Expected/Data.swift" should be equal to file "TorchData.swift"
-		And the file "../SourceFiles/Expected/Data2.swift" should be equal to file "TorchData2.swift"
+		Then the file "../SourceFiles/Expected/StandaloneData.swift" should be equal to file "TorchData+Torch.swift"
+		And the file "../SourceFiles/Expected/StandaloneData2.swift" should be equal to file "TorchData2+Torch.swift"
+And the file "../SourceFiles/Expected/StandaloneEntityBundle.swift" should be equal to file "UserProjectEntityBundle.swift"
 	Scenario: entity-name-prefix
-		When I run `runtorch generate --no-timestamp --entity-name-prefix CustomPrefix ../SourceFiles/Directory/Data.swift`
+		When I run `runtorch generate --no-timestamp --module-name CustomPrefix ../SourceFiles/Directory/Data.swift`
 		Then the file "../SourceFiles/Expected/EntityNamePrefix.swift" should be equal to file "GeneratedTorchEntityExtensions.swift"
 	Scenario: real data
 		When I run `runtorch generate --no-timestamp ../SourceFiles/RealData.swift`

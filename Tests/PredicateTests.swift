@@ -18,7 +18,7 @@ class PredicateTests: XCTestCase {
         super.setUp()
         
         let inMemoryStore = StoreConfiguration(storeType: NSInMemoryStoreType, configuration: nil, storeURL: nil, options: nil)
-        database = UnsafeDatabase(store: inMemoryStore, entities: Data.self, OtherData.self, ManualData.self)
+        database = try! Database(store: inMemoryStore, bundle: TorchTestsEntityBundle()).unsafeInstance()
         database.write {
             let otherData = OtherData(id: 0, text: "a")
             let manualData = ManualData(id: 0, text: "aa")

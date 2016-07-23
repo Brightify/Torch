@@ -3,9 +3,6 @@
 import Torch
 import CoreData
 
-import Foundation
-import UIKit
-
 internal extension Data {
 
     internal static var torch_name: String {
@@ -29,12 +26,4 @@ internal extension Data {
     internal static func torch_describeProperties(to registry: Torch.PropertyRegistry) {
         registry.description(of: Data.id)
     }
-}
-
-internal struct UserProjectEntityBundle: Torch.TorchEntityBundle {
-    internal let entityTypes: [Torch.TorchEntity.Type] = [
-            Data.self,
-        ]
-
-    internal init() { }
 }

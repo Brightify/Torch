@@ -14,11 +14,20 @@ public enum Accessibility: String {
     public var sourceName: String {
         switch self {
         case .Public:
-            return "public "
+            return "public"
         case .Internal:
-            return ""
+            return "internal"
         case .Private:
-            return "private "
+            return "private"
+        }
+    }
+
+    public func isMoreOpenThan(accessibility: Accessibility) -> Bool {
+        switch (self, accessibility) {
+        case (.Public, .Internal), (.Public, .Private), (.Internal, .Private):
+            return true
+        default:
+            return false
         }
     }
 }

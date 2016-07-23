@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		183D03FF1C4691C600EBAEF3 /* Torch.h in Headers */ = {isa = PBXBuildFile; fileRef = 183D03FE1C4691C600EBAEF3 /* Torch.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		183D04061C4691C600EBAEF3 /* Torch.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 183D03FB1C4691C600EBAEF3 /* Torch.framework */; };
+		18EE0B1B1D43956E001215B1 /* TorchEntityBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18EE0B1A1D43956E001215B1 /* TorchEntityBundle.swift */; };
 		DC32A0F11D3FEFE6008E3A4E /* Database.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC32A0F01D3FEFE6008E3A4E /* Database.swift */; };
 		DC32A0F31D3FF011008E3A4E /* UnsafeDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC32A0F21D3FF011008E3A4E /* UnsafeDatabase.swift */; };
 		DC32A0F71D3FF06E008E3A4E /* TorchEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC32A0F61D3FF06E008E3A4E /* TorchEntity.swift */; };
@@ -74,6 +75,7 @@
 		18EE0AFE1D437B03001215B1 /* TorchGenerator.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = TorchGenerator.xcodeproj; path = Generator/TorchGenerator.xcodeproj; sourceTree = "<group>"; };
 		18EE0B161D438B3A001215B1 /* build_generator */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = build_generator; sourceTree = "<group>"; };
 		18EE0B171D438B3A001215B1 /* run */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = run; sourceTree = "<group>"; };
+		18EE0B1A1D43956E001215B1 /* TorchEntityBundle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TorchEntityBundle.swift; sourceTree = "<group>"; };
 		DC32A0F01D3FEFE6008E3A4E /* Database.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Database.swift; sourceTree = "<group>"; };
 		DC32A0F21D3FF011008E3A4E /* UnsafeDatabase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnsafeDatabase.swift; sourceTree = "<group>"; };
 		DC32A0F61D3FF06E008E3A4E /* TorchEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TorchEntity.swift; sourceTree = "<group>"; };
@@ -202,6 +204,7 @@
 			children = (
 				DC32A1111D40144B008E3A4E /* EntityRegistry.swift */,
 				DC32A1131D40144B008E3A4E /* PropertyRegistry.swift */,
+				18EE0B1A1D43956E001215B1 /* TorchEntityBundle.swift */,
 			);
 			name = EntityRegistration;
 			sourceTree = "<group>";
@@ -395,7 +398,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "$BUILD_DIR/$CONFIGURATION/torch.app/Contents/MacOS/torch generate --output \"$PROJECT_DIR/Tests/Generated/ModelExtensions.swift\" \"$PROJECT_DIR/Tests/Source\"";
+			shellScript = "$BUILD_DIR/$CONFIGURATION/torch.app/Contents/MacOS/torch generate --module-name $PRODUCT_MODULE_NAME --output \"$PROJECT_DIR/Tests/Generated/ModelExtensions.swift\" \"$PROJECT_DIR/Tests/Source\"";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -417,6 +420,7 @@
 				DC32A1161D40144B008E3A4E /* PropertyRegistry.swift in Sources */,
 				DC8B9F2A1D3E26C100E3B9DE /* ApiDraft.swift in Sources */,
 				DC32A10B1D40142C008E3A4E /* TorchMetadata.swift in Sources */,
+				18EE0B1B1D43956E001215B1 /* TorchEntityBundle.swift in Sources */,
 				DC49D2201D41544A00EECA2F /* NSManagedObjectWrapper.swift in Sources */,
 				DC32A0F31D3FF011008E3A4E /* UnsafeDatabase.swift in Sources */,
 				DC49D23F1D42BA8400EECA2F /* TorchPropertySetType.swift in Sources */,

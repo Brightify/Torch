@@ -9,10 +9,10 @@
 public struct Generator {
     
     private let allEntities: [String]
-    private let entityNamePrefix: String
+    private let moduleName: String
     
-    public init(entityNamePrefix: String, allEntities: [StructDeclaration]) {
-        self.entityNamePrefix = entityNamePrefix
+    public init(moduleName: String, allEntities: [StructDeclaration]) {
+        self.moduleName = moduleName
         self.allEntities = allEntities.map { $0.name }
     }
     
@@ -27,6 +27,30 @@ public struct Generator {
         }
         return builder.code
     }
+
+    @warn_unused_result
+    public func generateBundle(entities: [StructDeclaration]) -> (name: String, content: String) {
+        // We want the bundle to be as open as the most open entity.
+        let mostOpenAccesibility = entities.map { $0.accessibility }.sort { $0.isMoreOpenThan($1) }.first ?? .Internal
+        let entityTypeNames = entities.map { "\($0.name).self," }
+        let bundleName = "\(moduleName)EntityBundle"
+        var builder = CodeBuilder()
+        builder += "\(mostOpenAccesibility.sourceName) struct \(bundleName): Torch.TorchEntityBundle {"
+        builder.nest {
+            $0 += "\(mostOpenAccesibility.sourceName) let entityTypes: [Torch.TorchEntity.Type] = ["
+            $0.nest {
+                $0.nest {
+                    $0 += entityTypeNames
+                    $0 += ""
+                }
+                $0 += "]"
+            }
+            $0 += ""
+            $0 += "\(mostOpenAccesibility.sourceName) init() { }"
+        }
+        builder += "}"
+        return (name: "\(bundleName).swift", content: builder.code)
+    }
     
     @warn_unused_result
     private func generate(entity: StructDeclaration) -> CodeBuilder {
@@ -35,20 +59,20 @@ public struct Generator {
             .flatMap { $0 as? InstanceVariable }
             .filter { !($0.isReadOnly && allEntities.contains($0.rawType)) }
 
-        builder += "\(entity.accessibility.sourceName)extension \(entity.name) {"
+        builder += "\(entity.accessibility.sourceName) extension \(entity.name) {"
         builder.nest {
-            builder += ""
-            builder += generateName(entity)
-            builder += ""
-            builder += generateStaticProperties(entity, variables: variables)
-            builder += ""
-            builder += generateInit(entity, variables: variables)
-            builder += ""
-            builder += generateUpdateManagedObject(entity, variables: variables)
-            builder += ""
-            builder += generateDiscribeEntity(entity)
-            builder += ""
-            builder += generateDiscribeProperties(entity, variables: variables)
+            $0 += ""
+            $0 += generateName(entity)
+            $0 += ""
+            $0 += generateStaticProperties(entity, variables: variables)
+            $0 += ""
+            $0 += generateInit(entity, variables: variables)
+            $0 += ""
+            $0 += generateUpdateManagedObject(entity, variables: variables)
+            $0 += ""
+            $0 += generateDiscribeEntity(entity)
+            $0 += ""
+            $0 += generateDiscribeProperties(entity, variables: variables)
         }
         builder += "}"
         return builder
@@ -57,8 +81,8 @@ public struct Generator {
     @warn_unused_result
     private func generateName(entity: StructDeclaration) -> CodeBuilder {
         var builder = CodeBuilder()
-        builder += "\(entity.accessibility.sourceName)static var torch_name: String {"
-        builder.nest("return \"\(entityNamePrefix).\(entity.name)\"")
+        builder += "\(entity.accessibility.sourceName) static var torch_name: String {"
+        builder.nest("return \"\(moduleName).\(entity.name)\"")
         builder += "}"
         return builder
     }
@@ -67,7 +91,7 @@ public struct Generator {
     private func generateStaticProperties(entity: StructDeclaration, variables: [InstanceVariable]) -> CodeBuilder {
         var builder = CodeBuilder()
         for variable in variables {
-            builder += "\(variable.accessibility.sourceName)static let \(variable.name) = Torch.TorchProperty<\(entity.name), \(variable.type)>(name: \"\(variable.name)\")"
+            builder += "\(variable.accessibility.sourceName) static let \(variable.name) = Torch.TorchProperty<\(entity.name), \(variable.type)>(name: \"\(variable.name)\")"
         }
         return builder
     }
@@ -75,11 +99,11 @@ public struct Generator {
     @warn_unused_result
     private func generateInit(entity: StructDeclaration, variables: [InstanceVariable]) -> CodeBuilder {
         var builder = CodeBuilder()
-        builder += "\(entity.accessibility.sourceName)init(fromManagedObject object: Torch.NSManagedObjectWrapper) throws {"
+        builder += "\(entity.accessibility.sourceName) init(fromManagedObject object: Torch.NSManagedObjectWrapper) throws {"
         builder.nest {
             for variable in variables {
                 let tryText = isTorchEntity(variable) ? "try " : ""
-                builder += "\(variable.name) = \(tryText)object.getValue(\(entity.name).\(variable.name))"
+                $0 += "\(variable.name) = \(tryText)object.getValue(\(entity.name).\(variable.name))"
             }
         }
         builder += "}"
@@ -89,12 +113,12 @@ public struct Generator {
     @warn_unused_result
     private func generateUpdateManagedObject(entity: StructDeclaration, variables: [InstanceVariable]) -> CodeBuilder {
         var builder = CodeBuilder()
-        builder += "\(entity.accessibility.sourceName)mutating func torch_updateManagedObject(object: Torch.NSManagedObjectWrapper) throws {"
+        builder += "\(entity.accessibility.sourceName) mutating func torch_updateManagedObject(object: Torch.NSManagedObjectWrapper) throws {"
         builder.nest {
             for variable in variables {
                 let tryText = isTorchEntity(variable) ? "try " : ""
                 let referenceText = isTorchEntity(variable) ? "&" : ""
-                builder += "\(tryText)object.setValue(\(referenceText)\(variable.name), for: \(entity.name).\(variable.name))"
+                $0 += "\(tryText)object.setValue(\(referenceText)\(variable.name), for: \(entity.name).\(variable.name))"
             }
         }
         builder += "}"
@@ -104,7 +128,7 @@ public struct Generator {
     @warn_unused_result
     private func generateDiscribeEntity(entity: StructDeclaration) -> CodeBuilder {
         var builder = CodeBuilder()
-        builder += "\(entity.accessibility.sourceName)static func torch_describeEntity(to registry: Torch.EntityRegistry) {"
+        builder += "\(entity.accessibility.sourceName) static func torch_describeEntity(to registry: Torch.EntityRegistry) {"
         builder.nest("registry.description(of: \(entity.name).self)")
         builder += "}"
         return builder
@@ -113,10 +137,10 @@ public struct Generator {
     @warn_unused_result
     private func generateDiscribeProperties(entity: StructDeclaration, variables: [InstanceVariable]) -> CodeBuilder {
         var builder = CodeBuilder()
-        builder += "\(entity.accessibility.sourceName)static func torch_describeProperties(to registry: Torch.PropertyRegistry) {"
+        builder += "\(entity.accessibility.sourceName) static func torch_describeProperties(to registry: Torch.PropertyRegistry) {"
         builder.nest {
             for variable in variables {
-                builder += "registry.description(of: \(entity.name).\(variable.name))"
+                $0 += "registry.description(of: \(entity.name).\(variable.name))"
             }
         }
         builder += "}"

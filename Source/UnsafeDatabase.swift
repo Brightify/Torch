@@ -9,17 +9,9 @@
 public class UnsafeDatabase {
     
     private let database: Database
-    
-    public convenience init(store: StoreConfiguration, entities: TorchEntity.Type...) {
-        self.init(store: store, entities: entities)
-    }
- 
-    public init(store: StoreConfiguration, entities: [TorchEntity.Type]) {
-        do {
-            database = try Database(store: store, entities: entities)
-        } catch {
-            fatalError(String(error))
-        }
+
+    internal init(database: Database) {
+        self.database = database
     }
     
     public func load<T: TorchEntity>(type: T.Type) -> [T] {

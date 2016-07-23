@@ -10,7 +10,7 @@ public struct CodeBuilder {
     private static let tab = "    "
 
     public private(set) var code = ""
-    
+
     private var nesting = 0
 
     private var nest: String {
@@ -21,22 +21,31 @@ public struct CodeBuilder {
         code = ""
     }
     
-    public mutating func nest(@noescape closure: () -> ()) {
+    public mutating func nest(@noescape closure: (inout builder: CodeBuilder) -> ()) {
         nesting += 1
-        closure()
+        closure(builder: &self)
         nesting -= 1
     }
     
     public mutating func nest(line: String) {
-        nest { self += line }
+        nest { $0 += line }
     }
 
-    public mutating func append(line line: String) {
-        code += "\(nest)\(line)\n"
+    public mutating func append(line line: String, insertLineBreak: Bool = true) {
+        if line == "" {
+            code += insertLineBreak ? "\n" : ""
+        } else {
+            code += "\(nest)\(line)\(insertLineBreak ? "\n" : "")"
+        }
     }
 
     public mutating func append(lines lines: [String]) {
-        lines.forEach { append(line: $0) }
+        lines.enumerate().forEach {
+            if $0 > 0 {
+                append(line: "")
+            }
+            append(line: $1, insertLineBreak: false)
+        }
     }
 
     public mutating func append(builder subbuilder: CodeBuilder) {
@@ -47,10 +56,12 @@ public struct CodeBuilder {
     }
 }
 
-
-
 public func +=(inout builder: CodeBuilder, string: String) {
     builder.append(line: string)
+}
+
+public func +=(inout builder: CodeBuilder, lines: [String]) {
+    builder.append(lines: lines)
 }
 
 public func +=(inout builder: CodeBuilder, subbuilder: CodeBuilder) {

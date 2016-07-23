@@ -18,7 +18,7 @@ class TorchTest: XCTestCase {
         super.setUp()
         
         let inMemoryStore = StoreConfiguration(storeType: NSInMemoryStoreType, configuration: nil, storeURL: nil, options: nil)
-        database = UnsafeDatabase(store: inMemoryStore, entities: Data.self, OtherData.self, ManualData.self)
+        database = try! Database(store: inMemoryStore, bundle: TorchTestsEntityBundle()).unsafeInstance()
     }
     
     func testPersistance() {

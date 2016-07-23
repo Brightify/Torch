@@ -17,8 +17,12 @@ public class Database {
     public convenience init(store: StoreConfiguration, entities: TorchEntity.Type...) throws {
         try self.init(store: store, entities: entities)
     }
+
+    public convenience init(store: StoreConfiguration, bundle: TorchEntityBundle) throws {
+        try self.init(store: store, entities: bundle.entityTypes)
+    }
     
-    public init(store: StoreConfiguration, entities: [TorchEntity.Type]) throws {
+    public init<S: SequenceType where S.Generator.Element == TorchEntity.Type>(store: StoreConfiguration, entities: S) throws {
         let managedObjectModel = NSManagedObjectModel()
         registerEntities(entities, managedObjectModel: managedObjectModel)
         
@@ -27,6 +31,10 @@ public class Database {
         context.persistentStoreCoordinator = coordinator
         
         try createMetadata(entities.map { $0.torch_name })
+    }
+
+    public func unsafeInstance() -> UnsafeDatabase {
+        return UnsafeDatabase(database: self)
     }
     
     public func load<T: TorchEntity>(type: T.Type) throws -> [T] {
@@ -157,7 +165,7 @@ public class Database {
         return metadata
     }
     
-    private func registerEntities(entities: [TorchEntity.Type], managedObjectModel: NSManagedObjectModel) {
+    private func registerEntities<S: SequenceType where S.Generator.Element == TorchEntity.Type>(entities: S, managedObjectModel: NSManagedObjectModel) {
         let entityRegistry = EntityRegistry()
         TorchMetadata.describeEntity(to: entityRegistry)
         for registration in entities {
