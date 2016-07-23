@@ -36,7 +36,8 @@ struct OtherData: TorchEntity {
 }
 
 enum ManualData: ManualTorchEntity {
-    case Test(id: Int?, text: String)
+    case Root(id: Int?, text: String)
+    indirect case Node(id: Int?, text: String, parent: ManualData)
 }
 
 extension ManualData {
@@ -46,18 +47,23 @@ extension ManualData {
 
     static let id = Torch.TorchProperty<ManualData, Int?>(name: "id")
     static let text = Torch.TorchProperty<ManualData, String>(name: "text")
+    static let parent = Torch.TorchProperty<ManualData, ManualData?>(name: "parent")
 
     var id: Int? {
         get {
             switch self {
-            case .Test(let id, _):
+            case .Node(let id, _, _):
+                return id
+            case .Root(let id, _):
                 return id
             }
         }
         set {
             switch self {
-            case .Test(_, let text):
-                self = .Test(id: newValue, text: text)
+            case .Node(_, let text, let parent):
+                self = .Node(id: newValue, text: text, parent: parent)
+            case .Root(_, let text):
+                self = .Root(id: newValue, text: text)
             }
         }
     }
@@ -65,12 +71,27 @@ extension ManualData {
     init(fromManagedObject object: NSManagedObjectWrapper) throws {
         let id = object.getValue(ManualData.id)
         let text = object.getValue(ManualData.text)
-
-        self = .Test(id: id, text: text)
+        if let parent = try object.getValue(ManualData.parent) {
+            self = .Node(id: id, text: text, parent: parent)
+        } else {
+            self = .Root(id: id, text: text)
+        }
     }
 
     mutating func torch_updateManagedObject(object: Torch.NSManagedObjectWrapper) throws {
-        if case .Test(let id, let text) = self {
+        switch self {
+        case .Node(let id, let text, let parent):
+            var mutableParent = Optional(parent)
+            object.setValue(id, for: ManualData.id)
+            object.setValue(text, for: ManualData.text)
+            try object.setValue(&mutableParent, for: ManualData.parent)
+            if let newParent = mutableParent {
+                self = .Node(id: id, text: text, parent: newParent)
+            } else {
+                self = .Root(id: id, text: text)
+            }
+
+        case .Root(let id, let text):
             object.setValue(id, for: ManualData.id)
             object.setValue(text, for: ManualData.text)
         }
@@ -83,5 +104,6 @@ extension ManualData {
     static func torch_describeProperties(to registry: Torch.PropertyRegistry) {
         registry.description(of: ManualData.id)
         registry.description(of: ManualData.text)
+        registry.description(of: ManualData.parent)
     }
 }

@@ -171,7 +171,11 @@ public class Database {
         for registration in entities {
             registration.torch_describeEntity(to: entityRegistry)
         }
-        managedObjectModel.entities = Array(entityRegistry.registeredEntities.values)
+        let incompleteRegistrations = entityRegistry.registeredEntities.values.filter { $0.state == EntityRegistrationState.Partial }
+        precondition(incompleteRegistrations.isEmpty,
+                     "These entities were not properly registered!" +
+                        incompleteRegistrations.map { $0.description.name ?? "nil" }.joinWithSeparator(", "))
+        managedObjectModel.entities = entityRegistry.registeredEntities.values.map { $0.description }
     }
     
     private func createMetadata(entityNames: [String]) throws {

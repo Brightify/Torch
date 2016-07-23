@@ -21,7 +21,7 @@ class PredicateTests: XCTestCase {
         database = try! Database(store: inMemoryStore, bundle: TorchTestsEntityBundle()).unsafeInstance()
         database.write {
             let otherData = OtherData(id: 0, text: "a")
-            let manualData = ManualData.Test(id: 0, text: "aa")
+            let manualData = ManualData.Root(id: 0, text: "aa")
             database.save(otherData)
             database.save(manualData)
             database.save(OtherData(id: 1, text: "b"))

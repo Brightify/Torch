@@ -22,7 +22,7 @@ class TorchTest: XCTestCase {
     }
     
     func testPersistance() {
-        let manualData = ManualData.Test(id: 0, text: "manual")
+        let manualData = ManualData.Root(id: 0, text: "manual")
         let otherData = OtherData(id: 0, text: "other")
         let data = Data(id: 0, number: 7, optionalNumber: 10, numbers: [1, 1, 2], text: "text",
                         float: 1.1, double: 1.2, bool: true, set: [1, 2], relation: otherData, optionalRelation: otherData,

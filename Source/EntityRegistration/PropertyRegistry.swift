@@ -82,7 +82,7 @@ public class PropertyRegistry {
     private func registerRelationship<T: TorchEntity>(name: String, type: T.Type, optional: Bool, minCount: Int, maxCount: Int) {
         let relationship = NSRelationshipDescription()
         relationship.name = name
-        relationship.destinationEntity = entityRegistry.description(of: type)
+        relationship.destinationEntity = entityRegistry.description(of: type, withState: .Partial)
         relationship.deleteRule = .NullifyDeleteRule
         relationship.optional = optional
         relationship.minCount = minCount

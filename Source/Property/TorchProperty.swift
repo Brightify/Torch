@@ -10,7 +10,7 @@ public struct TorchProperty<PARENT: TorchEntity, T: TorchPropertyType> {
     
     public let name: String
     
-    var torchName: String {
+    public var torchName: String {
         return Database.COLUMN_PREFIX + name
     }
     

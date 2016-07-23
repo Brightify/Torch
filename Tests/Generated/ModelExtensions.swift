@@ -1,4 +1,4 @@
-// MARK: - Torch entity extensions generated from file: Tests/Source/Models.swift at 2016-07-23 6:08:32 PM +0000
+// MARK: - Torch entity extensions generated from file: Tests/Source/Models.swift at 2016-07-23 10:10:28 PM +0000
 
 import Torch
 import CoreData
@@ -6,7 +6,7 @@ import CoreData
 internal extension Data {
 
     internal static var torch_name: String {
-        return "TorchTests.Data"
+        return "TorchTests_Data"
     }
 
     internal static let id = Torch.TorchProperty<Data, Int?>(name: "id")
@@ -83,7 +83,7 @@ internal extension Data {
 internal extension OtherData {
 
     internal static var torch_name: String {
-        return "TorchTests.OtherData"
+        return "TorchTests_OtherData"
     }
 
     internal static let id = Torch.TorchProperty<OtherData, Int?>(name: "id")
