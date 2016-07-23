@@ -72,6 +72,8 @@
 		183D04051C4691C600EBAEF3 /* TorchTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TorchTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		183D040C1C4691C600EBAEF3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		18EE0AFE1D437B03001215B1 /* TorchGenerator.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = TorchGenerator.xcodeproj; path = Generator/TorchGenerator.xcodeproj; sourceTree = "<group>"; };
+		18EE0B161D438B3A001215B1 /* build_generator */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = build_generator; sourceTree = "<group>"; };
+		18EE0B171D438B3A001215B1 /* run */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = run; sourceTree = "<group>"; };
 		DC32A0F01D3FEFE6008E3A4E /* Database.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Database.swift; sourceTree = "<group>"; };
 		DC32A0F21D3FF011008E3A4E /* UnsafeDatabase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnsafeDatabase.swift; sourceTree = "<group>"; };
 		DC32A0F61D3FF06E008E3A4E /* TorchEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TorchEntity.swift; sourceTree = "<group>"; };
@@ -120,7 +122,7 @@
 		183D03F11C4691C600EBAEF3 = {
 			isa = PBXGroup;
 			children = (
-				DC5A3A5C1CF6F8D600F520E3 /* TorchORM.podspec */,
+				18EE0B151D438B22001215B1 /* Support files */,
 				183D03FD1C4691C600EBAEF3 /* Source */,
 				183D04091C4691C600EBAEF3 /* Tests */,
 				183D03FC1C4691C600EBAEF3 /* Products */,
@@ -183,6 +185,16 @@
 				18EE0AFE1D437B03001215B1 /* TorchGenerator.xcodeproj */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		18EE0B151D438B22001215B1 /* Support files */ = {
+			isa = PBXGroup;
+			children = (
+				18EE0B161D438B3A001215B1 /* build_generator */,
+				18EE0B171D438B3A001215B1 /* run */,
+				DC5A3A5C1CF6F8D600F520E3 /* TorchORM.podspec */,
+			);
+			name = "Support files";
 			sourceTree = "<group>";
 		};
 		DC32A1061D40133E008E3A4E /* EntityRegistration */ = {
