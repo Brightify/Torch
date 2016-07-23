@@ -1,10 +1,4 @@
-//
-//  ModelExtensions.swift
-//  Torch
-//
-//  Created by Filip Dolnik on 22.07.16.
-//  Copyright © 2016 Brightify. All rights reserved.
-//
+// MARK: - Torch entity extensions generated from file: Tests/Source/Models.swift at 2016-07-23 12:35:45 AM +0000
 
 import Torch
 import CoreData

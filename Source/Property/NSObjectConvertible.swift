@@ -10,36 +10,39 @@ import Foundation
 
 public protocol NSObjectConvertible: TorchPropertyType {
     
-    init?(fromObject object: AnyObject)
+    static func fromObject(object: AnyObject) -> Self?
     
     func toNSObject() -> NSObject
 }
 
-extension NSObjectConvertible {
-    
-    public func toNSObject() -> NSObject {
-        return self as! NSObject
-    }
-}
+extension NSObjectConvertible { }
 
 extension String: NSObjectConvertible {
-    
-    public init?(fromObject object: AnyObject) {
+
+    public static func fromObject(object: AnyObject) -> String? {
         if let string = object as? String {
-            self = string
+            return string
         } else {
             return nil
         }
+    }
+
+    public func toNSObject() -> NSObject {
+        return self
     }
 }
 
 extension Bool: NSObjectConvertible {
-    
-    public init?(fromObject object: AnyObject) {
+
+    public static func fromObject(object: AnyObject) -> Bool? {
         if let bool = object as? Bool {
-            self = bool
+            return bool
         } else {
             return nil
         }
+    }
+
+    public func toNSObject() -> NSObject {
+        return self
     }
 }

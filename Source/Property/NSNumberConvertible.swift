@@ -9,17 +9,17 @@
 import Foundation
 
 public protocol NSNumberConvertible: NSObjectConvertible {
-    
-    init?(fromNSNumber number: NSNumber)
-    
+
+    static func fromNSNumber(number: NSNumber) -> Self?
+
     func toNSNumber() -> NSNumber
 }
 
 extension NSNumberConvertible {
-    
-    public init?(fromObject object: AnyObject) {
+
+    public static func fromObject(object: AnyObject) -> Self? {
         if let number = object as? NSNumber {
-            self.init(fromNSNumber: number)
+            return fromNSNumber(number)
         } else {
             return nil
         }
@@ -29,28 +29,37 @@ extension NSNumberConvertible {
         return toNSNumber()
     }
     
-    public func toNSNumber() -> NSNumber {
-        return self as! NSNumber
-    }
 }
 
 extension Int: NSNumberConvertible {
-    
-    public init?(fromNSNumber number: NSNumber) {
-        self = number.longValue
+
+    public static func fromNSNumber(number: NSNumber) -> Int? {
+        return number.integerValue
+    }
+
+    public func toNSNumber() -> NSNumber {
+        return self
     }
 }
 
 extension Float: NSNumberConvertible {
     
-    public init?(fromNSNumber number: NSNumber) {
-        self = number.floatValue
+    public static func fromNSNumber(number: NSNumber) -> Float? {
+        return number.floatValue
+    }
+
+    public func toNSNumber() -> NSNumber {
+        return self
     }
 }
 
 extension Double: NSNumberConvertible {
     
-    public init?(fromNSNumber number: NSNumber) {
-        self = number.doubleValue
+    public static func fromNSNumber(number: NSNumber) -> Double? {
+        return number.doubleValue
+    }
+
+    public func toNSNumber() -> NSNumber {
+        return self
     }
 }

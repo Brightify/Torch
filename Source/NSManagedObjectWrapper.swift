@@ -19,7 +19,7 @@ public struct NSManagedObjectWrapper {
     }
     
     public func getValue<PARENT: TorchEntity, T: NSObjectConvertible>(property: TorchProperty<PARENT, T>) -> T {
-        return T(fromObject: object.valueForKey(property.torchName)!)!
+        return T.fromObject(object.valueForKey(property.torchName)!)!
     }
     
     public func setValue<PARENT: TorchEntity, T: NSObjectConvertible>(value: T, for property: TorchProperty<PARENT, T>) {
@@ -28,7 +28,7 @@ public struct NSManagedObjectWrapper {
 
     public func getValue<PARENT: TorchEntity, T: TorchPropertyOptionalType where T.Wrapped: NSObjectConvertible>(property: TorchProperty<PARENT, T>) -> T.Wrapped? {
         if let value = object.valueForKey(property.torchName) {
-            return T.Wrapped(fromObject: value)!
+            return T.Wrapped.fromObject(value)!
         } else {
             return nil
         }
@@ -39,7 +39,7 @@ public struct NSManagedObjectWrapper {
     }
 
     public func getValue<PARENT: TorchEntity, T: TorchPropertyArrayType where T.Element: NSObjectConvertible>(property: TorchProperty<PARENT, T>) -> [T.Element] {
-        return (object.valueForKey(property.torchName) as! NSArray).map { T.Element(fromObject: $0)! }
+        return (object.valueForKey(property.torchName) as! NSArray).map { T.Element.fromObject($0)! }
     }
     
     public func setValue<PARENT: TorchEntity, T: TorchPropertyArrayType where T.Element: NSObjectConvertible>(values: T, for property: TorchProperty<PARENT, T>) {
@@ -52,7 +52,7 @@ public struct NSManagedObjectWrapper {
     
     public func getValue<PARENT: TorchEntity, T: TorchPropertySetType where T.Element: NSObjectConvertible>(property: TorchProperty<PARENT, T>) -> Set<T.Element> {
         var result = Set<T.Element>()
-        (object.valueForKey(property.torchName) as! NSSet).forEach { result.insert(T.Element(fromObject: $0)!) }
+        (object.valueForKey(property.torchName) as! NSSet).forEach { result.insert(T.Element.fromObject($0)!) }
         return result
     }
     
