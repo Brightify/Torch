@@ -1,23 +1,12 @@
 //
-//  ApiDraft.swift
+//  Property+Sort.swift
 //  Torch
 //
-//  Created by Filip Dolnik on 19.07.16.
+//  Created by Tadeáš Kříž on 24/07/16.
 //  Copyright © 2016 Brightify. All rights reserved.
 //
 
-import CoreData
-
-// TODO Finish
-public struct SortDescriptor<PARENT> {
-
-    public let keyPath: String
-    public let ascending: Bool
-
-    func toSortDescriptor() -> NSSortDescriptor {
-        return NSSortDescriptor(key: keyPath, ascending: ascending)
-    }
-}
+import Foundation
 
 extension TorchProperty {
     var ascending: SortDescriptor<PARENT> {
