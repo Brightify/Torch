@@ -12,7 +12,7 @@ script:
     - cd Generator
     - bash run_tests.sh
     - cd ..
-    - travis_wait xctool -workspace Torch.xcworkspace -scheme Torch -sdk macosx test
+    - travis_wait xcodebuild -workspace Torch.xcworkspace -scheme Torch -sdk macosx test
 
 after_script:
     - sleep 5
