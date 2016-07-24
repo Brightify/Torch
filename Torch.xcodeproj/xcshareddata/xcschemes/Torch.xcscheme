@@ -4,7 +4,7 @@
    version = "1.7">
    <BuildAction
       parallelizeBuildables = "NO"
-      buildImplicitDependencies = "YES">
+      buildImplicitDependencies = "NO">
       <BuildActionEntries>
          <BuildActionEntry
             buildForTesting = "YES"
