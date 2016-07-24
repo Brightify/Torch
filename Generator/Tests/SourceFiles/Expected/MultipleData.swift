@@ -6,7 +6,7 @@ import CoreData
 internal extension Data {
 
     internal static var torch_name: String {
-        return "UserProject.Data"
+        return "UserProject_Data"
     }
 
     internal static let id = Torch.Property<Data, Int?>(name: "id")
@@ -31,7 +31,7 @@ internal extension Data {
 internal extension Data2 {
 
     internal static var torch_name: String {
-        return "UserProject.Data2"
+        return "UserProject_Data2"
     }
 
     internal static let id = Torch.Property<Data2, Int?>(name: "id")

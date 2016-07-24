@@ -6,7 +6,7 @@ import CoreData
 public extension Data2 {
 
     public static var torch_name: String {
-        return "UserProject.Data2"
+        return "UserProject_Data2"
     }
 
     public static let id = Torch.Property<Data2, Int?>(name: "id")

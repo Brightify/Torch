@@ -6,7 +6,7 @@ import CoreData
 internal extension Data {
 
     internal static var torch_name: String {
-        return "CustomPrefix.Data"
+        return "CustomPrefix_Data"
     }
 
     internal static let id = Torch.Property<Data, Int?>(name: "id")

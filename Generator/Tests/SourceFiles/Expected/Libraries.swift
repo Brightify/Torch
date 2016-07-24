@@ -9,7 +9,7 @@ import UIKit
 internal extension Data {
 
     internal static var torch_name: String {
-        return "UserProject.Data"
+        return "UserProject_Data"
     }
 
     internal static let id = Torch.Property<Data, Int?>(name: "id")
