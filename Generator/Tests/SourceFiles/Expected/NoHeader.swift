@@ -7,7 +7,7 @@ internal extension Data {
         return "UserProject.Data"
     }
 
-    internal static let id = Torch.TorchProperty<Data, Int?>(name: "id")
+    internal static let id = Torch.Property<Data, Int?>(name: "id")
 
     internal init(fromManagedObject object: Torch.NSManagedObjectWrapper) throws {
         id = object.getValue(Data.id)

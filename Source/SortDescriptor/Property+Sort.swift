@@ -8,7 +8,7 @@
 
 import Foundation
 
-extension TorchProperty {
+extension Property {
     var ascending: SortDescriptor<PARENT> {
         return SortDescriptor(keyPath: torchName, ascending: true)
     }
@@ -18,13 +18,13 @@ extension TorchProperty {
     }
 }
 
-extension TorchProperty where T: TorchEntity {
+extension Property where T: TorchEntity {
     func by(descriptor: SortDescriptor<T>) -> SortDescriptor<PARENT> {
         return SortDescriptor<PARENT>(keyPath: descriptor.keyPath, ascending: descriptor.ascending)
     }
 }
 
-extension TorchProperty where T: TorchPropertyOptionalType, T.Wrapped: TorchEntity {
+extension Property where T: PropertyOptionalType, T.Wrapped: TorchEntity {
     func by(descriptor: SortDescriptor<T>) -> SortDescriptor<PARENT> {
         return SortDescriptor<PARENT>(keyPath: descriptor.keyPath, ascending: descriptor.ascending)
     }

@@ -9,19 +9,19 @@ internal extension Data {
         return "UserProject.Data"
     }
 
-    internal static let id = Torch.TorchProperty<Data, Int?>(name: "id")
-    internal static let number = Torch.TorchProperty<Data, Int>(name: "number")
-    internal static let optionalNumber = Torch.TorchProperty<Data, Int?>(name: "optionalNumber")
-    internal static let numbers = Torch.TorchProperty<Data, [Int]>(name: "numbers")
-    internal static let text = Torch.TorchProperty<Data, String>(name: "text")
-    internal static let float = Torch.TorchProperty<Data, Float>(name: "float")
-    internal static let double = Torch.TorchProperty<Data, Double>(name: "double")
-    internal static let bool = Torch.TorchProperty<Data, Bool>(name: "bool")
-    internal static let set = Torch.TorchProperty<Data, Set<Int>>(name: "set")
-    internal static let relation = Torch.TorchProperty<Data, OtherData>(name: "relation")
-    internal static let optionalRelation = Torch.TorchProperty<Data, OtherData?>(name: "optionalRelation")
-    internal static let arrayWithRelation = Torch.TorchProperty<Data, [OtherData]>(name: "arrayWithRelation")
-    internal static let readOnly = Torch.TorchProperty<Data, String>(name: "readOnly")
+    internal static let id = Torch.Property<Data, Int?>(name: "id")
+    internal static let number = Torch.Property<Data, Int>(name: "number")
+    internal static let optionalNumber = Torch.Property<Data, Int?>(name: "optionalNumber")
+    internal static let numbers = Torch.Property<Data, [Int]>(name: "numbers")
+    internal static let text = Torch.Property<Data, String>(name: "text")
+    internal static let float = Torch.Property<Data, Float>(name: "float")
+    internal static let double = Torch.Property<Data, Double>(name: "double")
+    internal static let bool = Torch.Property<Data, Bool>(name: "bool")
+    internal static let set = Torch.Property<Data, Set<Int>>(name: "set")
+    internal static let relation = Torch.Property<Data, OtherData>(name: "relation")
+    internal static let optionalRelation = Torch.Property<Data, OtherData?>(name: "optionalRelation")
+    internal static let arrayWithRelation = Torch.Property<Data, [OtherData]>(name: "arrayWithRelation")
+    internal static let readOnly = Torch.Property<Data, String>(name: "readOnly")
 
     internal init(fromManagedObject object: Torch.NSManagedObjectWrapper) throws {
         id = object.getValue(Data.id)
@@ -82,8 +82,8 @@ internal extension OtherData {
         return "UserProject.OtherData"
     }
 
-    internal static let id = Torch.TorchProperty<OtherData, Int?>(name: "id")
-    internal static let text = Torch.TorchProperty<OtherData, String>(name: "text")
+    internal static let id = Torch.Property<OtherData, Int?>(name: "id")
+    internal static let text = Torch.Property<OtherData, String>(name: "text")
 
     internal init(fromManagedObject object: Torch.NSManagedObjectWrapper) throws {
         id = object.getValue(OtherData.id)

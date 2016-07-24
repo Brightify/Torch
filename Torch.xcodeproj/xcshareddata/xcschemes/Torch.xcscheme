@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "1808B15F1C4575AA0036E924"
-               BuildableName = "torch.app"
+               BuildableName = "torch_generator.app"
                BlueprintName = "TorchGenerator"
                ReferencedContainer = "container:Generator/TorchGenerator.xcodeproj">
             </BuildableReference>

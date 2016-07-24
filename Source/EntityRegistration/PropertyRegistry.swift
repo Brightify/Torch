@@ -32,31 +32,31 @@ public class PropertyRegistry {
         self.entityRegistry = entityRegistry
     }
     
-    public func description<PARENT: TorchEntity, T: NSObjectConvertible>(of property: TorchProperty<PARENT, T>) {
+    public func description<PARENT: TorchEntity, T: NSObjectConvertible>(of property: Property<PARENT, T>) {
         registerAttribute(property.torchName, type: T.self, optional: false)
     }
     
-    public func description<PARENT: TorchEntity, T: TorchPropertyArrayType where T.Element: NSObjectConvertible>(of property: TorchProperty<PARENT, T>) {
+    public func description<PARENT: TorchEntity, T: PropertyArrayType where T.Element: NSObjectConvertible>(of property: Property<PARENT, T>) {
         registerAttribute(property.torchName, type: T.self, optional: false, forceTransformable: true)
     }
     
-    public func description<PARENT: TorchEntity, T: TorchPropertySetType where T.Element: NSObjectConvertible>(of property: TorchProperty<PARENT, T>) {
+    public func description<PARENT: TorchEntity, T: PropertySetType where T.Element: NSObjectConvertible>(of property: Property<PARENT, T>) {
         registerAttribute(property.torchName, type: T.self, optional: false, forceTransformable: true)
     }
     
-    public func description<PARENT: TorchEntity, T: TorchPropertyOptionalType where T.Wrapped: NSObjectConvertible>(of property: TorchProperty<PARENT, T>) {
+    public func description<PARENT: TorchEntity, T: PropertyOptionalType where T.Wrapped: NSObjectConvertible>(of property: Property<PARENT, T>) {
         registerAttribute(property.torchName, type: T.Wrapped.self, optional: true)
     }
     
-    public func description<PARENT: TorchEntity, T: TorchEntity>(of property: TorchProperty<PARENT, T>) {
+    public func description<PARENT: TorchEntity, T: TorchEntity>(of property: Property<PARENT, T>) {
         registerRelationship(property.torchName, type: T.self, optional: false, minCount: 1, maxCount: 1)
     }
     
-    public func description<PARENT: TorchEntity, T: TorchPropertyArrayType where T.Element: TorchEntity>(of property: TorchProperty<PARENT, T>) {
+    public func description<PARENT: TorchEntity, T: PropertyArrayType where T.Element: TorchEntity>(of property: Property<PARENT, T>) {
         registerRelationship(property.torchName, type: T.Element.self, optional: false, minCount: 0, maxCount: 0)
     }
     
-    public func description<PARENT: TorchEntity, T: TorchPropertyOptionalType where T.Wrapped: TorchEntity>(of property: TorchProperty<PARENT, T>) {
+    public func description<PARENT: TorchEntity, T: PropertyOptionalType where T.Wrapped: TorchEntity>(of property: Property<PARENT, T>) {
         registerRelationship(property.torchName, type: T.Wrapped.self, optional: true, minCount: 1, maxCount: 1)
     }
     

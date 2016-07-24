@@ -9,7 +9,7 @@
 import Foundation
 
 // MARK: - SequenceType<TorchEntity>
-public extension TorchProperty where T: SequenceType, T.Generator.Element: TorchEntity {
+public extension Property where T: SequenceType, T.Generator.Element: TorchEntity {
     public func any(predicate: SingleValuePredicate<T.Generator.Element>) -> AggregatePredicate<PARENT> {
         return inside(.Any, predicate: predicate)
     }

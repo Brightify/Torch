@@ -45,9 +45,9 @@ extension ManualData {
         return "TorchEntity.ManualData"
     }
 
-    static let id = Torch.TorchProperty<ManualData, Int?>(name: "id")
-    static let text = Torch.TorchProperty<ManualData, String>(name: "text")
-    static let parent = Torch.TorchProperty<ManualData, ManualData?>(name: "parent")
+    static let id = Torch.Property<ManualData, Int?>(name: "id")
+    static let text = Torch.Property<ManualData, String>(name: "text")
+    static let parent = Torch.Property<ManualData, ManualData?>(name: "parent")
 
     var id: Int? {
         get {

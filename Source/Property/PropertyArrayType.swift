@@ -1,12 +1,12 @@
 //
-//  TorchPropertyArrayType.swift
+//  PropertyArrayType.swift
 //  Torch
 //
 //  Created by Filip Dolnik on 22.07.16.
 //  Copyright © 2016 Brightify. All rights reserved.
 //
 
-public protocol TorchPropertyArrayType: TorchPropertyType {
+public protocol PropertyArrayType: PropertyType {
     
     associatedtype Element
     
@@ -15,7 +15,7 @@ public protocol TorchPropertyArrayType: TorchPropertyType {
     subscript(index: Int) -> Element { get set }
 }
 
-extension Array: TorchPropertyArrayType {
+extension Array: PropertyArrayType {
     
     public var values: [Element] {
         return self

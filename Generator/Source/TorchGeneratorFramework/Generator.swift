@@ -91,7 +91,7 @@ public struct Generator {
     private func generateStaticProperties(entity: StructDeclaration, variables: [InstanceVariable]) -> CodeBuilder {
         var builder = CodeBuilder()
         for variable in variables {
-            builder += "\(variable.accessibility.sourceName) static let \(variable.name) = Torch.TorchProperty<\(entity.name), \(variable.type)>(name: \"\(variable.name)\")"
+            builder += "\(variable.accessibility.sourceName) static let \(variable.name) = Torch.Property<\(entity.name), \(variable.type)>(name: \"\(variable.name)\")"
         }
         return builder
     }

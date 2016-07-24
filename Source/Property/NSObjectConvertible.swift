@@ -8,7 +8,7 @@
 
 import Foundation
 
-public protocol NSObjectConvertible: TorchPropertyType {
+public protocol NSObjectConvertible: PropertyType {
     
     static func fromObject(object: AnyObject) -> Self?
     

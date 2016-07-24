@@ -9,7 +9,7 @@
 import Foundation
 
 // MARK: - NSObjectConvertible
-public extension TorchProperty where T: NSObjectConvertible {
+public extension Property where T: NSObjectConvertible {
     public func equalTo(value: T) -> SingleValuePredicate<PARENT> {
         return SingleValuePredicate(keyPath: torchName, operatorString: "==", value: value.toNSObject())
     }
@@ -19,16 +19,16 @@ public extension TorchProperty where T: NSObjectConvertible {
     }
 }
 
-public func == <P, T: NSObjectConvertible>(lhs: TorchProperty<P, T>, rhs: T) -> SingleValuePredicate<P> {
+public func == <P, T: NSObjectConvertible>(lhs: Property<P, T>, rhs: T) -> SingleValuePredicate<P> {
     return lhs.equalTo(rhs)
 }
 
-public func != <P, T: NSObjectConvertible>(lhs: TorchProperty<P, T>, rhs: T) -> SingleValuePredicate<P> {
+public func != <P, T: NSObjectConvertible>(lhs: Property<P, T>, rhs: T) -> SingleValuePredicate<P> {
     return lhs.notEqualTo(rhs)
 }
 
 // MARK: NSNumberConvertible
-public extension TorchProperty where T: NSNumberConvertible {
+public extension Property where T: NSNumberConvertible {
 
     public func lessThan(value: T) -> SingleValuePredicate<PARENT> {
         return SingleValuePredicate(keyPath: torchName, operatorString: "<", value: value.toNSNumber())
@@ -47,24 +47,24 @@ public extension TorchProperty where T: NSNumberConvertible {
     }
 }
 
-public func < <P, T: NSNumberConvertible>(lhs: TorchProperty<P, T>, rhs: T) -> SingleValuePredicate<P> {
+public func < <P, T: NSNumberConvertible>(lhs: Property<P, T>, rhs: T) -> SingleValuePredicate<P> {
     return lhs.lessThan(rhs)
 }
 
-public func <= <P, T: NSNumberConvertible>(lhs: TorchProperty<P, T>, rhs: T) -> SingleValuePredicate<P> {
+public func <= <P, T: NSNumberConvertible>(lhs: Property<P, T>, rhs: T) -> SingleValuePredicate<P> {
     return lhs.lessThanOrEqualTo(rhs)
 }
 
-public func >= <P, T: NSNumberConvertible>(lhs: TorchProperty<P, T>, rhs: T) -> SingleValuePredicate<P> {
+public func >= <P, T: NSNumberConvertible>(lhs: Property<P, T>, rhs: T) -> SingleValuePredicate<P> {
     return lhs.greaterThanOrEqualTo(rhs)
 }
 
-public func > <P, T: NSNumberConvertible>(lhs: TorchProperty<P, T>, rhs: T) -> SingleValuePredicate<P> {
+public func > <P, T: NSNumberConvertible>(lhs: Property<P, T>, rhs: T) -> SingleValuePredicate<P> {
     return lhs.greaterThan(rhs)
 }
 
 // MARK: - TorchEntity
-public extension TorchProperty where T: TorchEntity {
+public extension Property where T: TorchEntity {
     subscript(predicate: SingleValuePredicate<T>) -> SingleValuePredicate<PARENT> {
         return matches(predicate)
     }

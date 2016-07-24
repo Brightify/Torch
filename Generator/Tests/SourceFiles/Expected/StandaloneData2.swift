@@ -9,7 +9,7 @@ public extension Data2 {
         return "UserProject.Data2"
     }
 
-    public static let id = Torch.TorchProperty<Data2, Int?>(name: "id")
+    public static let id = Torch.Property<Data2, Int?>(name: "id")
 
     public init(fromManagedObject object: Torch.NSManagedObjectWrapper) throws {
         id = object.getValue(Data2.id)

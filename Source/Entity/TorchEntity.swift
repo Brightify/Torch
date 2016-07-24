@@ -8,8 +8,7 @@
 
 import CoreData
 
-public protocol TorchEntity: TorchPropertyType {
-
+public protocol TorchEntity: PropertyType {
     static var torch_name: String { get }
 
     var id: Int? { get set }
