@@ -1,5 +1,5 @@
 //
-//  GenerateMocksCommand.swift
+//  GenerateCommand.swift
 //  TorchGenerator
 //
 //  Created by Filip Dolnik on 21.07.16.
@@ -23,7 +23,7 @@ private func recursivelyExtractEntities(fromTokens tokens: [Token]) -> [StructDe
     }
 }
 
-public struct GenerateMocksCommand: CommandType {
+public struct GenerateCommand: CommandType {
     
     public let verb = "generate"
     public let function = "Generates files with TorchEntities extensions"

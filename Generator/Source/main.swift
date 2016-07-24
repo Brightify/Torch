@@ -9,7 +9,7 @@
 import Commandant
 
 let registry = CommandRegistry<TorchGeneratorError>()
-registry.register(GenerateMocksCommand())
+registry.register(GenerateCommand())
 registry.register(VersionCommand())
 
 let helpCommand = HelpCommand(registry: registry)

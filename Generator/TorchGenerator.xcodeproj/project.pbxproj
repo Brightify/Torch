@@ -20,7 +20,7 @@
 		185AB6721D4397A200FBB7B6 /* Tokenizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E16D531C45A6AF0084EF54 /* Tokenizer.swift */; };
 		185AB6731D4397AA00FBB7B6 /* VersionCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5C26E51D0E9DA200630D49 /* VersionCommand.swift */; };
 		185AB6761D4397D600FBB7B6 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1808B1AA1C4581070036E924 /* main.swift */; };
-		185AB6771D4397DC00FBB7B6 /* GenerateMocksCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCDEE5111CFF124E007F18BC /* GenerateMocksCommand.swift */; };
+		185AB6771D4397DC00FBB7B6 /* GenerateCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCDEE5111CFF124E007F18BC /* GenerateCommand.swift */; };
 		185AB6781D4397E100FBB7B6 /* TorchGeneratorError.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCDEE5101CFF124E007F18BC /* TorchGeneratorError.swift */; };
 		18E16D691C45D8280084EF54 /* TorchGeneratorFramework.h in Headers */ = {isa = PBXBuildFile; fileRef = 18E16D681C45D8280084EF54 /* TorchGeneratorFramework.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		18E16D991C45DF7F0084EF54 /* Components.plist in Resources */ = {isa = PBXBuildFile; fileRef = 18E16D981C45DF7F0084EF54 /* Components.plist */; };
@@ -347,7 +347,7 @@
 		DCAD1E8A1D0DA9B60091EECE /* Result.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Result.xcodeproj; path = Dependencies/SourceKitten/Carthage/Checkouts/Commandant/Carthage/Checkouts/Result/Result.xcodeproj; sourceTree = "<group>"; };
 		DCAD1EC61D0DB3640091EECE /* Commandant.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Commandant.xcodeproj; path = Dependencies/SourceKitten/Carthage/Checkouts/Commandant/Commandant.xcodeproj; sourceTree = "<group>"; };
 		DCDEE5101CFF124E007F18BC /* TorchGeneratorError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TorchGeneratorError.swift; sourceTree = "<group>"; };
-		DCDEE5111CFF124E007F18BC /* GenerateMocksCommand.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GenerateMocksCommand.swift; sourceTree = "<group>"; };
+		DCDEE5111CFF124E007F18BC /* GenerateCommand.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GenerateCommand.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -397,7 +397,7 @@
 		1808B1621C4575AA0036E924 /* Source */ = {
 			isa = PBXGroup;
 			children = (
-				DCDEE5111CFF124E007F18BC /* GenerateMocksCommand.swift */,
+				DCDEE5111CFF124E007F18BC /* GenerateCommand.swift */,
 				1808B1AA1C4581070036E924 /* main.swift */,
 				DCDEE5101CFF124E007F18BC /* TorchGeneratorError.swift */,
 				DC5C26E51D0E9DA200630D49 /* VersionCommand.swift */,
@@ -994,7 +994,7 @@
 			files = (
 				185AB6761D4397D600FBB7B6 /* main.swift in Sources */,
 				185AB6781D4397E100FBB7B6 /* TorchGeneratorError.swift in Sources */,
-				185AB6771D4397DC00FBB7B6 /* GenerateMocksCommand.swift in Sources */,
+				185AB6771D4397DC00FBB7B6 /* GenerateCommand.swift in Sources */,
 				185AB6731D4397AA00FBB7B6 /* VersionCommand.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
