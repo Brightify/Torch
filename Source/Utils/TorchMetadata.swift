@@ -11,7 +11,7 @@ import CoreData
 @objc(TorchMetadata)
 class TorchMetadata: NSManagedObject {
 
-    static let NAME = "TorchSwift.TorchMetadata"
+    static let NAME = "TorchSwift_TorchMetadata"
     
     @NSManaged var torchEntityName: String
     @NSManaged var lastAssignedId: NSNumber
