@@ -331,19 +331,19 @@
 		18E16D981C45DF7F0084EF54 /* Components.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Components.plist; sourceTree = "<group>"; };
 		18F2BC1B1C46E8760015A95F /* Generator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = Generator.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		DC14CEFA1D40B4E300446BD1 /* CodeBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodeBuilder.swift; sourceTree = "<group>"; };
-		DC14CF1C1D40B76700446BD1 /* StructDeclaration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StructDeclaration.swift; path = Tokens/StructDeclaration.swift; sourceTree = "<group>"; };
+		DC14CF1C1D40B76700446BD1 /* StructDeclaration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StructDeclaration.swift; sourceTree = "<group>"; };
 		DC1AB5D21D0D9F0B00867895 /* FileKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = FileKit.xcodeproj; path = Dependencies/FileKit/FileKit.xcodeproj; sourceTree = "<group>"; };
 		DC1AB5E41D0D9F1600867895 /* sourcekitten.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = sourcekitten.xcodeproj; path = Dependencies/SourceKitten/sourcekitten.xcodeproj; sourceTree = "<group>"; };
 		DC1AB60B1D0D9F8600867895 /* SWXMLHash.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SWXMLHash.xcodeproj; path = Dependencies/SourceKitten/Carthage/Checkouts/SWXMLHash/SWXMLHash.xcodeproj; sourceTree = "<group>"; };
 		DC1AB6231D0D9FE500867895 /* Yaml.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Yaml.xcodeproj; path = Dependencies/SourceKitten/Carthage/Checkouts/YamlSwift/Yaml.xcodeproj; sourceTree = "<group>"; };
 		DC5C26E51D0E9DA200630D49 /* VersionCommand.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VersionCommand.swift; sourceTree = "<group>"; };
 		DC8C4EA91CF9A272005213F8 /* TorchGenerator.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = TorchGenerator.xcodeproj; sourceTree = "<group>"; };
-		DC9EFA581CFC4F420034DFE5 /* Key.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Key.swift; path = Tokens/Key.swift; sourceTree = "<group>"; };
-		DC9EFA591CFC4F420034DFE5 /* Kinds.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Kinds.swift; path = Tokens/Kinds.swift; sourceTree = "<group>"; };
-		DC9EFA5A1CFC4F420034DFE5 /* Accessibility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Accessibility.swift; path = Tokens/Accessibility.swift; sourceTree = "<group>"; };
-		DC9EFA5C1CFC4F420034DFE5 /* FileRepresentation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FileRepresentation.swift; path = Tokens/FileRepresentation.swift; sourceTree = "<group>"; };
-		DC9EFA5D1CFC4F420034DFE5 /* Token.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Token.swift; path = Tokens/Token.swift; sourceTree = "<group>"; };
-		DC9EFA801CFC4FCF0034DFE5 /* InstanceVariable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InstanceVariable.swift; path = Tokens/InstanceVariable.swift; sourceTree = "<group>"; };
+		DC9EFA581CFC4F420034DFE5 /* Key.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Key.swift; sourceTree = "<group>"; };
+		DC9EFA591CFC4F420034DFE5 /* Kinds.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Kinds.swift; sourceTree = "<group>"; };
+		DC9EFA5A1CFC4F420034DFE5 /* Accessibility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Accessibility.swift; sourceTree = "<group>"; };
+		DC9EFA5C1CFC4F420034DFE5 /* FileRepresentation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileRepresentation.swift; sourceTree = "<group>"; };
+		DC9EFA5D1CFC4F420034DFE5 /* Token.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Token.swift; sourceTree = "<group>"; };
+		DC9EFA801CFC4FCF0034DFE5 /* InstanceVariable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstanceVariable.swift; sourceTree = "<group>"; };
 		DCAD1E8A1D0DA9B60091EECE /* Result.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Result.xcodeproj; path = Dependencies/SourceKitten/Carthage/Checkouts/Commandant/Carthage/Checkouts/Result/Result.xcodeproj; sourceTree = "<group>"; };
 		DCAD1EC61D0DB3640091EECE /* Commandant.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Commandant.xcodeproj; path = Dependencies/SourceKitten/Carthage/Checkouts/Commandant/Commandant.xcodeproj; sourceTree = "<group>"; };
 		DCDEE5101CFF124E007F18BC /* TorchGeneratorError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TorchGeneratorError.swift; sourceTree = "<group>"; };
@@ -378,6 +378,7 @@
 		1808B1571C4575AA0036E924 = {
 			isa = PBXGroup;
 			children = (
+				18B9F0CE1D43A52E00F1C922 /* run_tests.sh */,
 				1808B1A21C457B160036E924 /* Frameworks */,
 				1808B1621C4575AA0036E924 /* Source */,
 				18B9F0811D43A3EA00F1C922 /* Tests */,
@@ -433,7 +434,6 @@
 		18B9F0811D43A3EA00F1C922 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
-				18B9F0CE1D43A52E00F1C922 /* run_tests.sh */,
 				18B9F0821D43A3EA00F1C922 /* bin */,
 				18B9F0841D43A3EA00F1C922 /* features */,
 				18B9F0891D43A3EA00F1C922 /* Gemfile */,
@@ -525,9 +525,8 @@
 				18601E8A1C46FA7400693A66 /* Supporting Files */,
 				DC9EFA551CFC4EC10034DFE5 /* Tokens */,
 			);
-			name = TorchGeneratorFramework;
-			path = Source/TorchGeneratorFramework;
-			sourceTree = SOURCE_ROOT;
+			path = TorchGeneratorFramework;
+			sourceTree = "<group>";
 		};
 		18E16D971C45DF600084EF54 /* Supporting Files */ = {
 			isa = PBXGroup;
@@ -589,6 +588,8 @@
 		};
 		DC8C4EAA1CF9A272005213F8 /* Products */ = {
 			isa = PBXGroup;
+			children = (
+			);
 			name = Products;
 			sourceTree = "<group>";
 		};
@@ -603,7 +604,7 @@
 				DC14CF1C1D40B76700446BD1 /* StructDeclaration.swift */,
 				DC9EFA5D1CFC4F420034DFE5 /* Token.swift */,
 			);
-			name = Tokens;
+			path = Tokens;
 			sourceTree = "<group>";
 		};
 		DCAD1E8B1D0DA9B60091EECE /* Products */ = {

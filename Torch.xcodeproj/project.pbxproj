@@ -87,22 +87,22 @@
 		18768FF51D44D1E500252E03 /* SortDescriptor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SortDescriptor.swift; sourceTree = "<group>"; };
 		18768FF71D44D20900252E03 /* Property+Sort.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Property+Sort.swift"; sourceTree = "<group>"; };
 		187690071D44D7E400252E03 /* AnyPredicate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnyPredicate.swift; sourceTree = "<group>"; };
-		187690131D44D8FF00252E03 /* TorchEntityBundle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TorchEntityBundle.swift; path = EntityRegistration/TorchEntityBundle.swift; sourceTree = "<group>"; };
+		187690131D44D8FF00252E03 /* TorchEntityBundle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TorchEntityBundle.swift; sourceTree = "<group>"; };
 		18EE0B161D438B3A001215B1 /* build_generator */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = build_generator; sourceTree = "<group>"; };
 		18EE0B171D438B3A001215B1 /* run */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = run; sourceTree = "<group>"; };
 		DC32A10A1D40142C008E3A4E /* TorchMetadata.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TorchMetadata.swift; sourceTree = "<group>"; };
-		DC32A10D1D401439008E3A4E /* Property.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Property.swift; path = Property/Property.swift; sourceTree = "<group>"; };
-		DC32A1111D40144B008E3A4E /* EntityRegistry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EntityRegistry.swift; path = EntityRegistration/EntityRegistry.swift; sourceTree = "<group>"; };
-		DC32A1131D40144B008E3A4E /* PropertyRegistry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PropertyRegistry.swift; path = EntityRegistration/PropertyRegistry.swift; sourceTree = "<group>"; };
-		DC49D22A1D42654200EECA2F /* PropertyType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PropertyType.swift; path = Property/PropertyType.swift; sourceTree = "<group>"; };
-		DC49D22C1D4286E500EECA2F /* NSObjectConvertible.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NSObjectConvertible.swift; path = Property/NSObjectConvertible.swift; sourceTree = "<group>"; };
-		DC49D22E1D42870900EECA2F /* NSNumberConvertible.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NSNumberConvertible.swift; path = Property/NSNumberConvertible.swift; sourceTree = "<group>"; };
-		DC49D2301D42874400EECA2F /* PropertyArrayType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PropertyArrayType.swift; path = Property/PropertyArrayType.swift; sourceTree = "<group>"; };
-		DC49D2321D42877E00EECA2F /* PropertyOptionalType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PropertyOptionalType.swift; path = Property/PropertyOptionalType.swift; sourceTree = "<group>"; };
-		DC49D2341D42902000EECA2F /* Models.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Models.swift; path = Source/Models.swift; sourceTree = "<group>"; };
-		DC49D2361D42904700EECA2F /* ModelExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ModelExtensions.swift; path = Generated/ModelExtensions.swift; sourceTree = "<group>"; };
+		DC32A10D1D401439008E3A4E /* Property.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Property.swift; sourceTree = "<group>"; };
+		DC32A1111D40144B008E3A4E /* EntityRegistry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EntityRegistry.swift; sourceTree = "<group>"; };
+		DC32A1131D40144B008E3A4E /* PropertyRegistry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PropertyRegistry.swift; sourceTree = "<group>"; };
+		DC49D22A1D42654200EECA2F /* PropertyType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PropertyType.swift; sourceTree = "<group>"; };
+		DC49D22C1D4286E500EECA2F /* NSObjectConvertible.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSObjectConvertible.swift; sourceTree = "<group>"; };
+		DC49D22E1D42870900EECA2F /* NSNumberConvertible.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSNumberConvertible.swift; sourceTree = "<group>"; };
+		DC49D2301D42874400EECA2F /* PropertyArrayType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PropertyArrayType.swift; sourceTree = "<group>"; };
+		DC49D2321D42877E00EECA2F /* PropertyOptionalType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PropertyOptionalType.swift; sourceTree = "<group>"; };
+		DC49D2341D42902000EECA2F /* Models.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
+		DC49D2361D42904700EECA2F /* ModelExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelExtensions.swift; sourceTree = "<group>"; };
 		DC49D23B1D42B2BE00EECA2F /* PredicateTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PredicateTests.swift; sourceTree = "<group>"; };
-		DC49D23D1D42BA6E00EECA2F /* PropertySetType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PropertySetType.swift; path = Property/PropertySetType.swift; sourceTree = "<group>"; };
+		DC49D23D1D42BA6E00EECA2F /* PropertySetType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PropertySetType.swift; sourceTree = "<group>"; };
 		DC5A3A5C1CF6F8D600F520E3 /* TorchORM.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = TorchORM.podspec; sourceTree = "<group>"; };
 		DC8B9F2B1D3EB41F00E3B9DE /* TorchTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TorchTest.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -129,7 +129,10 @@
 		183D03F11C4691C600EBAEF3 = {
 			isa = PBXGroup;
 			children = (
-				18EE0B151D438B22001215B1 /* Support files */,
+				18EE0B161D438B3A001215B1 /* build_generator */,
+				18EE0B171D438B3A001215B1 /* run */,
+				187688041D43E9C000252E03 /* .travis.yml */,
+				DC5A3A5C1CF6F8D600F520E3 /* TorchORM.podspec */,
 				183D03FD1C4691C600EBAEF3 /* Source */,
 				183D04091C4691C600EBAEF3 /* Tests */,
 				183D03FC1C4691C600EBAEF3 /* Products */,
@@ -223,17 +226,6 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		18EE0B151D438B22001215B1 /* Support files */ = {
-			isa = PBXGroup;
-			children = (
-				18EE0B161D438B3A001215B1 /* build_generator */,
-				18EE0B171D438B3A001215B1 /* run */,
-				187688041D43E9C000252E03 /* .travis.yml */,
-				DC5A3A5C1CF6F8D600F520E3 /* TorchORM.podspec */,
-			);
-			name = "Support files";
-			sourceTree = "<group>";
-		};
 		DC32A1061D40133E008E3A4E /* EntityRegistration */ = {
 			isa = PBXGroup;
 			children = (
@@ -241,7 +233,7 @@
 				DC32A1111D40144B008E3A4E /* EntityRegistry.swift */,
 				DC32A1131D40144B008E3A4E /* PropertyRegistry.swift */,
 			);
-			name = EntityRegistration;
+			path = EntityRegistration;
 			sourceTree = "<group>";
 		};
 		DC32A1071D40134B008E3A4E /* Predicate */ = {
@@ -269,7 +261,7 @@
 				DC49D23D1D42BA6E00EECA2F /* PropertySetType.swift */,
 				DC49D22A1D42654200EECA2F /* PropertyType.swift */,
 			);
-			name = Property;
+			path = Property;
 			sourceTree = "<group>";
 		};
 		DC32A1091D401422008E3A4E /* Utils */ = {
@@ -287,7 +279,7 @@
 			children = (
 				DC49D2341D42902000EECA2F /* Models.swift */,
 			);
-			name = Source;
+			path = Source;
 			sourceTree = "<group>";
 		};
 		DC70D0D01D2B006200014C5F /* Generated */ = {
@@ -295,7 +287,7 @@
 			children = (
 				DC49D2361D42904700EECA2F /* ModelExtensions.swift */,
 			);
-			name = Generated;
+			path = Generated;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
