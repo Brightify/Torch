@@ -12,6 +12,7 @@ public class Database {
     public static let COLUMN_PREFIX = "torch_"
 
     internal let context = NSManagedObjectContext(concurrencyType: .MainQueueConcurrencyType)
+    private var metadataMemoryStorage: [String: TorchMetadata] = [:]
 
     public init<S: SequenceType where S.Generator.Element == TorchEntity.Type>(store: StoreConfiguration, entities: S) throws {
         let managedObjectModel = NSManagedObjectModel()
@@ -21,7 +22,10 @@ public class Database {
         try coordinator.addPersistentStoreWithType(store.storeType, configuration: store.configuration, URL: store.storeURL, options: store.options)
         context.persistentStoreCoordinator = coordinator
 
-        try createMetadata(entities.map { $0.torch_name })
+        let entityNames = Set(entities.map { $0.torch_name })
+        for metadata in try createMetadata(entityNames) {
+            metadataMemoryStorage[metadata.torchEntityName] = metadata
+        }
     }
 
 }
@@ -74,6 +78,10 @@ extension Database {
         if let id = entity.id {
             let request = NSFetchRequest(entityName: T.torch_name)
             request.predicate = NSPredicate(format: "\(Database.COLUMN_PREFIX)id = %@", id as NSNumber)
+            request.fetchLimit = 1
+            request.returnsObjectsAsFaults = false
+            request.includesSubentities = false
+            request.includesPropertyValues = false
             return (try context.executeFetchRequest(request) as! [NSManagedObject]).first
         } else {
             return nil
@@ -100,10 +108,8 @@ extension Database {
     }
 
     private func getMetadata(entityName: String) throws -> TorchMetadata {
-        let request = NSFetchRequest(entityName: TorchMetadata.NAME)
-        request.predicate = NSPredicate(format: "torchEntityName = %@", entityName)
-        guard let metadata = (try context.executeFetchRequest(request) as? [TorchMetadata])?.first else {
-            fatalError("Could not load metadata for entity \(entityName)!")
+        guard let metadata = metadataMemoryStorage[entityName] else {
+            fatalError("Metadata for entity \(entityName) not loaded! Make sure the entity is registered.")
         }
         return metadata
     }
@@ -121,7 +127,7 @@ extension Database {
         managedObjectModel.entities = entityRegistry.registeredEntities.values.map { $0.description }
     }
 
-    private func createMetadata(entityNames: [String]) throws {
+    private func createMetadata(entityNames: Set<String>) throws -> [TorchMetadata] {
         let request = NSFetchRequest(entityName: TorchMetadata.NAME)
         guard let description = NSEntityDescription.entityForName(TorchMetadata.NAME, inManagedObjectContext: context) else {
             fatalError("Entity \(TorchMetadata.NAME) is not registered!")
@@ -142,5 +148,7 @@ extension Database {
         }
 
         try write()
+
+        return allMetadata
     }
 }
