@@ -25,7 +25,7 @@ extension Property where T: TorchEntity {
 }
 
 extension Property where T: PropertyOptionalType, T.Wrapped: TorchEntity {
-    public func by(descriptor: SortDescriptor<T>) -> SortDescriptor<PARENT> {
+    public func by(descriptor: SortDescriptor<T.Wrapped>) -> SortDescriptor<PARENT> {
         return SortDescriptor<PARENT>(keyPath: joinKeyPaths(torchName, descriptor.keyPath), ascending: descriptor.ascending)
     }
 }

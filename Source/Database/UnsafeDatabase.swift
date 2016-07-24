@@ -20,8 +20,16 @@ public class UnsafeDatabase {
 // MARK: - Load
 extension UnsafeDatabase {
 
-    public func load<T: TorchEntity>(type: T.Type) -> [T] {
-        return load(type, where: BoolPredicate<T>(value: true))
+    public func load<T: TorchEntity>(type: T.Type, sortBy sortDescriptors: SortDescriptor<T>...) -> [T] {
+        return load(type, sortBy: sortDescriptors)
+    }
+
+    public func load<T: TorchEntity>(type: T.Type, sortBy sortDescriptors: [SortDescriptor<T>]) -> [T] {
+        do {
+            return try database.load(type, sortBy: sortDescriptors)
+        } catch {
+            fatalError(String(error))
+        }
     }
 
     public func load<T: TorchEntity, P: PredicateConvertible where P.ParentType == T>(type: T.Type, where predicate: P, sortBy sortDescriptors: SortDescriptor<T>...) -> [T] {
