@@ -5,14 +5,14 @@ xcode_scheme: Torch
 xcode_sdk: macosx
 
 before_script:
-    - gem install cucumber
-    - gem install aruba
+    - gem install cucumber --no-rdoc --no-ri
+    - gem install aruba --no-rdoc --no-ri
 
 script:
     - cd Generator
     - bash run_tests.sh
     - cd ..
-    - travis_wait xcodebuild -workspace Torch.xcworkspace -scheme Torch -sdk macosx test
+    - travis_wait xcodebuild -workspace Torch.xcworkspace -scheme Torch -sdk macosx clean test
 
 after_script:
     - sleep 5
