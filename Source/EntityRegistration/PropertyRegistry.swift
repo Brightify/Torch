@@ -32,10 +32,6 @@ public class PropertyRegistry {
         self.entityRegistry = entityRegistry
     }
     
-    public func description<PARENT: TorchEntity, T: TorchPropertyType>(of property: TorchProperty<PARENT, T>) {
-        fatalError("Unsupported type \(String(T)). Consider extending it with `NSObjectConvertible` or add new overload for this method with correct implementation.")
-    }
-    
     public func description<PARENT: TorchEntity, T: NSObjectConvertible>(of property: TorchProperty<PARENT, T>) {
         registerAttribute(property.torchName, type: T.self, optional: false)
     }
