@@ -40,12 +40,15 @@ public class Database {
     public func load<T: TorchEntity>(type: T.Type) throws -> [T] {
         return try load(type, where: TorchPredicate(value: true))
     }
-    
-    // TODO Default values
-    public func load<T: TorchEntity>(type: T.Type, where predicate: TorchPredicate<T>, orderBy: SortDescriptor = SortDescriptor()) throws -> [T] {
+
+    public func load<T: TorchEntity>(type: T.Type, where predicate: TorchPredicate<T>, sortBy sortDescriptors: SortDescriptor<T>...) throws -> [T] {
+        return try load(type, where: predicate, sortBy: sortDescriptors)
+    }
+
+    public func load<T: TorchEntity>(type: T.Type, where predicate: TorchPredicate<T>, sortBy sortDescriptors: [SortDescriptor<T>]) throws -> [T] {
         let request = NSFetchRequest(entityName: type.torch_name)
         request.predicate = predicate.toPredicate()
-        request.sortDescriptors = orderBy.toSortDescriptors()
+        request.sortDescriptors = sortDescriptors.map { $0.toSortDescriptor() }
         let entities = try context.executeFetchRequest(request) as! [NSManagedObject]
         return try entities.map { try T(fromManagedObject: NSManagedObjectWrapper(object: $0, database: self)) }
     }

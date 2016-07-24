@@ -17,10 +17,14 @@ public class UnsafeDatabase {
     public func load<T: TorchEntity>(type: T.Type) -> [T] {
         return load(type, where: TorchPredicate(value: true))
     }
-    
-    public func load<T: TorchEntity>(type: T.Type, where predicate: TorchPredicate<T>, orderBy: SortDescriptor = SortDescriptor()) -> [T] {
+
+    public func load<T: TorchEntity>(type: T.Type, where predicate: TorchPredicate<T>, sortBy sortDescriptors: SortDescriptor<T>...) -> [T] {
+        return load(type, where: predicate, sortBy: sortDescriptors)
+    }
+
+    public func load<T: TorchEntity>(type: T.Type, where predicate: TorchPredicate<T>, sortBy sortDescriptors: [SortDescriptor<T>]) -> [T] {
         do {
-            return try database.load(type, where: predicate, orderBy: orderBy)
+            return try database.load(type, where: predicate, sortBy: sortDescriptors)
         } catch {
             fatalError(String(error))
         }
