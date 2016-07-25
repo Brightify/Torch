@@ -27,7 +27,6 @@ public class Database {
             metadataMemoryStorage[metadata.torchEntityName] = metadata
         }
     }
-
 }
 
 // MARK: - Actions
@@ -69,11 +68,11 @@ extension Database {
         if entity.id == nil {
             managedObject = createManagedObject(T)
             entity.id = try getNextId(T)
-            try updateLastAssignedId(entity)
         } else {
             managedObject = try loadManagedObject(entity) ?? createManagedObject(T)
         }
         try entity.torch_updateManagedObject(NSManagedObjectWrapper(object: managedObject, database: self))
+        try updateLastAssignedId(entity)
         return managedObject
     }
 

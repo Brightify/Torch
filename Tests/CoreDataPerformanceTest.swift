@@ -32,6 +32,7 @@ class CoreDataPerformanceTest: XCTestCase {
             }
             
             self.deleteAll(Core_OtherData.Name)
+            try! self.context.save()
         }
     }
     
@@ -42,6 +43,7 @@ class CoreDataPerformanceTest: XCTestCase {
             }
             
             self.deleteAll(Core_OtherData.Name)
+            try! self.context.save()
         }
     }
     
@@ -53,6 +55,7 @@ class CoreDataPerformanceTest: XCTestCase {
             
             self.deleteAll(Core_Data.Name)
             self.deleteAll(Core_OtherData.Name)
+            try! self.context.save()
         }
     }
     
@@ -101,6 +104,8 @@ class CoreDataPerformanceTest: XCTestCase {
             self.measure {
                 self.deleteAll(Core_OtherData.Name)
             }
+            
+            try! self.context.save()
         }
     }
     

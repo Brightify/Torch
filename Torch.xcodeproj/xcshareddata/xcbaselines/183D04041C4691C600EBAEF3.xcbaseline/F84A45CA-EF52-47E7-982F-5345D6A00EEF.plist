@@ -11,7 +11,7 @@
 				<key>com.apple.XCTPerformanceMetric_WallClockTime</key>
 				<dict>
 					<key>baselineAverage</key>
-					<real>0.00362</real>
+					<real>0.001</real>
 					<key>baselineIntegrationDisplayName</key>
 					<string>Local Baseline</string>
 				</dict>
@@ -21,7 +21,7 @@
 				<key>com.apple.XCTPerformanceMetric_WallClockTime</key>
 				<dict>
 					<key>baselineAverage</key>
-					<real>0.00074792</real>
+					<real>0.001</real>
 					<key>baselineIntegrationDisplayName</key>
 					<string>Local Baseline</string>
 				</dict>
@@ -81,7 +81,7 @@
 				<key>com.apple.XCTPerformanceMetric_WallClockTime</key>
 				<dict>
 					<key>baselineAverage</key>
-					<real>0.129</real>
+					<real>0.004</real>
 					<key>baselineIntegrationDisplayName</key>
 					<string>Local Baseline</string>
 				</dict>
@@ -104,7 +104,7 @@
 				<key>com.apple.XCTPerformanceMetric_WallClockTime</key>
 				<dict>
 					<key>baselineAverage</key>
-					<real>0.002</real>
+					<real>0.003</real>
 					<key>baselineIntegrationDisplayName</key>
 					<string>Local Baseline</string>
 				</dict>
@@ -114,7 +114,7 @@
 				<key>com.apple.XCTPerformanceMetric_WallClockTime</key>
 				<dict>
 					<key>baselineAverage</key>
-					<real>0.004592</real>
+					<real>0.007</real>
 					<key>baselineIntegrationDisplayName</key>
 					<string>Local Baseline</string>
 				</dict>
@@ -134,7 +134,7 @@
 				<key>com.apple.XCTPerformanceMetric_WallClockTime</key>
 				<dict>
 					<key>baselineAverage</key>
-					<real>0.349</real>
+					<real>0.017</real>
 					<key>baselineIntegrationDisplayName</key>
 					<string>Local Baseline</string>
 				</dict>
@@ -144,7 +144,17 @@
 				<key>com.apple.XCTPerformanceMetric_WallClockTime</key>
 				<dict>
 					<key>baselineAverage</key>
-					<real>0.78</real>
+					<real>0.017</real>
+					<key>baselineIntegrationDisplayName</key>
+					<string>Local Baseline</string>
+				</dict>
+			</dict>
+			<key>testSaveWithId()</key>
+			<dict>
+				<key>com.apple.XCTPerformanceMetric_WallClockTime</key>
+				<dict>
+					<key>baselineAverage</key>
+					<real>0.40918</real>
 					<key>baselineIntegrationDisplayName</key>
 					<string>Local Baseline</string>
 				</dict>
@@ -154,7 +164,7 @@
 				<key>com.apple.XCTPerformanceMetric_WallClockTime</key>
 				<dict>
 					<key>baselineAverage</key>
-					<real>0.008</real>
+					<real>0.004</real>
 					<key>baselineIntegrationDisplayName</key>
 					<string>Local Baseline</string>
 				</dict>

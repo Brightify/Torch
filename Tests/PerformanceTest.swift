@@ -32,6 +32,7 @@ class PerformanceTest: XCTestCase {
             }
             
             self.database.deleteAll(OtherData.self)
+            self.database.write()
         }
     }
     
@@ -42,6 +43,7 @@ class PerformanceTest: XCTestCase {
             }
             
             self.database.deleteAll(OtherData.self)
+            self.database.write()
         }
     }
     
@@ -53,6 +55,7 @@ class PerformanceTest: XCTestCase {
             
             self.database.deleteAll(OtherData.self)
             self.database.deleteAll(Data.self)
+            self.database.write()
         }
     }
     
@@ -94,6 +97,8 @@ class PerformanceTest: XCTestCase {
             self.measure {
                 self.database.deleteAll(OtherData.self)
             }
+            
+            self.database.write()
         }
     }
     
