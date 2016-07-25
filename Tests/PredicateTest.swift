@@ -1,5 +1,5 @@
 //
-//  PredicateTests.swift
+//  PredicateTest.swift
 //  Torch
 //
 //  Created by Filip Dolnik on 22.07.16.
@@ -10,7 +10,7 @@ import XCTest
 import CoreData
 import Torch
 
-class PredicateTests: XCTestCase {
+class PredicateTest: XCTestCase {
     
     private var database: UnsafeDatabase!
     

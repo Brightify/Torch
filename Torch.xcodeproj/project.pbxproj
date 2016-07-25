@@ -44,8 +44,9 @@
 		DC49D22F1D42870900EECA2F /* NSNumberConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC49D22E1D42870900EECA2F /* NSNumberConvertible.swift */; };
 		DC49D2351D42902000EECA2F /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC49D2341D42902000EECA2F /* Models.swift */; };
 		DC49D2371D42904700EECA2F /* ModelExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC49D2361D42904700EECA2F /* ModelExtensions.swift */; };
-		DC49D23C1D42B2BE00EECA2F /* PredicateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC49D23B1D42B2BE00EECA2F /* PredicateTests.swift */; };
+		DC49D23C1D42B2BE00EECA2F /* PredicateTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC49D23B1D42B2BE00EECA2F /* PredicateTest.swift */; };
 		DC8B9F2F1D3EB4AE00E3B9DE /* TorchTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC8B9F2B1D3EB41F00E3B9DE /* TorchTest.swift */; };
+		DCF198081D45FBD400C7B14C /* PerformanceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCF198061D45FBB500C7B14C /* PerformanceTest.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -101,10 +102,11 @@
 		DC49D2321D42877E00EECA2F /* PropertyOptionalType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PropertyOptionalType.swift; sourceTree = "<group>"; };
 		DC49D2341D42902000EECA2F /* Models.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
 		DC49D2361D42904700EECA2F /* ModelExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelExtensions.swift; sourceTree = "<group>"; };
-		DC49D23B1D42B2BE00EECA2F /* PredicateTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PredicateTests.swift; sourceTree = "<group>"; };
+		DC49D23B1D42B2BE00EECA2F /* PredicateTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PredicateTest.swift; sourceTree = "<group>"; };
 		DC49D23D1D42BA6E00EECA2F /* PropertySetType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PropertySetType.swift; sourceTree = "<group>"; };
 		DC5A3A5C1CF6F8D600F520E3 /* TorchORM.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = TorchORM.podspec; sourceTree = "<group>"; };
 		DC8B9F2B1D3EB41F00E3B9DE /* TorchTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TorchTest.swift; sourceTree = "<group>"; };
+		DCF198061D45FBB500C7B14C /* PerformanceTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PerformanceTest.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -169,10 +171,11 @@
 			isa = PBXGroup;
 			children = (
 				183D040C1C4691C600EBAEF3 /* Info.plist */,
+				DCF198061D45FBB500C7B14C /* PerformanceTest.swift */,
+				DC49D23B1D42B2BE00EECA2F /* PredicateTest.swift */,
+				DC8B9F2B1D3EB41F00E3B9DE /* TorchTest.swift */,
 				DC70D0D01D2B006200014C5F /* Generated */,
 				DC70D0B91D2AF3FA00014C5F /* Source */,
-				DC8B9F2B1D3EB41F00E3B9DE /* TorchTest.swift */,
-				DC49D23B1D42B2BE00EECA2F /* PredicateTests.swift */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -456,10 +459,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DCF198081D45FBD400C7B14C /* PerformanceTest.swift in Sources */,
 				DC8B9F2F1D3EB4AE00E3B9DE /* TorchTest.swift in Sources */,
 				DC49D2371D42904700EECA2F /* ModelExtensions.swift in Sources */,
 				DC49D2351D42902000EECA2F /* Models.swift in Sources */,
-				DC49D23C1D42B2BE00EECA2F /* PredicateTests.swift in Sources */,
+				DC49D23C1D42B2BE00EECA2F /* PredicateTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
