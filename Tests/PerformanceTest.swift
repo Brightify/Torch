@@ -13,7 +13,6 @@ class PerformanceTest: XCTestCase {
 
     private var database: UnsafeDatabase!
     
-    
     override func setUp() {
         super.setUp()
         
@@ -30,6 +29,16 @@ class PerformanceTest: XCTestCase {
         measureMetrics(performanceMetrics, automaticallyStartMeasuring: false) {
             self.measure {
                 self.saveData()
+            }
+            
+            self.database.deleteAll(OtherData.self)
+        }
+    }
+    
+    func testSaveWithId() {
+        measureMetrics(performanceMetrics, automaticallyStartMeasuring: false) {
+            self.measure {
+                self.saveDataWithId()
             }
             
             self.database.deleteAll(OtherData.self)
@@ -77,9 +86,7 @@ class PerformanceTest: XCTestCase {
         }
     }
     
-    func testDelete() {
-        saveData()
-        
+    func testDelete() {        
         measureMetrics(performanceMetrics, automaticallyStartMeasuring: false) {
             self.saveData()
             
@@ -100,6 +107,12 @@ class PerformanceTest: XCTestCase {
         }
     }
     
+    private func saveDataWithId() {
+        (0..<1000).forEach {
+            database.save(OtherData(id: $0 as Int, text: String($0)))
+        }
+    }
+    
     private func saveComplex() {
         let otherData = OtherData(id: nil, text: "")
         let manualData = ManualData.Root(id: nil, text: "")
@@ -109,21 +122,5 @@ class PerformanceTest: XCTestCase {
         (0..<100).forEach { _ in
             database.save(data)
         }
-    }
-    
-
-}
-
-extension XCTestCase {
-    
-    // TODO Use measureBlockWithSetup in Swift 3
-    var performanceMetrics: [String] {
-        return XCTestCase.defaultPerformanceMetrics()
-    }
-    
-    func measure(@noescape block: () -> Void) {
-        startMeasuring()
-        block()
-        stopMeasuring()
     }
 }

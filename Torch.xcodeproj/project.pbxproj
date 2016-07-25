@@ -46,6 +46,9 @@
 		DC49D2371D42904700EECA2F /* ModelExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC49D2361D42904700EECA2F /* ModelExtensions.swift */; };
 		DC49D23C1D42B2BE00EECA2F /* PredicateTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC49D23B1D42B2BE00EECA2F /* PredicateTest.swift */; };
 		DC8B9F2F1D3EB4AE00E3B9DE /* TorchTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC8B9F2B1D3EB41F00E3B9DE /* TorchTest.swift */; };
+		DCC759751D46209A00D23B24 /* CoreDataPerformanceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC759701D46207200D23B24 /* CoreDataPerformanceTest.swift */; };
+		DCC759761D46209F00D23B24 /* CoreDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = DCC759721D46208500D23B24 /* CoreDataModel.xcdatamodeld */; };
+		DCC7597A1D4673F700D23B24 /* XCTestCase+Measure.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC759781D4673DA00D23B24 /* XCTestCase+Measure.swift */; };
 		DCF198081D45FBD400C7B14C /* PerformanceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCF198061D45FBB500C7B14C /* PerformanceTest.swift */; };
 /* End PBXBuildFile section */
 
@@ -106,6 +109,9 @@
 		DC49D23D1D42BA6E00EECA2F /* PropertySetType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PropertySetType.swift; sourceTree = "<group>"; };
 		DC5A3A5C1CF6F8D600F520E3 /* TorchORM.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = TorchORM.podspec; sourceTree = "<group>"; };
 		DC8B9F2B1D3EB41F00E3B9DE /* TorchTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TorchTest.swift; sourceTree = "<group>"; };
+		DCC759701D46207200D23B24 /* CoreDataPerformanceTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataPerformanceTest.swift; sourceTree = "<group>"; };
+		DCC759731D46208500D23B24 /* CoreDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CoreDataModel.xcdatamodel; sourceTree = "<group>"; };
+		DCC759781D4673DA00D23B24 /* XCTestCase+Measure.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "XCTestCase+Measure.swift"; sourceTree = "<group>"; };
 		DCF198061D45FBB500C7B14C /* PerformanceTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PerformanceTest.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -171,11 +177,14 @@
 			isa = PBXGroup;
 			children = (
 				183D040C1C4691C600EBAEF3 /* Info.plist */,
+				DCC759701D46207200D23B24 /* CoreDataPerformanceTest.swift */,
 				DCF198061D45FBB500C7B14C /* PerformanceTest.swift */,
 				DC49D23B1D42B2BE00EECA2F /* PredicateTest.swift */,
 				DC8B9F2B1D3EB41F00E3B9DE /* TorchTest.swift */,
+				DCC759721D46208500D23B24 /* CoreDataModel.xcdatamodeld */,
 				DC70D0D01D2B006200014C5F /* Generated */,
 				DC70D0B91D2AF3FA00014C5F /* Source */,
+				DCC759771D4673C500D23B24 /* Utils */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -291,6 +300,14 @@
 				DC49D2361D42904700EECA2F /* ModelExtensions.swift */,
 			);
 			path = Generated;
+			sourceTree = "<group>";
+		};
+		DCC759771D4673C500D23B24 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				DCC759781D4673DA00D23B24 /* XCTestCase+Measure.swift */,
+			);
+			path = Utils;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -460,10 +477,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				DCF198081D45FBD400C7B14C /* PerformanceTest.swift in Sources */,
+				DCC759751D46209A00D23B24 /* CoreDataPerformanceTest.swift in Sources */,
 				DC8B9F2F1D3EB4AE00E3B9DE /* TorchTest.swift in Sources */,
 				DC49D2371D42904700EECA2F /* ModelExtensions.swift in Sources */,
 				DC49D2351D42902000EECA2F /* Models.swift in Sources */,
+				DCC759761D46209F00D23B24 /* CoreDataModel.xcdatamodeld in Sources */,
 				DC49D23C1D42B2BE00EECA2F /* PredicateTest.swift in Sources */,
+				DCC7597A1D4673F700D23B24 /* XCTestCase+Measure.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -684,6 +704,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		DCC759721D46208500D23B24 /* CoreDataModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				DCC759731D46208500D23B24 /* CoreDataModel.xcdatamodel */,
+			);
+			currentVersion = DCC759731D46208500D23B24 /* CoreDataModel.xcdatamodel */;
+			path = CoreDataModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 183D03F21C4691C600EBAEF3 /* Project object */;
 }
