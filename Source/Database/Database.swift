@@ -10,6 +10,10 @@ import CoreData
 
 public class Database {
     public static let COLUMN_PREFIX = "torch_"
+    
+    static func getColumnName(name: String) -> String {
+        return Database.COLUMN_PREFIX + name
+    }
 
     internal let context = NSManagedObjectContext(concurrencyType: .MainQueueConcurrencyType)
     private var metadataMemoryStorage: [String: TorchMetadata] = [:]

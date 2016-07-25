@@ -11,7 +11,7 @@ public struct Property<PARENT: TorchEntity, T: PropertyType> {
     public let name: String
     
     public var torchName: String {
-        return Database.COLUMN_PREFIX + name
+        return Database.getColumnName(name)
     }
     
     public init(name: String) {

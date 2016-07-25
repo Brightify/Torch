@@ -43,6 +43,11 @@ public class EntityRegistry {
         let propertyRegistry = PropertyRegistry(entityRegistry: self)
         entityType.torch_describeProperties(to: propertyRegistry)
         entity.properties = propertyRegistry.registeredProperties
+        entity.properties.forEach {
+            if $0.name == Database.getColumnName("id") {
+                $0.indexed = true
+            }
+        }
 
         registeredEntities[entityType.torch_name] = EntityRegistration(description: entity, state: .Complete)
 
