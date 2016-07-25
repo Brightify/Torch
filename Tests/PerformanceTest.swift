@@ -83,6 +83,7 @@ class PerformanceTest: XCTestCase {
             }
             
             self.database.deleteAll(OtherData.self)
+            self.database.write()
         }
     }
     

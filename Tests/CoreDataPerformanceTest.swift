@@ -90,6 +90,7 @@ class CoreDataPerformanceTest: XCTestCase {
             }
             
             self.deleteAll(Core_OtherData.Name)
+            try! self.context.save()
         }
     }
 

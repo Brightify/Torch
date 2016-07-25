@@ -65,12 +65,15 @@ extension Database {
 extension Database {
     // Intentionally left `internal` because it is used in NSManagedObjectWrapper.
     internal func getManagedObject<T: TorchEntity>(inout for entity: T) throws -> NSManagedObject {
+        let managedObject: NSManagedObject
         if entity.id == nil {
+            managedObject = createManagedObject(T)
             entity.id = try getNextId(T)
+            try updateLastAssignedId(entity)
+        } else {
+            managedObject = try loadManagedObject(entity) ?? createManagedObject(T)
         }
-        let managedObject = try loadManagedObject(entity) ?? createManagedObject(T)
         try entity.torch_updateManagedObject(NSManagedObjectWrapper(object: managedObject, database: self))
-        try updateLastAssignedId(entity)
         return managedObject
     }
 
