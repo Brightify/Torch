@@ -11,6 +11,11 @@ import Torch
 
 class PerformanceTest: XCTestCase {
 
+    static let OtherDataCount = 10000
+    static let OtherDataWithIdCount = 1000
+    static let DataCount = 500
+    static let RelationsCount = 10
+    
     private var database: UnsafeDatabase!
     
     override func setUp() {
@@ -63,7 +68,7 @@ class PerformanceTest: XCTestCase {
         saveData()
         
         measureBlock {
-            self.database.load(OtherData.self, where: OtherData.id > 10)
+            self.database.load(OtherData.self, where: OtherData.id > 40000)
         }
     }
     
@@ -108,13 +113,13 @@ class PerformanceTest: XCTestCase {
     }
     
     private func saveData() {
-        (0..<1000).forEach {
+        (0..<PerformanceTest.OtherDataCount).forEach {
             database.save(OtherData(id: nil, text: String($0)))
         }
     }
     
     private func saveDataWithId() {
-        (0..<1000).forEach {
+        (0..<PerformanceTest.OtherDataWithIdCount).forEach {
             database.save(OtherData(id: $0 as Int, text: String($0)))
         }
     }
@@ -124,8 +129,8 @@ class PerformanceTest: XCTestCase {
         let manualData = ManualData.Root(id: nil, text: "")
         let data = Data(id: nil, number: 0, optionalNumber: 0, numbers: [1, 1, 2], text: "",
              float: 0, double: 0, bool: false, set: [1, 2], relation: otherData, optionalRelation: nil,
-             arrayWithRelation: (0..<10).map { _ in otherData }, manualEntityRelation: manualData, readOnly: "")
-        (0..<100).forEach { _ in
+             arrayWithRelation: (0..<PerformanceTest.RelationsCount).map { _ in otherData }, manualEntityRelation: manualData, readOnly: "")
+        (0..<PerformanceTest.DataCount).forEach { _ in
             database.save(data)
         }
     }

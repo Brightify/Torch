@@ -65,12 +65,9 @@ class CoreDataPerformanceTest: XCTestCase {
         
         measureBlock {
             let request = NSFetchRequest(entityName: Core_OtherData.Name)
-            request.predicate = NSPredicate(format: "id > 10")
+            request.predicate = NSPredicate(format: "id > 40000")
             let objects = try! self.context.executeFetchRequest(request) as! [NSManagedObject]
-            for object in objects {
-                _ = object.valueForKey("id")
-                _ = object.valueForKey("text")
-            }
+            let _ = objects.map { OtherData(id: $0.valueForKey("id") as? Int, text: $0.valueForKey("text") as! String) }
         }
     }
 
@@ -122,7 +119,7 @@ class CoreDataPerformanceTest: XCTestCase {
     
     private func saveData() {
         let description = NSEntityDescription.entityForName(Core_OtherData.Name, inManagedObjectContext: context)!
-        (0..<1000).forEach {
+        (0..<PerformanceTest.OtherDataCount).forEach {
             let otherData = Core_OtherData(entity: description, insertIntoManagedObjectContext: context)
             otherData.id = $0
             otherData.text = String($0)
@@ -132,7 +129,7 @@ class CoreDataPerformanceTest: XCTestCase {
     private func saveDataWithId() {
         let description = NSEntityDescription.entityForName(Core_OtherData.Name, inManagedObjectContext: context)!
         
-        (0..<1000).forEach {
+        (0..<PerformanceTest.OtherDataWithIdCount).forEach {
                 let request = NSFetchRequest(entityName: Core_OtherData.Name)
 
             request.predicate = NSPredicate(format: "id = \($0)")
@@ -151,7 +148,7 @@ class CoreDataPerformanceTest: XCTestCase {
     private func saveComplex() {
         let dataDescription = NSEntityDescription.entityForName(Core_Data.Name, inManagedObjectContext: context)!
         let otherDescription = NSEntityDescription.entityForName(Core_OtherData.Name, inManagedObjectContext: context)!
-        (0..<100).forEach {
+        (0..<PerformanceTest.DataCount).forEach {
             let otherData = Core_OtherData(entity: otherDescription, insertIntoManagedObjectContext: context)
             otherData.id = $0
             otherData.text = String($0)
@@ -167,7 +164,7 @@ class CoreDataPerformanceTest: XCTestCase {
             data.set = NSOrderedSet(array: [1, 2])
             data.relation = otherData
             data.relation2 = otherData
-            data.arrayWithRelation = NSOrderedSet(array: (0..<10).map {
+            data.arrayWithRelation = NSOrderedSet(array: (0..<PerformanceTest.RelationsCount).map {
                 let otherData = Core_OtherData(entity: otherDescription, insertIntoManagedObjectContext: context)
                 otherData.text = String($0)
                 return otherData

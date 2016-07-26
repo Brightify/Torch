@@ -9,12 +9,10 @@
 public struct Property<PARENT: TorchEntity, T: PropertyType> {
     
     public let name: String
-    
-    public var torchName: String {
-        return Database.getColumnName(name)
-    }
+    public let torchName: String
     
     public init(name: String) {
         self.name = name
+        torchName = Database.getColumnName(name)
     }
 }

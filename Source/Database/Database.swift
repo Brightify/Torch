@@ -9,7 +9,7 @@
 import CoreData
 
 public class Database {
-    public static let COLUMN_PREFIX = "torch_"
+    private static let COLUMN_PREFIX = "torch_"
     
     static func getColumnName(name: String) -> String {
         return Database.COLUMN_PREFIX + name
