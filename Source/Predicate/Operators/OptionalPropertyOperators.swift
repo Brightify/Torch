@@ -8,7 +8,7 @@
 
 import Foundation
 
-
+/*
 // MARK: - NSObjectConvertible
 public extension Property where T: PropertyOptionalType, T.Wrapped: NSObjectConvertible {
     public func equalTo(value: T) -> SingleValuePredicate<PARENT> {
@@ -75,4 +75,4 @@ public extension Property where T: PropertyOptionalType, T.Wrapped: TorchEntity 
                                     operatorString: predicate.operatorString,
                                     value: predicate.value)
     }
-}
+}*/

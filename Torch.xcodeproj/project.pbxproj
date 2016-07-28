@@ -21,13 +21,10 @@
 		18768FD91D44CB1200252E03 /* Database+Load.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18768FD81D44CB1200252E03 /* Database+Load.swift */; };
 		18768FDB1D44CB5F00252E03 /* Database+Save.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18768FDA1D44CB5F00252E03 /* Database+Save.swift */; };
 		18768FDD1D44CB7D00252E03 /* Database+Delete.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18768FDC1D44CB7D00252E03 /* Database+Delete.swift */; };
-		18768FDF1D44CBBB00252E03 /* Database+Transaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18768FDE1D44CBBB00252E03 /* Database+Transaction.swift */; };
-		18768FE11D44CBEB00252E03 /* Database+Init.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18768FE01D44CBEB00252E03 /* Database+Init.swift */; };
 		18768FE61D44D07900252E03 /* UnsafeDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18768FE51D44D07900252E03 /* UnsafeDatabase.swift */; };
-		18768FEC1D44D18200252E03 /* NSManagedObjectWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18768FEB1D44D18200252E03 /* NSManagedObjectWrapper.swift */; };
+		18768FEC1D44D18200252E03 /* ManagedObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18768FEB1D44D18200252E03 /* ManagedObject.swift */; };
 		18768FEF1D44D1A200252E03 /* TorchEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18768FEE1D44D1A200252E03 /* TorchEntity.swift */; };
 		18768FF11D44D1AE00252E03 /* ManualTorchEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18768FF01D44D1AE00252E03 /* ManualTorchEntity.swift */; };
-		18768FF31D44D1C100252E03 /* StoreConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18768FF21D44D1C100252E03 /* StoreConfiguration.swift */; };
 		18768FF61D44D1E500252E03 /* SortDescriptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18768FF51D44D1E500252E03 /* SortDescriptor.swift */; };
 		18768FF81D44D20900252E03 /* Property+Sort.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18768FF71D44D20900252E03 /* Property+Sort.swift */; };
 		187690091D44D7E400252E03 /* AnyPredicate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187690071D44D7E400252E03 /* AnyPredicate.swift */; };
@@ -36,12 +33,8 @@
 		1876900D1D44D81500252E03 /* PropertyOptionalType.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC49D2321D42877E00EECA2F /* PropertyOptionalType.swift */; };
 		1876900E1D44D81700252E03 /* PropertySetType.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC49D23D1D42BA6E00EECA2F /* PropertySetType.swift */; };
 		1876900F1D44D81A00252E03 /* PropertyType.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC49D22A1D42654200EECA2F /* PropertyType.swift */; };
-		187690101D44D81E00252E03 /* NSObjectConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC49D22C1D4286E500EECA2F /* NSObjectConvertible.swift */; };
-		187690111D44D84900252E03 /* EntityRegistry.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC32A1111D40144B008E3A4E /* EntityRegistry.swift */; };
-		187690121D44D86100252E03 /* TorchMetadata.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC32A10A1D40142C008E3A4E /* TorchMetadata.swift */; };
 		187690141D44D8FF00252E03 /* TorchEntityBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187690131D44D8FF00252E03 /* TorchEntityBundle.swift */; };
 		DC32A1161D40144B008E3A4E /* PropertyRegistry.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC32A1131D40144B008E3A4E /* PropertyRegistry.swift */; };
-		DC49D22F1D42870900EECA2F /* NSNumberConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC49D22E1D42870900EECA2F /* NSNumberConvertible.swift */; };
 		DC49D2351D42902000EECA2F /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC49D2341D42902000EECA2F /* Models.swift */; };
 		DC49D2371D42904700EECA2F /* ModelExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC49D2361D42904700EECA2F /* ModelExtensions.swift */; };
 		DC49D23C1D42B2BE00EECA2F /* PredicateTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC49D23B1D42B2BE00EECA2F /* PredicateTest.swift */; };
@@ -49,7 +42,12 @@
 		DCC759751D46209A00D23B24 /* CoreDataPerformanceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC759701D46207200D23B24 /* CoreDataPerformanceTest.swift */; };
 		DCC759761D46209F00D23B24 /* CoreDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = DCC759721D46208500D23B24 /* CoreDataModel.xcdatamodeld */; };
 		DCC7597A1D4673F700D23B24 /* XCTestCase+Measure.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC759781D4673DA00D23B24 /* XCTestCase+Measure.swift */; };
+		DCD4F26C1D47960700E3DC63 /* GRDB.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCD4F2441D47951600E3DC63 /* GRDB.framework */; };
+		DCD4F28D1D479F4000E3DC63 /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCD4F28C1D479F4000E3DC63 /* Storage.swift */; };
+		DCD4F2911D47BDB000E3DC63 /* PropertyValueType.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCD4F2901D47BDB000E3DC63 /* PropertyValueType.swift */; };
+		DCD4F2931D47FFFA00E3DC63 /* DatabaseValueType.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCD4F2921D47FFFA00E3DC63 /* DatabaseValueType.swift */; };
 		DCF198081D45FBD400C7B14C /* PerformanceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCF198061D45FBB500C7B14C /* PerformanceTest.swift */; };
+		DCF9F0271D4A63330049D2F7 /* GRDBPerformanceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC0127A91D4A625100F84DFE /* GRDBPerformanceTest.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,6 +57,118 @@
 			proxyType = 1;
 			remoteGlobalIDString = 183D03FA1C4691C600EBAEF3;
 			remoteInfo = Mockery;
+		};
+		DCD4F2431D47951600E3DC63 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DCD4F22D1D47951600E3DC63 /* GRDB.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = DC3773F319C8CBB3004FCF85;
+			remoteInfo = GRDBOSX;
+		};
+		DCD4F2451D47951600E3DC63 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DCD4F22D1D47951600E3DC63 /* GRDB.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 56E5D7F91B4D422D00430942;
+			remoteInfo = GRDBOSXTests;
+		};
+		DCD4F2471D47951600E3DC63 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DCD4F22D1D47951600E3DC63 /* GRDB.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 560C981A1C0E22D300BF8471;
+			remoteInfo = GRDBOSXPerformanceTests;
+		};
+		DCD4F2491D47951600E3DC63 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DCD4F22D1D47951600E3DC63 /* GRDB.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 56553C181C3E906C00522B5C;
+			remoteInfo = GRDBOSXCrashTests;
+		};
+		DCD4F24B1D47951600E3DC63 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DCD4F22D1D47951600E3DC63 /* GRDB.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 560FC54D1CB003810014AA8E;
+			remoteInfo = GRDBCipherOSX;
+		};
+		DCD4F24D1D47951600E3DC63 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DCD4F22D1D47951600E3DC63 /* GRDB.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 560FC5B01CB00B880014AA8E;
+			remoteInfo = GRDBCipherOSXTests;
+		};
+		DCD4F24F1D47951600E3DC63 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DCD4F22D1D47951600E3DC63 /* GRDB.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 5671566C1CB16729007DC145;
+			remoteInfo = GRDBCipherOSXEncryptedTests;
+		};
+		DCD4F2511D47951600E3DC63 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DCD4F22D1D47951600E3DC63 /* GRDB.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = F3BA805A1CFB2BB2003DC1BA;
+			remoteInfo = GRDBCustomSQLiteOSX;
+		};
+		DCD4F2531D47951600E3DC63 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DCD4F22D1D47951600E3DC63 /* GRDB.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = F3BA809B1CFB2F6F003DC1BA;
+			remoteInfo = GRDBCustomSQLiteOSXTests;
+		};
+		DCD4F2551D47951600E3DC63 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DCD4F22D1D47951600E3DC63 /* GRDB.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 56E5D7CA1B4D3FED00430942;
+			remoteInfo = GRDBiOS;
+		};
+		DCD4F2571D47951600E3DC63 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DCD4F22D1D47951600E3DC63 /* GRDB.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 56E5D7D31B4D3FEE00430942;
+			remoteInfo = GRDBiOSTests;
+		};
+		DCD4F2591D47951600E3DC63 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DCD4F22D1D47951600E3DC63 /* GRDB.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 56AFCA231CB1A8BB00F48B96;
+			remoteInfo = GRDBCipheriOS;
+		};
+		DCD4F25B1D47951600E3DC63 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DCD4F22D1D47951600E3DC63 /* GRDB.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 56AFCA7F1CB1AA9900F48B96;
+			remoteInfo = GRDBCipheriOSTests;
+		};
+		DCD4F25D1D47951600E3DC63 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DCD4F22D1D47951600E3DC63 /* GRDB.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 56AFCAD71CB1ABC800F48B96;
+			remoteInfo = GRDBCipheriOSEncryptedTests;
+		};
+		DCD4F25F1D47951600E3DC63 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DCD4F22D1D47951600E3DC63 /* GRDB.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = F3BA7FFE1CFB25E4003DC1BA;
+			remoteInfo = GRDBCustomSQLiteiOS;
+		};
+		DCD4F2611D47951600E3DC63 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DCD4F22D1D47951600E3DC63 /* GRDB.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = F3BA80411CFB2AD7003DC1BA;
+			remoteInfo = GRDBCustomSQLiteiOSTests;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -81,26 +191,20 @@
 		18768FD81D44CB1200252E03 /* Database+Load.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Database+Load.swift"; sourceTree = "<group>"; };
 		18768FDA1D44CB5F00252E03 /* Database+Save.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Database+Save.swift"; sourceTree = "<group>"; };
 		18768FDC1D44CB7D00252E03 /* Database+Delete.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Database+Delete.swift"; sourceTree = "<group>"; };
-		18768FDE1D44CBBB00252E03 /* Database+Transaction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Database+Transaction.swift"; sourceTree = "<group>"; };
-		18768FE01D44CBEB00252E03 /* Database+Init.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Database+Init.swift"; sourceTree = "<group>"; };
 		18768FE51D44D07900252E03 /* UnsafeDatabase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnsafeDatabase.swift; sourceTree = "<group>"; };
-		18768FEB1D44D18200252E03 /* NSManagedObjectWrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSManagedObjectWrapper.swift; sourceTree = "<group>"; };
+		18768FEB1D44D18200252E03 /* ManagedObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManagedObject.swift; sourceTree = "<group>"; };
 		18768FEE1D44D1A200252E03 /* TorchEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TorchEntity.swift; sourceTree = "<group>"; };
 		18768FF01D44D1AE00252E03 /* ManualTorchEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManualTorchEntity.swift; sourceTree = "<group>"; };
-		18768FF21D44D1C100252E03 /* StoreConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoreConfiguration.swift; sourceTree = "<group>"; };
 		18768FF51D44D1E500252E03 /* SortDescriptor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SortDescriptor.swift; sourceTree = "<group>"; };
 		18768FF71D44D20900252E03 /* Property+Sort.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Property+Sort.swift"; sourceTree = "<group>"; };
 		187690071D44D7E400252E03 /* AnyPredicate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnyPredicate.swift; sourceTree = "<group>"; };
 		187690131D44D8FF00252E03 /* TorchEntityBundle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TorchEntityBundle.swift; sourceTree = "<group>"; };
 		18EE0B161D438B3A001215B1 /* build_generator */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = build_generator; sourceTree = "<group>"; };
 		18EE0B171D438B3A001215B1 /* run */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = run; sourceTree = "<group>"; };
-		DC32A10A1D40142C008E3A4E /* TorchMetadata.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TorchMetadata.swift; sourceTree = "<group>"; };
+		DC0127A91D4A625100F84DFE /* GRDBPerformanceTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GRDBPerformanceTest.swift; sourceTree = "<group>"; };
 		DC32A10D1D401439008E3A4E /* Property.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Property.swift; sourceTree = "<group>"; };
-		DC32A1111D40144B008E3A4E /* EntityRegistry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EntityRegistry.swift; sourceTree = "<group>"; };
 		DC32A1131D40144B008E3A4E /* PropertyRegistry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PropertyRegistry.swift; sourceTree = "<group>"; };
 		DC49D22A1D42654200EECA2F /* PropertyType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PropertyType.swift; sourceTree = "<group>"; };
-		DC49D22C1D4286E500EECA2F /* NSObjectConvertible.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSObjectConvertible.swift; sourceTree = "<group>"; };
-		DC49D22E1D42870900EECA2F /* NSNumberConvertible.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSNumberConvertible.swift; sourceTree = "<group>"; };
 		DC49D2301D42874400EECA2F /* PropertyArrayType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PropertyArrayType.swift; sourceTree = "<group>"; };
 		DC49D2321D42877E00EECA2F /* PropertyOptionalType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PropertyOptionalType.swift; sourceTree = "<group>"; };
 		DC49D2341D42902000EECA2F /* Models.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
@@ -112,6 +216,10 @@
 		DCC759701D46207200D23B24 /* CoreDataPerformanceTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataPerformanceTest.swift; sourceTree = "<group>"; };
 		DCC759731D46208500D23B24 /* CoreDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CoreDataModel.xcdatamodel; sourceTree = "<group>"; };
 		DCC759781D4673DA00D23B24 /* XCTestCase+Measure.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "XCTestCase+Measure.swift"; sourceTree = "<group>"; };
+		DCD4F22D1D47951600E3DC63 /* GRDB.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = GRDB.xcodeproj; path = Dependencies/GRDB/GRDB.xcodeproj; sourceTree = "<group>"; };
+		DCD4F28C1D479F4000E3DC63 /* Storage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
+		DCD4F2901D47BDB000E3DC63 /* PropertyValueType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PropertyValueType.swift; sourceTree = "<group>"; };
+		DCD4F2921D47FFFA00E3DC63 /* DatabaseValueType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatabaseValueType.swift; sourceTree = "<group>"; };
 		DCF198061D45FBB500C7B14C /* PerformanceTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PerformanceTest.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -120,6 +228,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DCD4F26C1D47960700E3DC63 /* GRDB.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -139,12 +248,12 @@
 			children = (
 				18EE0B161D438B3A001215B1 /* build_generator */,
 				18EE0B171D438B3A001215B1 /* run */,
-				187688041D43E9C000252E03 /* .travis.yml */,
 				DC5A3A5C1CF6F8D600F520E3 /* TorchORM.podspec */,
+				187688041D43E9C000252E03 /* .travis.yml */,
+				DCD4F2631D47951E00E3DC63 /* Frameworks */,
+				183D03FC1C4691C600EBAEF3 /* Products */,
 				183D03FD1C4691C600EBAEF3 /* Source */,
 				183D04091C4691C600EBAEF3 /* Tests */,
-				183D03FC1C4691C600EBAEF3 /* Products */,
-				18EE0B0A1D437B7F001215B1 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -178,6 +287,7 @@
 			children = (
 				183D040C1C4691C600EBAEF3 /* Info.plist */,
 				DCC759701D46207200D23B24 /* CoreDataPerformanceTest.swift */,
+				DC0127A91D4A625100F84DFE /* GRDBPerformanceTest.swift */,
 				DCF198061D45FBB500C7B14C /* PerformanceTest.swift */,
 				DC49D23B1D42B2BE00EECA2F /* PredicateTest.swift */,
 				DC8B9F2B1D3EB41F00E3B9DE /* TorchTest.swift */,
@@ -203,11 +313,9 @@
 			isa = PBXGroup;
 			children = (
 				18768FD61D44CAFD00252E03 /* Database.swift */,
-				18768FE01D44CBEB00252E03 /* Database+Init.swift */,
 				18768FD81D44CB1200252E03 /* Database+Load.swift */,
 				18768FDA1D44CB5F00252E03 /* Database+Save.swift */,
 				18768FDC1D44CB7D00252E03 /* Database+Delete.swift */,
-				18768FDE1D44CBBB00252E03 /* Database+Transaction.swift */,
 				18768FE51D44D07900252E03 /* UnsafeDatabase.swift */,
 			);
 			path = Database;
@@ -231,19 +339,12 @@
 			path = SortDescriptor;
 			sourceTree = "<group>";
 		};
-		18EE0B0A1D437B7F001215B1 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 		DC32A1061D40133E008E3A4E /* EntityRegistration */ = {
 			isa = PBXGroup;
 			children = (
 				187690131D44D8FF00252E03 /* TorchEntityBundle.swift */,
-				DC32A1111D40144B008E3A4E /* EntityRegistry.swift */,
 				DC32A1131D40144B008E3A4E /* PropertyRegistry.swift */,
+				DCD4F2921D47FFFA00E3DC63 /* DatabaseValueType.swift */,
 			);
 			path = EntityRegistration;
 			sourceTree = "<group>";
@@ -265,13 +366,12 @@
 		DC32A1081D40135A008E3A4E /* Property */ = {
 			isa = PBXGroup;
 			children = (
-				DC49D22E1D42870900EECA2F /* NSNumberConvertible.swift */,
-				DC49D22C1D4286E500EECA2F /* NSObjectConvertible.swift */,
 				DC32A10D1D401439008E3A4E /* Property.swift */,
 				DC49D2301D42874400EECA2F /* PropertyArrayType.swift */,
 				DC49D2321D42877E00EECA2F /* PropertyOptionalType.swift */,
 				DC49D23D1D42BA6E00EECA2F /* PropertySetType.swift */,
 				DC49D22A1D42654200EECA2F /* PropertyType.swift */,
+				DCD4F2901D47BDB000E3DC63 /* PropertyValueType.swift */,
 			);
 			path = Property;
 			sourceTree = "<group>";
@@ -279,9 +379,8 @@
 		DC32A1091D401422008E3A4E /* Utils */ = {
 			isa = PBXGroup;
 			children = (
-				DC32A10A1D40142C008E3A4E /* TorchMetadata.swift */,
-				18768FEB1D44D18200252E03 /* NSManagedObjectWrapper.swift */,
-				18768FF21D44D1C100252E03 /* StoreConfiguration.swift */,
+				18768FEB1D44D18200252E03 /* ManagedObject.swift */,
+				DCD4F28C1D479F4000E3DC63 /* Storage.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -310,6 +409,37 @@
 			path = Utils;
 			sourceTree = "<group>";
 		};
+		DCD4F22E1D47951600E3DC63 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				DCD4F2441D47951600E3DC63 /* GRDB.framework */,
+				DCD4F2461D47951600E3DC63 /* GRDBTests.xctest */,
+				DCD4F2481D47951600E3DC63 /* GRDBOSXPerformanceTests.xctest */,
+				DCD4F24A1D47951600E3DC63 /* GRDBOSXCrashTests.xctest */,
+				DCD4F24C1D47951600E3DC63 /* GRDBCipher.framework */,
+				DCD4F24E1D47951600E3DC63 /* GRDBTests.xctest */,
+				DCD4F2501D47951600E3DC63 /* GRDBCipherOSXEncryptedTests.xctest */,
+				DCD4F2521D47951600E3DC63 /* GRDBCustomSQLite.framework */,
+				DCD4F2541D47951600E3DC63 /* GRDBCustomSQLiteOSXTests.xctest */,
+				DCD4F2561D47951600E3DC63 /* GRDB.framework */,
+				DCD4F2581D47951600E3DC63 /* GRDBTests.xctest */,
+				DCD4F25A1D47951600E3DC63 /* GRDBCipher.framework */,
+				DCD4F25C1D47951600E3DC63 /* GRDBTests.xctest */,
+				DCD4F25E1D47951600E3DC63 /* GRDBTests.xctest */,
+				DCD4F2601D47951600E3DC63 /* GRDBCustomSQLite.framework */,
+				DCD4F2621D47951600E3DC63 /* GRDBCustomSQLiteiOSTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		DCD4F2631D47951E00E3DC63 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				DCD4F22D1D47951600E3DC63 /* GRDB.xcodeproj */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -329,8 +459,8 @@
 			buildConfigurationList = 183D040F1C4691C600EBAEF3 /* Build configuration list for PBXNativeTarget "Torch" */;
 			buildPhases = (
 				183D03F61C4691C600EBAEF3 /* Sources */,
-				183D03F71C4691C600EBAEF3 /* Frameworks */,
 				183D03F81C4691C600EBAEF3 /* Headers */,
+				183D03F71C4691C600EBAEF3 /* Frameworks */,
 				183D03F91C4691C600EBAEF3 /* Resources */,
 			);
 			buildRules = (
@@ -389,6 +519,12 @@
 			mainGroup = 183D03F11C4691C600EBAEF3;
 			productRefGroup = 183D03FC1C4691C600EBAEF3 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = DCD4F22E1D47951600E3DC63 /* Products */;
+					ProjectRef = DCD4F22D1D47951600E3DC63 /* GRDB.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				183D03FA1C4691C600EBAEF3 /* Torch */,
@@ -396,6 +532,121 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		DCD4F2441D47951600E3DC63 /* GRDB.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = GRDB.framework;
+			remoteRef = DCD4F2431D47951600E3DC63 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		DCD4F2461D47951600E3DC63 /* GRDBTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = GRDBTests.xctest;
+			remoteRef = DCD4F2451D47951600E3DC63 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		DCD4F2481D47951600E3DC63 /* GRDBOSXPerformanceTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = GRDBOSXPerformanceTests.xctest;
+			remoteRef = DCD4F2471D47951600E3DC63 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		DCD4F24A1D47951600E3DC63 /* GRDBOSXCrashTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = GRDBOSXCrashTests.xctest;
+			remoteRef = DCD4F2491D47951600E3DC63 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		DCD4F24C1D47951600E3DC63 /* GRDBCipher.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = GRDBCipher.framework;
+			remoteRef = DCD4F24B1D47951600E3DC63 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		DCD4F24E1D47951600E3DC63 /* GRDBTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = GRDBTests.xctest;
+			remoteRef = DCD4F24D1D47951600E3DC63 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		DCD4F2501D47951600E3DC63 /* GRDBCipherOSXEncryptedTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = GRDBCipherOSXEncryptedTests.xctest;
+			remoteRef = DCD4F24F1D47951600E3DC63 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		DCD4F2521D47951600E3DC63 /* GRDBCustomSQLite.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = GRDBCustomSQLite.framework;
+			remoteRef = DCD4F2511D47951600E3DC63 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		DCD4F2541D47951600E3DC63 /* GRDBCustomSQLiteOSXTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = GRDBCustomSQLiteOSXTests.xctest;
+			remoteRef = DCD4F2531D47951600E3DC63 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		DCD4F2561D47951600E3DC63 /* GRDB.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = GRDB.framework;
+			remoteRef = DCD4F2551D47951600E3DC63 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		DCD4F2581D47951600E3DC63 /* GRDBTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = GRDBTests.xctest;
+			remoteRef = DCD4F2571D47951600E3DC63 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		DCD4F25A1D47951600E3DC63 /* GRDBCipher.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = GRDBCipher.framework;
+			remoteRef = DCD4F2591D47951600E3DC63 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		DCD4F25C1D47951600E3DC63 /* GRDBTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = GRDBTests.xctest;
+			remoteRef = DCD4F25B1D47951600E3DC63 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		DCD4F25E1D47951600E3DC63 /* GRDBTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = GRDBTests.xctest;
+			remoteRef = DCD4F25D1D47951600E3DC63 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		DCD4F2601D47951600E3DC63 /* GRDBCustomSQLite.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = GRDBCustomSQLite.framework;
+			remoteRef = DCD4F25F1D47951600E3DC63 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		DCD4F2621D47951600E3DC63 /* GRDBCustomSQLiteiOSTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = GRDBCustomSQLiteiOSTests.xctest;
+			remoteRef = DCD4F2611D47951600E3DC63 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		183D03F91C4691C600EBAEF3 /* Resources */ = {
@@ -438,34 +689,30 @@
 			files = (
 				18768FCA1D44C02B00252E03 /* OptionalPropertyOperators.swift in Sources */,
 				18768FDB1D44CB5F00252E03 /* Database+Save.swift in Sources */,
+				DCD4F2931D47FFFA00E3DC63 /* DatabaseValueType.swift in Sources */,
 				18768FBD1D44BCE400252E03 /* CompoundPredicate.swift in Sources */,
-				18768FF31D44D1C100252E03 /* StoreConfiguration.swift in Sources */,
 				18768FCE1D44C08900252E03 /* SequencePropertyOperators.swift in Sources */,
-				187690111D44D84900252E03 /* EntityRegistry.swift in Sources */,
-				18768FDF1D44CBBB00252E03 /* Database+Transaction.swift in Sources */,
 				1876900B1D44D81000252E03 /* Property.swift in Sources */,
 				1876900C1D44D81300252E03 /* PropertyArrayType.swift in Sources */,
 				18768FE61D44D07900252E03 /* UnsafeDatabase.swift in Sources */,
 				18768FC11D44BEF400252E03 /* AggregatePredicate.swift in Sources */,
-				187690101D44D81E00252E03 /* NSObjectConvertible.swift in Sources */,
 				1876900D1D44D81500252E03 /* PropertyOptionalType.swift in Sources */,
 				18768FF81D44D20900252E03 /* Property+Sort.swift in Sources */,
 				187690141D44D8FF00252E03 /* TorchEntityBundle.swift in Sources */,
 				18768FF61D44D1E500252E03 /* SortDescriptor.swift in Sources */,
 				18768FBF1D44BEDC00252E03 /* SingleValuePredicate.swift in Sources */,
+				DCD4F2911D47BDB000E3DC63 /* PropertyValueType.swift in Sources */,
 				1876900F1D44D81A00252E03 /* PropertyType.swift in Sources */,
 				DC32A1161D40144B008E3A4E /* PropertyRegistry.swift in Sources */,
 				18768FEF1D44D1A200252E03 /* TorchEntity.swift in Sources */,
 				18768FD91D44CB1200252E03 /* Database+Load.swift in Sources */,
 				18768FDD1D44CB7D00252E03 /* Database+Delete.swift in Sources */,
 				1876900E1D44D81700252E03 /* PropertySetType.swift in Sources */,
-				18768FE11D44CBEB00252E03 /* Database+Init.swift in Sources */,
+				DCD4F28D1D479F4000E3DC63 /* Storage.swift in Sources */,
 				187690091D44D7E400252E03 /* AnyPredicate.swift in Sources */,
 				18768FF11D44D1AE00252E03 /* ManualTorchEntity.swift in Sources */,
-				18768FEC1D44D18200252E03 /* NSManagedObjectWrapper.swift in Sources */,
+				18768FEC1D44D18200252E03 /* ManagedObject.swift in Sources */,
 				18768FD01D44C0C300252E03 /* PropertyOperators.swift in Sources */,
-				DC49D22F1D42870900EECA2F /* NSNumberConvertible.swift in Sources */,
-				187690121D44D86100252E03 /* TorchMetadata.swift in Sources */,
 				18768FD71D44CAFD00252E03 /* Database.swift in Sources */,
 				18768FC31D44BF0800252E03 /* BoolPredicate.swift in Sources */,
 				18768FBB1D44BC1C00252E03 /* PredicateConvertible.swift in Sources */,
@@ -484,6 +731,7 @@
 				DCC759761D46209F00D23B24 /* CoreDataModel.xcdatamodeld in Sources */,
 				DC49D23C1D42B2BE00EECA2F /* PredicateTest.swift in Sources */,
 				DCC7597A1D4673F700D23B24 /* XCTestCase+Measure.swift in Sources */,
+				DCF9F0271D4A63330049D2F7 /* GRDBPerformanceTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

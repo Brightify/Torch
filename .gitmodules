@@ -4,3 +4,6 @@
 [submodule "Generator/Dependencies/FileKit"]
 	path = Generator/Dependencies/FileKit
 	url = https://github.com/nvzqz/FileKit
+[submodule "Dependencies/GRDB"]
+	path = Dependencies/GRDB
+	url = git@github.com:groue/GRDB.swift.git

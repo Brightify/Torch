@@ -5,9 +5,7 @@
 //  Created by Tadeáš Kříž on 24/07/16.
 //  Copyright © 2016 Brightify. All rights reserved.
 //
-
-import Foundation
-
+/*
 // MARK: - SequenceType<TorchEntity>
 public extension Property where T: SequenceType, T.Generator.Element: TorchEntity {
     public func any(predicate: SingleValuePredicate<T.Generator.Element>) -> AggregatePredicate<PARENT> {
@@ -28,4 +26,4 @@ public extension Property where T: SequenceType, T.Generator.Element: TorchEntit
                                   operatorString: predicate.operatorString,
                                   value: predicate.value)
     }
-}
+}*/

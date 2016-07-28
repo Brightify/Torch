@@ -5,7 +5,7 @@
 //  Created by Tadeáš Kříž on 24/07/16.
 //  Copyright © 2016 Brightify. All rights reserved.
 //
-
+/*
 import Foundation
 
 public struct CompoundPredicate<PARENT>: PredicateConvertible {
@@ -26,4 +26,4 @@ public struct CompoundPredicate<PARENT>: PredicateConvertible {
     public func toPredicate() -> NSPredicate {
         return NSCompoundPredicate(type: type, subpredicates: predicates.map { $0.toPredicate() })
     }
-}
+}*/

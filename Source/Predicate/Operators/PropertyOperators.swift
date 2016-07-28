@@ -5,9 +5,7 @@
 //  Created by Tadeáš Kříž on 24/07/16.
 //  Copyright © 2016 Brightify. All rights reserved.
 //
-
-import Foundation
-
+/*
 // MARK: - NSObjectConvertible
 public extension Property where T: NSObjectConvertible {
     public func equalTo(value: T) -> SingleValuePredicate<PARENT> {
@@ -74,4 +72,4 @@ public extension Property where T: TorchEntity {
                                     operatorString: predicate.operatorString,
                                     value: predicate.value)
     }
-}
+}*/

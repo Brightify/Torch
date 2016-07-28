@@ -14,22 +14,21 @@ public class UnsafeDatabase {
     internal init(database: Database) {
         self.database = database
     }
-
 }
 
 // MARK: - Load
 extension UnsafeDatabase {
-
+    
+    public func load<T: TorchEntity>(type: T.Type) -> [T] {
+        return try! database.load(type)
+    }
+/*
     public func load<T: TorchEntity>(type: T.Type, sortBy sortDescriptors: SortDescriptor<T>...) -> [T] {
         return load(type, sortBy: sortDescriptors)
     }
 
     public func load<T: TorchEntity>(type: T.Type, sortBy sortDescriptors: [SortDescriptor<T>]) -> [T] {
-        do {
-            return try database.load(type, sortBy: sortDescriptors)
-        } catch {
-            fatalError(String(error))
-        }
+        return try! database.load(type, sortBy: sortDescriptors)
     }
 
     public func load<T: TorchEntity, P: PredicateConvertible where P.ParentType == T>(type: T.Type, where predicate: P, sortBy sortDescriptors: SortDescriptor<T>...) -> [T] {
@@ -37,12 +36,8 @@ extension UnsafeDatabase {
     }
 
     public func load<T: TorchEntity, P: PredicateConvertible where P.ParentType == T>(type: T.Type, where predicate: P, sortBy sortDescriptors: [SortDescriptor<T>]) -> [T] {
-        do {
-            return try database.load(type, where: predicate, sortBy: sortDescriptors)
-        } catch {
-            fatalError(String(error))
-        }
-    }
+        return try! database.load(type, where: predicate, sortBy: sortDescriptors)
+    }*/
 
 }
 
@@ -55,30 +50,18 @@ extension UnsafeDatabase {
     }
 
     public func save<T: TorchEntity>(entities: [T]) -> UnsafeDatabase {
-        do {
-            try database.save(entities)
-        } catch {
-            fatalError(String(error))
-        }
+        try! database.save(entities)
         return self
     }
 
     /// See `Database.create`
     public func create<T: TorchEntity>(inout entity: T) -> UnsafeDatabase {
-        do {
-            try database.create(&entity)
-        } catch {
-            fatalError(String(error))
-        }
+        try! database.create(&entity)
         return self
     }
 
     public func create<T: TorchEntity>(inout entities: [T]) -> UnsafeDatabase {
-        do {
-            try database.create(&entities)
-        } catch {
-            fatalError(String(error))
-        }
+        try! database.create(&entities)
         return self
     }
 }
@@ -92,48 +75,17 @@ extension UnsafeDatabase {
     }
 
     public func delete<T: TorchEntity>(entities: [T]) -> UnsafeDatabase {
-        do {
-            try database.delete(entities)
-        } catch {
-            fatalError(String(error))
-        }
+        try! database.delete(entities)
         return self
     }
-
+/*
     public func delete<T: TorchEntity, P: PredicateConvertible where P.ParentType == T>(type: T.Type, where predicate: P) -> UnsafeDatabase {
-        do {
-            try database.delete(type, where: predicate)
-        } catch {
-            fatalError(String(error))
-        }
+        try! database.delete(type, where: predicate)
         return self
-    }
+    }*/
 
     public func deleteAll<T: TorchEntity>(type: T.Type) -> UnsafeDatabase {
-        do {
-            try database.deleteAll(type)
-        } catch {
-            fatalError(String(error))
-        }
-        return self
-    }
-
-}
-
-// MARK: - Transaction
-extension UnsafeDatabase {
-
-    public func rollback() -> UnsafeDatabase {
-        database.rollback()
-        return self
-    }
-
-    public func write(@noescape closure: () -> () = {}) -> UnsafeDatabase {
-        do {
-            try database.write(closure)
-        } catch {
-            fatalError(String(error))
-        }
+        try! database.deleteAll(type)
         return self
     }
 }

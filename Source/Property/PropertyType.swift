@@ -6,5 +6,7 @@
 //  Copyright © 2016 Brightify. All rights reserved.
 //
 
+import GRDB
+
 public protocol PropertyType {
 }

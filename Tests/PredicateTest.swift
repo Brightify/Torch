@@ -9,7 +9,7 @@
 import XCTest
 import CoreData
 import Torch
-
+/*
 class PredicateTest: XCTestCase {
     
     private var database: UnsafeDatabase!
@@ -138,3 +138,4 @@ class PredicateTest: XCTestCase {
         XCTAssertEqual(0, database.load(Data.self, where: Data.optionalNumber > nil).count)
     }
 }
+*/

@@ -7,7 +7,7 @@
 //
 
 import Torch
-
+/*
 struct Data: TorchEntity {
     var id: Int?
     
@@ -29,12 +29,12 @@ struct Data: TorchEntity {
     
     let readOnly: String
 }
-
+*/
 struct OtherData: TorchEntity {
     var id: Int?
     var text: String
 }
-
+/*
 enum ManualData: ManualTorchEntity {
     case Root(id: Int?, text: String)
     indirect case Node(id: Int?, text: String, parent: ManualData)
@@ -68,7 +68,7 @@ extension ManualData {
         }
     }
 
-    init(fromManagedObject object: NSManagedObjectWrapper) throws {
+    init(fromManagedObject object: Torch.ManagedObject) throws {
         let id = object.getValue(ManualData.id)
         let text = object.getValue(ManualData.text)
         if let parent = try object.getValue(ManualData.parent) {
@@ -78,7 +78,7 @@ extension ManualData {
         }
     }
 
-    mutating func torch_updateManagedObject(object: Torch.NSManagedObjectWrapper) throws {
+    mutating func torch_updateManagedObject(object: Torch.ManagedObject) throws {
         switch self {
         case .Node(let id, let text, let parent):
             var mutableParent = Optional(parent)
@@ -97,13 +97,10 @@ extension ManualData {
         }
     }
 
-    static func torch_describeEntity(to registry: Torch.EntityRegistry) {
-        registry.description(of: ManualData.self)
-    }
-
     static func torch_describeProperties(to registry: Torch.PropertyRegistry) {
         registry.description(of: ManualData.id)
         registry.description(of: ManualData.text)
         registry.description(of: ManualData.parent)
     }
 }
+*/

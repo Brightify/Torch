@@ -5,7 +5,7 @@
 //  Created by Tadeáš Kříž on 24/07/16.
 //  Copyright © 2016 Brightify. All rights reserved.
 //
-
+/*
 import Foundation
 
 func joinKeyPaths(path1: String, _ path2: String) -> String {
@@ -29,4 +29,4 @@ public struct AggregatePredicate<PARENT: TorchEntity>: PredicateConvertible {
     public func toPredicate() -> NSPredicate {
         return NSPredicate(format: "\(type.rawValue.uppercaseString) %K \(operatorString) %@", keyPath, value)
     }
-}
+}*/

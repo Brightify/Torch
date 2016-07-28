@@ -70,8 +70,6 @@ public struct Generator {
             $0 += ""
             $0 += generateUpdateManagedObject(entity, variables: variables)
             $0 += ""
-            $0 += generateDiscribeEntity(entity)
-            $0 += ""
             $0 += generateDiscribeProperties(entity, variables: variables)
         }
         builder += "}"
@@ -99,7 +97,7 @@ public struct Generator {
     @warn_unused_result
     private func generateInit(entity: StructDeclaration, variables: [InstanceVariable]) -> CodeBuilder {
         var builder = CodeBuilder()
-        builder += "\(entity.accessibility.sourceName) init(fromManagedObject object: Torch.NSManagedObjectWrapper) throws {"
+        builder += "\(entity.accessibility.sourceName) init(fromManagedObject object: Torch.ManagedObject) throws {"
         builder.nest {
             for variable in variables {
                 let tryText = isTorchEntity(variable) ? "try " : ""
@@ -113,7 +111,7 @@ public struct Generator {
     @warn_unused_result
     private func generateUpdateManagedObject(entity: StructDeclaration, variables: [InstanceVariable]) -> CodeBuilder {
         var builder = CodeBuilder()
-        builder += "\(entity.accessibility.sourceName) mutating func torch_updateManagedObject(object: Torch.NSManagedObjectWrapper) throws {"
+        builder += "\(entity.accessibility.sourceName) mutating func torch_updateManagedObject(object: Torch.ManagedObject) throws {"
         builder.nest {
             for variable in variables {
                 let tryText = isTorchEntity(variable) ? "try " : ""
@@ -121,15 +119,6 @@ public struct Generator {
                 $0 += "\(tryText)object.setValue(\(referenceText)\(variable.name), for: \(entity.name).\(variable.name))"
             }
         }
-        builder += "}"
-        return builder
-    }
-    
-    @warn_unused_result
-    private func generateDiscribeEntity(entity: StructDeclaration) -> CodeBuilder {
-        var builder = CodeBuilder()
-        builder += "\(entity.accessibility.sourceName) static func torch_describeEntity(to registry: Torch.EntityRegistry) {"
-        builder.nest("registry.description(of: \(entity.name).self)")
         builder += "}"
         return builder
     }

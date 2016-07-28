@@ -65,7 +65,7 @@ class CoreDataPerformanceTest: XCTestCase {
         
         measureBlock {
             let request = NSFetchRequest(entityName: Core_OtherData.Name)
-            request.predicate = NSPredicate(format: "id > 40000")
+            //request.predicate = NSPredicate(format: "id > 40000")
             let objects = try! self.context.executeFetchRequest(request) as! [NSManagedObject]
             let _ = objects.map { OtherData(id: $0.valueForKey("id") as? Int, text: $0.valueForKey("text") as! String) }
         }

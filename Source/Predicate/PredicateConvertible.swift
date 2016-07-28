@@ -5,7 +5,7 @@
 //  Created by Tadeáš Kříž on 24/07/16.
 //  Copyright © 2016 Brightify. All rights reserved.
 //
-
+/*
 import Foundation
 
 public protocol PredicateConvertible {
@@ -45,4 +45,4 @@ public func || <P1: PredicateConvertible, P2: PredicateConvertible where P1.Pare
 
 public func && <P1: PredicateConvertible, P2: PredicateConvertible where P1.ParentType == P2.ParentType>(lhs: P1, rhs: P2) -> CompoundPredicate<P1.ParentType> {
     return lhs.and(rhs)
-}
+}*/

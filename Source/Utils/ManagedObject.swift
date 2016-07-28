@@ -1,55 +1,54 @@
 //
-//  NSManagedObjectWrapper.swift
+//  ManagedObject.swift
 //  Torch
 //
 //  Created by Filip Dolnik on 21.07.16.
 //  Copyright © 2016 Brightify. All rights reserved.
 //
 
-import CoreData
+// TODO Don't forget to escape characters
 
-public struct NSManagedObjectWrapper {
+import GRDB
 
-    private let object: NSManagedObject
+public class ManagedObject {
+
+    private(set) var data: [String:DatabaseValue]
+    // TODO Replace with closure
     private let database: Database
 
-    init(object: NSManagedObject, database: Database) {
+    init(data: [String:DatabaseValue], database: Database) {
+        self.data = data
         self.database = database
-        self.object = object
     }
 
-    public func getValue<PARENT: TorchEntity, T: NSObjectConvertible>(property: Property<PARENT, T>) -> T {
-        return T.fromObject(object.valueForKey(property.torchName)!)!
+    public func getValue<PARENT: TorchEntity, T: PropertyValueType>(property: Property<PARENT, T>) -> T {
+        return T.fromDatabaseValue(data[property.name]!)!
     }
     
-    public func setValue<PARENT: TorchEntity, T: NSObjectConvertible>(value: T, for property: Property<PARENT, T>) {
-        object.setValue(value.toNSObject(), forKey: property.torchName)
+    public func setValue<PARENT: TorchEntity, T: PropertyValueType>(value: T, for property: Property<PARENT, T>) {
+        data[property.name] = value.databaseValue
     }
 
-    public func getValue<PARENT: TorchEntity, T: PropertyOptionalType where T.Wrapped: NSObjectConvertible>(property: Property<PARENT, T>) -> T.Wrapped? {
-        if let value = object.valueForKey(property.torchName) {
-            return T.Wrapped.fromObject(value)!
+    public func getValue<PARENT: TorchEntity, T: PropertyOptionalType where T.Wrapped: PropertyValueType>(property: Property<PARENT, T>) -> T.Wrapped? {
+        if let value = data[property.name] {
+            return T.Wrapped.fromDatabaseValue(value)
         } else {
             return nil
         }
     }
 
-    public func setValue<PARENT: TorchEntity, T: PropertyOptionalType where T.Wrapped: NSObjectConvertible>(value: T, for property: Property<PARENT, T>) {
-        object.setValue(value.value?.toNSObject() ?? nil, forKey: property.torchName)
+    public func setValue<PARENT: TorchEntity, T: PropertyOptionalType where T.Wrapped: PropertyValueType>(value: T, for property: Property<PARENT, T>) {
+        data[property.name] = value.value?.databaseValue
     }
-
-    public func getValue<PARENT: TorchEntity, T: PropertyArrayType where T.Element: NSObjectConvertible>(property: Property<PARENT, T>) -> [T.Element] {
-        return (object.valueForKey(property.torchName) as! NSArray).map { T.Element.fromObject($0)! }
+/*
+    public func getValue<PARENT: TorchEntity, T: PropertyArrayType where T.Element: PropertyValueType>(property: Property<PARENT, T>) -> [T.Element] {
+        return (data[property.name] as! NSArray).map { T.Element.fromObject($0)! }
     }
+*/
+    /*public func setValue<PARENT: TorchEntity, T: PropertyArrayType where T.Element: PropertyValueType>(values: T, for property: Property<PARENT, T>) {
 
-    public func setValue<PARENT: TorchEntity, T: PropertyArrayType where T.Element: NSObjectConvertible>(values: T, for property: Property<PARENT, T>) {
-        let set = NSMutableArray()
-        for value in values.values {
-            set.addObject(value.toNSObject())
-        }
-        object.setValue(set, forKey: property.torchName)
-    }
-
+    }*/
+/*
     public func getValue<PARENT: TorchEntity, T: PropertySetType where T.Element: NSObjectConvertible>(property: Property<PARENT, T>) -> Set<T.Element> {
         var result = Set<T.Element>()
         (object.valueForKey(property.torchName) as! NSSet).forEach { result.insert(T.Element.fromObject($0)!) }
@@ -103,5 +102,5 @@ public struct NSManagedObjectWrapper {
             set.addObject(try database.getManagedObject(for: &values[i]))
         }
         object.setValue(set, forKey: property.torchName)
-    }
+    }*/
 }

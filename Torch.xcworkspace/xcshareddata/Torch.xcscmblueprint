@@ -4,33 +4,45 @@
 
   },
   "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
-    "E084C86B03F81D63323C9E7510697EA528A758C7+++2C6F4E0" : 0,
+    "CBF92293916D19D8AA3B5911EB5CE04B7EBCA00D+++316A17E" : 0,
     "EB2210CFD48672E403BED699D5D7F01B844069CF+++C5C04EC" : 0,
+    "3AE8ED2E684071AF4FB151FA51BF266B82FF45BD+++9FDD213" : 0,
     "64ACE19A884E8C30BC53E2E0CE86010ECED70B5A+++034E1A5" : 0,
     "956D2B21DD155C49504BB67697A67F7C5351A353+++1C78424" : 0,
     "D23C0CEAADB77074FDA4459000068A7940EB7AD0+++57FD98A" : 0,
     "95438028B10BBB846574013D29F154A00556A9D1+++8F10250" : 0,
     "FD7DA18210A2C280E9107E37D7344F243FEE5F75+++F45B9D2" : 0,
     "D0725CAC6FF2D66F2C83C2C48DC12106D42DAA64+++F53D950" : 0,
-    "E084C86B03F81D63323C9E7510697EA528A758C7+++A44A252" : 0,
-    "E084C86B03F81D63323C9E7510697EA528A758C7+++806FF41" : 0,
+    "E084C86B03F81D63323C9E7510697EA528A758C7+++2C6F4E0" : 0,
     "E111B14063EC98ABE518A93E1C4498F4167C2DEE+++322EAEC" : 0,
+    "55011AEBD444630C0E9DF47BD2E18FDBBDCC285D+++6CAA8CE" : 0,
+    "9FB1FDDBA011002795A1FF5BD3CABFA2F79E6A59+++41AB6C8" : 0,
+    "78CEBD94FC52DCE625058FE6959F9449C7CD4A7B+++2358AE4" : 0,
+    "E084C86B03F81D63323C9E7510697EA528A758C7+++A44A252" : 0,
+    "04101981B66E318109934C9516F88D824BB96459+++2361411" : 0,
+    "E084C86B03F81D63323C9E7510697EA528A758C7+++806FF41" : 0,
     "DAE76EA82CAFA2CC0F913C7B06B4469CFBE15929+++3D69E76" : 0,
     "95438028B10BBB846574013D29F154A00556A9D1+++66238CE" : 0
   },
   "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "4B61B055-0BF5-47B6-A594-EAF10E19DF9B",
   "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
-    "E084C86B03F81D63323C9E7510697EA528A758C7+++2C6F4E0" : "Torch\/Generator\/Dependencies\/SourceKitten\/Carthage\/Checkouts\/xcconfigs\/",
+    "CBF92293916D19D8AA3B5911EB5CE04B7EBCA00D+++316A17E" : "Torch\/Dependencies\/GRDB\/SQLiteCustom\/src\/",
     "EB2210CFD48672E403BED699D5D7F01B844069CF+++C5C04EC" : "Torch\/Generator\/Dependencies\/SourceKitten\/Carthage\/Checkouts\/SWXMLHash\/",
+    "3AE8ED2E684071AF4FB151FA51BF266B82FF45BD+++9FDD213" : "Torch\/Dependencies\/GRDB\/Tests\/Performance\/SQLite.swift\/",
     "64ACE19A884E8C30BC53E2E0CE86010ECED70B5A+++034E1A5" : "Torch\/Generator\/Dependencies\/FileKit\/",
     "956D2B21DD155C49504BB67697A67F7C5351A353+++1C78424" : "Torch\/Generator\/Dependencies\/SourceKitten\/Carthage\/Checkouts\/Commandant\/Carthage\/Checkouts\/Result\/",
     "D23C0CEAADB77074FDA4459000068A7940EB7AD0+++57FD98A" : "Torch\/Generator\/Dependencies\/SourceKitten\/Carthage\/Checkouts\/Commandant\/",
     "95438028B10BBB846574013D29F154A00556A9D1+++8F10250" : "Torch\/Generator\/Dependencies\/SourceKitten\/Carthage\/Checkouts\/Commandant\/Carthage\/Checkouts\/Nimble\/",
     "FD7DA18210A2C280E9107E37D7344F243FEE5F75+++F45B9D2" : "Torch\/Generator\/Dependencies\/SourceKitten\/",
     "D0725CAC6FF2D66F2C83C2C48DC12106D42DAA64+++F53D950" : "Torch\/Generator\/Dependencies\/SourceKitten\/Carthage\/Checkouts\/Commandant\/Carthage\/Checkouts\/Quick\/",
-    "E084C86B03F81D63323C9E7510697EA528A758C7+++A44A252" : "Torch\/Generator\/Dependencies\/SourceKitten\/Carthage\/Checkouts\/Commandant\/Carthage\/Checkouts\/xcconfigs\/",
-    "E084C86B03F81D63323C9E7510697EA528A758C7+++806FF41" : "Torch\/Generator\/Dependencies\/SourceKitten\/Carthage\/Checkouts\/Commandant\/Carthage\/Checkouts\/xcconfigs\/",
+    "E084C86B03F81D63323C9E7510697EA528A758C7+++2C6F4E0" : "Torch\/Generator\/Dependencies\/SourceKitten\/Carthage\/Checkouts\/xcconfigs\/",
     "E111B14063EC98ABE518A93E1C4498F4167C2DEE+++322EAEC" : "Torch\/Generator\/Dependencies\/SourceKitten\/Carthage\/Checkouts\/YamlSwift\/",
+    "55011AEBD444630C0E9DF47BD2E18FDBBDCC285D+++6CAA8CE" : "Torch\/Dependencies\/GRDB\/SQLCipher\/src\/",
+    "9FB1FDDBA011002795A1FF5BD3CABFA2F79E6A59+++41AB6C8" : "Torch\/Dependencies\/GRDB\/Tests\/Performance\/Realm\/",
+    "78CEBD94FC52DCE625058FE6959F9449C7CD4A7B+++2358AE4" : "Torch\/Dependencies\/GRDB\/",
+    "E084C86B03F81D63323C9E7510697EA528A758C7+++A44A252" : "Torch\/Generator\/Dependencies\/SourceKitten\/Carthage\/Checkouts\/Commandant\/Carthage\/Checkouts\/xcconfigs\/",
+    "04101981B66E318109934C9516F88D824BB96459+++2361411" : "Torch\/Dependencies\/GRDB\/Tests\/Performance\/fmdb\/",
+    "E084C86B03F81D63323C9E7510697EA528A758C7+++806FF41" : "Torch\/Generator\/Dependencies\/SourceKitten\/Carthage\/Checkouts\/Commandant\/Carthage\/Checkouts\/xcconfigs\/",
     "DAE76EA82CAFA2CC0F913C7B06B4469CFBE15929+++3D69E76" : "Torch\/",
     "95438028B10BBB846574013D29F154A00556A9D1+++66238CE" : "Torch\/Generator\/Dependencies\/SourceKitten\/Carthage\/Checkouts\/Commandant\/Carthage\/Checkouts\/Quick\/Externals\/Nimble\/"
   },
@@ -39,9 +51,29 @@
   "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "Torch.xcworkspace",
   "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
     {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/ccgus\/fmdb.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "04101981B66E318109934C9516F88D824BB96459+++2361411"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/stephencelis\/SQLite.swift.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "3AE8ED2E684071AF4FB151FA51BF266B82FF45BD+++9FDD213"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/groue\/sqlcipher.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "55011AEBD444630C0E9DF47BD2E18FDBBDCC285D+++6CAA8CE"
+    },
+    {
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/nvzqz\/FileKit",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "64ACE19A884E8C30BC53E2E0CE86010ECED70B5A+++034E1A5"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "github.com:groue\/GRDB.swift.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "78CEBD94FC52DCE625058FE6959F9449C7CD4A7B+++2358AE4"
     },
     {
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/Quick\/Nimble.git",
@@ -57,6 +89,16 @@
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/antitypical\/Result.git",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "956D2B21DD155C49504BB67697A67F7C5351A353+++1C78424"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/realm\/realm-cocoa.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "9FB1FDDBA011002795A1FF5BD3CABFA2F79E6A59+++41AB6C8"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/swiftlyfalling\/SQLiteLib",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "CBF92293916D19D8AA3B5911EB5CE04B7EBCA00D+++316A17E"
     },
     {
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/Quick\/Quick.git",

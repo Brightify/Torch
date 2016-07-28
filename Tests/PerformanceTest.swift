@@ -37,7 +37,6 @@ class PerformanceTest: XCTestCase {
             }
             
             self.database.deleteAll(OtherData.self)
-            self.database.write()
         }
     }
     
@@ -48,10 +47,10 @@ class PerformanceTest: XCTestCase {
             }
             
             self.database.deleteAll(OtherData.self)
-            self.database.write()
         }
     }
-    
+
+    /*
     func testSaveComplex() {
         measureMetrics(performanceMetrics, automaticallyStartMeasuring: false) {
             self.measure {
@@ -60,38 +59,14 @@ class PerformanceTest: XCTestCase {
             
             self.database.deleteAll(OtherData.self)
             self.database.deleteAll(Data.self)
-            self.database.write()
         }
-    }
+    }*/
     
     func testLoad() {
         saveData()
         
         measureBlock {
-            self.database.load(OtherData.self, where: OtherData.id > 40000)
-        }
-    }
-    
-    func testRollback() {
-        measureMetrics(performanceMetrics, automaticallyStartMeasuring: false) {
-            self.saveData()
-            
-            self.measure {
-                self.database.rollback()
-            }
-        }
-    }
-    
-    func testWrite() {
-        measureMetrics(performanceMetrics, automaticallyStartMeasuring: false) {
-            self.saveData()
-            
-            self.measure {
-                self.database.write()
-            }
-            
-            self.database.deleteAll(OtherData.self)
-            self.database.write()
+            self.database.load(OtherData.self)//, where: OtherData.id > 40000)
         }
     }
     
@@ -102,14 +77,11 @@ class PerformanceTest: XCTestCase {
             self.measure {
                 self.database.deleteAll(OtherData.self)
             }
-            
-            self.database.write()
         }
     }
     
     private func initDatabase() {
-        let inMemoryStore = StoreConfiguration(storeType: NSInMemoryStoreType, configuration: nil, storeURL: nil, options: nil)
-        database = try! Database(store: inMemoryStore, bundle: TorchTestsEntityBundle()).unsafeInstance()
+        database = try! Database(storage: .Memory, bundle: TorchTestsEntityBundle()).unsafeInstance()
     }
     
     private func saveData() {
@@ -123,7 +95,7 @@ class PerformanceTest: XCTestCase {
             database.save(OtherData(id: $0 as Int, text: String($0)))
         }
     }
-    
+    /*
     private func saveComplex() {
         let otherData = OtherData(id: nil, text: "")
         let manualData = ManualData.Root(id: nil, text: "")
@@ -133,5 +105,5 @@ class PerformanceTest: XCTestCase {
         (0..<PerformanceTest.DataCount).forEach { _ in
             database.save(data)
         }
-    }
+    }*/
 }

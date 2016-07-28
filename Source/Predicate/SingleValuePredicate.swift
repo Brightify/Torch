@@ -5,7 +5,7 @@
 //  Created by Tadeáš Kříž on 24/07/16.
 //  Copyright © 2016 Brightify. All rights reserved.
 //
-
+/*
 import Foundation
 
 public struct SingleValuePredicate<PARENT: TorchEntity>: PredicateConvertible {
@@ -18,4 +18,4 @@ public struct SingleValuePredicate<PARENT: TorchEntity>: PredicateConvertible {
     public func toPredicate() -> NSPredicate {
         return NSPredicate(format: "%K \(operatorString) %@", keyPath, value)
     }
-}
+}*/

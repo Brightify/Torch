@@ -7,7 +7,7 @@
 //
 
 import Foundation
-
+/*
 extension Property {
     public var ascending: SortDescriptor<PARENT> {
         return SortDescriptor(keyPath: torchName, ascending: true)
@@ -29,3 +29,4 @@ extension Property where T: PropertyOptionalType, T.Wrapped: TorchEntity {
         return SortDescriptor<PARENT>(keyPath: joinKeyPaths(torchName, descriptor.keyPath), ascending: descriptor.ascending)
     }
 }
+*/
