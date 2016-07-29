@@ -50,6 +50,7 @@
 		DCC759761D46209F00D23B24 /* CoreDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = DCC759721D46208500D23B24 /* CoreDataModel.xcdatamodeld */; };
 		DCC7597A1D4673F700D23B24 /* XCTestCase+Measure.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC759781D4673DA00D23B24 /* XCTestCase+Measure.swift */; };
 		DCF198081D45FBD400C7B14C /* PerformanceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCF198061D45FBB500C7B14C /* PerformanceTest.swift */; };
+		FB27948A4EAB99B17BE63F54 /* Pods_Torch.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 719D5F99DBB43C8D129F2D49 /* Pods_Torch.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -94,6 +95,10 @@
 		187690131D44D8FF00252E03 /* TorchEntityBundle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TorchEntityBundle.swift; sourceTree = "<group>"; };
 		18EE0B161D438B3A001215B1 /* build_generator */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = build_generator; sourceTree = "<group>"; };
 		18EE0B171D438B3A001215B1 /* run */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = run; sourceTree = "<group>"; };
+		719D5F99DBB43C8D129F2D49 /* Pods_Torch.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Torch.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8A819D552FDC7F418850E68B /* Pods-Torch.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Torch.release.xcconfig"; path = "Pods/Target Support Files/Pods-Torch/Pods-Torch.release.xcconfig"; sourceTree = "<group>"; };
+		B390C24F78AE5A5A70B7F2C7 /* Pods-Torch.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Torch.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Torch/Pods-Torch.debug.xcconfig"; sourceTree = "<group>"; };
+		DC1012F61D4B3DC0003C3F1E /* Podfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; };
 		DC32A10A1D40142C008E3A4E /* TorchMetadata.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TorchMetadata.swift; sourceTree = "<group>"; };
 		DC32A10D1D401439008E3A4E /* Property.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Property.swift; sourceTree = "<group>"; };
 		DC32A1111D40144B008E3A4E /* EntityRegistry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EntityRegistry.swift; sourceTree = "<group>"; };
@@ -120,6 +125,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FB27948A4EAB99B17BE63F54 /* Pods_Torch.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -138,13 +144,15 @@
 			isa = PBXGroup;
 			children = (
 				18EE0B161D438B3A001215B1 /* build_generator */,
+				DC1012F61D4B3DC0003C3F1E /* Podfile */,
 				18EE0B171D438B3A001215B1 /* run */,
-				187688041D43E9C000252E03 /* .travis.yml */,
 				DC5A3A5C1CF6F8D600F520E3 /* TorchORM.podspec */,
+				187688041D43E9C000252E03 /* .travis.yml */,
+				18EE0B0A1D437B7F001215B1 /* Frameworks */,
+				DBF46B104ACC8FB05E6A754D /* Pods */,
+				183D03FC1C4691C600EBAEF3 /* Products */,
 				183D03FD1C4691C600EBAEF3 /* Source */,
 				183D04091C4691C600EBAEF3 /* Tests */,
-				183D03FC1C4691C600EBAEF3 /* Products */,
-				18EE0B0A1D437B7F001215B1 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -234,8 +242,18 @@
 		18EE0B0A1D437B7F001215B1 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				719D5F99DBB43C8D129F2D49 /* Pods_Torch.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		DBF46B104ACC8FB05E6A754D /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				B390C24F78AE5A5A70B7F2C7 /* Pods-Torch.debug.xcconfig */,
+				8A819D552FDC7F418850E68B /* Pods-Torch.release.xcconfig */,
+			);
+			name = Pods;
 			sourceTree = "<group>";
 		};
 		DC32A1061D40133E008E3A4E /* EntityRegistration */ = {
@@ -328,10 +346,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 183D040F1C4691C600EBAEF3 /* Build configuration list for PBXNativeTarget "Torch" */;
 			buildPhases = (
+				F20228DAD4B5668CF9E0C5E5 /* [CP] Check Pods Manifest.lock */,
 				183D03F61C4691C600EBAEF3 /* Sources */,
 				183D03F71C4691C600EBAEF3 /* Frameworks */,
 				183D03F81C4691C600EBAEF3 /* Headers */,
 				183D03F91C4691C600EBAEF3 /* Resources */,
+				91B6390C4D6B977677AFF787 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -415,6 +435,21 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		91B6390C4D6B977677AFF787 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Torch/Pods-Torch-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		DC49D2401D42BF2800EECA2F /* Generate extensions */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -428,6 +463,21 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "$BUILD_DIR/$CONFIGURATION/torch_generator.app/Contents/MacOS/torch_generator generate --module-name $PRODUCT_MODULE_NAME --output \"$PROJECT_DIR/Tests/Generated/ModelExtensions.swift\" \"$PROJECT_DIR/Tests/Source\"";
+		};
+		F20228DAD4B5668CF9E0C5E5 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -593,6 +643,7 @@
 		};
 		183D04101C4691C600EBAEF3 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B390C24F78AE5A5A70B7F2C7 /* Pods-Torch.debug.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				DEFINES_MODULE = YES;
@@ -619,6 +670,7 @@
 		};
 		183D04111C4691C600EBAEF3 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8A819D552FDC7F418850E68B /* Pods-Torch.release.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				DEFINES_MODULE = YES;
