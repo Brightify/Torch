@@ -7,26 +7,27 @@
 //
 
 import XCTest
+import RealmSwift
 import Torch
 
 class PerformanceTest: XCTestCase {
 
-    static let OtherDataCount = 10000
+    static let OtherDataCount = 5000
     static let OtherDataWithIdCount = 1000
     static let DataCount = 500
     static let RelationsCount = 10
     
-    private var database: UnsafeDatabase!
+    private var database: Database!
     
     override func setUp() {
         super.setUp()
         
-        initDatabase()
+        database = TestUtils.initDatabase()
     }
     
     func testInit() {
         measureBlock {
-            self.initDatabase()
+            let _ = try! Database(configuration: Realm.Configuration(inMemoryIdentifier: String(PerformanceTest) + "testInit"))
         }
     }
     
@@ -36,7 +37,7 @@ class PerformanceTest: XCTestCase {
                 self.saveData()
             }
             
-            self.database.deleteAll(OtherData.self)
+            self.database.deleteAll(OtherData)
             self.database.write()
         }
     }
@@ -47,7 +48,7 @@ class PerformanceTest: XCTestCase {
                 self.saveDataWithId()
             }
             
-            self.database.deleteAll(OtherData.self)
+            self.database.deleteAll(OtherData)
             self.database.write()
         }
     }
@@ -58,9 +59,28 @@ class PerformanceTest: XCTestCase {
                 self.saveComplex()
             }
             
-            self.database.deleteAll(OtherData.self)
-            self.database.deleteAll(Data.self)
+            self.database.deleteAll(OtherData)
+            self.database.deleteAll(Data)
+            
             self.database.write()
+        }
+    }
+    
+    func testUpdate() {
+        self.saveComplex()
+        database.write()
+        let objects = database.load(Data)
+        measureMetrics(performanceMetrics, automaticallyStartMeasuring: false) {
+            self.measure {
+                for var object in objects {
+                    object.number = 0
+                    object.optionalNumber = nil
+                    object.numbers = [1, 2, 3]
+                    self.database.save(object)
+                }
+            }
+            
+            self.database.rollback()
         }
     }
     
@@ -68,7 +88,7 @@ class PerformanceTest: XCTestCase {
         saveData()
         
         measureBlock {
-            self.database.load(OtherData.self, where: OtherData.id > 40000)
+            self.database.load(OtherData)
         }
     }
     
@@ -90,26 +110,21 @@ class PerformanceTest: XCTestCase {
                 self.database.write()
             }
             
-            self.database.deleteAll(OtherData.self)
+            self.database.deleteAll(OtherData)
             self.database.write()
         }
     }
     
-    func testDelete() {        
+    func testDelete() {
         measureMetrics(performanceMetrics, automaticallyStartMeasuring: false) {
             self.saveData()
             
             self.measure {
-                self.database.deleteAll(OtherData.self)
+                self.database.deleteAll(OtherData)
             }
             
             self.database.write()
         }
-    }
-    
-    private func initDatabase() {
-        let inMemoryStore = StoreConfiguration(storeType: NSInMemoryStoreType, configuration: nil, storeURL: nil, options: nil)
-        database = try! Database(store: inMemoryStore, bundle: TorchTestsEntityBundle()).unsafeInstance()
     }
     
     private func saveData() {
@@ -120,16 +135,16 @@ class PerformanceTest: XCTestCase {
     
     private func saveDataWithId() {
         (0..<PerformanceTest.OtherDataWithIdCount).forEach {
-            database.save(OtherData(id: $0 as Int, text: String($0)))
+
+            database.save(OtherData(id: $0, text: String($0)))
         }
     }
     
     private func saveComplex() {
         let otherData = OtherData(id: nil, text: "")
-        let manualData = ManualData.Root(id: nil, text: "")
-        let data = Data(id: nil, number: 0, optionalNumber: 0, numbers: [1, 1, 2], text: "",
-             float: 0, double: 0, bool: false, set: [1, 2], relation: otherData, optionalRelation: nil,
-             arrayWithRelation: (0..<PerformanceTest.RelationsCount).map { _ in otherData }, manualEntityRelation: manualData, readOnly: "")
+        let data = Data(id: nil, number: 0, optionalNumber: 0, numbers: [1, 1, 2], text: "", optionalString: nil,
+             float: 0, double: 0, bool: false, relation: otherData,
+             arrayWithRelation: (0..<PerformanceTest.RelationsCount).map { _ in otherData }, readOnly: "")
         (0..<PerformanceTest.DataCount).forEach { _ in
             database.save(data)
         }

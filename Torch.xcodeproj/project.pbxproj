@@ -9,46 +9,41 @@
 /* Begin PBXBuildFile section */
 		183D03FF1C4691C600EBAEF3 /* Torch.h in Headers */ = {isa = PBXBuildFile; fileRef = 183D03FE1C4691C600EBAEF3 /* Torch.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		183D04061C4691C600EBAEF3 /* Torch.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 183D03FB1C4691C600EBAEF3 /* Torch.framework */; };
-		18768FBB1D44BC1C00252E03 /* PredicateConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18768FBA1D44BC1C00252E03 /* PredicateConvertible.swift */; };
-		18768FBD1D44BCE400252E03 /* CompoundPredicate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18768FBC1D44BCE400252E03 /* CompoundPredicate.swift */; };
-		18768FBF1D44BEDC00252E03 /* SingleValuePredicate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18768FBE1D44BEDC00252E03 /* SingleValuePredicate.swift */; };
-		18768FC11D44BEF400252E03 /* AggregatePredicate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18768FC01D44BEF400252E03 /* AggregatePredicate.swift */; };
-		18768FC31D44BF0800252E03 /* BoolPredicate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18768FC21D44BF0800252E03 /* BoolPredicate.swift */; };
-		18768FCA1D44C02B00252E03 /* OptionalPropertyOperators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18768FC91D44C02B00252E03 /* OptionalPropertyOperators.swift */; };
-		18768FCE1D44C08900252E03 /* SequencePropertyOperators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18768FCD1D44C08900252E03 /* SequencePropertyOperators.swift */; };
-		18768FD01D44C0C300252E03 /* PropertyOperators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18768FCF1D44C0C300252E03 /* PropertyOperators.swift */; };
 		18768FD71D44CAFD00252E03 /* Database.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18768FD61D44CAFD00252E03 /* Database.swift */; };
 		18768FD91D44CB1200252E03 /* Database+Load.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18768FD81D44CB1200252E03 /* Database+Load.swift */; };
 		18768FDB1D44CB5F00252E03 /* Database+Save.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18768FDA1D44CB5F00252E03 /* Database+Save.swift */; };
 		18768FDD1D44CB7D00252E03 /* Database+Delete.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18768FDC1D44CB7D00252E03 /* Database+Delete.swift */; };
 		18768FDF1D44CBBB00252E03 /* Database+Transaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18768FDE1D44CBBB00252E03 /* Database+Transaction.swift */; };
-		18768FE11D44CBEB00252E03 /* Database+Init.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18768FE01D44CBEB00252E03 /* Database+Init.swift */; };
-		18768FE61D44D07900252E03 /* UnsafeDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18768FE51D44D07900252E03 /* UnsafeDatabase.swift */; };
-		18768FEC1D44D18200252E03 /* NSManagedObjectWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18768FEB1D44D18200252E03 /* NSManagedObjectWrapper.swift */; };
 		18768FEF1D44D1A200252E03 /* TorchEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18768FEE1D44D1A200252E03 /* TorchEntity.swift */; };
 		18768FF11D44D1AE00252E03 /* ManualTorchEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18768FF01D44D1AE00252E03 /* ManualTorchEntity.swift */; };
-		18768FF31D44D1C100252E03 /* StoreConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18768FF21D44D1C100252E03 /* StoreConfiguration.swift */; };
-		18768FF61D44D1E500252E03 /* SortDescriptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18768FF51D44D1E500252E03 /* SortDescriptor.swift */; };
 		18768FF81D44D20900252E03 /* Property+Sort.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18768FF71D44D20900252E03 /* Property+Sort.swift */; };
-		187690091D44D7E400252E03 /* AnyPredicate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187690071D44D7E400252E03 /* AnyPredicate.swift */; };
 		1876900B1D44D81000252E03 /* Property.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC32A10D1D401439008E3A4E /* Property.swift */; };
 		1876900C1D44D81300252E03 /* PropertyArrayType.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC49D2301D42874400EECA2F /* PropertyArrayType.swift */; };
 		1876900D1D44D81500252E03 /* PropertyOptionalType.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC49D2321D42877E00EECA2F /* PropertyOptionalType.swift */; };
-		1876900E1D44D81700252E03 /* PropertySetType.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC49D23D1D42BA6E00EECA2F /* PropertySetType.swift */; };
 		1876900F1D44D81A00252E03 /* PropertyType.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC49D22A1D42654200EECA2F /* PropertyType.swift */; };
-		187690101D44D81E00252E03 /* NSObjectConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC49D22C1D4286E500EECA2F /* NSObjectConvertible.swift */; };
-		187690111D44D84900252E03 /* EntityRegistry.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC32A1111D40144B008E3A4E /* EntityRegistry.swift */; };
-		187690121D44D86100252E03 /* TorchMetadata.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC32A10A1D40142C008E3A4E /* TorchMetadata.swift */; };
-		187690141D44D8FF00252E03 /* TorchEntityBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187690131D44D8FF00252E03 /* TorchEntityBundle.swift */; };
-		DC32A1161D40144B008E3A4E /* PropertyRegistry.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC32A1131D40144B008E3A4E /* PropertyRegistry.swift */; };
-		DC49D22F1D42870900EECA2F /* NSNumberConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC49D22E1D42870900EECA2F /* NSNumberConvertible.swift */; };
+		8E15FB157588645EF62C0E53 /* Pods_TorchTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 17E6CA52BE4277B23EFF9401 /* Pods_TorchTests.framework */; };
+		DC1012FA1D4B45D0003C3F1E /* Metadata.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC1012F91D4B45D0003C3F1E /* Metadata.swift */; };
+		DC1012FC1D4BA5AA003C3F1E /* PropertyValueType.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC1012FB1D4BA5AA003C3F1E /* PropertyValueType.swift */; };
 		DC49D2351D42902000EECA2F /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC49D2341D42902000EECA2F /* Models.swift */; };
 		DC49D2371D42904700EECA2F /* ModelExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC49D2361D42904700EECA2F /* ModelExtensions.swift */; };
 		DC49D23C1D42B2BE00EECA2F /* PredicateTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC49D23B1D42B2BE00EECA2F /* PredicateTest.swift */; };
+		DC4A784D1D5093F60096A817 /* ManagedObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC4A784C1D5093F60096A817 /* ManagedObject.swift */; };
+		DC4A784F1D50D1540096A817 /* ValueTypeWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC4A784E1D50D1540096A817 /* ValueTypeWrapper.swift */; };
+		DC8AB1A81D4BB6BF00A24A12 /* RealmPerformanceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC8AB1A61D4BB67500A24A12 /* RealmPerformanceTest.swift */; };
+		DC8AB1AC1D4E295800A24A12 /* SortDescriptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC8AB1AB1D4E295800A24A12 /* SortDescriptor.swift */; };
+		DC8AB1AE1D4E30C300A24A12 /* Predicate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC8AB1AD1D4E30C300A24A12 /* Predicate.swift */; };
+		DC8AB1B11D4E6CA900A24A12 /* PropertyValueType+Predicate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC8AB1B01D4E6CA900A24A12 /* PropertyValueType+Predicate.swift */; };
+		DC8AB1B31D4E70EA00A24A12 /* Property+Predicate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC8AB1B21D4E70EA00A24A12 /* Property+Predicate.swift */; };
+		DC8AB1B51D4E723E00A24A12 /* PropertyComparableValueType+Predicate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC8AB1B41D4E723E00A24A12 /* PropertyComparableValueType+Predicate.swift */; };
+		DC8AB1B81D4E730F00A24A12 /* PropertyOptionalType+Predicate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC8AB1B71D4E730F00A24A12 /* PropertyOptionalType+Predicate.swift */; };
+		DC8AB1BA1D4E74F500A24A12 /* PropertyOptionalComparableType+Predicate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC8AB1B91D4E74F500A24A12 /* PropertyOptionalComparableType+Predicate.swift */; };
+		DC8AB1BC1D4E75CF00A24A12 /* PropertyComparableValueType.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC8AB1BB1D4E75CF00A24A12 /* PropertyComparableValueType.swift */; };
+		DC8AB1C01D4F9D1800A24A12 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC8AB1BF1D4F9D1800A24A12 /* Utils.swift */; };
 		DC8B9F2F1D3EB4AE00E3B9DE /* TorchTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC8B9F2B1D3EB41F00E3B9DE /* TorchTest.swift */; };
 		DCC759751D46209A00D23B24 /* CoreDataPerformanceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC759701D46207200D23B24 /* CoreDataPerformanceTest.swift */; };
 		DCC759761D46209F00D23B24 /* CoreDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = DCC759721D46208500D23B24 /* CoreDataModel.xcdatamodeld */; };
 		DCC7597A1D4673F700D23B24 /* XCTestCase+Measure.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC759781D4673DA00D23B24 /* XCTestCase+Measure.swift */; };
+		DCE907AF1D5088B200BF09D8 /* TestUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCE907AD1D5088AB00BF09D8 /* TestUtils.swift */; };
 		DCF198081D45FBD400C7B14C /* PerformanceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCF198061D45FBB500C7B14C /* PerformanceTest.swift */; };
 		FB27948A4EAB99B17BE63F54 /* Pods_Torch.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 719D5F99DBB43C8D129F2D49 /* Pods_Torch.framework */; };
 /* End PBXBuildFile section */
@@ -64,59 +59,56 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		17E6CA52BE4277B23EFF9401 /* Pods_TorchTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TorchTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		183D03FB1C4691C600EBAEF3 /* Torch.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Torch.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		183D03FE1C4691C600EBAEF3 /* Torch.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Torch.h; sourceTree = "<group>"; };
 		183D04001C4691C600EBAEF3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		183D04051C4691C600EBAEF3 /* TorchTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TorchTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		183D040C1C4691C600EBAEF3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		187688041D43E9C000252E03 /* .travis.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .travis.yml; sourceTree = "<group>"; };
-		18768FBA1D44BC1C00252E03 /* PredicateConvertible.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PredicateConvertible.swift; sourceTree = "<group>"; };
-		18768FBC1D44BCE400252E03 /* CompoundPredicate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompoundPredicate.swift; sourceTree = "<group>"; };
-		18768FBE1D44BEDC00252E03 /* SingleValuePredicate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleValuePredicate.swift; sourceTree = "<group>"; };
-		18768FC01D44BEF400252E03 /* AggregatePredicate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AggregatePredicate.swift; sourceTree = "<group>"; };
-		18768FC21D44BF0800252E03 /* BoolPredicate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoolPredicate.swift; sourceTree = "<group>"; };
-		18768FC91D44C02B00252E03 /* OptionalPropertyOperators.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionalPropertyOperators.swift; sourceTree = "<group>"; };
-		18768FCD1D44C08900252E03 /* SequencePropertyOperators.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SequencePropertyOperators.swift; sourceTree = "<group>"; };
-		18768FCF1D44C0C300252E03 /* PropertyOperators.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PropertyOperators.swift; sourceTree = "<group>"; };
 		18768FD61D44CAFD00252E03 /* Database.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Database.swift; sourceTree = "<group>"; };
 		18768FD81D44CB1200252E03 /* Database+Load.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Database+Load.swift"; sourceTree = "<group>"; };
 		18768FDA1D44CB5F00252E03 /* Database+Save.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Database+Save.swift"; sourceTree = "<group>"; };
 		18768FDC1D44CB7D00252E03 /* Database+Delete.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Database+Delete.swift"; sourceTree = "<group>"; };
 		18768FDE1D44CBBB00252E03 /* Database+Transaction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Database+Transaction.swift"; sourceTree = "<group>"; };
-		18768FE01D44CBEB00252E03 /* Database+Init.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Database+Init.swift"; sourceTree = "<group>"; };
-		18768FE51D44D07900252E03 /* UnsafeDatabase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnsafeDatabase.swift; sourceTree = "<group>"; };
-		18768FEB1D44D18200252E03 /* NSManagedObjectWrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSManagedObjectWrapper.swift; sourceTree = "<group>"; };
 		18768FEE1D44D1A200252E03 /* TorchEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TorchEntity.swift; sourceTree = "<group>"; };
 		18768FF01D44D1AE00252E03 /* ManualTorchEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManualTorchEntity.swift; sourceTree = "<group>"; };
-		18768FF21D44D1C100252E03 /* StoreConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoreConfiguration.swift; sourceTree = "<group>"; };
-		18768FF51D44D1E500252E03 /* SortDescriptor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SortDescriptor.swift; sourceTree = "<group>"; };
 		18768FF71D44D20900252E03 /* Property+Sort.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Property+Sort.swift"; sourceTree = "<group>"; };
-		187690071D44D7E400252E03 /* AnyPredicate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnyPredicate.swift; sourceTree = "<group>"; };
-		187690131D44D8FF00252E03 /* TorchEntityBundle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TorchEntityBundle.swift; sourceTree = "<group>"; };
 		18EE0B161D438B3A001215B1 /* build_generator */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = build_generator; sourceTree = "<group>"; };
 		18EE0B171D438B3A001215B1 /* run */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = run; sourceTree = "<group>"; };
+		4C271572D14D2113C6B3868E /* Pods-TorchTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TorchTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TorchTests/Pods-TorchTests.debug.xcconfig"; sourceTree = "<group>"; };
+		5944DF56D018CB82D081BE53 /* Pods-TorchTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TorchTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-TorchTests/Pods-TorchTests.release.xcconfig"; sourceTree = "<group>"; };
 		719D5F99DBB43C8D129F2D49 /* Pods_Torch.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Torch.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8A819D552FDC7F418850E68B /* Pods-Torch.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Torch.release.xcconfig"; path = "Pods/Target Support Files/Pods-Torch/Pods-Torch.release.xcconfig"; sourceTree = "<group>"; };
 		B390C24F78AE5A5A70B7F2C7 /* Pods-Torch.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Torch.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Torch/Pods-Torch.debug.xcconfig"; sourceTree = "<group>"; };
 		DC1012F61D4B3DC0003C3F1E /* Podfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; };
-		DC32A10A1D40142C008E3A4E /* TorchMetadata.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TorchMetadata.swift; sourceTree = "<group>"; };
+		DC1012F91D4B45D0003C3F1E /* Metadata.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Metadata.swift; sourceTree = "<group>"; };
+		DC1012FB1D4BA5AA003C3F1E /* PropertyValueType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PropertyValueType.swift; sourceTree = "<group>"; };
 		DC32A10D1D401439008E3A4E /* Property.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Property.swift; sourceTree = "<group>"; };
-		DC32A1111D40144B008E3A4E /* EntityRegistry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EntityRegistry.swift; sourceTree = "<group>"; };
-		DC32A1131D40144B008E3A4E /* PropertyRegistry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PropertyRegistry.swift; sourceTree = "<group>"; };
 		DC49D22A1D42654200EECA2F /* PropertyType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PropertyType.swift; sourceTree = "<group>"; };
-		DC49D22C1D4286E500EECA2F /* NSObjectConvertible.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSObjectConvertible.swift; sourceTree = "<group>"; };
-		DC49D22E1D42870900EECA2F /* NSNumberConvertible.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSNumberConvertible.swift; sourceTree = "<group>"; };
 		DC49D2301D42874400EECA2F /* PropertyArrayType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PropertyArrayType.swift; sourceTree = "<group>"; };
 		DC49D2321D42877E00EECA2F /* PropertyOptionalType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PropertyOptionalType.swift; sourceTree = "<group>"; };
 		DC49D2341D42902000EECA2F /* Models.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
 		DC49D2361D42904700EECA2F /* ModelExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelExtensions.swift; sourceTree = "<group>"; };
 		DC49D23B1D42B2BE00EECA2F /* PredicateTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PredicateTest.swift; sourceTree = "<group>"; };
-		DC49D23D1D42BA6E00EECA2F /* PropertySetType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PropertySetType.swift; sourceTree = "<group>"; };
+		DC4A784C1D5093F60096A817 /* ManagedObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManagedObject.swift; sourceTree = "<group>"; };
+		DC4A784E1D50D1540096A817 /* ValueTypeWrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ValueTypeWrapper.swift; sourceTree = "<group>"; };
 		DC5A3A5C1CF6F8D600F520E3 /* TorchORM.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = TorchORM.podspec; sourceTree = "<group>"; };
+		DC8AB1A61D4BB67500A24A12 /* RealmPerformanceTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmPerformanceTest.swift; sourceTree = "<group>"; };
+		DC8AB1AB1D4E295800A24A12 /* SortDescriptor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SortDescriptor.swift; sourceTree = "<group>"; };
+		DC8AB1AD1D4E30C300A24A12 /* Predicate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Predicate.swift; sourceTree = "<group>"; };
+		DC8AB1B01D4E6CA900A24A12 /* PropertyValueType+Predicate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PropertyValueType+Predicate.swift"; sourceTree = "<group>"; };
+		DC8AB1B21D4E70EA00A24A12 /* Property+Predicate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Property+Predicate.swift"; sourceTree = "<group>"; };
+		DC8AB1B41D4E723E00A24A12 /* PropertyComparableValueType+Predicate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PropertyComparableValueType+Predicate.swift"; sourceTree = "<group>"; };
+		DC8AB1B71D4E730F00A24A12 /* PropertyOptionalType+Predicate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PropertyOptionalType+Predicate.swift"; sourceTree = "<group>"; };
+		DC8AB1B91D4E74F500A24A12 /* PropertyOptionalComparableType+Predicate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PropertyOptionalComparableType+Predicate.swift"; sourceTree = "<group>"; };
+		DC8AB1BB1D4E75CF00A24A12 /* PropertyComparableValueType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PropertyComparableValueType.swift; sourceTree = "<group>"; };
+		DC8AB1BF1D4F9D1800A24A12 /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		DC8B9F2B1D3EB41F00E3B9DE /* TorchTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TorchTest.swift; sourceTree = "<group>"; };
 		DCC759701D46207200D23B24 /* CoreDataPerformanceTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataPerformanceTest.swift; sourceTree = "<group>"; };
 		DCC759731D46208500D23B24 /* CoreDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CoreDataModel.xcdatamodel; sourceTree = "<group>"; };
 		DCC759781D4673DA00D23B24 /* XCTestCase+Measure.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "XCTestCase+Measure.swift"; sourceTree = "<group>"; };
+		DCE907AD1D5088AB00BF09D8 /* TestUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestUtils.swift; sourceTree = "<group>"; };
 		DCF198061D45FBB500C7B14C /* PerformanceTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PerformanceTest.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -134,6 +126,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				183D04061C4691C600EBAEF3 /* Torch.framework in Frameworks */,
+				8E15FB157588645EF62C0E53 /* Pods_TorchTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -172,7 +165,6 @@
 				183D04001C4691C600EBAEF3 /* Info.plist */,
 				18768FD51D44CAF000252E03 /* Database */,
 				18768FED1D44D19800252E03 /* Entity */,
-				DC32A1061D40133E008E3A4E /* EntityRegistration */,
 				DC32A1071D40134B008E3A4E /* Predicate */,
 				DC32A1081D40135A008E3A4E /* Property */,
 				18768FF41D44D1D500252E03 /* SortDescriptor */,
@@ -185,38 +177,34 @@
 			isa = PBXGroup;
 			children = (
 				183D040C1C4691C600EBAEF3 /* Info.plist */,
-				DCC759701D46207200D23B24 /* CoreDataPerformanceTest.swift */,
-				DCF198061D45FBB500C7B14C /* PerformanceTest.swift */,
 				DC49D23B1D42B2BE00EECA2F /* PredicateTest.swift */,
 				DC8B9F2B1D3EB41F00E3B9DE /* TorchTest.swift */,
 				DCC759721D46208500D23B24 /* CoreDataModel.xcdatamodeld */,
 				DC70D0D01D2B006200014C5F /* Generated */,
+				DCE907B01D5088B700BF09D8 /* Performance */,
 				DC70D0B91D2AF3FA00014C5F /* Source */,
 				DCC759771D4673C500D23B24 /* Utils */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
 		};
-		18768FC81D44C01D00252E03 /* Operators */ = {
+		18768FC81D44C01D00252E03 /* ValueType */ = {
 			isa = PBXGroup;
 			children = (
-				18768FC91D44C02B00252E03 /* OptionalPropertyOperators.swift */,
-				18768FCD1D44C08900252E03 /* SequencePropertyOperators.swift */,
-				18768FCF1D44C0C300252E03 /* PropertyOperators.swift */,
+				DC8AB1B41D4E723E00A24A12 /* PropertyComparableValueType+Predicate.swift */,
+				DC8AB1B01D4E6CA900A24A12 /* PropertyValueType+Predicate.swift */,
 			);
-			path = Operators;
+			path = ValueType;
 			sourceTree = "<group>";
 		};
 		18768FD51D44CAF000252E03 /* Database */ = {
 			isa = PBXGroup;
 			children = (
 				18768FD61D44CAFD00252E03 /* Database.swift */,
-				18768FE01D44CBEB00252E03 /* Database+Init.swift */,
 				18768FD81D44CB1200252E03 /* Database+Load.swift */,
 				18768FDA1D44CB5F00252E03 /* Database+Save.swift */,
 				18768FDC1D44CB7D00252E03 /* Database+Delete.swift */,
 				18768FDE1D44CBBB00252E03 /* Database+Transaction.swift */,
-				18768FE51D44D07900252E03 /* UnsafeDatabase.swift */,
 			);
 			path = Database;
 			sourceTree = "<group>";
@@ -233,8 +221,8 @@
 		18768FF41D44D1D500252E03 /* SortDescriptor */ = {
 			isa = PBXGroup;
 			children = (
-				18768FF51D44D1E500252E03 /* SortDescriptor.swift */,
 				18768FF71D44D20900252E03 /* Property+Sort.swift */,
+				DC8AB1AB1D4E295800A24A12 /* SortDescriptor.swift */,
 			);
 			path = SortDescriptor;
 			sourceTree = "<group>";
@@ -243,6 +231,7 @@
 			isa = PBXGroup;
 			children = (
 				719D5F99DBB43C8D129F2D49 /* Pods_Torch.framework */,
+				17E6CA52BE4277B23EFF9401 /* Pods_TorchTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -252,30 +241,19 @@
 			children = (
 				B390C24F78AE5A5A70B7F2C7 /* Pods-Torch.debug.xcconfig */,
 				8A819D552FDC7F418850E68B /* Pods-Torch.release.xcconfig */,
+				4C271572D14D2113C6B3868E /* Pods-TorchTests.debug.xcconfig */,
+				5944DF56D018CB82D081BE53 /* Pods-TorchTests.release.xcconfig */,
 			);
 			name = Pods;
-			sourceTree = "<group>";
-		};
-		DC32A1061D40133E008E3A4E /* EntityRegistration */ = {
-			isa = PBXGroup;
-			children = (
-				187690131D44D8FF00252E03 /* TorchEntityBundle.swift */,
-				DC32A1111D40144B008E3A4E /* EntityRegistry.swift */,
-				DC32A1131D40144B008E3A4E /* PropertyRegistry.swift */,
-			);
-			path = EntityRegistration;
 			sourceTree = "<group>";
 		};
 		DC32A1071D40134B008E3A4E /* Predicate */ = {
 			isa = PBXGroup;
 			children = (
-				18768FC81D44C01D00252E03 /* Operators */,
-				18768FBA1D44BC1C00252E03 /* PredicateConvertible.swift */,
-				18768FBC1D44BCE400252E03 /* CompoundPredicate.swift */,
-				18768FBE1D44BEDC00252E03 /* SingleValuePredicate.swift */,
-				18768FC01D44BEF400252E03 /* AggregatePredicate.swift */,
-				18768FC21D44BF0800252E03 /* BoolPredicate.swift */,
-				187690071D44D7E400252E03 /* AnyPredicate.swift */,
+				DC8AB1AD1D4E30C300A24A12 /* Predicate.swift */,
+				DC8AB1B21D4E70EA00A24A12 /* Property+Predicate.swift */,
+				DC8AB1B61D4E72F200A24A12 /* OptionalType */,
+				18768FC81D44C01D00252E03 /* ValueType */,
 			);
 			path = Predicate;
 			sourceTree = "<group>";
@@ -283,13 +261,12 @@
 		DC32A1081D40135A008E3A4E /* Property */ = {
 			isa = PBXGroup;
 			children = (
-				DC49D22E1D42870900EECA2F /* NSNumberConvertible.swift */,
-				DC49D22C1D4286E500EECA2F /* NSObjectConvertible.swift */,
 				DC32A10D1D401439008E3A4E /* Property.swift */,
 				DC49D2301D42874400EECA2F /* PropertyArrayType.swift */,
+				DC8AB1BB1D4E75CF00A24A12 /* PropertyComparableValueType.swift */,
 				DC49D2321D42877E00EECA2F /* PropertyOptionalType.swift */,
-				DC49D23D1D42BA6E00EECA2F /* PropertySetType.swift */,
 				DC49D22A1D42654200EECA2F /* PropertyType.swift */,
+				DC1012FB1D4BA5AA003C3F1E /* PropertyValueType.swift */,
 			);
 			path = Property;
 			sourceTree = "<group>";
@@ -297,9 +274,10 @@
 		DC32A1091D401422008E3A4E /* Utils */ = {
 			isa = PBXGroup;
 			children = (
-				DC32A10A1D40142C008E3A4E /* TorchMetadata.swift */,
-				18768FEB1D44D18200252E03 /* NSManagedObjectWrapper.swift */,
-				18768FF21D44D1C100252E03 /* StoreConfiguration.swift */,
+				DC1012F91D4B45D0003C3F1E /* Metadata.swift */,
+				DC8AB1BF1D4F9D1800A24A12 /* Utils.swift */,
+				DC4A784C1D5093F60096A817 /* ManagedObject.swift */,
+				DC4A784E1D50D1540096A817 /* ValueTypeWrapper.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -320,12 +298,32 @@
 			path = Generated;
 			sourceTree = "<group>";
 		};
+		DC8AB1B61D4E72F200A24A12 /* OptionalType */ = {
+			isa = PBXGroup;
+			children = (
+				DC8AB1B91D4E74F500A24A12 /* PropertyOptionalComparableType+Predicate.swift */,
+				DC8AB1B71D4E730F00A24A12 /* PropertyOptionalType+Predicate.swift */,
+			);
+			path = OptionalType;
+			sourceTree = "<group>";
+		};
 		DCC759771D4673C500D23B24 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				DCE907AD1D5088AB00BF09D8 /* TestUtils.swift */,
 				DCC759781D4673DA00D23B24 /* XCTestCase+Measure.swift */,
 			);
 			path = Utils;
+			sourceTree = "<group>";
+		};
+		DCE907B01D5088B700BF09D8 /* Performance */ = {
+			isa = PBXGroup;
+			children = (
+				DCC759701D46207200D23B24 /* CoreDataPerformanceTest.swift */,
+				DCF198061D45FBB500C7B14C /* PerformanceTest.swift */,
+				DC8AB1A61D4BB67500A24A12 /* RealmPerformanceTest.swift */,
+			);
+			path = Performance;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -366,10 +364,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 183D04121C4691C600EBAEF3 /* Build configuration list for PBXNativeTarget "TorchTests" */;
 			buildPhases = (
+				393D3876B773DD6DCE980757 /* [CP] Check Pods Manifest.lock */,
 				DC49D2401D42BF2800EECA2F /* Generate extensions */,
 				183D04011C4691C600EBAEF3 /* Sources */,
 				183D04021C4691C600EBAEF3 /* Frameworks */,
 				183D04031C4691C600EBAEF3 /* Resources */,
+				9D2F23E9D8416B4DC592272C /* [CP] Embed Pods Frameworks */,
+				B5B34BC8B5963920FD7E397C /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -435,6 +436,21 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		393D3876B773DD6DCE980757 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
 		91B6390C4D6B977677AFF787 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -450,6 +466,36 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Torch/Pods-Torch-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		9D2F23E9D8416B4DC592272C /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TorchTests/Pods-TorchTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B5B34BC8B5963920FD7E397C /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TorchTests/Pods-TorchTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		DC49D2401D42BF2800EECA2F /* Generate extensions */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -462,7 +508,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "$BUILD_DIR/$CONFIGURATION/torch_generator.app/Contents/MacOS/torch_generator generate --module-name $PRODUCT_MODULE_NAME --output \"$PROJECT_DIR/Tests/Generated/ModelExtensions.swift\" \"$PROJECT_DIR/Tests/Source\"";
+			shellScript = "$BUILD_DIR/$CONFIGURATION/torch_generator.app/Contents/MacOS/torch_generator generate --output \"$PROJECT_DIR/Tests/Generated/ModelExtensions.swift\" \"$PROJECT_DIR/Tests/Source\"";
 		};
 		F20228DAD4B5668CF9E0C5E5 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -486,39 +532,31 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				18768FCA1D44C02B00252E03 /* OptionalPropertyOperators.swift in Sources */,
+				DC8AB1AC1D4E295800A24A12 /* SortDescriptor.swift in Sources */,
 				18768FDB1D44CB5F00252E03 /* Database+Save.swift in Sources */,
-				18768FBD1D44BCE400252E03 /* CompoundPredicate.swift in Sources */,
-				18768FF31D44D1C100252E03 /* StoreConfiguration.swift in Sources */,
-				18768FCE1D44C08900252E03 /* SequencePropertyOperators.swift in Sources */,
-				187690111D44D84900252E03 /* EntityRegistry.swift in Sources */,
+				DC4A784D1D5093F60096A817 /* ManagedObject.swift in Sources */,
+				DC1012FA1D4B45D0003C3F1E /* Metadata.swift in Sources */,
 				18768FDF1D44CBBB00252E03 /* Database+Transaction.swift in Sources */,
+				DC8AB1AE1D4E30C300A24A12 /* Predicate.swift in Sources */,
 				1876900B1D44D81000252E03 /* Property.swift in Sources */,
 				1876900C1D44D81300252E03 /* PropertyArrayType.swift in Sources */,
-				18768FE61D44D07900252E03 /* UnsafeDatabase.swift in Sources */,
-				18768FC11D44BEF400252E03 /* AggregatePredicate.swift in Sources */,
-				187690101D44D81E00252E03 /* NSObjectConvertible.swift in Sources */,
+				DC8AB1B31D4E70EA00A24A12 /* Property+Predicate.swift in Sources */,
+				DC8AB1B81D4E730F00A24A12 /* PropertyOptionalType+Predicate.swift in Sources */,
+				DC8AB1BA1D4E74F500A24A12 /* PropertyOptionalComparableType+Predicate.swift in Sources */,
 				1876900D1D44D81500252E03 /* PropertyOptionalType.swift in Sources */,
 				18768FF81D44D20900252E03 /* Property+Sort.swift in Sources */,
-				187690141D44D8FF00252E03 /* TorchEntityBundle.swift in Sources */,
-				18768FF61D44D1E500252E03 /* SortDescriptor.swift in Sources */,
-				18768FBF1D44BEDC00252E03 /* SingleValuePredicate.swift in Sources */,
 				1876900F1D44D81A00252E03 /* PropertyType.swift in Sources */,
-				DC32A1161D40144B008E3A4E /* PropertyRegistry.swift in Sources */,
 				18768FEF1D44D1A200252E03 /* TorchEntity.swift in Sources */,
+				DC8AB1BC1D4E75CF00A24A12 /* PropertyComparableValueType.swift in Sources */,
+				DC4A784F1D50D1540096A817 /* ValueTypeWrapper.swift in Sources */,
+				DC8AB1B11D4E6CA900A24A12 /* PropertyValueType+Predicate.swift in Sources */,
 				18768FD91D44CB1200252E03 /* Database+Load.swift in Sources */,
 				18768FDD1D44CB7D00252E03 /* Database+Delete.swift in Sources */,
-				1876900E1D44D81700252E03 /* PropertySetType.swift in Sources */,
-				18768FE11D44CBEB00252E03 /* Database+Init.swift in Sources */,
-				187690091D44D7E400252E03 /* AnyPredicate.swift in Sources */,
 				18768FF11D44D1AE00252E03 /* ManualTorchEntity.swift in Sources */,
-				18768FEC1D44D18200252E03 /* NSManagedObjectWrapper.swift in Sources */,
-				18768FD01D44C0C300252E03 /* PropertyOperators.swift in Sources */,
-				DC49D22F1D42870900EECA2F /* NSNumberConvertible.swift in Sources */,
-				187690121D44D86100252E03 /* TorchMetadata.swift in Sources */,
+				DC1012FC1D4BA5AA003C3F1E /* PropertyValueType.swift in Sources */,
 				18768FD71D44CAFD00252E03 /* Database.swift in Sources */,
-				18768FC31D44BF0800252E03 /* BoolPredicate.swift in Sources */,
-				18768FBB1D44BC1C00252E03 /* PredicateConvertible.swift in Sources */,
+				DC8AB1B51D4E723E00A24A12 /* PropertyComparableValueType+Predicate.swift in Sources */,
+				DC8AB1C01D4F9D1800A24A12 /* Utils.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -529,10 +567,12 @@
 				DCF198081D45FBD400C7B14C /* PerformanceTest.swift in Sources */,
 				DCC759751D46209A00D23B24 /* CoreDataPerformanceTest.swift in Sources */,
 				DC8B9F2F1D3EB4AE00E3B9DE /* TorchTest.swift in Sources */,
+				DCE907AF1D5088B200BF09D8 /* TestUtils.swift in Sources */,
 				DC49D2371D42904700EECA2F /* ModelExtensions.swift in Sources */,
 				DC49D2351D42902000EECA2F /* Models.swift in Sources */,
 				DCC759761D46209F00D23B24 /* CoreDataModel.xcdatamodeld in Sources */,
 				DC49D23C1D42B2BE00EECA2F /* PredicateTest.swift in Sources */,
+				DC8AB1A81D4BB6BF00A24A12 /* RealmPerformanceTest.swift in Sources */,
 				DCC7597A1D4673F700D23B24 /* XCTestCase+Measure.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -696,6 +736,7 @@
 		};
 		183D04131C4691C600EBAEF3 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4C271572D14D2113C6B3868E /* Pods-TorchTests.debug.xcconfig */;
 			buildSettings = {
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)",
@@ -712,6 +753,7 @@
 		};
 		183D04141C4691C600EBAEF3 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5944DF56D018CB82D081BE53 /* Pods-TorchTests.release.xcconfig */;
 			buildSettings = {
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)",

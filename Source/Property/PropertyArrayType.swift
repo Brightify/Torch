@@ -6,6 +6,7 @@
 //  Copyright © 2016 Brightify. All rights reserved.
 //
 
+// TODO Refactor if needed
 public protocol PropertyArrayType: PropertyType {
     
     associatedtype Element

@@ -6,26 +6,27 @@
 //  Copyright © 2016 Brightify. All rights reserved.
 //
 
-import Foundation
-
-extension Property {
+// TODO Fix for TorchEntity
+public extension Property {
     public var ascending: SortDescriptor<PARENT> {
-        return SortDescriptor(keyPath: torchName, ascending: true)
+        return SortDescriptor(property: name, ascending: true)
     }
 
     public var descending: SortDescriptor<PARENT> {
-        return SortDescriptor(keyPath: torchName, ascending: false)
+        return SortDescriptor(property: name, ascending: false)
     }
 }
 
-extension Property where T: TorchEntity {
+public extension Property where T: TorchEntity {
+    
     public func by(descriptor: SortDescriptor<T>) -> SortDescriptor<PARENT> {
-        return SortDescriptor<PARENT>(keyPath: joinKeyPaths(torchName, descriptor.keyPath), ascending: descriptor.ascending)
+        return SortDescriptor<PARENT>(parentProperty: self, sortDescriptor: descriptor)
     }
 }
 
-extension Property where T: PropertyOptionalType, T.Wrapped: TorchEntity {
+public extension Property where T: PropertyOptionalType, T.Wrapped: TorchEntity {
+    
     public func by(descriptor: SortDescriptor<T.Wrapped>) -> SortDescriptor<PARENT> {
-        return SortDescriptor<PARENT>(keyPath: joinKeyPaths(torchName, descriptor.keyPath), ascending: descriptor.ascending)
+        return SortDescriptor<PARENT>(parentProperty: self, sortDescriptor: descriptor)
     }
 }

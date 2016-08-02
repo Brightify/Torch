@@ -6,18 +6,16 @@
 //  Copyright © 2016 Brightify. All rights reserved.
 //
 
-import CoreData
+import RealmSwift
 
 public protocol TorchEntity: PropertyType {
-    static var torch_name: String { get }
+    associatedtype ManagedObjectType: Object, ManagedObject
 
     var id: Int? { get set }
 
-    init(fromManagedObject object: NSManagedObjectWrapper) throws
+    init(fromManagedObject object: ManagedObjectType)
 
-    mutating func torch_updateManagedObject(object: NSManagedObjectWrapper) throws
-
-    static func torch_describeEntity(to registry: EntityRegistry)
-
-    static func torch_describeProperties(to registry: PropertyRegistry)
+    mutating func torch_updateManagedObject(object: ManagedObjectType, database: Database)
+    
+    static func torch_deleteValueTypeWrappers(object: ManagedObjectType, @noescape deleteFunction: (RealmSwift.Object) -> Void)
 }

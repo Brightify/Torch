@@ -59,13 +59,29 @@ class CoreDataPerformanceTest: XCTestCase {
         }
     }
     
+    func testUpdate() {
+        saveComplex()
+        try! context.save()
+        let request = NSFetchRequest(entityName: Core_Data.Name)
+        let objects = try! self.context.executeFetchRequest(request) as! [NSManagedObject]
+        measureMetrics(performanceMetrics, automaticallyStartMeasuring: false) {
+            self.measure {
+                objects.forEach {
+                    $0.setValue(0, forKey: "number")
+                    $0.setValue(nil, forKey: "optionalNumber")
+                    $0.setValue(NSArray(array: [1, 2, 3]) as! [NSNumber], forKey: "numbers")
+                }
+            }
+            
+            self.context.rollback()
+        }
+    }
     
     func testLoad() {
         saveData()
         
         measureBlock {
             let request = NSFetchRequest(entityName: Core_OtherData.Name)
-            request.predicate = NSPredicate(format: "id > 40000")
             let objects = try! self.context.executeFetchRequest(request) as! [NSManagedObject]
             let _ = objects.map { OtherData(id: $0.valueForKey("id") as? Int, text: $0.valueForKey("text") as! String) }
         }
@@ -161,9 +177,7 @@ class CoreDataPerformanceTest: XCTestCase {
             data.float = 0
             data.double = 0
             data.bool = false
-            data.set = NSOrderedSet(array: [1, 2])
             data.relation = otherData
-            data.relation2 = otherData
             data.arrayWithRelation = NSOrderedSet(array: (0..<PerformanceTest.RelationsCount).map {
                 let otherData = Core_OtherData(entity: otherDescription, insertIntoManagedObjectContext: context)
                 otherData.text = String($0)
@@ -194,14 +208,10 @@ class Core_Data: NSManagedObject {
     @NSManaged var text: String
     @NSManaged var float: NSNumber
     @NSManaged var double: NSNumber
-    @NSManaged var bool: Bool
-    
-    @NSManaged var set: NSOrderedSet
+    @NSManaged var bool: NSNumber
     
     @NSManaged var relation: Core_OtherData
-    @NSManaged var optionalRelation: Core_OtherData
     @NSManaged var arrayWithRelation: NSOrderedSet
-    @NSManaged var relation2: Core_OtherData
     
     @NSManaged var readOnly: String
 }

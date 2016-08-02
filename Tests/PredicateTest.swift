@@ -7,34 +7,31 @@
 //
 
 import XCTest
-import CoreData
+import RealmSwift
 import Torch
 
 class PredicateTest: XCTestCase {
     
-    private var database: UnsafeDatabase!
+    private var database: Database!
     
     override func setUp() {
         super.setUp()
         
-        let inMemoryStore = StoreConfiguration(storeType: NSInMemoryStoreType, configuration: nil, storeURL: nil, options: nil)
-        database = try! Database(store: inMemoryStore, bundle: TorchTestsEntityBundle()).unsafeInstance()
+        database = TestUtils.initDatabase()
         database.write {
             let otherData = OtherData(id: 0, text: "a")
-            let manualData = ManualData.Root(id: 0, text: "aa")
             database.save(otherData)
-            database.save(manualData)
             database.save(OtherData(id: 1, text: "b"))
             database.save(OtherData(id: 2, text: "b"))
-            database.save(Data(id: nil, number: 7, optionalNumber: nil, numbers: [1, 1, 2], text: "a",
-                float: 1.1, double: 1.2, bool: true, set: [1, 2], relation: otherData, optionalRelation: nil,
-                arrayWithRelation: [], manualEntityRelation: manualData, readOnly: "ra"))
-            database.save(Data(id: nil, number: 8, optionalNumber: 1, numbers: [1, 1, 2], text: "b",
-                float: 1.2, double: 1.3, bool: true, set: [1, 2], relation: otherData, optionalRelation: otherData,
-                arrayWithRelation: [], manualEntityRelation: manualData, readOnly: "b"))
-            database.save(Data(id: nil, number: 8, optionalNumber: 1, numbers: [1, 1, 2], text: "b",
-                float: 1.2, double: 1.3, bool: false, set: [1, 2], relation: otherData, optionalRelation: nil,
-                arrayWithRelation: [], manualEntityRelation: manualData, readOnly: "c"))
+            database.save(Data(id: nil, number: 7, optionalNumber: nil, numbers: [1, 1, 2], text: "a", optionalString: nil,
+                float: 1.1, double: 1.2, bool: true, relation: otherData,
+                arrayWithRelation: [], readOnly: "ra"))
+            database.save(Data(id: nil, number: 8, optionalNumber: 1, numbers: [1, 1, 2], text: "b", optionalString: nil,
+                float: 1.2, double: 1.3, bool: true, relation: otherData,
+                arrayWithRelation: [], readOnly: "b"))
+            database.save(Data(id: nil, number: 8, optionalNumber: 1, numbers: [1, 1, 2], text: "b", optionalString: nil,
+                float: 1.2, double: 1.3, bool: false, relation: otherData,
+                arrayWithRelation: [], readOnly: "c"))
         }
     }
     
@@ -97,14 +94,12 @@ class PredicateTest: XCTestCase {
     }
     
     // OptionalEqualTo
-    
     func testOptionalIntEqualTo() {
         XCTAssertEqual(2, database.load(Data.self, where: Data.optionalNumber.equalTo(1)).count)
         XCTAssertEqual(2, database.load(Data.self, where: Data.optionalNumber == 1).count)
     }
     
     // OptionalNotEqualTo
-    
     func testOptionalIntNotEqualTo() {
         XCTAssertEqual(2, database.load(Data.self, where: Data.optionalNumber.notEqualTo(nil)).count)
         XCTAssertEqual(2, database.load(Data.self, where: Data.optionalNumber != nil).count)

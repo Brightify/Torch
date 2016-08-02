@@ -6,14 +6,31 @@
 //  Copyright © 2016 Brightify. All rights reserved.
 //
 
-import Foundation
+import RealmSwift
 
-public struct SortDescriptor<PARENT> {
+public struct SortDescriptor<PARENT: TorchEntity> {
 
-    public let keyPath: String
-    public let ascending: Bool
+    private let sortDescriptors: [RealmSwift.SortDescriptor]
 
-    func toSortDescriptor() -> NSSortDescriptor {
-        return NSSortDescriptor(key: keyPath, ascending: ascending)
+    init(property: String, ascending: Bool) {
+        sortDescriptors = [RealmSwift.SortDescriptor(property: property, ascending: ascending)]
+    }
+    
+    init<P, T: PropertyType>(parentProperty: Property<PARENT, T>, sortDescriptor: SortDescriptor<P>) {
+        self.sortDescriptors = sortDescriptor.sortDescriptors.map {
+            RealmSwift.SortDescriptor(property: parentProperty.name + "." + $0.property, ascending: $0.ascending)
+        }
+    }
+    
+    private init(sortDescriptors: [RealmSwift.SortDescriptor]) {
+        self.sortDescriptors = sortDescriptors
+    }
+    
+    public func then(sortDescriptor: SortDescriptor) -> SortDescriptor {
+        return SortDescriptor(sortDescriptors: sortDescriptors + sortDescriptor.sortDescriptors)
+    }
+    
+    func toSortDescriptors() -> [RealmSwift.SortDescriptor] {
+        return sortDescriptors
     }
 }

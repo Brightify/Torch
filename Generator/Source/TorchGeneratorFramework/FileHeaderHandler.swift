@@ -26,7 +26,7 @@ public struct FileHeaderHandler {
         if imports.isEmpty == false {
             imports += "\n"
         }
-        return "import Torch\n" + "import CoreData\n\n" + imports
+        return "import Torch\n" + "import RealmSwift\n\n" + imports
     }
 
     private static func getRelativePath(absolutePath: String) -> String {

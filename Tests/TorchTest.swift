@@ -7,34 +7,32 @@
 //
 
 import XCTest
-import CoreData
+import RealmSwift
 import Torch
 
 class TorchTest: XCTestCase {
     
-    private var database: UnsafeDatabase!
+    private var database: Database!
     
     override func setUp() {
         super.setUp()
         
-        let inMemoryStore = StoreConfiguration(storeType: NSInMemoryStoreType, configuration: nil, storeURL: nil, options: nil)
-        database = try! Database(store: inMemoryStore, bundle: TorchTestsEntityBundle()).unsafeInstance()
+        database = TestUtils.initDatabase()
     }
     
     func testPersistance() {
-        let manualData = ManualData.Root(id: 0, text: "manual")
         let otherData = OtherData(id: 0, text: "other")
-        let data = Data(id: 0, number: 7, optionalNumber: 10, numbers: [1, 1, 2], text: "text",
-                        float: 1.1, double: 1.2, bool: true, set: [1, 2], relation: otherData, optionalRelation: otherData,
-                        arrayWithRelation: [otherData], manualEntityRelation: manualData, readOnly: "read only")
-        let dataWithOptionals = Data(id: 1, number: 7, optionalNumber: nil, numbers: [1, 2], text: "text",
-                        float: 1.1, double: 1.2, bool: true, set: [1, 2], relation: otherData, optionalRelation: nil,
-                        arrayWithRelation: [otherData], manualEntityRelation: manualData, readOnly: "read only")
+        let data = Data(id: 0, number: 7, optionalNumber: 10, numbers: [1, 1, 2], text: "text", optionalString: "text",
+                        float: 1.1, double: 1.2, bool: true, relation: otherData,
+                        arrayWithRelation: [otherData], readOnly: "read only")
+        let dataWithOptionals = Data(id: 1, number: 7, optionalNumber: nil, numbers: [1, 1, 2], text: "text", optionalString: nil,
+                        float: 1.1, double: 1.2, bool: true, relation: otherData,
+                        arrayWithRelation: [otherData], readOnly: "read only")
         
         database.save(data, dataWithOptionals).write()
         
-        let loadedOtherData = database.load(OtherData.self)
-        XCTAssertEqual(2, database.load(Data.self).count)
+        let loadedOtherData = database.load(OtherData)
+        XCTAssertEqual(2, database.load(Data).count)
         XCTAssertEqual(1, loadedOtherData.count)
         XCTAssertEqual(String(data), String(database.load(Data.self, where: Data.id == 0).first!))
         XCTAssertEqual(String(dataWithOptionals), String(database.load(Data.self, where: Data.id == 1).first!))
@@ -50,7 +48,7 @@ class TorchTest: XCTestCase {
             database.save(data0, data10, data11)
         }
         
-        let loadedData = database.load(OtherData.self)
+        let loadedData = database.load(OtherData)
         XCTAssertEqual(3, loadedData.count)
         loadedData.map { (expected: Int($0.text), actual: $0.id) }.forEach {
             XCTAssertEqual($0.expected, $0.actual)
@@ -115,21 +113,21 @@ class TorchTest: XCTestCase {
     func testRollback() {
         let data = OtherData(id: nil, text: "")
         database.save(data)
-        XCTAssertEqual(1, database.load(OtherData.self).count)
+        XCTAssertEqual(1, database.load(OtherData).count)
         
         database.rollback()
         
-        XCTAssertEqual(0, database.load(OtherData.self).count)
+        XCTAssertEqual(0, database.load(OtherData).count)
     }
     
     func testWrite() {
         let data = OtherData(id: nil, text: "")
         database.save(data).write()
-        XCTAssertEqual(1, database.load(OtherData.self).count)
+        XCTAssertEqual(1, database.load(OtherData).count)
         
         database.rollback()
         
-        XCTAssertEqual(1, database.load(OtherData.self).count)
+        XCTAssertEqual(1, database.load(OtherData).count)
     }
     
     func testDelete() {
@@ -139,7 +137,7 @@ class TorchTest: XCTestCase {
         
         database.delete(data, secondData)
         
-        XCTAssertEqual(0, database.load(OtherData.self).count)
+        XCTAssertEqual(0, database.load(OtherData).count)
     }
     
     func testDeleteTypeWithPredicate() {
@@ -149,7 +147,7 @@ class TorchTest: XCTestCase {
         
         database.delete(OtherData.self, where: OtherData.id == 1)
         
-        XCTAssertEqual(1, database.load(OtherData.self).count)
+        XCTAssertEqual(1, database.load(OtherData).count)
     }
     
     func testDeleteAll() {
@@ -157,8 +155,8 @@ class TorchTest: XCTestCase {
         let secondData = OtherData(id: 1, text: "")
         database.save(data, secondData).write()
         
-        database.deleteAll(OtherData.self)
+        database.deleteAll(OtherData)
         
-        XCTAssertEqual(0, database.load(OtherData.self).count)
+        XCTAssertEqual(0, database.load(OtherData).count)
     }
 }

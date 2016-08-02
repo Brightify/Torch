@@ -6,155 +6,77 @@
 //  Copyright © 2016 Brightify. All rights reserved.
 //
 
-import CoreData
+import RealmSwift
 
 public class Database {
-    private static let COLUMN_PREFIX = "torch_"
     
-    static func getColumnName(name: String) -> String {
-        return Database.COLUMN_PREFIX + name
-    }
-
-    internal let context = NSManagedObjectContext(concurrencyType: .MainQueueConcurrencyType)
-    private var metadataMemoryStorage: [String: TorchMetadata] = [:]
-
-    public init<S: SequenceType where S.Generator.Element == TorchEntity.Type>(store: StoreConfiguration, entities: S) throws {
-        let managedObjectModel = NSManagedObjectModel()
-        registerEntities(entities, managedObjectModel: managedObjectModel)
-
-        let coordinator = NSPersistentStoreCoordinator(managedObjectModel: managedObjectModel)
-        try coordinator.addPersistentStoreWithType(store.storeType, configuration: store.configuration, URL: store.storeURL, options: store.options)
-        context.persistentStoreCoordinator = coordinator
-
-        let entityNames = Set(entities.map { $0.torch_name })
-        for metadata in try createMetadata(entityNames) {
-            metadataMemoryStorage[metadata.torchEntityName] = metadata
+    public typealias OnWriteErrorListener = (ErrorType) -> Void
+    
+    internal var metadata: [String:Metadata] = [:]
+    
+    internal let realm: Realm
+    internal let defaultOnWriteError: OnWriteErrorListener
+    
+    public init(configuration: Realm.Configuration = Realm.Configuration.defaultConfiguration,
+                defaultOnWriteError: OnWriteErrorListener = { fatalError(String($0)) }) throws {
+        realm = try Realm(configuration: configuration)
+        self.defaultOnWriteError = defaultOnWriteError
+        
+        if !realm.inWriteTransaction {
+            realm.beginWrite()
         }
+    }
+    
+    deinit {
+        realm.cancelWrite()
     }
 }
 
-// MARK: - Actions
 extension Database {
-    internal func loadImpl<T: TorchEntity>(type: T.Type, predicate: NSPredicate?, sortDescriptors: [NSSortDescriptor]?) throws -> [T] {
-        let request = NSFetchRequest(entityName: type.torch_name)
-        request.predicate = predicate
-        request.sortDescriptors = sortDescriptors
-        let entities = try context.executeFetchRequest(request) as! [NSManagedObject]
-        return try entities.map { try T(fromManagedObject: NSManagedObjectWrapper(object: $0, database: self)) }
-    }
-
-    internal func deleteImpl<T: TorchEntity>(type: T.Type, predicate: NSPredicate?) throws {
-        let request = NSFetchRequest(entityName: type.torch_name)
-        request.predicate = predicate
-        (try context.executeFetchRequest(request) as! [NSManagedObject]).forEach {
-            context.deleteObject($0)
-        }
-    }
-
-    internal func deleteImpl<T: TorchEntity>(entities: [T]) throws {
-        try entities.forEach {
-            if let managedObject = try loadManagedObject($0) {
-                context.deleteObject(managedObject)
-            }
-        }
-    }
-
-    internal func createImpl<T: TorchEntity>(inout entity: T) throws {
-        try getManagedObject(for: &entity)
-    }
-}
-
-// MARK: CoreData bridging
-extension Database {
-    // Intentionally left `internal` because it is used in NSManagedObjectWrapper.
-    internal func getManagedObject<T: TorchEntity>(inout for entity: T) throws -> NSManagedObject {
-        let managedObject: NSManagedObject
-        if entity.id == nil {
-            managedObject = createManagedObject(T)
-            entity.id = try getNextId(T)
+    
+    // Intentionally left `internal` because it is used in Utils and Save.
+    internal func getManagedObject<T: TorchEntity>(inout entity: T) -> T.ManagedObjectType {
+        if let id = entity.id, managedObject = realm.objectForPrimaryKey(T.ManagedObjectType.self, key: id) {
+            entity.torch_updateManagedObject(managedObject, database: self)
+            return managedObject
         } else {
-            managedObject = try loadManagedObject(entity) ?? createManagedObject(T)
+            assignId(&entity)
+            let managedObject = T.ManagedObjectType()
+            managedObject.id = entity.id!
+            entity.torch_updateManagedObject(managedObject, database: self)
+            realm.add(managedObject)
+            return managedObject
         }
-        try entity.torch_updateManagedObject(NSManagedObjectWrapper(object: managedObject, database: self))
-        try updateLastAssignedId(entity)
-        return managedObject
     }
-
-    private func loadManagedObject<T: TorchEntity>(entity: T) throws -> NSManagedObject? {
+    
+    // Intentionally left `internal` because it is used in Delete.
+    internal func deleteValueTypeWrappers<T: TorchEntity>(type: T.Type, managedObject: T.ManagedObjectType) {
+        T.torch_deleteValueTypeWrappers(managedObject) {
+            realm.delete($0)
+        }
+    }
+    
+    private func assignId<T: TorchEntity>(inout entity: T) {
+        let metadata = getMetadata(String(T))
         if let id = entity.id {
-            let request = NSFetchRequest(entityName: T.torch_name)
-            request.predicate = NSPredicate(format: "\(Database.COLUMN_PREFIX)id = %@", id as NSNumber)
-            request.fetchLimit = 1
-            request.returnsObjectsAsFaults = false
-            request.includesSubentities = false
-            request.includesPropertyValues = false
-            return (try context.executeFetchRequest(request) as! [NSManagedObject]).first
+            metadata.lastAssignedId = max(metadata.lastAssignedId, id)
         } else {
-            return nil
+            metadata.lastAssignedId += 1
+            entity.id = metadata.lastAssignedId
         }
     }
-
-    private func createManagedObject<T: TorchEntity>(entityType: T.Type) -> NSManagedObject {
-        guard let description = NSEntityDescription.entityForName(T.torch_name, inManagedObjectContext: context) else {
-            fatalError("Entity \(T.torch_name) is not registered!")
+    
+    private func getMetadata(entityName: String) -> Metadata {
+        if let result = metadata[entityName] {
+            return result
+        } else if let result = realm.objectForPrimaryKey(Metadata.self, key: entityName) {
+            metadata[entityName] = result
+            return result
+        } else {
+            let result = Metadata()
+            result.entityName = entityName
+            realm.add(result)
+            return result
         }
-
-        return NSManagedObject(entity: description, insertIntoManagedObjectContext: context)
-    }
-
-    private func getNextId<T: TorchEntity>(entityType: T.Type) throws -> Int {
-        return try getMetadata(T.torch_name).lastAssignedId as Int + 1
-    }
-
-    private func updateLastAssignedId<T: TorchEntity>(entity: T) throws {
-        guard let id = entity.id else { return }
-
-        let metadata = try getMetadata(T.torch_name)
-        metadata.lastAssignedId = max(metadata.lastAssignedId as Int, id)
-    }
-
-    private func getMetadata(entityName: String) throws -> TorchMetadata {
-        guard let metadata = metadataMemoryStorage[entityName] else {
-            fatalError("Metadata for entity \(entityName) not loaded! Make sure the entity is registered.")
-        }
-        return metadata
-    }
-
-    private func registerEntities<S: SequenceType where S.Generator.Element == TorchEntity.Type>(entities: S, managedObjectModel: NSManagedObjectModel) {
-        let entityRegistry = EntityRegistry()
-        TorchMetadata.describeEntity(to: entityRegistry)
-        for registration in entities {
-            registration.torch_describeEntity(to: entityRegistry)
-        }
-        let incompleteRegistrations = entityRegistry.registeredEntities.values.filter { $0.state == EntityRegistrationState.Partial }
-        precondition(incompleteRegistrations.isEmpty,
-                     "These entities were not properly registered!" +
-                        incompleteRegistrations.map { $0.description.name ?? "nil" }.joinWithSeparator(", "))
-        managedObjectModel.entities = entityRegistry.registeredEntities.values.map { $0.description }
-    }
-
-    private func createMetadata(entityNames: Set<String>) throws -> [TorchMetadata] {
-        let request = NSFetchRequest(entityName: TorchMetadata.NAME)
-        guard let description = NSEntityDescription.entityForName(TorchMetadata.NAME, inManagedObjectContext: context) else {
-            fatalError("Entity \(TorchMetadata.NAME) is not registered!")
-        }
-        guard var allMetadata = try context.executeFetchRequest(request) as? [TorchMetadata] else {
-            fatalError("Could not load metadata!")
-        }
-
-        for entityName in entityNames {
-            if allMetadata.contains({ $0.torchEntityName == entityName }) {
-                continue
-            }
-
-            let metadata = TorchMetadata(entity: description, insertIntoManagedObjectContext: context)
-            metadata.torchEntityName = entityName
-            metadata.lastAssignedId = -1
-            allMetadata.append(metadata)
-        }
-
-        try write()
-
-        return allMetadata
     }
 }

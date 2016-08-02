@@ -24,7 +24,6 @@ Pod::Spec.new do |s|
                                     git submodule update --init --recursive
                                     ./build_generator
                                 CMD
-  s.frameworks                  = 'CoreData'
   s.module_name                 = 'Torch'
   s.requires_arc                = true
   s.pod_target_xcconfig         = { 'ENABLE_BITCODE' => 'NO' }

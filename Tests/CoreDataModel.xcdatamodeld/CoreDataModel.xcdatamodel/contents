@@ -9,19 +9,16 @@
         <attribute name="numbers" attributeType="Transformable" syncable="YES"/>
         <attribute name="optionalNumber" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="readOnly" attributeType="String" syncable="YES"/>
-        <attribute name="set" attributeType="Transformable" syncable="YES"/>
         <attribute name="text" attributeType="String" syncable="YES"/>
         <relationship name="arrayWithRelation" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="Core_OtherData" syncable="YES"/>
-        <relationship name="optionalRelation" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Core_OtherData" syncable="YES"/>
         <relationship name="relation" maxCount="1" deletionRule="Nullify" destinationEntity="Core_OtherData" syncable="YES"/>
-        <relationship name="relation2" maxCount="1" deletionRule="Nullify" destinationEntity="Core_OtherData" syncable="YES"/>
     </entity>
     <entity name="Core_OtherData" syncable="YES">
         <attribute name="id" optional="YES" attributeType="Integer 64" defaultValueString="0" indexed="YES" syncable="YES"/>
         <attribute name="text" attributeType="String" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Core_Data" positionX="-63" positionY="-18" width="128" height="255"/>
+        <element name="Core_Data" positionX="-63" positionY="-18" width="128" height="210"/>
         <element name="Core_OtherData" positionX="-54" positionY="-9" width="128" height="75"/>
     </elements>
 </model>

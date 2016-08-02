@@ -21,13 +21,4 @@ public enum Accessibility: String {
             return "private"
         }
     }
-
-    public func isMoreOpenThan(accessibility: Accessibility) -> Bool {
-        switch (self, accessibility) {
-        case (.Public, .Internal), (.Public, .Private), (.Internal, .Private):
-            return true
-        default:
-            return false
-        }
-    }
 }

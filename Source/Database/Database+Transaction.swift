@@ -9,14 +9,28 @@
 import Foundation
 
 extension Database {
+    
     public func rollback() -> Database {
-        context.rollback()
+        realm.cancelWrite()
+        metadata = [:]
+        realm.beginWrite()
         return self
     }
 
-    public func write(@noescape closure: () throws -> Void = {}) throws -> Database {
-        try closure()
-        try context.save()
+    public func write(@noescape closure: () -> Void = {}) -> Database {
+        return write(defaultOnWriteError, closure: closure)
+    }
+    
+    public func write(@noescape onWriteError: OnWriteErrorListener, @noescape closure: () -> Void = {}) -> Database {
+        closure()
+        do {
+            try realm.commitWrite()
+        } catch {
+            onWriteError(error)
+        }
+        if !realm.inWriteTransaction {
+            realm.beginWrite()
+        }
         return self
     }
 }
