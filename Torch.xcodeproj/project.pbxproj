@@ -45,6 +45,7 @@
 		DCC7597A1D4673F700D23B24 /* XCTestCase+Measure.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC759781D4673DA00D23B24 /* XCTestCase+Measure.swift */; };
 		DCE907AF1D5088B200BF09D8 /* TestUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCE907AD1D5088AB00BF09D8 /* TestUtils.swift */; };
 		DCF198081D45FBD400C7B14C /* PerformanceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCF198061D45FBB500C7B14C /* PerformanceTest.swift */; };
+		DCFA7E191D52460E003F24B4 /* PropertyValueTypeConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCFA7E181D52460E003F24B4 /* PropertyValueTypeConvertible.swift */; };
 		FB27948A4EAB99B17BE63F54 /* Pods_Torch.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 719D5F99DBB43C8D129F2D49 /* Pods_Torch.framework */; };
 /* End PBXBuildFile section */
 
@@ -110,6 +111,7 @@
 		DCC759781D4673DA00D23B24 /* XCTestCase+Measure.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "XCTestCase+Measure.swift"; sourceTree = "<group>"; };
 		DCE907AD1D5088AB00BF09D8 /* TestUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestUtils.swift; sourceTree = "<group>"; };
 		DCF198061D45FBB500C7B14C /* PerformanceTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PerformanceTest.swift; sourceTree = "<group>"; };
+		DCFA7E181D52460E003F24B4 /* PropertyValueTypeConvertible.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PropertyValueTypeConvertible.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -267,6 +269,7 @@
 				DC49D2321D42877E00EECA2F /* PropertyOptionalType.swift */,
 				DC49D22A1D42654200EECA2F /* PropertyType.swift */,
 				DC1012FB1D4BA5AA003C3F1E /* PropertyValueType.swift */,
+				DCFA7E181D52460E003F24B4 /* PropertyValueTypeConvertible.swift */,
 			);
 			path = Property;
 			sourceTree = "<group>";
@@ -538,6 +541,7 @@
 				DC1012FA1D4B45D0003C3F1E /* Metadata.swift in Sources */,
 				18768FDF1D44CBBB00252E03 /* Database+Transaction.swift in Sources */,
 				DC8AB1AE1D4E30C300A24A12 /* Predicate.swift in Sources */,
+				DCFA7E191D52460E003F24B4 /* PropertyValueTypeConvertible.swift in Sources */,
 				1876900B1D44D81000252E03 /* Property.swift in Sources */,
 				1876900C1D44D81300252E03 /* PropertyArrayType.swift in Sources */,
 				DC8AB1B31D4E70EA00A24A12 /* Property+Predicate.swift in Sources */,

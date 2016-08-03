@@ -39,6 +39,16 @@ class TorchTest: XCTestCase {
         XCTAssertEqual(String(otherData), String(loadedOtherData.first!))
     }
     
+    func testPersistanceOfValueConvertible() {
+        let data = DataWithEnums(id: 0, planet: .Earth, day: .Wednesday, days: [.Saturday, .Sunday])
+        
+        database.save(data).write()
+        
+        let loadedData = database.load(DataWithEnums)
+        XCTAssertEqual(1, loadedData.count)
+        XCTAssertEqual(String(data), String(database.load(DataWithEnums).first!))
+    }
+    
     func testIdAssignment() {
         let data0 = OtherData(id: nil, text: "0")
         let data10 = OtherData(id: 10, text: "10")
