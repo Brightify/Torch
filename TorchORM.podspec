@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = "TorchORM"
-  s.version          = "0.1.12"
+  s.version          = "0.2.0"
   s.summary          = "Torch - Boilerplate-free CoreData bridge."
   s.description      = <<-DESC
                         Torch is an ORM library allowing you to use structs instead of classes for your models.
