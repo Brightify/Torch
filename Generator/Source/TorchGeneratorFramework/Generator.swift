@@ -50,8 +50,11 @@ public struct Generator {
         builder += "}"
         builder += ""
         builder += generateManagedObject(entity, variables: variables)
-        builder += ""
-        builder += generateWrappers(entity, variables: variables)
+        let wrappers = generateWrappers(entity, variables: variables)
+        if !wrappers.code.isEmpty {
+            builder += ""
+            builder += wrappers
+        }
         return builder
     }
     
@@ -111,28 +114,29 @@ public struct Generator {
     @warn_unused_result
     private func generateManagedObject(entity: StructDeclaration, variables: [InstanceVariable]) -> CodeBuilder {
         var builder = CodeBuilder()
-        builder += "\(entity.accessibility.sourceName) class \(getManagedObjectName(entity.name)): RealmSwift.Object, Torch.ManagedObject {"
+        let accessibility = entity.accessibility.sourceName
+        builder += "\(accessibility) class \(getManagedObjectName(entity.name)): RealmSwift.Object, Torch.ManagedObject {"
         builder.nest {
             for variable in variables {
                 if isId(variable) {
-                    $0 += "dynamic var id = Int()"
+                    $0 += "\(accessibility) dynamic var id = Int()"
                 } else if isArrayWithValues(variable) {
-                    $0 += "var \(variable.name) = RealmSwift.List<\(getWrapperName(entity.name, variable.name))>()"
+                    $0 += "\(accessibility) var \(variable.name) = RealmSwift.List<\(getWrapperName(entity.name, variable.name))>()"
                 } else if variable.isArray {
-                    $0 += "var \(variable.name) = RealmSwift.List<\(getManagedObjectName(variable.rawType))>()"
+                    $0 += "\(accessibility) var \(variable.name) = RealmSwift.List<\(getManagedObjectName(variable.rawType))>()"
                 } else if isRealmOptional(variable) {
-                    $0 += "var \(variable.name) = RealmSwift.RealmOptional<\(variable.rawType)>()"
+                    $0 += "\(accessibility) var \(variable.name) = RealmSwift.RealmOptional<\(variable.rawType)>()"
                 } else if isTorchEntity(variable) {
-                    $0 += "dynamic var \(variable.name): \(getManagedObjectName(variable.rawType))?"
+                    $0 += "\(accessibility) dynamic var \(variable.name): \(getManagedObjectName(variable.rawType))?"
                 } else if variable.isOptional {
-                    $0 += "dynamic var \(variable.name): \(variable.type)"
+                    $0 += "\(accessibility) dynamic var \(variable.name): \(variable.type)"
                 } else {
-                    $0 += "dynamic var \(variable.name) = \(variable.type)()"
+                    $0 += "\(accessibility) dynamic var \(variable.name) = \(variable.type)()"
                 }
             }
             
             $0 += ""
-            $0 += "override static func primaryKey() -> String? {"
+            $0 += "\(accessibility) override static func primaryKey() -> String? {"
             $0.nest("return \"id\"")
             $0 += "}"
         }

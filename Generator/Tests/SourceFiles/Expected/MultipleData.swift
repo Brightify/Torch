@@ -1,63 +1,50 @@
 // MARK: - Torch entity extensions generated from file: ../../Tests/SourceFiles/MultipleData.swift
 
 import Torch
-import CoreData
+import RealmSwift
 
 internal extension Data {
 
-    internal static var torch_name: String {
-        return "UserProject_Data"
-    }
-
     internal static let id = Torch.Property<Data, Int?>(name: "id")
 
-    internal init(fromManagedObject object: Torch.NSManagedObjectWrapper) throws {
-        id = object.getValue(Data.id)
+    internal init(fromManagedObject object: Torch_Data) {
+        id = Torch.Utils.toValue(object.id)
     }
 
-    internal mutating func torch_updateManagedObject(object: Torch.NSManagedObjectWrapper) throws {
-        object.setValue(id, for: Data.id)
+    internal mutating func torch_updateManagedObject(object: Torch_Data, database: Torch.Database) {
     }
 
-    internal static func torch_describeEntity(to registry: Torch.EntityRegistry) {
-        registry.description(of: Data.self)
+    internal static func torch_deleteValueTypeWrappers(object: Torch_Data, @noescape deleteFunction: (RealmSwift.Object) -> Void) {
     }
+}
 
-    internal static func torch_describeProperties(to registry: Torch.PropertyRegistry) {
-        registry.description(of: Data.id)
+internal class Torch_Data: RealmSwift.Object, Torch.ManagedObject {
+    internal dynamic var id = Int()
+
+    internal override static func primaryKey() -> String? {
+        return "id"
     }
 }
 
 internal extension Data2 {
 
-    internal static var torch_name: String {
-        return "UserProject_Data2"
-    }
-
     internal static let id = Torch.Property<Data2, Int?>(name: "id")
 
-    internal init(fromManagedObject object: Torch.NSManagedObjectWrapper) throws {
-        id = object.getValue(Data2.id)
+    internal init(fromManagedObject object: Torch_Data2) {
+        id = Torch.Utils.toValue(object.id)
     }
 
-    internal mutating func torch_updateManagedObject(object: Torch.NSManagedObjectWrapper) throws {
-        object.setValue(id, for: Data2.id)
+    internal mutating func torch_updateManagedObject(object: Torch_Data2, database: Torch.Database) {
     }
 
-    internal static func torch_describeEntity(to registry: Torch.EntityRegistry) {
-        registry.description(of: Data2.self)
-    }
-
-    internal static func torch_describeProperties(to registry: Torch.PropertyRegistry) {
-        registry.description(of: Data2.id)
+    internal static func torch_deleteValueTypeWrappers(object: Torch_Data2, @noescape deleteFunction: (RealmSwift.Object) -> Void) {
     }
 }
 
-internal struct UserProjectEntityBundle: Torch.TorchEntityBundle {
-    internal let entityTypes: [Torch.TorchEntity.Type] = [
-            Data.self,
-            Data2.self,
-        ]
+internal class Torch_Data2: RealmSwift.Object, Torch.ManagedObject {
+    internal dynamic var id = Int()
 
-    internal init() { }
+    internal override static func primaryKey() -> String? {
+        return "id"
+    }
 }
