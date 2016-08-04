@@ -133,7 +133,7 @@ class RealmPerformanceTest: XCTestCase {
         (0..<(update ? PerformanceTest.OtherDataWithIdCount : PerformanceTest.OtherDataCount)).forEach {
             let data = Torch_OtherData()
             data.id = $0
-            data.text = String($0)
+            data.torch_text = String($0)
             realm.add(data, update: update)
         }
     }
@@ -143,35 +143,35 @@ class RealmPerformanceTest: XCTestCase {
             let data = Torch_Data()
             data.id = i
             updateData(data)
-            data.text = ""
-            data.optionalString = nil
-            data.float = 0
-            data.double = 0
-            data.bool = false
+            data.torch_text = ""
+            data.torch_optionalString = nil
+            data.torch_float = 0
+            data.torch_double = 0
+            data.torch_bool = false
             
             let otherData = Torch_OtherData()
             otherData.id = i
-            otherData.text = String(index)
-            data.relation = otherData
+            otherData.torch_text = String(index)
+            data.torch_relation = otherData
             (0..<PerformanceTest.RelationsCount).forEach { j in
                 let otherData = Torch_OtherData()
                 otherData.id = PerformanceTest.DataCount + PerformanceTest.RelationsCount * i + j
-                otherData.text = String(index)
-                data.arrayWithRelation.append(otherData)
+                otherData.torch_text = String(index)
+                data.torch_arrayWithRelation.append(otherData)
             }
-            data.readOnly = ""
+            data.torch_readOnly = ""
             realm.add(data)
         }
     }
     
     private func updateData(data: Torch_Data) {
-        data.number = 0
-        data.optionalNumber.value = nil
+        data.torch_number = 0
+        data.torch_optionalNumber.value = nil
         
         let numbers = [Torch_Data_numbers(), Torch_Data_numbers(), Torch_Data_numbers()]
         numbers[0].value = 1
         numbers[1].value = 1
         numbers[2].value = 2
-        data.numbers = List(numbers)
+        data.torch_numbers = List(numbers)
     }
 }

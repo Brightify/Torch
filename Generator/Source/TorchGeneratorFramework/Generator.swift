@@ -64,7 +64,9 @@ public struct Generator {
     private func generateStaticProperties(entity: StructDeclaration, variables: [InstanceVariable]) -> CodeBuilder {
         var builder = CodeBuilder()
         for variable in variables {
-            builder += "\(variable.accessibility.sourceName) static let \(variable.name) = Torch.Property<\(entity.name), \(variable.type)>(name: \"\(variable.name)\")"
+
+            let name = isId(variable) ? variable.name : getPrefixedPropertyName(variable.name)
+            builder += "\(variable.accessibility.sourceName) static let \(variable.name) = Torch.Property<\(entity.name), \(variable.type)>(name: \"\(name)\")"
         }
         return builder
     }
@@ -76,9 +78,11 @@ public struct Generator {
         builder.nest {
             for variable in variables {
                 if isValueConvertible(variable) && variable.isOptional {
-                    $0 += "\(variable.name) = Torch.Utils.toValue(object.\(variable.name), object.\(getIsNilName(variable.name)))"
+                    $0 += "\(variable.name) = Torch.Utils.toValue(object.\(getPrefixedPropertyName(variable.name)), object.\(getIsNilName(variable.name)))"
+                } else if isId(variable) {
+                    $0 += "\(variable.name) = Torch.Utils.toValue(object.id)"
                 } else {
-                    $0 += "\(variable.name) = Torch.Utils.toValue(object.\(variable.name))"
+                    $0 += "\(variable.name) = Torch.Utils.toValue(object.\(getPrefixedPropertyName(variable.name)))"
                 }
             }
         }
@@ -93,11 +97,11 @@ public struct Generator {
         builder.nest {
             for variable in variables where !isId(variable) {
                 if isTorchEntity(variable) {
-                    $0 += "Torch.Utils.updateManagedValue(&object.\(variable.name), &\(variable.name), database)"
+                    $0 += "Torch.Utils.updateManagedValue(&object.\(getPrefixedPropertyName(variable.name)), &\(variable.name), database)"
                 } else if isValueConvertible(variable) && variable.isOptional {
-                    $0 += "Torch.Utils.updateManagedValue(&object.\(variable.name), &object.\(getIsNilName(variable.name)), \(variable.name))"
+                    $0 += "Torch.Utils.updateManagedValue(&object.\(getPrefixedPropertyName(variable.name)), &object.\(getIsNilName(variable.name)), \(variable.name))"
                 } else {
-                    $0 += "Torch.Utils.updateManagedValue(&object.\(variable.name), \(variable.name))"
+                    $0 += "Torch.Utils.updateManagedValue(&object.\(getPrefixedPropertyName(variable.name)), \(variable.name))"
                 }
             }
         }
@@ -112,7 +116,7 @@ public struct Generator {
                     ", @noescape deleteFunction: (RealmSwift.Object) -> Void) {"
         builder.nest {
             for variable in variables where isArrayWithValues(variable) {
-                $0 += "object.\(variable.name).forEach { deleteFunction($0) }"
+                $0 += "object.\(getPrefixedPropertyName(variable.name)).forEach { deleteFunction($0) }"
             }
         }
         builder += "}"
@@ -128,9 +132,9 @@ public struct Generator {
             for variable in variables {
                 if isValueConvertible(variable) {
                     if variable.isArray {
-                        $0 += "\(accessibility) var \(variable.name) = RealmSwift.List<\(getWrapperName(entity.name, variable.name))>()"
+                        $0 += "\(accessibility) var \(getPrefixedPropertyName(variable.name)) = RealmSwift.List<\(getWrapperName(entity.name, variable.name))>()"
                     } else {
-                        $0 += "\(accessibility) dynamic var \(variable.name) = \(variable.rawType).getDefaultValue().toValue()"
+                        $0 += "\(accessibility) dynamic var \(getPrefixedPropertyName(variable.name)) = \(variable.rawType).getDefaultValue().toValue()"
                     }
                     if variable.isOptional {
                         $0 += "\(accessibility) dynamic var \(getIsNilName(variable.name)) = true"
@@ -139,17 +143,17 @@ public struct Generator {
                     if isId(variable) {
                         $0 += "\(accessibility) dynamic var id = Int()"
                     } else if isArrayWithValues(variable) {
-                        $0 += "\(accessibility) var \(variable.name) = RealmSwift.List<\(getWrapperName(entity.name, variable.name))>()"
+                        $0 += "\(accessibility) var \(getPrefixedPropertyName(variable.name)) = RealmSwift.List<\(getWrapperName(entity.name, variable.name))>()"
                     } else if variable.isArray {
-                        $0 += "\(accessibility) var \(variable.name) = RealmSwift.List<\(getManagedObjectType(variable.rawType))>()"
+                        $0 += "\(accessibility) var \(getPrefixedPropertyName(variable.name)) = RealmSwift.List<\(getManagedObjectType(variable.rawType))>()"
                     } else if isRealmOptional(variable) {
-                        $0 += "\(accessibility) var \(variable.name) = RealmSwift.RealmOptional<\(variable.rawType)>()"
+                        $0 += "\(accessibility) var \(getPrefixedPropertyName(variable.name)) = RealmSwift.RealmOptional<\(variable.rawType)>()"
                     } else if isTorchEntity(variable) {
-                        $0 += "\(accessibility) dynamic var \(variable.name): \(getManagedObjectType(variable.rawType))?"
+                        $0 += "\(accessibility) dynamic var \(getPrefixedPropertyName(variable.name)): \(getManagedObjectType(variable.rawType))?"
                     } else if variable.isOptional {
-                        $0 += "\(accessibility) dynamic var \(variable.name): \(variable.type)"
+                        $0 += "\(accessibility) dynamic var \(getPrefixedPropertyName(variable.name)): \(variable.type)"
                     } else {
-                        $0 += "\(accessibility) dynamic var \(variable.name) = \(variable.type)()"
+                        $0 += "\(accessibility) dynamic var \(getPrefixedPropertyName(variable.name)) = \(variable.type)()"
                     }
                 }
             }
@@ -226,6 +230,11 @@ public struct Generator {
     
     @warn_unused_result
     private func getIsNilName(variableName: String) -> String {
-        return variableName + "_isNil"
+        return getPrefixedPropertyName(variableName) + "_isNil"
+    }
+
+    @warn_unused_result
+    private func getPrefixedPropertyName(variableName: String) -> String {
+        return "torch_\(variableName)"
     }
 }
