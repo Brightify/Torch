@@ -24,6 +24,10 @@
 		8E15FB157588645EF62C0E53 /* Pods_TorchTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 17E6CA52BE4277B23EFF9401 /* Pods_TorchTests.framework */; };
 		DC1012FA1D4B45D0003C3F1E /* Metadata.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC1012F91D4B45D0003C3F1E /* Metadata.swift */; };
 		DC1012FC1D4BA5AA003C3F1E /* PropertyValueType.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC1012FB1D4BA5AA003C3F1E /* PropertyValueType.swift */; };
+		DC11F7141D532ED0002875DD /* PropertyComparableValueTypeConvertible+Predicate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC11F7121D532ED0002875DD /* PropertyComparableValueTypeConvertible+Predicate.swift */; };
+		DC11F7151D532ED0002875DD /* PropertyValueTypeConvertible+Predicate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC11F7131D532ED0002875DD /* PropertyValueTypeConvertible+Predicate.swift */; };
+		DC11F7191D532FD0002875DD /* PropertyOptionalComparableTypeConvertible+Predicate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC11F7171D532FD0002875DD /* PropertyOptionalComparableTypeConvertible+Predicate.swift */; };
+		DC11F71A1D532FD0002875DD /* PropertyOptionalTypeConvertible+Predicate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC11F7181D532FD0002875DD /* PropertyOptionalTypeConvertible+Predicate.swift */; };
 		DC49D2351D42902000EECA2F /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC49D2341D42902000EECA2F /* Models.swift */; };
 		DC49D2371D42904700EECA2F /* ModelExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC49D2361D42904700EECA2F /* ModelExtensions.swift */; };
 		DC49D23C1D42B2BE00EECA2F /* PredicateTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC49D23B1D42B2BE00EECA2F /* PredicateTest.swift */; };
@@ -85,6 +89,10 @@
 		DC1012F61D4B3DC0003C3F1E /* Podfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; };
 		DC1012F91D4B45D0003C3F1E /* Metadata.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Metadata.swift; sourceTree = "<group>"; };
 		DC1012FB1D4BA5AA003C3F1E /* PropertyValueType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PropertyValueType.swift; sourceTree = "<group>"; };
+		DC11F7121D532ED0002875DD /* PropertyComparableValueTypeConvertible+Predicate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "PropertyComparableValueTypeConvertible+Predicate.swift"; path = "ConvertibleType/PropertyComparableValueTypeConvertible+Predicate.swift"; sourceTree = "<group>"; };
+		DC11F7131D532ED0002875DD /* PropertyValueTypeConvertible+Predicate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "PropertyValueTypeConvertible+Predicate.swift"; path = "ConvertibleType/PropertyValueTypeConvertible+Predicate.swift"; sourceTree = "<group>"; };
+		DC11F7171D532FD0002875DD /* PropertyOptionalComparableTypeConvertible+Predicate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "PropertyOptionalComparableTypeConvertible+Predicate.swift"; path = "ConvertibleOptionalType/PropertyOptionalComparableTypeConvertible+Predicate.swift"; sourceTree = "<group>"; };
+		DC11F7181D532FD0002875DD /* PropertyOptionalTypeConvertible+Predicate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "PropertyOptionalTypeConvertible+Predicate.swift"; path = "ConvertibleOptionalType/PropertyOptionalTypeConvertible+Predicate.swift"; sourceTree = "<group>"; };
 		DC32A10D1D401439008E3A4E /* Property.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Property.swift; sourceTree = "<group>"; };
 		DC49D22A1D42654200EECA2F /* PropertyType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PropertyType.swift; sourceTree = "<group>"; };
 		DC49D2301D42874400EECA2F /* PropertyArrayType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PropertyArrayType.swift; sourceTree = "<group>"; };
@@ -249,11 +257,31 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		DC11F7111D532E88002875DD /* ConvertibleType */ = {
+			isa = PBXGroup;
+			children = (
+				DC11F7121D532ED0002875DD /* PropertyComparableValueTypeConvertible+Predicate.swift */,
+				DC11F7131D532ED0002875DD /* PropertyValueTypeConvertible+Predicate.swift */,
+			);
+			name = ConvertibleType;
+			sourceTree = "<group>";
+		};
+		DC11F7161D532FB9002875DD /* ConvertibleOptionalType */ = {
+			isa = PBXGroup;
+			children = (
+				DC11F7171D532FD0002875DD /* PropertyOptionalComparableTypeConvertible+Predicate.swift */,
+				DC11F7181D532FD0002875DD /* PropertyOptionalTypeConvertible+Predicate.swift */,
+			);
+			name = ConvertibleOptionalType;
+			sourceTree = "<group>";
+		};
 		DC32A1071D40134B008E3A4E /* Predicate */ = {
 			isa = PBXGroup;
 			children = (
 				DC8AB1AD1D4E30C300A24A12 /* Predicate.swift */,
 				DC8AB1B21D4E70EA00A24A12 /* Property+Predicate.swift */,
+				DC11F7161D532FB9002875DD /* ConvertibleOptionalType */,
+				DC11F7111D532E88002875DD /* ConvertibleType */,
 				DC8AB1B61D4E72F200A24A12 /* OptionalType */,
 				18768FC81D44C01D00252E03 /* ValueType */,
 			);
@@ -535,11 +563,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DC11F71A1D532FD0002875DD /* PropertyOptionalTypeConvertible+Predicate.swift in Sources */,
 				DC8AB1AC1D4E295800A24A12 /* SortDescriptor.swift in Sources */,
 				18768FDB1D44CB5F00252E03 /* Database+Save.swift in Sources */,
 				DC4A784D1D5093F60096A817 /* ManagedObject.swift in Sources */,
 				DC1012FA1D4B45D0003C3F1E /* Metadata.swift in Sources */,
 				18768FDF1D44CBBB00252E03 /* Database+Transaction.swift in Sources */,
+				DC11F7141D532ED0002875DD /* PropertyComparableValueTypeConvertible+Predicate.swift in Sources */,
 				DC8AB1AE1D4E30C300A24A12 /* Predicate.swift in Sources */,
 				DCFA7E191D52460E003F24B4 /* PropertyValueTypeConvertible.swift in Sources */,
 				1876900B1D44D81000252E03 /* Property.swift in Sources */,
@@ -550,6 +580,7 @@
 				1876900D1D44D81500252E03 /* PropertyOptionalType.swift in Sources */,
 				18768FF81D44D20900252E03 /* Property+Sort.swift in Sources */,
 				1876900F1D44D81A00252E03 /* PropertyType.swift in Sources */,
+				DC11F7191D532FD0002875DD /* PropertyOptionalComparableTypeConvertible+Predicate.swift in Sources */,
 				18768FEF1D44D1A200252E03 /* TorchEntity.swift in Sources */,
 				DC8AB1BC1D4E75CF00A24A12 /* PropertyComparableValueType.swift in Sources */,
 				DC4A784F1D50D1540096A817 /* ValueTypeWrapper.swift in Sources */,
@@ -558,6 +589,7 @@
 				18768FDD1D44CB7D00252E03 /* Database+Delete.swift in Sources */,
 				18768FF11D44D1AE00252E03 /* ManualTorchEntity.swift in Sources */,
 				DC1012FC1D4BA5AA003C3F1E /* PropertyValueType.swift in Sources */,
+				DC11F7151D532ED0002875DD /* PropertyValueTypeConvertible+Predicate.swift in Sources */,
 				18768FD71D44CAFD00252E03 /* Database.swift in Sources */,
 				DC8AB1B51D4E723E00A24A12 /* PropertyComparableValueType+Predicate.swift in Sources */,
 				DC8AB1C01D4F9D1800A24A12 /* Utils.swift in Sources */,

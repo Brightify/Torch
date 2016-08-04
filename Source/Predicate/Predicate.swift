@@ -23,6 +23,10 @@ public struct Predicate<PARENT: TorchEntity> {
     private let predicateString: String
     private let predicateArguments: [AnyObject]
     
+    static func boolPredicate(value: Bool) -> Predicate {
+        return Predicate(predicateString: value ? "TRUEPREDICATE" : "FALSEPREDICATE", predicateArguments: [])
+    }
+    
     static func singleValuePredicate(property: String, value: AnyObject?, operatorString: String) -> Predicate {
         return Predicate(predicateString: "\(getPropertyName(property)) \(operatorString) %@", predicateArguments: [value ?? NSNull()])
     }

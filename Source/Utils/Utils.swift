@@ -10,6 +10,10 @@ import RealmSwift
 
 public struct Utils {
     
+    static func getIsNilVariableName(variableName: String) -> String {
+        return variableName + "_isNil"
+    }
+    
     public static func toValue<T: PropertyValueType>(managedValue: T) -> T {
         return managedValue
     }
