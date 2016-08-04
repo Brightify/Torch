@@ -40,13 +40,15 @@ class TorchTest: XCTestCase {
     }
     
     func testPersistanceOfValueConvertible() {
-        let data = DataWithEnums(id: 0, planet: .Earth, day: .Wednesday, days: [.Saturday, .Sunday])
+        let data = DataWithEnums(id: 0, planet: .Earth, optionalPlanet: .Mars, day: .Wednesday, optionalDay: .Thursday, days: [.Saturday, .Sunday])
+        let dataWithOptionals = DataWithEnums(id: 1, planet: .Earth, optionalPlanet: nil, day: .Wednesday, optionalDay: nil, days: [.Saturday, .Sunday])
         
-        database.save(data).write()
+        database.save(data, dataWithOptionals).write()
         
         let loadedData = database.load(DataWithEnums)
-        XCTAssertEqual(1, loadedData.count)
-        XCTAssertEqual(String(data), String(database.load(DataWithEnums).first!))
+        XCTAssertEqual(2, loadedData.count)
+        XCTAssertEqual(String(data), String(database.load(DataWithEnums.self, where: DataWithEnums.id == 0).first!))
+        XCTAssertEqual(String(dataWithOptionals), String(database.load(DataWithEnums.self, where: DataWithEnums.id == 1).first!))
     }
     
     func testIdAssignment() {

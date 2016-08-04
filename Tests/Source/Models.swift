@@ -37,7 +37,9 @@ struct OtherData: TorchEntity {
 struct DataWithEnums: TorchEntity {
     var id: Int?
     var planet: Planet
+    var optionalPlanet: Planet?
     var day: Day
+    var optionalDay: Day?
     var days: [Day]
 }
 

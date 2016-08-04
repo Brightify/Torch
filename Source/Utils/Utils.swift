@@ -31,6 +31,10 @@ public struct Utils {
         return managedValue
     }
     
+    public static func toValue<T: PropertyValueTypeConvertible>(managedValue: T.ValueType, _ isNil: Bool) -> T? {
+        return isNil ? nil : T.fromValue(managedValue)
+    }
+    
     public static func toValue<T: PropertyValueType, V: ValueTypeWrapper where V.ValueType == T>(managedValue: List<V>) -> [T] {
         return managedValue.map { $0.value }
     }
@@ -65,6 +69,15 @@ public struct Utils {
 
     public static func updateManagedValue<T: PropertyOptionalType where T.Wrapped: PropertyValueType>(inout managedValue: T, _ value: T) {
         managedValue = value
+    }
+    
+    public static func updateManagedValue<T: PropertyOptionalType where T.Wrapped: PropertyValueTypeConvertible>(inout managedValue: T.Wrapped.ValueType, inout _ isNil: Bool, _ value: T) {
+        if let value = value.value {
+            managedValue = value.toValue()
+            isNil = false
+        } else {
+            isNil = true
+        }
     }
     
     public static func updateManagedValue<T: PropertyValueType, V: ValueTypeWrapper where V.ValueType == T>(inout managedValue: List<V>, _ value: [T]) {

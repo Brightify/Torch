@@ -75,7 +75,11 @@ public struct Generator {
         builder += "\(entity.accessibility.sourceName) init(fromManagedObject object: \(getManagedObjectName(entity.name))) {"
         builder.nest {
             for variable in variables {
-                $0 += "\(variable.name) = Torch.Utils.toValue(object.\(variable.name))"
+                if isValueConvertible(variable) && variable.isOptional {
+                    $0 += "\(variable.name) = Torch.Utils.toValue(object.\(variable.name), object.\(getIsNilName(variable.name)))"
+                } else {
+                    $0 += "\(variable.name) = Torch.Utils.toValue(object.\(variable.name))"
+                }
             }
         }
         builder += "}"
@@ -90,6 +94,8 @@ public struct Generator {
             for variable in variables where !isId(variable) {
                 if isTorchEntity(variable) {
                     $0 += "Torch.Utils.updateManagedValue(&object.\(variable.name), &\(variable.name), database)"
+                } else if isValueConvertible(variable) && variable.isOptional {
+                    $0 += "Torch.Utils.updateManagedValue(&object.\(variable.name), &object.\(getIsNilName(variable.name)), \(variable.name))"
                 } else {
                     $0 += "Torch.Utils.updateManagedValue(&object.\(variable.name), \(variable.name))"
                 }
@@ -124,7 +130,10 @@ public struct Generator {
                     if variable.isArray {
                         $0 += "\(accessibility) var \(variable.name) = RealmSwift.List<\(getWrapperName(entity.name, variable.name))>()"
                     } else {
-                        $0 += "\(accessibility) dynamic var \(variable.name) = \(variable.type).defaultValue.toValue()"
+                        $0 += "\(accessibility) dynamic var \(variable.name) = \(variable.rawType).defaultValue.toValue()"
+                    }
+                    if variable.isOptional {
+                        $0 += "\(accessibility) dynamic var \(getIsNilName(variable.name)) = true"
                     }
                 } else {
                     if isId(variable) {
@@ -208,5 +217,10 @@ public struct Generator {
     @warn_unused_result
     private func getWrapperName(entityName: String, _ variableName: String) -> String {
         return getManagedObjectName(entityName) + "_" + variableName
+    }
+    
+    @warn_unused_result
+    private func getIsNilName(variableName: String) -> String {
+        return variableName + "_isNil"
     }
 }
