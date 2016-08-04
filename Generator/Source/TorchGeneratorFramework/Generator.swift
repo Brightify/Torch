@@ -130,7 +130,7 @@ public struct Generator {
                     if variable.isArray {
                         $0 += "\(accessibility) var \(variable.name) = RealmSwift.List<\(getWrapperName(entity.name, variable.name))>()"
                     } else {
-                        $0 += "\(accessibility) dynamic var \(variable.name) = \(variable.rawType).defaultValue.toValue()"
+                        $0 += "\(accessibility) dynamic var \(variable.name) = \(variable.rawType).getDefaultValue().toValue()"
                     }
                     if variable.isOptional {
                         $0 += "\(accessibility) dynamic var \(getIsNilName(variable.name)) = true"
@@ -141,11 +141,11 @@ public struct Generator {
                     } else if isArrayWithValues(variable) {
                         $0 += "\(accessibility) var \(variable.name) = RealmSwift.List<\(getWrapperName(entity.name, variable.name))>()"
                     } else if variable.isArray {
-                        $0 += "\(accessibility) var \(variable.name) = RealmSwift.List<\(getManagedObjectName(variable.rawType))>()"
+                        $0 += "\(accessibility) var \(variable.name) = RealmSwift.List<\(getManagedObjectType(variable.rawType))>()"
                     } else if isRealmOptional(variable) {
                         $0 += "\(accessibility) var \(variable.name) = RealmSwift.RealmOptional<\(variable.rawType)>()"
                     } else if isTorchEntity(variable) {
-                        $0 += "\(accessibility) dynamic var \(variable.name): \(getManagedObjectName(variable.rawType))?"
+                        $0 += "\(accessibility) dynamic var \(variable.name): \(getManagedObjectType(variable.rawType))?"
                     } else if variable.isOptional {
                         $0 += "\(accessibility) dynamic var \(variable.name): \(variable.type)"
                     } else {
@@ -175,7 +175,7 @@ public struct Generator {
             }
             builder += "\(entity.accessibility.sourceName) class \(getWrapperName(entity.name, variable.name)): RealmSwift.Object, Torch.ValueTypeWrapper {"
             if isValueConvertible(variable) {
-                builder.nest("dynamic var value = \(variable.rawType).defaultValue.toValue()")
+                builder.nest("dynamic var value = \(variable.rawType).getDefaultValue().toValue()")
             } else {
                  builder.nest("dynamic var value = \(variable.rawType)()")
             }
@@ -213,7 +213,12 @@ public struct Generator {
     private func getManagedObjectName(entityName: String) -> String {
         return "Torch_" + entityName
     }
-    
+
+    @warn_unused_result
+    private func getManagedObjectType(entityName: String) -> String {
+        return entityName + ".ManagedObjectType"
+    }
+
     @warn_unused_result
     private func getWrapperName(entityName: String, _ variableName: String) -> String {
         return getManagedObjectName(entityName) + "_" + variableName

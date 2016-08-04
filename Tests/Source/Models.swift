@@ -49,7 +49,9 @@ enum Planet: Int {
 
 extension Planet: PropertyValueTypeConvertible {
     
-    static var defaultValue = Planet.Mercury
+    static func getDefaultValue() -> Planet {
+        return Planet.Mercury
+    }
     
     static func fromValue(value: Int) -> Planet {
         return Planet(rawValue: value)!
@@ -72,7 +74,9 @@ enum Day: String {
 
 extension Day: PropertyValueTypeConvertible {
     
-    static var defaultValue = Day.Monday
+    static func getDefaultValue() -> Day {
+        return Day.Monday
+    }
     
     static func fromValue(value: String) -> Day {
         return Day(rawValue: value)!

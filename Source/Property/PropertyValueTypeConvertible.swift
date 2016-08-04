@@ -10,8 +10,9 @@ import RealmSwift
 
 public protocol PropertyValueTypeConvertible: PropertyType {
     associatedtype ValueType: PropertyValueType
-    
-    static var defaultValue: Self { get }
+
+    // Has to be function, otherwise cannot be used in extensions.
+    static func getDefaultValue() -> Self
     
     static func fromValue(value: ValueType) -> Self
     
