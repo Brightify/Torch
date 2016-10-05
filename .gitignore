@@ -66,3 +66,4 @@ fastlane/test_output
 Generator/torch_generator.app
 default.profraw
 Tests/Generated/*.swift
+.DS_Store

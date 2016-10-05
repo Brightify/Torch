@@ -8,9 +8,9 @@
 
 import RealmSwift
 
-public class Database {
+open class Database {
     
-    public typealias OnWriteErrorListener = (ErrorType) -> Void
+    public typealias OnWriteErrorListener = (Error) -> Void
     
     internal var metadata: [String:Metadata] = [:]
     
@@ -18,11 +18,11 @@ public class Database {
     internal let defaultOnWriteError: OnWriteErrorListener
     
     public init(configuration: Realm.Configuration = Realm.Configuration.defaultConfiguration,
-                defaultOnWriteError: OnWriteErrorListener = { fatalError(String($0)) }) throws {
+                defaultOnWriteError: @escaping OnWriteErrorListener = { fatalError(String(describing: $0)) }) throws {
         realm = try Realm(configuration: configuration)
         self.defaultOnWriteError = defaultOnWriteError
         
-        if !realm.inWriteTransaction {
+        if !realm.isInWriteTransaction {
             realm.beginWrite()
         }
     }
@@ -35,29 +35,29 @@ public class Database {
 extension Database {
     
     // Intentionally left `internal` because it is used in Utils and Save.
-    internal func getManagedObject<T: TorchEntity>(inout entity: T) -> T.ManagedObjectType {
-        if let id = entity.id, managedObject = realm.objectForPrimaryKey(T.ManagedObjectType.self, key: id) {
-            entity.torch_updateManagedObject(managedObject, database: self)
+    internal func getManagedObject<T: TorchEntity>(_ entity: inout T) -> T.ManagedObjectType {
+        if let id = entity.id, let managedObject = realm.object(ofType: T.ManagedObjectType.self, forPrimaryKey: id) {
+            entity.torch_update(managedObject: managedObject, database: self)
             return managedObject
         } else {
             assignId(&entity)
             let managedObject = T.ManagedObjectType()
             managedObject.id = entity.id!
-            entity.torch_updateManagedObject(managedObject, database: self)
+            entity.torch_update(managedObject: managedObject, database: self)
             realm.add(managedObject)
             return managedObject
         }
     }
     
     // Intentionally left `internal` because it is used in Delete.
-    internal func deleteValueTypeWrappers<T: TorchEntity>(type: T.Type, managedObject: T.ManagedObjectType) {
-        T.torch_deleteValueTypeWrappers(managedObject) {
+    internal func deleteValueTypeWrappers<T: TorchEntity>(_ type: T.Type, managedObject: T.ManagedObjectType) {
+        T.torch_delete(managedObject: managedObject) {
             realm.delete($0)
         }
     }
     
-    private func assignId<T: TorchEntity>(inout entity: T) {
-        let metadata = getMetadata(String(T))
+    fileprivate func assignId<T: TorchEntity>(_ entity: inout T) {
+        let metadata = getMetadata(String(describing: T.self))
         if let id = entity.id {
             metadata.lastAssignedId = max(metadata.lastAssignedId, id)
         } else {
@@ -66,10 +66,10 @@ extension Database {
         }
     }
     
-    private func getMetadata(entityName: String) -> Metadata {
+    fileprivate func getMetadata(_ entityName: String) -> Metadata {
         if let result = metadata[entityName] {
             return result
-        } else if let result = realm.objectForPrimaryKey(Metadata.self, key: entityName) {
+        } else if let result = realm.object(ofType: Metadata.self, forPrimaryKey: entityName) {
             metadata[entityName] = result
             return result
         } else {

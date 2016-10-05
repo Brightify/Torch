@@ -8,17 +8,17 @@
 
 public struct Generator {
     
-    private static let ValueTypes = ["Bool", "Int8", "Int16", "Int32", "Int64", "Int", "Double", "Float", "String", "NSDate", "NSData"]
-    private static let RealmOptionalTypes = ["Bool", "Int8", "Int16", "Int32", "Int64", "Int", "Double", "Float"]
+    fileprivate static let ValueTypes = ["Bool", "Int8", "Int16", "Int32", "Int64", "Int", "Double", "Float", "String", "NSDate", "NSData"]
+    fileprivate static let RealmOptionalTypes = ["Bool", "Int8", "Int16", "Int32", "Int64", "Int", "Double", "Float"]
     
-    private let allEntities: [String]
+    fileprivate let allEntities: [String]
     
     public init(allEntities: [StructDeclaration]) {
         self.allEntities = allEntities.map { $0.name }
     }
     
-    @warn_unused_result
-    public func generate(entities: [StructDeclaration]) -> String {
+    
+    public func generate(_ entities: [StructDeclaration]) -> String {
         var builder = CodeBuilder()
         var first = true
         for entity in entities where entity.kind == .TorchEntity {
@@ -32,8 +32,8 @@ public struct Generator {
         return builder.code
     }
     
-    @warn_unused_result
-    private func generate(entity: StructDeclaration) -> CodeBuilder {
+    
+    fileprivate func generate(_ entity: StructDeclaration) -> CodeBuilder {
         var builder = CodeBuilder()
         let variables = entity.children
             .flatMap { $0 as? InstanceVariable }
@@ -60,8 +60,8 @@ public struct Generator {
         return builder
     }
     
-    @warn_unused_result
-    private func generateStaticProperties(entity: StructDeclaration, variables: [InstanceVariable]) -> CodeBuilder {
+    
+    fileprivate func generateStaticProperties(_ entity: StructDeclaration, variables: [InstanceVariable]) -> CodeBuilder {
         var builder = CodeBuilder()
         for variable in variables {
 
@@ -71,8 +71,8 @@ public struct Generator {
         return builder
     }
     
-    @warn_unused_result
-    private func generateInit(entity: StructDeclaration, variables: [InstanceVariable]) -> CodeBuilder {
+    
+    fileprivate func generateInit(_ entity: StructDeclaration, variables: [InstanceVariable]) -> CodeBuilder {
         var builder = CodeBuilder()
         builder += "\(entity.accessibility.sourceName) init(fromManagedObject object: \(getManagedObjectName(entity.name))) {"
         builder.nest {
@@ -90,10 +90,10 @@ public struct Generator {
         return builder
     }
     
-    @warn_unused_result
-    private func generateUpdateManagedObject(entity: StructDeclaration, variables: [InstanceVariable]) -> CodeBuilder {
+    
+    fileprivate func generateUpdateManagedObject(_ entity: StructDeclaration, variables: [InstanceVariable]) -> CodeBuilder {
         var builder = CodeBuilder()
-        builder += "\(entity.accessibility.sourceName) mutating func torch_updateManagedObject(object: \(getManagedObjectName(entity.name)), database: Torch.Database) {"
+        builder += "\(entity.accessibility.sourceName) mutating func torch_update(managedObject object: \(getManagedObjectName(entity.name)), database: Torch.Database) {"
         builder.nest {
             for variable in variables where !isId(variable) {
                 if isTorchEntity(variable) {
@@ -109,11 +109,11 @@ public struct Generator {
         return builder
     }
     
-    @warn_unused_result
-    private func generateDeleteValueTypeWrappers(entity: StructDeclaration, variables: [InstanceVariable]) -> CodeBuilder {
+    
+    fileprivate func generateDeleteValueTypeWrappers(_ entity: StructDeclaration, variables: [InstanceVariable]) -> CodeBuilder {
         var builder = CodeBuilder()
-        builder += "\(entity.accessibility.sourceName) static func torch_deleteValueTypeWrappers(object: \(getManagedObjectName(entity.name))" +
-                    ", @noescape deleteFunction: (RealmSwift.Object) -> Void) {"
+        builder += "\(entity.accessibility.sourceName) static func torch_delete(managedObject object: \(getManagedObjectName(entity.name))" +
+                    ", deleteFunction: (RealmSwift.Object) -> Void) {"
         builder.nest {
             for variable in variables where isArrayWithValues(variable) {
                 $0 += "object.\(getPrefixedPropertyName(variable.name)).forEach { deleteFunction($0) }"
@@ -123,8 +123,8 @@ public struct Generator {
         return builder
     }
     
-    @warn_unused_result
-    private func generateManagedObject(entity: StructDeclaration, variables: [InstanceVariable]) -> CodeBuilder {
+    
+    fileprivate func generateManagedObject(_ entity: StructDeclaration, variables: [InstanceVariable]) -> CodeBuilder {
         var builder = CodeBuilder()
         let accessibility = entity.accessibility.sourceName
         builder += "\(accessibility) class \(getManagedObjectName(entity.name)): RealmSwift.Object, Torch.ManagedObject {"
@@ -167,8 +167,8 @@ public struct Generator {
         return builder
     }
     
-    @warn_unused_result
-    private func generateWrappers(entity: StructDeclaration, variables: [InstanceVariable]) -> CodeBuilder {
+    
+    fileprivate func generateWrappers(_ entity: StructDeclaration, variables: [InstanceVariable]) -> CodeBuilder {
         var builder = CodeBuilder()
         var first = true
         for variable in variables where isArrayWithValues(variable) || (isValueConvertible(variable) && variable.isArray) {
@@ -188,53 +188,53 @@ public struct Generator {
         return builder
     }
     
-    @warn_unused_result
-    private func isTorchEntity(variable: InstanceVariable) -> Bool {
+    
+    fileprivate func isTorchEntity(_ variable: InstanceVariable) -> Bool {
         return allEntities.contains(variable.rawType)
     }
     
-    @warn_unused_result
-    private func isId(variable: InstanceVariable) -> Bool {
+    
+    fileprivate func isId(_ variable: InstanceVariable) -> Bool {
         return variable.name == "id"
     }
     
-    @warn_unused_result
-    private func isArrayWithValues(variable: InstanceVariable) -> Bool {
+    
+    fileprivate func isArrayWithValues(_ variable: InstanceVariable) -> Bool {
         return variable.isArray && !isTorchEntity(variable)
     }
     
-    @warn_unused_result
-    private func isRealmOptional(variable: InstanceVariable) -> Bool {
+    
+    fileprivate func isRealmOptional(_ variable: InstanceVariable) -> Bool {
         return variable.isOptional && Generator.RealmOptionalTypes.contains(variable.rawType)
     }
     
-    @warn_unused_result
-    private func isValueConvertible(variable: InstanceVariable) -> Bool {
+    
+    fileprivate func isValueConvertible(_ variable: InstanceVariable) -> Bool {
         return !Generator.ValueTypes.contains(variable.rawType) && !isTorchEntity(variable)
     }
     
-    @warn_unused_result
-    private func getManagedObjectName(entityName: String) -> String {
+    
+    fileprivate func getManagedObjectName(_ entityName: String) -> String {
         return "Torch_" + entityName
     }
 
-    @warn_unused_result
-    private func getManagedObjectType(entityName: String) -> String {
+    
+    fileprivate func getManagedObjectType(_ entityName: String) -> String {
         return entityName + ".ManagedObjectType"
     }
 
-    @warn_unused_result
-    private func getWrapperName(entityName: String, _ variableName: String) -> String {
+    
+    fileprivate func getWrapperName(_ entityName: String, _ variableName: String) -> String {
         return getManagedObjectName(entityName) + "_" + variableName
     }
     
-    @warn_unused_result
-    private func getIsNilName(variableName: String) -> String {
+    
+    fileprivate func getIsNilName(_ variableName: String) -> String {
         return getPrefixedPropertyName(variableName) + "_isNil"
     }
 
-    @warn_unused_result
-    private func getPrefixedPropertyName(variableName: String) -> String {
+    
+    fileprivate func getPrefixedPropertyName(_ variableName: String) -> String {
         return "torch_\(variableName)"
     }
 }

@@ -7,13 +7,13 @@
 //
 
 public struct CodeBuilder {
-    private static let tab = "    "
+    fileprivate static let tab = "    "
 
-    public private(set) var code = ""
+    public fileprivate(set) var code = ""
 
-    private var nesting = 0
+    fileprivate var nesting = 0
 
-    private var nest: String {
+    fileprivate var nest: String {
         return (0 ..< nesting).reduce("") { acc, _ in acc + CodeBuilder.tab }
     }
     
@@ -21,17 +21,19 @@ public struct CodeBuilder {
         code = ""
     }
     
-    public mutating func nest(@noescape closure: (inout builder: CodeBuilder) -> ()) {
+    public mutating func nest(_ closure: (_ builder: inout CodeBuilder) -> ()) {
         nesting += 1
-        closure(builder: &self)
+        closure(&self)
         nesting -= 1
     }
     
-    public mutating func nest(line: String) {
-        nest { $0 += line }
+    public mutating func nest(_ line: String) {
+        nest { (builder: inout CodeBuilder) in
+            builder += line
+        }
     }
 
-    public mutating func append(line line: String, insertLineBreak: Bool = true) {
+    public mutating func append(line: String, insertLineBreak: Bool = true) {
         if line == "" {
             code += insertLineBreak ? "\n" : ""
         } else {
@@ -39,8 +41,8 @@ public struct CodeBuilder {
         }
     }
 
-    public mutating func append(lines lines: [String]) {
-        lines.enumerate().forEach {
+    public mutating func append(lines: [String]) {
+        lines.enumerated().forEach {
             if $0 > 0 {
                 append(line: "")
             }
@@ -50,20 +52,20 @@ public struct CodeBuilder {
 
     public mutating func append(builder subbuilder: CodeBuilder) {
         let lines = subbuilder.code.characters
-            .split(allowEmptySlices: true) { $0 == "\n" || $0 == "\r\n" }
+            .split(omittingEmptySubsequences: false) { $0 == "\n" || $0 == "\r\n" }
             .map(String.init)
         append(lines: lines)
     }
 }
 
-public func +=(inout builder: CodeBuilder, string: String) {
+public func +=(builder: inout CodeBuilder, string: String) {
     builder.append(line: string)
 }
 
-public func +=(inout builder: CodeBuilder, lines: [String]) {
+public func +=(builder: inout CodeBuilder, lines: [String]) {
     builder.append(lines: lines)
 }
 
-public func +=(inout builder: CodeBuilder, subbuilder: CodeBuilder) {
+public func +=(builder: inout CodeBuilder, subbuilder: CodeBuilder) {
     builder.append(builder: subbuilder)
 }

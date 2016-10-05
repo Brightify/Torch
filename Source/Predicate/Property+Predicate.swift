@@ -12,7 +12,7 @@ public extension Property where T: TorchEntity {
         return matches(predicate)
     }
     
-    public func matches(predicate: Predicate<T>) -> Predicate<PARENT> {
+    public func matches(_ predicate: Predicate<T>) -> Predicate<PARENT> {
         return Predicate.parentPropertyPredicate(self, predicate: predicate)
     }
 }
@@ -23,7 +23,7 @@ public extension Property where T: PropertyOptionalType, T.Wrapped: TorchEntity 
         return matches(predicate)
     }
     
-    public func matches(predicate: Predicate<T.Wrapped>) -> Predicate<PARENT> {
+    public func matches(_ predicate: Predicate<T.Wrapped>) -> Predicate<PARENT> {
         return Predicate.parentPropertyPredicate(self, predicate: predicate)
     }
 }

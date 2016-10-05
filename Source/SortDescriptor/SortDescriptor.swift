@@ -10,7 +10,7 @@ import RealmSwift
 
 public struct SortDescriptor<PARENT: TorchEntity> {
 
-    private let sortDescriptors: [RealmSwift.SortDescriptor]
+    fileprivate let sortDescriptors: [RealmSwift.SortDescriptor]
 
     init(property: String, ascending: Bool) {
         sortDescriptors = [RealmSwift.SortDescriptor(property: property, ascending: ascending)]
@@ -22,11 +22,11 @@ public struct SortDescriptor<PARENT: TorchEntity> {
         }
     }
     
-    private init(sortDescriptors: [RealmSwift.SortDescriptor]) {
+    fileprivate init(sortDescriptors: [RealmSwift.SortDescriptor]) {
         self.sortDescriptors = sortDescriptors
     }
     
-    public func then(sortDescriptor: SortDescriptor) -> SortDescriptor {
+    public func then(_ sortDescriptor: SortDescriptor) -> SortDescriptor {
         return SortDescriptor(sortDescriptors: sortDescriptors + sortDescriptor.sortDescriptors)
     }
     

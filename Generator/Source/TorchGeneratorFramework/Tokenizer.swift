@@ -9,8 +9,8 @@
 import SourceKittenFramework
 
 public struct Tokenizer {
-    private let file: File
-    private let source: String
+    fileprivate let file: File
+    fileprivate let source: String
 
     public init(sourceFile: File) {
         self.file = sourceFile
@@ -26,11 +26,11 @@ public struct Tokenizer {
         return FileRepresentation(sourceFile: file, declarations: declarations)
     }
     
-    private func tokenize(representables: [SourceKitRepresentable]) -> [Token] {
+    fileprivate func tokenize(_ representables: [SourceKitRepresentable]) -> [Token] {
         return representables.flatMap(tokenize)
     }
     
-    private func tokenize(representable: SourceKitRepresentable) -> Token? {
+    fileprivate func tokenize(_ representable: SourceKitRepresentable) -> Token? {
         guard let dictionary = representable as? [String: SourceKitRepresentable] else { return nil }
         
         let name = dictionary[Key.Name.rawValue] as? String ?? "name not set"

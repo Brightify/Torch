@@ -20,16 +20,16 @@ class CoreDataPerformanceTest: XCTestCase {
     }
     
     func testInit() {
-        measureBlock {
+        measure {
             self.initDatabase()
         }
     }
     
     func testSave() {
         measureMetrics(performanceMetrics, automaticallyStartMeasuring: false) {
-            self.measure {
-                self.saveData()
-            }
+            self.startMeasuring()
+            self.saveData()
+            self.stopMeasuring()
             
             self.deleteAll(Core_OtherData.Name)
             try! self.context.save()
@@ -38,9 +38,9 @@ class CoreDataPerformanceTest: XCTestCase {
     
     func testSaveWithId() {
         measureMetrics(performanceMetrics, automaticallyStartMeasuring: false) {
-            self.measure {
-                self.saveDataWithId()
-            }
+            self.startMeasuring()
+            self.saveDataWithId()
+            self.stopMeasuring()
             
             self.deleteAll(Core_OtherData.Name)
             try! self.context.save()
@@ -49,9 +49,9 @@ class CoreDataPerformanceTest: XCTestCase {
     
     func testSaveComplex() {
         measureMetrics(performanceMetrics, automaticallyStartMeasuring: false) {
-            self.measure {
-                self.saveComplex()
-            }
+            self.startMeasuring()
+            self.saveComplex()
+            self.stopMeasuring()
             
             self.deleteAll(Core_Data.Name)
             self.deleteAll(Core_OtherData.Name)
@@ -62,16 +62,16 @@ class CoreDataPerformanceTest: XCTestCase {
     func testUpdate() {
         saveComplex()
         try! context.save()
-        let request = NSFetchRequest(entityName: Core_Data.Name)
-        let objects = try! self.context.executeFetchRequest(request) as! [NSManagedObject]
+        let request = NSFetchRequest<Core_Data>(entityName: Core_Data.Name)
+        let objects = try! self.context.fetch(request)
         measureMetrics(performanceMetrics, automaticallyStartMeasuring: false) {
-            self.measure {
-                objects.forEach {
-                    $0.setValue(0, forKey: "number")
-                    $0.setValue(nil, forKey: "optionalNumber")
-                    $0.setValue(NSArray(array: [1, 2, 3]) as! [NSNumber], forKey: "numbers")
-                }
+            self.startMeasuring()
+            objects.forEach {
+                $0.setValue(0, forKey: "number")
+                $0.setValue(nil, forKey: "optionalNumber")
+                $0.setValue(NSArray(array: [1, 2, 3]) as! [NSNumber], forKey: "numbers")
             }
+            self.stopMeasuring()
             
             self.context.rollback()
         }
@@ -80,10 +80,10 @@ class CoreDataPerformanceTest: XCTestCase {
     func testLoad() {
         saveData()
         
-        measureBlock {
-            let request = NSFetchRequest(entityName: Core_OtherData.Name)
-            let objects = try! self.context.executeFetchRequest(request) as! [NSManagedObject]
-            let _ = objects.map { OtherData(id: $0.valueForKey("id") as? Int, text: $0.valueForKey("text") as! String) }
+        measure {
+            let request = NSFetchRequest<Core_OtherData>(entityName: Core_OtherData.Name)
+            let objects = try! self.context.fetch(request)
+            let _ = objects.map { OtherData(id: $0.value(forKey: "id") as? Int, text: $0.value(forKey: "text") as! String) }
         }
     }
 
@@ -91,9 +91,9 @@ class CoreDataPerformanceTest: XCTestCase {
         measureMetrics(performanceMetrics, automaticallyStartMeasuring: false) {
             self.saveData()
             
-            self.measure {
-                self.context.rollback()
-            }
+            self.startMeasuring()
+            self.context.rollback()
+            self.stopMeasuring()
         }
     }
 
@@ -101,9 +101,9 @@ class CoreDataPerformanceTest: XCTestCase {
         measureMetrics(performanceMetrics, automaticallyStartMeasuring: false) {
             self.saveData()
             
-            self.measure {
-                try! self.context.save()
-            }
+            self.startMeasuring()
+            try! self.context.save()
+            self.stopMeasuring()
             
             self.deleteAll(Core_OtherData.Name)
             try! self.context.save()
@@ -114,63 +114,63 @@ class CoreDataPerformanceTest: XCTestCase {
         measureMetrics(performanceMetrics, automaticallyStartMeasuring: false) {
             self.saveData()
             
-            self.measure {
-                self.deleteAll(Core_OtherData.Name)
-            }
+            self.startMeasuring()
+            self.deleteAll(Core_OtherData.Name)
+            self.stopMeasuring()
             
             try! self.context.save()
         }
     }
     
     private func initDatabase() {
-        let modelURL = NSBundle(forClass: CoreDataPerformanceTest.self).URLForResource("CoreDataModel", withExtension: "momd")!
-        let managedObjectModel = NSManagedObjectModel(contentsOfURL: modelURL)!
+        let modelURL = Bundle(for: CoreDataPerformanceTest.self).url(forResource: "CoreDataModel", withExtension: "momd")!
+        let managedObjectModel = NSManagedObjectModel(contentsOf: modelURL)!
         
         let coordinator = NSPersistentStoreCoordinator(managedObjectModel: managedObjectModel)
-        try! coordinator.addPersistentStoreWithType(NSInMemoryStoreType, configuration: nil, URL: nil, options: nil)
+        try! coordinator.addPersistentStore(ofType: NSInMemoryStoreType, configurationName: nil, at: nil, options: nil)
         
-        context = NSManagedObjectContext(concurrencyType: .MainQueueConcurrencyType)
+        context = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
         context.persistentStoreCoordinator = coordinator
     }
     
     private func saveData() {
-        let description = NSEntityDescription.entityForName(Core_OtherData.Name, inManagedObjectContext: context)!
+        let description = NSEntityDescription.entity(forEntityName: Core_OtherData.Name, in: context)!
         (0..<PerformanceTest.OtherDataCount).forEach {
-            let otherData = Core_OtherData(entity: description, insertIntoManagedObjectContext: context)
-            otherData.id = $0
+            let otherData = Core_OtherData(entity: description, insertInto: context)
+            otherData.id = NSNumber(value: $0)
             otherData.text = String($0)
         }
     }
     
     private func saveDataWithId() {
-        let description = NSEntityDescription.entityForName(Core_OtherData.Name, inManagedObjectContext: context)!
+        let description = NSEntityDescription.entity(forEntityName: Core_OtherData.Name, in: context)!
         
         (0..<PerformanceTest.OtherDataWithIdCount).forEach {
-                let request = NSFetchRequest(entityName: Core_OtherData.Name)
+                let request = NSFetchRequest<Core_OtherData>(entityName: Core_OtherData.Name)
 
             request.predicate = NSPredicate(format: "id = \($0)")
             request.fetchLimit = 1
             let otherData: Core_OtherData
-            if let object = (try! self.context.executeFetchRequest(request) as! [Core_OtherData]).first {
+            if let object = (try! self.context.fetch(request)).first {
                 otherData = object
             } else {
-                otherData = Core_OtherData(entity: description, insertIntoManagedObjectContext: context)
-                otherData.id = $0
+                otherData = Core_OtherData(entity: description, insertInto: context)
+                otherData.id = NSNumber(value: $0)
             }
             otherData.text = String($0)
         }
     }
     
     private func saveComplex() {
-        let dataDescription = NSEntityDescription.entityForName(Core_Data.Name, inManagedObjectContext: context)!
-        let otherDescription = NSEntityDescription.entityForName(Core_OtherData.Name, inManagedObjectContext: context)!
+        let dataDescription = NSEntityDescription.entity(forEntityName: Core_Data.Name, in: context)!
+        let otherDescription = NSEntityDescription.entity(forEntityName: Core_OtherData.Name, in: context)!
         (0..<PerformanceTest.DataCount).forEach {
-            let otherData = Core_OtherData(entity: otherDescription, insertIntoManagedObjectContext: context)
-            otherData.id = $0
+            let otherData = Core_OtherData(entity: otherDescription, insertInto: context)
+            otherData.id = NSNumber(value: $0)
             otherData.text = String($0)
             
-            let data = Core_Data(entity: dataDescription, insertIntoManagedObjectContext: context)
-            data.id = $0
+            let data = Core_Data(entity: dataDescription, insertInto: context)
+            data.id = NSNumber(value: $0)
             data.number = 0
             data.numbers = NSArray(array: [1, 1, 2]) as! [NSNumber]
             data.text = ""
@@ -179,7 +179,7 @@ class CoreDataPerformanceTest: XCTestCase {
             data.bool = false
             data.relation = otherData
             data.arrayWithRelation = NSOrderedSet(array: (0..<PerformanceTest.RelationsCount).map {
-                let otherData = Core_OtherData(entity: otherDescription, insertIntoManagedObjectContext: context)
+                let otherData = Core_OtherData(entity: otherDescription, insertInto: context)
                 otherData.text = String($0)
                 return otherData
             })
@@ -187,10 +187,10 @@ class CoreDataPerformanceTest: XCTestCase {
         }
     }
     
-    private func deleteAll(name: String) {
-        let request = NSFetchRequest(entityName: name)
-        (try! context.executeFetchRequest(request) as! [NSManagedObject]).forEach {
-            context.deleteObject($0)
+    private func deleteAll(_ name: String) {
+        let request = NSFetchRequest<NSManagedObject>(entityName: name)
+        (try! context.fetch(request)).forEach {
+            context.delete($0)
         }
     }
 }

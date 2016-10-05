@@ -9,23 +9,23 @@
 import Commandant
 import Result
 
-public struct VersionCommand: CommandType {
+public struct VersionCommand: CommandProtocol {
     
-    static let appVersion = NSBundle.allFrameworks().filter {
+    static let appVersion = Bundle.allFrameworks.filter {
         $0.bundleIdentifier == "org.brightify.TorchGeneratorFramework"
-        }.first?.objectForInfoDictionaryKey("CFBundleShortVersionString") as? String ?? ""
+        }.first?.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? ""
     
     public let verb = "version"
     public let function = "Prints the version of this generator."
     
-    public func run(options: Options) -> Result<Void, TorchGeneratorError> {
+    public func run(_ options: Options) -> Result<Void, TorchGeneratorError> {
         print(VersionCommand.appVersion)
-        return .Success()
+        return .success()
     }
     
-    public struct Options: OptionsType {
-        public static func evaluate(m: CommandMode) -> Result<Options, CommandantError<TorchGeneratorError>> {
-            return .Success(Options())
+    public struct Options: OptionsProtocol {
+        public static func evaluate(_ m: CommandMode) -> Result<Options, CommandantError<TorchGeneratorError>> {
+            return .success(Options())
         }
     }
 }

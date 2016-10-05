@@ -3,7 +3,7 @@ platform :osx, '10.9'
 use_frameworks!
 
 def pods
-	pod 'RealmSwift', '~> 1.0.0'
+	pod 'RealmSwift', '~> 2.0.0'
 end
 
 target "Torch" do

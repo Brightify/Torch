@@ -14,7 +14,7 @@ public protocol PropertyValueTypeConvertible: PropertyType {
     // Has to be function, otherwise cannot be used in extensions.
     static func getDefaultValue() -> Self
     
-    static func fromValue(value: ValueType) -> Self
+    static func from(value: ValueType) -> Self
     
     func toValue() -> ValueType
 }

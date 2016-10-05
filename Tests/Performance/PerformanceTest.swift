@@ -26,41 +26,41 @@ class PerformanceTest: XCTestCase {
     }
     
     func testInit() {
-        measureBlock {
-            let _ = try! Database(configuration: Realm.Configuration(inMemoryIdentifier: String(PerformanceTest) + "testInit"))
+        measure {
+            let _ = try! Database(configuration: Realm.Configuration(inMemoryIdentifier: String(describing: PerformanceTest.self) + "testInit"))
         }
     }
     
     func testSave() {
         measureMetrics(performanceMetrics, automaticallyStartMeasuring: false) {
-            self.measure {
-                self.saveData()
-            }
-            
-            self.database.deleteAll(OtherData)
+            self.startMeasuring()
+            self.saveData()
+            self.stopMeasuring()
+
+            self.database.deleteAll(OtherData.self)
             self.database.write()
         }
     }
     
     func testSaveWithId() {
         measureMetrics(performanceMetrics, automaticallyStartMeasuring: false) {
-            self.measure {
-                self.saveDataWithId()
-            }
+            self.startMeasuring()
+            self.saveDataWithId()
+            self.stopMeasuring()
             
-            self.database.deleteAll(OtherData)
+            self.database.deleteAll(OtherData.self)
             self.database.write()
         }
     }
     
     func testSaveComplex() {
         measureMetrics(performanceMetrics, automaticallyStartMeasuring: false) {
-            self.measure {
-                self.saveComplex()
-            }
+            self.startMeasuring()
+            self.saveComplex()
+            self.stopMeasuring()
             
-            self.database.deleteAll(OtherData)
-            self.database.deleteAll(Data)
+            self.database.deleteAll(OtherData.self)
+            self.database.deleteAll(Data.self)
             
             self.database.write()
         }
@@ -69,16 +69,17 @@ class PerformanceTest: XCTestCase {
     func testUpdate() {
         self.saveComplex()
         database.write()
-        let objects = database.load(Data)
+        let objects = database.load(Data.self)
         measureMetrics(performanceMetrics, automaticallyStartMeasuring: false) {
-            self.measure {
-                for var object in objects {
-                    object.number = 0
-                    object.optionalNumber = nil
-                    object.numbers = [1, 2, 3]
-                    self.database.save(object)
-                }
+            self.startMeasuring()
+            for var object in objects {
+                object.number = 0
+                object.optionalNumber = nil
+                object.numbers = [1, 2, 3]
+                self.database.save(object)
             }
+
+            self.stopMeasuring()
             
             self.database.rollback()
         }
@@ -87,8 +88,8 @@ class PerformanceTest: XCTestCase {
     func testLoad() {
         saveData()
         
-        measureBlock {
-            self.database.load(OtherData)
+        measure {
+            _ = self.database.load(OtherData.self)
         }
     }
     
@@ -96,9 +97,9 @@ class PerformanceTest: XCTestCase {
         measureMetrics(performanceMetrics, automaticallyStartMeasuring: false) {
             self.saveData()
             
-            self.measure {
-                self.database.rollback()
-            }
+            self.startMeasuring()
+            self.database.rollback()
+            self.stopMeasuring()
         }
     }
     
@@ -106,11 +107,11 @@ class PerformanceTest: XCTestCase {
         measureMetrics(performanceMetrics, automaticallyStartMeasuring: false) {
             self.saveData()
             
-            self.measure {
-                self.database.write()
-            }
+            self.startMeasuring()
+            self.database.write()
+            self.stopMeasuring()
             
-            self.database.deleteAll(OtherData)
+            self.database.deleteAll(OtherData.self)
             self.database.write()
         }
     }
@@ -119,9 +120,9 @@ class PerformanceTest: XCTestCase {
         measureMetrics(performanceMetrics, automaticallyStartMeasuring: false) {
             self.saveData()
             
-            self.measure {
-                self.database.deleteAll(OtherData)
-            }
+            self.startMeasuring()
+            self.database.deleteAll(OtherData.self)
+            self.stopMeasuring()
             
             self.database.write()
         }
@@ -136,7 +137,7 @@ class PerformanceTest: XCTestCase {
     private func saveDataWithId() {
         (0..<PerformanceTest.OtherDataWithIdCount).forEach {
 
-            database.save(OtherData(id: $0, text: String($0)))
+            database.save(OtherData(id: $0, text: String(describing: $0)))
         }
     }
     

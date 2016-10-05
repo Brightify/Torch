@@ -31,12 +31,18 @@ class TorchTest: XCTestCase {
         
         database.save(data, dataWithOptionals).write()
         
-        let loadedOtherData = database.load(OtherData)
-        XCTAssertEqual(2, database.load(Data).count)
+        let loadedOtherData = database.load(OtherData.self)
+        XCTAssertEqual(2, database.load(Data.self).count)
         XCTAssertEqual(1, loadedOtherData.count)
-        XCTAssertEqual(String(data), String(database.load(Data.self, where: Data.id == 0).first!))
-        XCTAssertEqual(String(dataWithOptionals), String(database.load(Data.self, where: Data.id == 1).first!))
-        XCTAssertEqual(String(otherData), String(loadedOtherData.first!))
+        XCTAssertEqual(
+            String(describing: data),
+            String(describing: database.load(Data.self, where: Data.id == 0).first!))
+        XCTAssertEqual(
+            String(describing: dataWithOptionals),
+            String(describing: database.load(Data.self, where: Data.id == 1).first!))
+        XCTAssertEqual(
+            String(describing: otherData),
+            String(describing: loadedOtherData.first!))
     }
     
     func testPersistanceOfValueConvertible() {
@@ -45,10 +51,14 @@ class TorchTest: XCTestCase {
         
         database.save(data, dataWithOptionals).write()
         
-        let loadedData = database.load(DataWithEnums)
+        let loadedData = database.load(DataWithEnums.self)
         XCTAssertEqual(2, loadedData.count)
-        XCTAssertEqual(String(data), String(database.load(DataWithEnums.self, where: DataWithEnums.id == 0).first!))
-        XCTAssertEqual(String(dataWithOptionals), String(database.load(DataWithEnums.self, where: DataWithEnums.id == 1).first!))
+        XCTAssertEqual(
+            String(describing: data),
+            String(describing: database.load(DataWithEnums.self, where: DataWithEnums.id == 0).first!))
+        XCTAssertEqual(
+            String(describing: dataWithOptionals),
+            String(describing: database.load(DataWithEnums.self, where: DataWithEnums.id == 1).first!))
     }
     
     func testIdAssignment() {
@@ -60,7 +70,7 @@ class TorchTest: XCTestCase {
             database.save(data0, data10, data11)
         }
         
-        let loadedData = database.load(OtherData)
+        let loadedData = database.load(OtherData.self)
         XCTAssertEqual(3, loadedData.count)
         loadedData.map { (expected: Int($0.text), actual: $0.id) }.forEach {
             XCTAssertEqual($0.expected, $0.actual)
@@ -125,21 +135,21 @@ class TorchTest: XCTestCase {
     func testRollback() {
         let data = OtherData(id: nil, text: "")
         database.save(data)
-        XCTAssertEqual(1, database.load(OtherData).count)
+        XCTAssertEqual(1, database.load(OtherData.self).count)
         
         database.rollback()
         
-        XCTAssertEqual(0, database.load(OtherData).count)
+        XCTAssertEqual(0, database.load(OtherData.self).count)
     }
     
     func testWrite() {
         let data = OtherData(id: nil, text: "")
         database.save(data).write()
-        XCTAssertEqual(1, database.load(OtherData).count)
+        XCTAssertEqual(1, database.load(OtherData.self).count)
         
         database.rollback()
         
-        XCTAssertEqual(1, database.load(OtherData).count)
+        XCTAssertEqual(1, database.load(OtherData.self).count)
     }
     
     func testDelete() {
@@ -149,7 +159,7 @@ class TorchTest: XCTestCase {
         
         database.delete(data, secondData)
         
-        XCTAssertEqual(0, database.load(OtherData).count)
+        XCTAssertEqual(0, database.load(OtherData.self).count)
     }
     
     func testDeleteTypeWithPredicate() {
@@ -159,7 +169,7 @@ class TorchTest: XCTestCase {
         
         database.delete(OtherData.self, where: OtherData.id == 1)
         
-        XCTAssertEqual(1, database.load(OtherData).count)
+        XCTAssertEqual(1, database.load(OtherData.self).count)
     }
     
     func testDeleteAll() {
@@ -167,8 +177,8 @@ class TorchTest: XCTestCase {
         let secondData = OtherData(id: 1, text: "")
         database.save(data, secondData).write()
         
-        database.deleteAll(OtherData)
+        database.deleteAll(OtherData.self)
         
-        XCTAssertEqual(0, database.load(OtherData).count)
+        XCTAssertEqual(0, database.load(OtherData.self).count)
     }
 }

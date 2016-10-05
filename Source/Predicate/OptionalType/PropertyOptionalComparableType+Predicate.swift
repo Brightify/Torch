@@ -8,35 +8,35 @@
 
 public extension Property where T: PropertyOptionalType, T.Wrapped: PropertyComparableValueType {
     
-    public func lessThan(value: T) -> Predicate<PARENT> {
+    public func lessThan(_ value: T) -> Predicate<PARENT> {
         return Predicate.singleValuePredicate(name, value: value.value?.toAnyObject(), operatorString: "<")
     }
     
-    public func lessThanOrEqualTo(value: T) -> Predicate<PARENT> {
+    public func lessThanOrEqualTo(_ value: T) -> Predicate<PARENT> {
         return Predicate.singleValuePredicate(name, value: value.value?.toAnyObject(), operatorString: "<=")
     }
     
-    public func greaterThanOrEqualTo(value: T) -> Predicate<PARENT> {
+    public func greaterThanOrEqualTo(_ value: T) -> Predicate<PARENT> {
         return Predicate.singleValuePredicate(name, value: value.value?.toAnyObject(), operatorString: ">=")
     }
     
-    public func greaterThan(value: T) -> Predicate<PARENT> {
+    public func greaterThan(_ value: T) -> Predicate<PARENT> {
         return Predicate.singleValuePredicate(name, value: value.value?.toAnyObject(), operatorString: ">")
     }
 }
 
-public func < <P, T: PropertyOptionalType where T.Wrapped: PropertyComparableValueType>(lhs: Property<P, T>, rhs: T) -> Predicate<P> {
+public func < <P, T: PropertyOptionalType>(lhs: Property<P, T>, rhs: T) -> Predicate<P> where T.Wrapped: PropertyComparableValueType {
     return lhs.lessThan(rhs)
 }
 
-public func <= <P, T: PropertyOptionalType where T.Wrapped: PropertyComparableValueType>(lhs: Property<P, T>, rhs: T) -> Predicate<P> {
+public func <= <P, T: PropertyOptionalType>(lhs: Property<P, T>, rhs: T) -> Predicate<P> where T.Wrapped: PropertyComparableValueType {
     return lhs.lessThanOrEqualTo(rhs)
 }
 
-public func >= <P, T: PropertyOptionalType where T.Wrapped: PropertyComparableValueType>(lhs: Property<P, T>, rhs: T) -> Predicate<P> {
+public func >= <P, T: PropertyOptionalType>(lhs: Property<P, T>, rhs: T) -> Predicate<P> where T.Wrapped: PropertyComparableValueType {
     return lhs.greaterThanOrEqualTo(rhs)
 }
 
-public func > <P, T: PropertyOptionalType where T.Wrapped: PropertyComparableValueType>(lhs: Property<P, T>, rhs: T) -> Predicate<P> {
+public func > <P, T: PropertyOptionalType>(lhs: Property<P, T>, rhs: T) -> Predicate<P> where T.Wrapped: PropertyComparableValueType {
     return lhs.greaterThan(rhs)
 }

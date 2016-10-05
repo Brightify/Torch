@@ -15,7 +15,7 @@ public protocol TorchEntity: PropertyType {
 
     init(fromManagedObject object: ManagedObjectType)
 
-    mutating func torch_updateManagedObject(object: ManagedObjectType, database: Database)
+    mutating func torch_update(managedObject object: ManagedObjectType, database: Database)
     
-    static func torch_deleteValueTypeWrappers(object: ManagedObjectType, @noescape deleteFunction: (RealmSwift.Object) -> Void)
+    static func torch_delete(managedObject object: ManagedObjectType, deleteFunction: (RealmSwift.Object) -> Void)
 }

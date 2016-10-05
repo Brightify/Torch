@@ -10,31 +10,31 @@ import FileKit
 
 public struct FileHeaderHandler {
     
-    public static func getHeader(file: FileRepresentation, withTimestamp timestamp: Bool) -> String {
+    public static func getHeader(_ file: FileRepresentation, withTimestamp timestamp: Bool) -> String {
         let path: String
         if let absolutePath = file.sourceFile.path {
             path = getRelativePath(absolutePath)
         } else {
             path = "unknown"
         }
-        let generationInfo = "// MARK: - Torch entity extensions generated from file: \(path)" + (timestamp ? " at \(NSDate())" : "")
+        let generationInfo = "// MARK: - Torch entity extensions generated from file: \(path)" + (timestamp ? " at \(Date())" : "")
         return generationInfo + "\n\n"
     }
     
-    public static func getImports(file: FileRepresentation, libraries: [String]) -> String {
-        var imports = Array(Set(libraries.map { "import " + $0 + "\n" })).sort().joinWithSeparator("")
+    public static func getImports(_ file: FileRepresentation, libraries: [String]) -> String {
+        var imports = Array(Set(libraries.map { "import " + $0 + "\n" })).sorted().joined(separator: "")
         if imports.isEmpty == false {
             imports += "\n"
         }
         return "import Torch\n" + "import RealmSwift\n\n" + imports
     }
 
-    private static func getRelativePath(absolutePath: String) -> String {
+    fileprivate static func getRelativePath(_ absolutePath: String) -> String {
         let path = Path(absolutePath)
-        let base = path.commonAncestor(Path.Current)
-        let components = path.components.suffixFrom(base.components.endIndex)
-        let result = components.map { $0.rawValue }.joinWithSeparator(Path.separator)
-        let difference = Path.Current.components.endIndex - base.components.endIndex
+        let base = path.commonAncestor(Path.current)
+        let components = path.components.suffix(from: base.components.endIndex)
+        let result = components.map { $0.rawValue }.joined(separator: Path.separator)
+        let difference = Path.current.components.endIndex - base.components.endIndex
         return (0..<difference).reduce(result) { acc, _ in ".." + Path.separator + acc }
     }
 }

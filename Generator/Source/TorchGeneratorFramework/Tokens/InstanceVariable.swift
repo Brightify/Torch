@@ -17,17 +17,17 @@ public struct InstanceVariable: Token {
     }
     
     public var isArray: Bool {
-        return type.hasPrefix("[") && !type.containsString(":")
+        return type.hasPrefix("[") && !type.contains(":")
     }
     
     public var rawType: String {
         var result = type
         if isOptional {
-            result.removeAtIndex(result.endIndex.advancedBy(-1))
+            result.remove(at: result.characters.index(result.endIndex, offsetBy: -1))
         }
         if isArray {
-            result.removeAtIndex(result.startIndex)
-            result.removeAtIndex(result.endIndex.advancedBy(-1))
+            result.remove(at: result.startIndex)
+            result.remove(at: result.characters.index(result.endIndex, offsetBy: -1))
         }
         return result
     }

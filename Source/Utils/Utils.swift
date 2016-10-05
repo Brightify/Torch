@@ -10,44 +10,44 @@ import RealmSwift
 
 public struct Utils {
     
-    static func getIsNilVariableName(variableName: String) -> String {
+    static func getIsNilVariableName(_ variableName: String) -> String {
         return variableName + "_isNil"
     }
     
-    public static func toValue<T: PropertyValueType>(managedValue: T) -> T {
+    public static func toValue<T: PropertyValueType>(_ managedValue: T) -> T {
         return managedValue
     }
     
-    public static func toValue<T: PropertyValueTypeConvertible>(managedValue: T.ValueType) -> T {
-        return T.fromValue(managedValue)
+    public static func toValue<T: PropertyValueTypeConvertible>(_ managedValue: T.ValueType) -> T {
+        return T.from(value: managedValue)
     }
     
     // For ID
-    public static func toValue<T: PropertyValueType>(managedValue: T) -> T? {
+    public static func toValue<T: PropertyValueType>(_ managedValue: T) -> T? {
         return managedValue
     }
     
-    public static func toValue<T: PropertyValueType>(managedValue: RealmOptional<T>) -> T? {
+    public static func toValue<T: PropertyValueType>(_ managedValue: RealmOptional<T>) -> T? {
         return managedValue.value
     }
     
-    public static func toValue<T: PropertyOptionalType where T.Wrapped: PropertyValueType>(managedValue: T) -> T {
+    public static func toValue<T: PropertyOptionalType>(_ managedValue: T) -> T where T.Wrapped: PropertyValueType {
         return managedValue
     }
     
-    public static func toValue<T: PropertyValueTypeConvertible>(managedValue: T.ValueType, _ isNil: Bool) -> T? {
-        return isNil ? nil : T.fromValue(managedValue)
+    public static func toValue<T: PropertyValueTypeConvertible>(_ managedValue: T.ValueType, _ isNil: Bool) -> T? {
+        return isNil ? nil : T.from(value: managedValue)
     }
     
-    public static func toValue<T: PropertyValueType, V: ValueTypeWrapper where V.ValueType == T>(managedValue: List<V>) -> [T] {
+    public static func toValue<T: PropertyValueType, V: ValueTypeWrapper>(_ managedValue: List<V>) -> [T] where V.ValueType == T {
         return managedValue.map { $0.value }
     }
     
-    public static func toValue<T: PropertyValueTypeConvertible, V: ValueTypeWrapper where V.ValueType == T.ValueType>(managedValue: List<V>) -> [T] {
-        return managedValue.map { T.fromValue($0.value) }
+    public static func toValue<T: PropertyValueTypeConvertible, V: ValueTypeWrapper>(_ managedValue: List<V>) -> [T] where V.ValueType == T.ValueType {
+        return managedValue.map { T.from(value: $0.value) }
     }
     
-    public static func toValue<T: TorchEntity>(managedValue: T.ManagedObjectType?) -> T? {
+    public static func toValue<T: TorchEntity>(_ managedValue: T.ManagedObjectType?) -> T? {
         if let managedValue = managedValue {
             return T(fromManagedObject: managedValue)
         } else {
@@ -55,27 +55,27 @@ public struct Utils {
         }
     }
     
-    public static func toValue<T: TorchEntity>(managedValue: List<T.ManagedObjectType>) -> [T] {
+    public static func toValue<T: TorchEntity>(_ managedValue: List<T.ManagedObjectType>) -> [T] {
         return managedValue.map { T(fromManagedObject: $0) }
     }
     
-    public static func updateManagedValue<T: PropertyValueType>(inout managedValue: T, _ value: T) {
+    public static func updateManagedValue<T: PropertyValueType>(_ managedValue: inout T, _ value: T) {
         managedValue = value
     }
     
-    public static func updateManagedValue<T: PropertyValueTypeConvertible>(inout managedValue: T.ValueType, _ value: T) {
+    public static func updateManagedValue<T: PropertyValueTypeConvertible>(_ managedValue: inout T.ValueType, _ value: T) {
         managedValue = value.toValue()
     }
     
-    public static func updateManagedValue<T: PropertyValueType>(inout managedValue: RealmOptional<T>, _ value: T?) {
+    public static func updateManagedValue<T: PropertyValueType>(_ managedValue: inout RealmOptional<T>, _ value: T?) {
         managedValue.value = value
     }
 
-    public static func updateManagedValue<T: PropertyOptionalType where T.Wrapped: PropertyValueType>(inout managedValue: T, _ value: T) {
+    public static func updateManagedValue<T: PropertyOptionalType>(_ managedValue: inout T, _ value: T) where T.Wrapped: PropertyValueType {
         managedValue = value
     }
     
-    public static func updateManagedValue<T: PropertyOptionalType where T.Wrapped: PropertyValueTypeConvertible>(inout managedValue: T.Wrapped.ValueType, inout _ isNil: Bool, _ value: T) {
+    public static func updateManagedValue<T: PropertyOptionalType>(_ managedValue: inout T.Wrapped.ValueType, _ isNil: inout Bool, _ value: T) where T.Wrapped: PropertyValueTypeConvertible {
         if let value = value.value {
             managedValue = value.toValue()
             isNil = false
@@ -84,7 +84,7 @@ public struct Utils {
         }
     }
     
-    public static func updateManagedValue<T: PropertyValueType, V: ValueTypeWrapper where V.ValueType == T>(inout managedValue: List<V>, _ value: [T]) {
+    public static func updateManagedValue<T: PropertyValueType, V: ValueTypeWrapper>(_ managedValue: inout List<V>, _ value: [T]) where V.ValueType == T {
         managedValue.first?.realm?.delete(managedValue)
         managedValue.removeAll()
         value.map {
@@ -94,8 +94,8 @@ public struct Utils {
         }.forEach { managedValue.append($0) }
     }
     
-    public static func updateManagedValue<T: PropertyValueTypeConvertible, V: ValueTypeWrapper where V.ValueType == T.ValueType>
-        (inout managedValue: List<V>, _ value: [T]) {
+    public static func updateManagedValue<T: PropertyValueTypeConvertible, V: ValueTypeWrapper>
+        (_ managedValue: inout List<V>, _ value: [T]) where V.ValueType == T.ValueType {
         managedValue.first?.realm?.delete(managedValue)
         managedValue.removeAll()
         value.map {
@@ -105,7 +105,7 @@ public struct Utils {
             }.forEach { managedValue.append($0) }
     }
     
-    public static func updateManagedValue<T: TorchEntity>(inout managedValue: T.ManagedObjectType?, inout _ value: T?, _ database: Database) {
+    public static func updateManagedValue<T: TorchEntity>(_ managedValue: inout T.ManagedObjectType?, _ value: inout T?, _ database: Database) {
         if var unwrapedValue = value {
             managedValue = database.getManagedObject(&unwrapedValue)
             value = unwrapedValue
@@ -114,7 +114,7 @@ public struct Utils {
         }
     }
     
-    public static func updateManagedValue<T: TorchEntity>(inout managedValue: List<T.ManagedObjectType>, inout _ value: [T], _ database: Database) {
+    public static func updateManagedValue<T: TorchEntity>(_ managedValue: inout List<T.ManagedObjectType>, _ value: inout [T], _ database: Database) {
         managedValue.removeAll()
         for i in value.indices {
             managedValue.append(database.getManagedObject(&value[i]))

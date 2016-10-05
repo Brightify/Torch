@@ -9,15 +9,18 @@
 import XCTest
 
 extension XCTestCase {
-    
-    // TODO Use measureBlockWithSetup in Swift 3
     var performanceMetrics: [String] {
         return XCTestCase.defaultPerformanceMetrics()
     }
     
-    func measure(@noescape block: () -> Void) {
-        startMeasuring()
-        block()
-        stopMeasuring()
-    }
+    // TODO Use measureBlockWithSetup in Swift 3
+//    var performanceMetrics: [String] {
+//        return XCTestCase.defaultPerformanceMetrics()
+//    }
+    
+//    func measure(block: () -> Void) {
+//        startMeasuring()
+//        block()
+//        stopMeasuring()
+//    }
 }

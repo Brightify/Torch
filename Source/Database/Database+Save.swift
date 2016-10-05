@@ -14,11 +14,13 @@ extension Database {
      If object doesn`t have id it is not possible to use it afterwards (next invocation of save will create new object).
      If you do want to continue using the same object without loading it from database you can use `create` instead.
      */
-    public func save<T: TorchEntity>(entities: T...) -> Database {
+    @discardableResult
+    public func save<T: TorchEntity>(_ entities: T...) -> Database {
         return save(entities)
     }
 
-    public func save<T: TorchEntity>(entities: [T]) -> Database {
+    @discardableResult
+    public func save<T: TorchEntity>(_ entities: [T]) -> Database {
         var mutableEntities = entities
         create(&mutableEntities)
         return self
@@ -27,12 +29,14 @@ extension Database {
     /**
      Same as `save` except it is possible to set entity new id. This allows to use the same object after it was created. If object has id this method acts as `save`.
      */
-    public func create<T: TorchEntity>(inout entity: T) -> Database {
-        getManagedObject(&entity)
+    @discardableResult
+    public func create<T: TorchEntity>(_ entity: inout T) -> Database {
+        _ = getManagedObject(&entity)
         return self
     }
 
-    public func create<T: TorchEntity>(inout entities: [T]) -> Database {
+    @discardableResult
+    public func create<T: TorchEntity>(_ entities: inout [T]) -> Database {
         for i in entities.indices {
             create(&entities[i])
         }

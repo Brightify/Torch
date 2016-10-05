@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="10174" systemVersion="15F34" minimumToolsVersion="Xcode 7.0">
-    <entity name="Core_Data" syncable="YES">
-        <attribute name="bool" attributeType="Boolean" syncable="YES"/>
-        <attribute name="double" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
-        <attribute name="float" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
-        <attribute name="id" optional="YES" attributeType="Integer 64" defaultValueString="0" indexed="YES" syncable="YES"/>
-        <attribute name="number" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="11232" systemVersion="16A322" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="Core_Data" representedClassName="Core_Data" syncable="YES">
+        <attribute name="bool" attributeType="Boolean" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="double" attributeType="Double" defaultValueString="0.0" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="float" attributeType="Float" defaultValueString="0.0" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="id" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" indexed="YES" syncable="YES"/>
+        <attribute name="number" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="numbers" attributeType="Transformable" syncable="YES"/>
-        <attribute name="optionalNumber" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="optionalNumber" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="readOnly" attributeType="String" syncable="YES"/>
         <attribute name="text" attributeType="String" syncable="YES"/>
         <relationship name="arrayWithRelation" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="Core_OtherData" syncable="YES"/>
         <relationship name="relation" maxCount="1" deletionRule="Nullify" destinationEntity="Core_OtherData" syncable="YES"/>
     </entity>
-    <entity name="Core_OtherData" syncable="YES">
-        <attribute name="id" optional="YES" attributeType="Integer 64" defaultValueString="0" indexed="YES" syncable="YES"/>
+    <entity name="Core_OtherData" representedClassName="Core_OtherData" syncable="YES">
+        <attribute name="id" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" indexed="YES" syncable="YES"/>
         <attribute name="text" attributeType="String" syncable="YES"/>
     </entity>
     <elements>

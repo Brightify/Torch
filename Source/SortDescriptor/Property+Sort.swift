@@ -19,14 +19,14 @@ public extension Property {
 
 public extension Property where T: TorchEntity {
     
-    public func by(descriptor: SortDescriptor<T>) -> SortDescriptor<PARENT> {
+    public func by(_ descriptor: SortDescriptor<T>) -> SortDescriptor<PARENT> {
         return SortDescriptor<PARENT>(parentProperty: self, sortDescriptor: descriptor)
     }
 }
 
 public extension Property where T: PropertyOptionalType, T.Wrapped: TorchEntity {
     
-    public func by(descriptor: SortDescriptor<T.Wrapped>) -> SortDescriptor<PARENT> {
+    public func by(_ descriptor: SortDescriptor<T.Wrapped>) -> SortDescriptor<PARENT> {
         return SortDescriptor<PARENT>(parentProperty: self, sortDescriptor: descriptor)
     }
 }

@@ -14,7 +14,7 @@ struct TestUtils {
     static func initDatabase() -> Database {
         let configuration = Realm.Configuration(inMemoryIdentifier: "memory")
         let realm = try! Realm(configuration: configuration)
-        if realm.inWriteTransaction {
+        if realm.isInWriteTransaction {
             realm.cancelWrite()
         }
         try! realm.write {

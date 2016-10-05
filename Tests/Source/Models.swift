@@ -53,7 +53,7 @@ extension Planet: PropertyValueTypeConvertible {
         return Planet.Mercury
     }
     
-    static func fromValue(value: Int) -> Planet {
+    static func from(value: Int) -> Planet {
         return Planet(rawValue: value)!
     }
     
@@ -78,7 +78,7 @@ extension Day: PropertyValueTypeConvertible {
         return Day.Monday
     }
     
-    static func fromValue(value: String) -> Day {
+    static func from(value: String) -> Day {
         return Day(rawValue: value)!
     }
     

@@ -9,7 +9,8 @@
 import Foundation
 
 extension Database {
-    
+
+    @discardableResult
     public func rollback() -> Database {
         realm.cancelWrite()
         metadata = [:]
@@ -17,18 +18,20 @@ extension Database {
         return self
     }
 
-    public func write(@noescape closure: () -> Void = {}) -> Database {
+    @discardableResult
+    public func write(_ closure: () -> Void = {}) -> Database {
         return write(defaultOnWriteError, closure: closure)
     }
-    
-    public func write(@noescape onWriteError: OnWriteErrorListener, @noescape closure: () -> Void = {}) -> Database {
+
+    @discardableResult
+    public func write(_ onWriteError: OnWriteErrorListener, closure: () -> Void = {}) -> Database {
         closure()
         do {
             try realm.commitWrite()
         } catch {
             onWriteError(error)
         }
-        if !realm.inWriteTransaction {
+        if !realm.isInWriteTransaction {
             realm.beginWrite()
         }
         return self

@@ -11,7 +11,7 @@ import RealmSwift
 
 class RealmPerformanceTest: XCTestCase {
     
-    private var realm = try! Realm(configuration: Realm.Configuration(inMemoryIdentifier: String(RealmPerformanceTest)))
+    private var realm = try! Realm(configuration: Realm.Configuration(inMemoryIdentifier: String(describing: RealmPerformanceTest.self)))
     
     override func setUp() {
         super.setUp()
@@ -22,17 +22,17 @@ class RealmPerformanceTest: XCTestCase {
     }
     
     func testInit() {
-        measureBlock {
-            let _ = try! Realm(configuration: Realm.Configuration(inMemoryIdentifier: String(RealmPerformanceTest) + "testInit"))
+        measure {
+            let _ = try! Realm(configuration: Realm.Configuration(inMemoryIdentifier: String(describing: RealmPerformanceTest.self) + "testInit"))
         }
     }
     
     func testSave() {
         measureMetrics(performanceMetrics, automaticallyStartMeasuring: false) {
             try! self.realm.write {
-                self.measure {
-                    self.saveData()
-                }
+                self.startMeasuring()
+                self.saveData()
+                self.stopMeasuring()
                 
                 self.realm.deleteAll()
             }
@@ -42,9 +42,9 @@ class RealmPerformanceTest: XCTestCase {
     func testSaveWithId() {
         measureMetrics(performanceMetrics, automaticallyStartMeasuring: false) {
             try! self.realm.write {
-                self.measure {
-                    self.saveData(withId: true)
-                }
+                self.startMeasuring()
+                self.saveData(withId: true)
+                self.stopMeasuring()
                 
                 self.realm.deleteAll()
             }
@@ -54,9 +54,9 @@ class RealmPerformanceTest: XCTestCase {
     func testSaveComplex() {
         measureMetrics(performanceMetrics, automaticallyStartMeasuring: false) {
             try! self.realm.write {
-                self.measure {
-                    self.saveComplex()
-                }
+                self.startMeasuring()
+                self.saveComplex()
+                self.stopMeasuring()
                 
                 self.realm.deleteAll()
             }
@@ -67,15 +67,15 @@ class RealmPerformanceTest: XCTestCase {
         try! self.realm.write {
             saveComplex()
         }
-        let objects = self.realm.objects(Torch_Data)
+        let objects = self.realm.objects(Torch_Data.self)
         measureMetrics(performanceMetrics, automaticallyStartMeasuring: false) {
             self.realm.beginWrite()
             
-            self.measure {
-                objects.forEach {
-                    self.updateData($0)
-                }
+            self.startMeasuring()
+            objects.forEach {
+                self.updateData($0)
             }
+            self.stopMeasuring()
             
             self.realm.cancelWrite()
         }
@@ -86,8 +86,8 @@ class RealmPerformanceTest: XCTestCase {
             saveData()
         }
         
-        measureBlock {
-            let _ = Array(self.realm.objects(Torch_OtherData))
+        measure {
+            let _ = Array(self.realm.objects(Torch_OtherData.self))
         }
     }
     
@@ -96,9 +96,9 @@ class RealmPerformanceTest: XCTestCase {
             self.realm.beginWrite()
             self.saveData()
             
-            self.measure {
-                self.realm.cancelWrite()
-            }
+            self.startMeasuring()
+            self.realm.cancelWrite()
+            self.stopMeasuring()
         }
     }
     
@@ -107,9 +107,9 @@ class RealmPerformanceTest: XCTestCase {
             self.realm.beginWrite()
             self.saveData()
             
-            self.measure {
-                try! self.realm.commitWrite()
-            }
+            self.startMeasuring()
+            try! self.realm.commitWrite()
+            self.stopMeasuring()
             
             try! self.realm.write {
                 self.realm.deleteAll()
@@ -122,9 +122,9 @@ class RealmPerformanceTest: XCTestCase {
             try! self.realm.write {
                 self.saveData()
                 
-                self.measure {
-                    self.realm.deleteAll()
-                }
+                self.startMeasuring()
+                self.realm.deleteAll()
+                self.stopMeasuring()
             }
         }
     }
@@ -151,12 +151,12 @@ class RealmPerformanceTest: XCTestCase {
             
             let otherData = Torch_OtherData()
             otherData.id = i
-            otherData.torch_text = String(index)
+            otherData.torch_text = String(describing: index)
             data.torch_relation = otherData
             (0..<PerformanceTest.RelationsCount).forEach { j in
                 let otherData = Torch_OtherData()
                 otherData.id = PerformanceTest.DataCount + PerformanceTest.RelationsCount * i + j
-                otherData.torch_text = String(index)
+                otherData.torch_text = String(describing: index)
                 data.torch_arrayWithRelation.append(otherData)
             }
             data.torch_readOnly = ""
@@ -164,7 +164,7 @@ class RealmPerformanceTest: XCTestCase {
         }
     }
     
-    private func updateData(data: Torch_Data) {
+    private func updateData(_ data: Torch_Data) {
         data.torch_number = 0
         data.torch_optionalNumber.value = nil
         

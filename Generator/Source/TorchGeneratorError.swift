@@ -8,15 +8,15 @@
 
 import FileKit
 
-public enum TorchGeneratorError: ErrorType {
-    case IOError(FileKitError)
-    case UnknownError(ErrorType)
+public enum TorchGeneratorError: Error {
+    case ioError(FileKitError)
+    case unknownError(Error)
     
     public var description: String {
         switch self {
-        case .IOError(let error):
+        case .ioError(let error):
             return error.description
-        case .UnknownError(let error):
+        case .unknownError(let error):
             return "\(error)"
         }
     }

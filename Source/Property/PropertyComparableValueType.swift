@@ -14,55 +14,55 @@ public protocol PropertyComparableValueType: PropertyValueType {
 extension Int8: PropertyComparableValueType {
     
     public func toAnyObject() -> AnyObject {
-        return NSNumber(char: self)
+        return NSNumber(value: self as Int8)
     }
 }
 
 extension Int16: PropertyComparableValueType {
     
     public func toAnyObject() -> AnyObject {
-        return NSNumber(short: self)
+        return NSNumber(value: self as Int16)
     }
 }
 
 extension Int32: PropertyComparableValueType {
     
     public func toAnyObject() -> AnyObject {
-        return NSNumber(int: self)
+        return NSNumber(value: self as Int32)
     }
 }
 
 extension Int64: PropertyComparableValueType {
     
     public func toAnyObject() -> AnyObject {
-        return NSNumber(longLong: self)
+        return NSNumber(value: self as Int64)
     }
 }
 
 extension Int: PropertyComparableValueType {
     
     public func toAnyObject() -> AnyObject {
-        return self
+        return self as AnyObject
     }
 }
 
 extension Double: PropertyComparableValueType {
     
     public func toAnyObject() -> AnyObject {
-        return self
+        return self as AnyObject
     }
 }
 
 extension Float: PropertyComparableValueType {
     
     public func toAnyObject() -> AnyObject {
-        return self
+        return self as AnyObject
     }
 }
 
-extension NSDate: PropertyComparableValueType {
+extension Date: PropertyComparableValueType {
     
     public func toAnyObject() -> AnyObject {
-        return self
+        return self as AnyObject
     }
 }

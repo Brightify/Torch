@@ -16,20 +16,20 @@ public protocol PropertyValueType: PropertyType {
 extension Bool: PropertyValueType {
     
     public func toAnyObject() -> AnyObject {
-        return self
+        return self as AnyObject
     }
 }
 
 extension String: PropertyValueType {
     
     public func toAnyObject() -> AnyObject {
-        return self
+        return self as AnyObject
     }
 }
 
-extension NSData: PropertyValueType {
+extension Data: PropertyValueType {
     
     public func toAnyObject() -> AnyObject {
-        return self
+        return self as AnyObject
     }
 }

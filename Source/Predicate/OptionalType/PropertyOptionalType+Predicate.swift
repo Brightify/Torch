@@ -8,19 +8,19 @@
 
 public extension Property where T: PropertyOptionalType, T.Wrapped: PropertyValueType {
     
-    public func equalTo(value: T) -> Predicate<PARENT> {
+    public func equalTo(_ value: T) -> Predicate<PARENT> {
         return Predicate.singleValuePredicate(name, value: value.value?.toAnyObject(), operatorString: "==")
     }
     
-    public func notEqualTo(value: T) -> Predicate<PARENT> {
+    public func notEqualTo(_ value: T) -> Predicate<PARENT> {
         return Predicate.singleValuePredicate(name, value: value.value?.toAnyObject(), operatorString: "!=")
     }
 }
 
-public func == <P, T: PropertyOptionalType where T.Wrapped: PropertyValueType>(lhs: Property<P, T>, rhs: T) -> Predicate<P> {
+public func == <P, T: PropertyOptionalType>(lhs: Property<P, T>, rhs: T) -> Predicate<P> where T.Wrapped: PropertyValueType {
     return lhs.equalTo(rhs)
 }
 
-public func != <P, T: PropertyOptionalType where T.Wrapped: PropertyValueType>(lhs: Property<P, T>, rhs: T) -> Predicate<P> {
+public func != <P, T: PropertyOptionalType>(lhs: Property<P, T>, rhs: T) -> Predicate<P> where T.Wrapped: PropertyValueType {
     return lhs.notEqualTo(rhs)
 }
