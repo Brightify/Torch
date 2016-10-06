@@ -42,7 +42,8 @@ public struct Tokenizer {
             if accesibility == .Private {
                 return nil
             }
-            
+
+            print("Tokenizing structure \(name)")
             let children = tokenize(dictionary[Key.Substructure.rawValue] as? [SourceKitRepresentable] ?? [])
             
             let inheritedTypes = dictionary[Key.InheritedTypes.rawValue] as? [SourceKitRepresentable] ?? []
@@ -63,9 +64,13 @@ public struct Tokenizer {
                 kind: structKind
             )
         case Kinds.InstanceVariable.rawValue:
+            guard let type = dictionary[Key.TypeName.rawValue] as? String else {
+                print("WARNING: Skipping property \(name) because it does not have type. Torch does not support properties with inferred type.")
+                return nil
+            }
             return InstanceVariable(
                 name: name,
-                type: dictionary[Key.TypeName.rawValue] as! String,
+                type: type,
                 accessibility: accesibility!,
                 isReadOnly: dictionary[Key.SetterAccessibility.rawValue] as? String == nil
             )
