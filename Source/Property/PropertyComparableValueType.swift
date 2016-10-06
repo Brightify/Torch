@@ -66,3 +66,10 @@ extension Date: PropertyComparableValueType {
         return self as AnyObject
     }
 }
+
+extension NSDate: PropertyComparableValueType {
+
+    public func toAnyObject() -> AnyObject {
+        return self as AnyObject
+    }
+}

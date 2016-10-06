@@ -8,7 +8,7 @@
 
 public struct Generator {
     
-    fileprivate static let ValueTypes = ["Bool", "Int8", "Int16", "Int32", "Int64", "Int", "Double", "Float", "String", "NSDate", "NSData"]
+    fileprivate static let ValueTypes = ["Bool", "Int8", "Int16", "Int32", "Int64", "Int", "Double", "Float", "String", "Date", "NSDate", "NSData"]
     fileprivate static let RealmOptionalTypes = ["Bool", "Int8", "Int16", "Int32", "Int64", "Int", "Double", "Float"]
     
     fileprivate let allEntities: [String]
