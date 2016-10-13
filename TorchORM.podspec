@@ -26,6 +26,6 @@ Pod::Spec.new do |s|
                                 CMD
   s.module_name                 = 'Torch'
   s.requires_arc                = true
-  s.pod_target_xcconfig         = { 'ENABLE_BITCODE' => 'NO' }
+  s.pod_target_xcconfig         = { 'ENABLE_BITCODE' => 'YES' }
   s.dependency 'RealmSwift', '~> 2.0.0'
 end
