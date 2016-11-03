@@ -5,7 +5,10 @@ FILE_NAME=torch_generator.app
 FILE_PATH=$SCRIPT_PATH/Generator/$FILE_NAME
 
 if [ ! -e $FILE_PATH ]; then
-	$SCRIPT_PATH/build_generator
+    CURRENT_PWD=$(pwd)
+    cd $SCRIPT_PATH
+	./build_generator
+    cd $CURRENT_PWD
 fi
 
 $FILE_PATH/Contents/MacOS/torch_generator "$@"
