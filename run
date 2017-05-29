@@ -1,14 +1,14 @@
 #!/usr/bin/env bash
 
-SCRIPT_PATH="`dirname \"$0\"`"
-FILE_NAME=torch_generator.app
-FILE_PATH=$SCRIPT_PATH/Generator/$FILE_NAME
+SCRIPT_PATH="$(dirname "$0")"
+FILE_NAME=torch_generator
+FILE_PATH="$SCRIPT_PATH/Generator/.build/debug/$FILE_NAME"
 
-if [ ! -e $FILE_PATH ]; then
-    CURRENT_PWD=$(pwd)
-    cd $SCRIPT_PATH
-	./build_generator
-    cd $CURRENT_PWD
+if [ ! -e "$FILE_PATH" ]; then
+    echo "$SCRIPT_PATH"
+    pushd "$SCRIPT_PATH"
+    ./build_generator
+    popd
 fi
 
-$FILE_PATH/Contents/MacOS/torch_generator "$@"
+$FILE_PATH "$@"

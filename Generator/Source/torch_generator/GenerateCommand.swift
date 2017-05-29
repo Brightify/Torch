@@ -11,6 +11,7 @@ import Result
 import SourceKittenFramework
 import FileKit
 import TorchGeneratorFramework
+import Foundation
 
 private func curry<P1, P2, P3, P4, P5, P6, P7, R>(_ f: @escaping (P1, P2, P3, P4, P5, P6, P7) -> R)
     -> (P1) -> (P2) -> (P3) -> (P4) -> (P5) -> (P6) -> (P7) -> R {
@@ -24,10 +25,10 @@ private func recursivelyExtractEntities(fromTokens tokens: [Token]) -> [StructDe
 }
 
 public struct GenerateCommand: CommandProtocol {
-    
+
     public let verb = "generate"
     public let function = "Generates files with TorchEntities extensions"
-    
+
     public func run(_ options: Options) -> Result<Void, TorchGeneratorError> {
         let inputPath = Path(options.source)
         let outputPath = Path(options.output)
@@ -62,7 +63,7 @@ public struct GenerateCommand: CommandProtocol {
             return [File(path: path.standardRawValue)].flatMap { $0 }
         }
     }
-    
+
     fileprivate func generateFilesContent(_ parsedFiles: [FileRepresentation], generator: Generator, options: Options) -> [String] {
         let headers = parsedFiles.map { options.noHeader ? "" : FileHeaderHandler.getHeader($0, withTimestamp: !options.noTimestamp) }
         let imports = parsedFiles.map { FileHeaderHandler.getImports($0, libraries: options.libraries) }
@@ -70,7 +71,7 @@ public struct GenerateCommand: CommandProtocol {
             let entitiesInFile = recursivelyExtractEntities(fromTokens: $0.declarations)
             return generator.generate(entitiesInFile)
         }
-        
+
         return zip(zip(headers, imports), extensions).map { "\($0.0)\($0.1)\($1)" }
     }
 
@@ -118,7 +119,7 @@ public struct GenerateCommand: CommandProtocol {
             self.fileSuffix = fileSuffix
             self.source = source
         }
-        
+
         public static func evaluate(_ m: CommandMode) -> Result<Options, CommandantError<TorchGeneratorError>> {
             return curry(Options.init)
                 <*> m <| Option(

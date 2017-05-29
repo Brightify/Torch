@@ -7,9 +7,10 @@
 //
 
 import FileKit
+import Foundation
 
 public struct FileHeaderHandler {
-    
+
     public static func getHeader(_ file: FileRepresentation, withTimestamp timestamp: Bool) -> String {
         let path: String
         if let absolutePath = file.sourceFile.path {
@@ -20,7 +21,7 @@ public struct FileHeaderHandler {
         let generationInfo = "// MARK: - Torch entity extensions generated from file: \(path)" + (timestamp ? " at \(Date())" : "")
         return generationInfo + "\n\n"
     }
-    
+
     public static func getImports(_ file: FileRepresentation, libraries: [String]) -> String {
         var imports = Array(Set(libraries.map { "import " + $0 + "\n" })).sorted().joined(separator: "")
         if imports.isEmpty == false {

@@ -7,6 +7,7 @@
 //
 
 import Commandant
+import Foundation
 
 let registry = CommandRegistry<TorchGeneratorError>()
 registry.register(GenerateCommand())
