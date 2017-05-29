@@ -1,9 +1,6 @@
 #!/usr/bin/env bash
 
-FILE_NAME=torch_generator.app
-cd Generator
-rm -rf Build
-rm -rf $FILE_NAME
-env -i PATH=${PATH}, HOME=${HOME} xcodebuild -project 'TorchGenerator.xcodeproj' -scheme 'TorchGenerator' -configuration 'Release' CONFIGURATION_BUILD_DIR=$(pwd)/Build clean build
-mv Build/torch_generator.app $FILE_NAME
-cd ..
+pushd Generator
+rm -rf .build
+env -i PATH=${PATH}, HOME=${HOME} swift build
+popd
