@@ -11,4 +11,4 @@ if [ ! -e "$FILE_PATH" ]; then
     popd
 fi
 
-$FILE_PATH "$@"
+"$FILE_PATH" "$@"
