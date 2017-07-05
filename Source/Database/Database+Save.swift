@@ -31,14 +31,18 @@ extension Database {
      */
     @discardableResult
     public func create<T: TorchEntity>(_ entity: inout T) -> Database {
-        _ = getManagedObject(&entity)
+        ensureTransaction {
+            _ = getManagedObject(&entity)
+        }
         return self
     }
 
     @discardableResult
     public func create<T: TorchEntity>(_ entities: inout [T]) -> Database {
-        for i in entities.indices {
-            create(&entities[i])
+        ensureTransaction {
+            for i in entities.indices {
+                create(&entities[i])
+            }
         }
         return self
     }

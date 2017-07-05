@@ -11,14 +11,16 @@ import Torch
 
 struct TestUtils {
     
-    static func initDatabase() -> Database {
+    static func initDatabase(keepData: Bool = false) -> Database {
         let configuration = Realm.Configuration(inMemoryIdentifier: "memory")
         let realm = try! Realm(configuration: configuration)
         if realm.isInWriteTransaction {
             realm.cancelWrite()
         }
-        try! realm.write {
-            realm.deleteAll()
+        if !keepData {
+            try! realm.write {
+                realm.deleteAll()
+            }
         }
         return try! Database(configuration: configuration)
     }

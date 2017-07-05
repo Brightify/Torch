@@ -18,7 +18,7 @@ class PredicateTest: XCTestCase {
         super.setUp()
         
         database = TestUtils.initDatabase()
-        database.write {
+        database.write { _ in
             let otherData = OtherData(id: 0, text: "a")
             database.save(otherData)
             database.save(OtherData(id: 1, text: "b"))

@@ -21,14 +21,6 @@ open class Database {
                 defaultOnWriteError: @escaping OnWriteErrorListener = { fatalError(String(describing: $0)) }) throws {
         realm = try Realm(configuration: configuration)
         self.defaultOnWriteError = defaultOnWriteError
-        
-        if !realm.isInWriteTransaction {
-            realm.beginWrite()
-        }
-    }
-    
-    deinit {
-        realm.cancelWrite()
     }
 }
 
@@ -40,9 +32,9 @@ extension Database {
             entity.torch_update(managedObject: managedObject, database: self)
             return managedObject
         } else {
-            assignId(&entity)
+            let id = assignId(&entity)
             let managedObject = T.ManagedObjectType()
-            managedObject.id = entity.id!
+            managedObject.id = id
             entity.torch_update(managedObject: managedObject, database: self)
             realm.add(managedObject)
             return managedObject
@@ -56,13 +48,16 @@ extension Database {
         }
     }
     
-    fileprivate func assignId<T: TorchEntity>(_ entity: inout T) {
+    fileprivate func assignId<T: TorchEntity>(_ entity: inout T) -> Int {
         let metadata = getMetadata(String(describing: T.self))
         if let id = entity.id {
             metadata.lastAssignedId = max(metadata.lastAssignedId, id)
+            return id
         } else {
-            metadata.lastAssignedId += 1
-            entity.id = metadata.lastAssignedId
+            let id = metadata.lastAssignedId + 1
+            metadata.lastAssignedId = id
+            entity.id = id
+            return id
         }
     }
     
@@ -77,6 +72,14 @@ extension Database {
             result.entityName = entityName
             realm.add(result)
             return result
+        }
+    }
+
+    internal func ensureTransaction(_ closure: () -> Void) {
+        if realm.isInWriteTransaction {
+            closure()
+        } else {
+            write { _ in closure() }
         }
     }
 }

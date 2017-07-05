@@ -38,7 +38,6 @@ class PerformanceTest: XCTestCase {
             self.stopMeasuring()
 
             self.database.deleteAll(OtherData.self)
-            self.database.write()
         }
     }
     
@@ -49,7 +48,6 @@ class PerformanceTest: XCTestCase {
             self.stopMeasuring()
             
             self.database.deleteAll(OtherData.self)
-            self.database.write()
         }
     }
     
@@ -58,33 +56,34 @@ class PerformanceTest: XCTestCase {
             self.startMeasuring()
             self.saveComplex()
             self.stopMeasuring()
-            
-            self.database.deleteAll(OtherData.self)
-            self.database.deleteAll(Data.self)
-            
-            self.database.write()
+
+            self.database.write { _ in
+                self.database.deleteAll(OtherData.self)
+                self.database.deleteAll(Data.self)
+            }
         }
     }
     
     func testUpdate() {
         self.saveComplex()
-        database.write()
         let objects = database.load(Data.self)
         measureMetrics(performanceMetrics, automaticallyStartMeasuring: false) {
-            self.startMeasuring()
-            for var object in objects {
-                object.number = 0
-                object.optionalNumber = nil
-                object.numbers = [1, 2, 3]
-                self.database.save(object)
-            }
+            self.database.write { rollback in
+                self.startMeasuring()
+                for var object in objects {
+                    object.number = 0
+                    object.optionalNumber = nil
+                    object.numbers = [1, 2, 3]
+                    self.database.save(object)
+                }
 
-            self.stopMeasuring()
-            
-            self.database.rollback()
+                self.stopMeasuring()
+
+                rollback()
+            }
         }
     }
-    
+
     func testLoad() {
         saveData()
         
@@ -95,24 +94,25 @@ class PerformanceTest: XCTestCase {
     
     func testRollback() {
         measureMetrics(performanceMetrics, automaticallyStartMeasuring: false) {
-            self.saveData()
-            
-            self.startMeasuring()
-            self.database.rollback()
+            self.database.write { rollback in
+                self.saveData()
+
+                self.startMeasuring()
+                rollback()
+            }
             self.stopMeasuring()
         }
     }
-    
+
     func testWrite() {
         measureMetrics(performanceMetrics, automaticallyStartMeasuring: false) {
             self.saveData()
             
             self.startMeasuring()
-            self.database.write()
+            self.database.write { _ in }
             self.stopMeasuring()
             
             self.database.deleteAll(OtherData.self)
-            self.database.write()
         }
     }
     
@@ -123,8 +123,6 @@ class PerformanceTest: XCTestCase {
             self.startMeasuring()
             self.database.deleteAll(OtherData.self)
             self.stopMeasuring()
-            
-            self.database.write()
         }
     }
     
@@ -136,7 +134,6 @@ class PerformanceTest: XCTestCase {
     
     private func saveDataWithId() {
         (0..<PerformanceTest.OtherDataWithIdCount).forEach {
-
             database.save(OtherData(id: $0, text: String(describing: $0)))
         }
     }

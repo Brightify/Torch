@@ -9,31 +9,29 @@
 import Foundation
 
 extension Database {
+    public typealias Rollback = () -> Void
 
     @discardableResult
-    public func rollback() -> Database {
-        realm.cancelWrite()
-        metadata = [:]
-        realm.beginWrite()
-        return self
-    }
-
-    @discardableResult
-    public func write(_ closure: () -> Void = {}) -> Database {
+    public func write(_ closure: (@escaping Rollback) -> Void) -> Database {
         return write(defaultOnWriteError, closure: closure)
     }
 
     @discardableResult
-    public func write(_ onWriteError: OnWriteErrorListener, closure: () -> Void = {}) -> Database {
-        closure()
+    public func write(_ onWriteError: OnWriteErrorListener, closure: (@escaping Rollback) -> Void) -> Database {
+        realm.beginWrite()
+        closure(rollback)
+        // In case we rolled back
+        guard realm.isInWriteTransaction else { return self }
         do {
             try realm.commitWrite()
         } catch {
             onWriteError(error)
         }
-        if !realm.isInWriteTransaction {
-            realm.beginWrite()
-        }
         return self
+    }
+
+    private func rollback() {
+        realm.cancelWrite()
+        metadata = [:]
     }
 }
