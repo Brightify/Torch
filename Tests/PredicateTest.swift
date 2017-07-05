@@ -41,6 +41,18 @@ class PredicateTest: XCTestCase {
         XCTAssertEqual(2, database.load(OtherData.self, where: OtherData.text == "b").count)
     }
 
+    #if swift(>=3.1)
+    func testStringHasPrefix() {
+        XCTAssertEqual(1, database.load(Data.self, where: Data.readOnly.hasPrefix("r")).count)
+        XCTAssertEqual(0, database.load(Data.self, where: Data.readOnly.hasPrefix("a")).count)
+    }
+
+    func testStringHasSuffix() {
+        XCTAssertEqual(1, database.load(Data.self, where: Data.readOnly.hasSuffix("a")).count)
+        XCTAssertEqual(0, database.load(Data.self, where: Data.readOnly.hasSuffix("r")).count)
+    }
+    #endif
+
     func testIntEqualTo() {
         XCTAssertEqual(2, database.load(Data.self, where: Data.number.equalTo(8)).count)
         XCTAssertEqual(2, database.load(Data.self, where: Data.number == 8).count)

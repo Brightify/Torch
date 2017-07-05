@@ -22,6 +22,7 @@
 		1876900D1D44D81500252E03 /* PropertyOptionalType.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC49D2321D42877E00EECA2F /* PropertyOptionalType.swift */; };
 		1876900F1D44D81A00252E03 /* PropertyType.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC49D22A1D42654200EECA2F /* PropertyType.swift */; };
 		188CCA4D1F0D2F9A00F17C47 /* GCDSafetyTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 188CCA4B1F0D2F0700F17C47 /* GCDSafetyTest.swift */; };
+		188CCA4F1F0D686300F17C47 /* String+Predicate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 188CCA4E1F0D686300F17C47 /* String+Predicate.swift */; };
 		8E15FB157588645EF62C0E53 /* Pods_TorchTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 17E6CA52BE4277B23EFF9401 /* Pods_TorchTests.framework */; };
 		DC1012FA1D4B45D0003C3F1E /* Metadata.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC1012F91D4B45D0003C3F1E /* Metadata.swift */; };
 		DC1012FC1D4BA5AA003C3F1E /* PropertyValueType.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC1012FB1D4BA5AA003C3F1E /* PropertyValueType.swift */; };
@@ -81,6 +82,7 @@
 		18768FF01D44D1AE00252E03 /* ManualTorchEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManualTorchEntity.swift; sourceTree = "<group>"; };
 		18768FF71D44D20900252E03 /* Property+Sort.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Property+Sort.swift"; sourceTree = "<group>"; };
 		188CCA4B1F0D2F0700F17C47 /* GCDSafetyTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GCDSafetyTest.swift; sourceTree = "<group>"; };
+		188CCA4E1F0D686300F17C47 /* String+Predicate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Predicate.swift"; sourceTree = "<group>"; };
 		18EE0B161D438B3A001215B1 /* build_generator */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = build_generator; sourceTree = "<group>"; };
 		18EE0B171D438B3A001215B1 /* run */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = run; sourceTree = "<group>"; };
 		4C271572D14D2113C6B3868E /* Pods-TorchTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TorchTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TorchTests/Pods-TorchTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -206,6 +208,7 @@
 			children = (
 				DC8AB1B41D4E723E00A24A12 /* PropertyComparableValueType+Predicate.swift */,
 				DC8AB1B01D4E6CA900A24A12 /* PropertyValueType+Predicate.swift */,
+				188CCA4E1F0D686300F17C47 /* String+Predicate.swift */,
 			);
 			path = ValueType;
 			sourceTree = "<group>";
@@ -582,6 +585,7 @@
 				DC8AB1B31D4E70EA00A24A12 /* Property+Predicate.swift in Sources */,
 				DC8AB1B81D4E730F00A24A12 /* PropertyOptionalType+Predicate.swift in Sources */,
 				DC8AB1BA1D4E74F500A24A12 /* PropertyOptionalComparableType+Predicate.swift in Sources */,
+				188CCA4F1F0D686300F17C47 /* String+Predicate.swift in Sources */,
 				1876900D1D44D81500252E03 /* PropertyOptionalType.swift in Sources */,
 				18768FF81D44D20900252E03 /* Property+Sort.swift in Sources */,
 				1876900F1D44D81A00252E03 /* PropertyType.swift in Sources */,
