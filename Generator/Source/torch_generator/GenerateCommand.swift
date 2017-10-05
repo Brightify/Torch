@@ -91,7 +91,7 @@ public struct GenerateCommand: CommandProtocol {
         } catch let error {
             return .failure(.unknownError(error))
         }
-        return .success()
+        return .success(())
     }
 
     public struct Options: OptionsProtocol {

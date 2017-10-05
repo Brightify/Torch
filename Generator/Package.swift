@@ -1,3 +1,4 @@
+// swift-tools-version:3.1
 import PackageDescription
 
 let package = Package(
@@ -8,8 +9,8 @@ let package = Package(
             .Target(name: "TorchGeneratorFramework")]),
         ],
     dependencies: [
-        .Package(url: "https://github.com/jpsim/SourceKitten.git", versions: Version(0, 15, 0)..<Version(0, 17, .max)),
-        .Package(url: "https://github.com/TadeasKriz/FileKit.git", Version(4, 0, 2)),
+        .Package(url: "https://github.com/jpsim/SourceKitten.git", versions: Version(0, 15, 0)..<Version(0, 18, .max)),
+        .Package(url: "https://github.com/nvzqz/FileKit.git", Version(5, 0, 0)),
         ],
     exclude: [
         "Tests"

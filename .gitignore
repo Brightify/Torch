@@ -68,3 +68,4 @@ default.profraw
 Tests/Generated/*.swift
 .DS_Store
 *.xcworkspace
+Generator/TorchGenerator.xcodeproj
