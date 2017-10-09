@@ -7,17 +7,17 @@
 //
 
 public struct Generator {
-    
+
     fileprivate static let ValueTypes = ["Bool", "Int8", "Int16", "Int32", "Int64", "Int", "Double", "Float", "String", "Date", "NSDate", "NSData"]
     fileprivate static let RealmOptionalTypes = ["Bool", "Int8", "Int16", "Int32", "Int64", "Int", "Double", "Float"]
-    
+
     fileprivate let allEntities: [String]
-    
+
     public init(allEntities: [StructDeclaration]) {
         self.allEntities = allEntities.map { $0.name }
     }
-    
-    
+
+
     public func generate(_ entities: [StructDeclaration]) -> String {
         var builder = CodeBuilder()
         var first = true
@@ -31,8 +31,8 @@ public struct Generator {
         }
         return builder.code
     }
-    
-    
+
+
     fileprivate func generate(_ entity: StructDeclaration) -> CodeBuilder {
         var builder = CodeBuilder()
         let variables = entity.children
@@ -59,8 +59,8 @@ public struct Generator {
         }
         return builder
     }
-    
-    
+
+
     fileprivate func generateStaticProperties(_ entity: StructDeclaration, variables: [InstanceVariable]) -> CodeBuilder {
         var builder = CodeBuilder()
         for variable in variables {
@@ -70,8 +70,8 @@ public struct Generator {
         }
         return builder
     }
-    
-    
+
+
     fileprivate func generateInit(_ entity: StructDeclaration, variables: [InstanceVariable]) -> CodeBuilder {
         var builder = CodeBuilder()
         builder += "\(entity.accessibility.sourceName) init(fromManagedObject object: \(getManagedObjectName(entity.name))) {"
@@ -89,8 +89,8 @@ public struct Generator {
         builder += "}"
         return builder
     }
-    
-    
+
+
     fileprivate func generateUpdateManagedObject(_ entity: StructDeclaration, variables: [InstanceVariable]) -> CodeBuilder {
         var builder = CodeBuilder()
         builder += "\(entity.accessibility.sourceName) mutating func torch_update(managedObject object: \(getManagedObjectName(entity.name)), database: Torch.Database) {"
@@ -108,8 +108,8 @@ public struct Generator {
         builder += "}"
         return builder
     }
-    
-    
+
+
     fileprivate func generateDeleteValueTypeWrappers(_ entity: StructDeclaration, variables: [InstanceVariable]) -> CodeBuilder {
         var builder = CodeBuilder()
         builder += "\(entity.accessibility.sourceName) static func torch_delete(managedObject object: \(getManagedObjectName(entity.name))" +
@@ -122,8 +122,8 @@ public struct Generator {
         builder += "}"
         return builder
     }
-    
-    
+
+
     fileprivate func generateManagedObject(_ entity: StructDeclaration, variables: [InstanceVariable]) -> CodeBuilder {
         var builder = CodeBuilder()
         let accessibility = entity.accessibility.sourceName
@@ -134,14 +134,14 @@ public struct Generator {
                     if variable.isArray {
                         $0 += "\(accessibility) var \(getPrefixedPropertyName(variable.name)) = RealmSwift.List<\(getWrapperName(entity.name, variable.name))>()"
                     } else {
-                        $0 += "\(accessibility) dynamic var \(getPrefixedPropertyName(variable.name)) = \(variable.rawType).getDefaultValue().toValue()"
+                        $0 += "@objc \(accessibility) dynamic var \(getPrefixedPropertyName(variable.name)) = \(variable.rawType).getDefaultValue().toValue()"
                     }
                     if variable.isOptional {
-                        $0 += "\(accessibility) dynamic var \(getIsNilName(variable.name)) = true"
+                        $0 += "@objc \(accessibility) dynamic var \(getIsNilName(variable.name)) = true"
                     }
                 } else {
                     if isId(variable) {
-                        $0 += "\(accessibility) dynamic var id = Int()"
+                        $0 += "@objc \(accessibility) dynamic var id = Int()"
                     } else if isArrayWithValues(variable) {
                         $0 += "\(accessibility) var \(getPrefixedPropertyName(variable.name)) = RealmSwift.List<\(getWrapperName(entity.name, variable.name))>()"
                     } else if variable.isArray {
@@ -149,15 +149,15 @@ public struct Generator {
                     } else if isRealmOptional(variable) {
                         $0 += "\(accessibility) var \(getPrefixedPropertyName(variable.name)) = RealmSwift.RealmOptional<\(variable.rawType)>()"
                     } else if isTorchEntity(variable) {
-                        $0 += "\(accessibility) dynamic var \(getPrefixedPropertyName(variable.name)): \(getManagedObjectType(variable.rawType))?"
+                        $0 += "@objc \(accessibility) dynamic var \(getPrefixedPropertyName(variable.name)): \(getManagedObjectType(variable.rawType))?"
                     } else if variable.isOptional {
-                        $0 += "\(accessibility) dynamic var \(getPrefixedPropertyName(variable.name)): \(variable.type)"
+                        $0 += "@objc \(accessibility) dynamic var \(getPrefixedPropertyName(variable.name)): \(variable.type)"
                     } else {
-                        $0 += "\(accessibility) dynamic var \(getPrefixedPropertyName(variable.name)) = \(variable.type)()"
+                        $0 += "@objc \(accessibility) dynamic var \(getPrefixedPropertyName(variable.name)) = \(variable.type)()"
                     }
                 }
             }
-            
+
             $0 += ""
             $0 += "\(accessibility) override static func primaryKey() -> String? {"
             $0.nest("return \"id\"")
@@ -166,8 +166,8 @@ public struct Generator {
         builder += "}"
         return builder
     }
-    
-    
+
+
     fileprivate func generateWrappers(_ entity: StructDeclaration, variables: [InstanceVariable]) -> CodeBuilder {
         var builder = CodeBuilder()
         var first = true
@@ -179,61 +179,61 @@ public struct Generator {
             }
             builder += "\(entity.accessibility.sourceName) class \(getWrapperName(entity.name, variable.name)): RealmSwift.Object, Torch.ValueTypeWrapper {"
             if isValueConvertible(variable) {
-                builder.nest("dynamic var value = \(variable.rawType).getDefaultValue().toValue()")
+                builder.nest("@objc dynamic var value = \(variable.rawType).getDefaultValue().toValue()")
             } else {
-                 builder.nest("dynamic var value = \(variable.rawType)()")
+                 builder.nest("@objc dynamic var value = \(variable.rawType)()")
             }
             builder += "}"
         }
         return builder
     }
-    
-    
+
+
     fileprivate func isTorchEntity(_ variable: InstanceVariable) -> Bool {
         return allEntities.contains(variable.rawType)
     }
-    
-    
+
+
     fileprivate func isId(_ variable: InstanceVariable) -> Bool {
         return variable.name == "id"
     }
-    
-    
+
+
     fileprivate func isArrayWithValues(_ variable: InstanceVariable) -> Bool {
         return variable.isArray && !isTorchEntity(variable)
     }
-    
-    
+
+
     fileprivate func isRealmOptional(_ variable: InstanceVariable) -> Bool {
         return variable.isOptional && Generator.RealmOptionalTypes.contains(variable.rawType)
     }
-    
-    
+
+
     fileprivate func isValueConvertible(_ variable: InstanceVariable) -> Bool {
         return !Generator.ValueTypes.contains(variable.rawType) && !isTorchEntity(variable)
     }
-    
-    
+
+
     fileprivate func getManagedObjectName(_ entityName: String) -> String {
         return "Torch_" + entityName
     }
 
-    
+
     fileprivate func getManagedObjectType(_ entityName: String) -> String {
         return entityName + ".ManagedObjectType"
     }
 
-    
+
     fileprivate func getWrapperName(_ entityName: String, _ variableName: String) -> String {
         return getManagedObjectName(entityName) + "_" + variableName
     }
-    
-    
+
+
     fileprivate func getIsNilName(_ variableName: String) -> String {
         return getPrefixedPropertyName(variableName) + "_isNil"
     }
 
-    
+
     fileprivate func getPrefixedPropertyName(_ variableName: String) -> String {
         return "torch_\(variableName)"
     }
