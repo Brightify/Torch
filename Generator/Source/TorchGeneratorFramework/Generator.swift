@@ -8,15 +8,16 @@
 
 public struct Generator {
 
-    fileprivate static let ValueTypes = ["Bool", "Int8", "Int16", "Int32", "Int64", "Int", "Double", "Float", "String", "Date", "NSDate", "NSData"]
-    fileprivate static let RealmOptionalTypes = ["Bool", "Int8", "Int16", "Int32", "Int64", "Int", "Double", "Float"]
+    private static let ValueTypes = ["Bool", "Int8", "Int16", "Int32", "Int64", "Int", "Double", "Float", "String", "Date", "NSDate", "NSData"]
+    private static let RealmOptionalTypes = ["Bool", "Int8", "Int16", "Int32", "Int64", "Int", "Double", "Float"]
 
-    fileprivate let allEntities: [String]
+    private let allEntities: [String]
+    private let manualEntities: [String]
 
-    public init(allEntities: [StructDeclaration]) {
+    public init(allEntities: [StructDeclaration], manualEntities: [String]) {
         self.allEntities = allEntities.map { $0.name }
+        self.manualEntities = manualEntities
     }
-
 
     public func generate(_ entities: [StructDeclaration]) -> String {
         var builder = CodeBuilder()
@@ -32,8 +33,7 @@ public struct Generator {
         return builder.code
     }
 
-
-    fileprivate func generate(_ entity: StructDeclaration) -> CodeBuilder {
+    private func generate(_ entity: StructDeclaration) -> CodeBuilder {
         var builder = CodeBuilder()
         let variables = entity.children
             .flatMap { $0 as? InstanceVariable }
@@ -60,8 +60,7 @@ public struct Generator {
         return builder
     }
 
-
-    fileprivate func generateStaticProperties(_ entity: StructDeclaration, variables: [InstanceVariable]) -> CodeBuilder {
+    private func generateStaticProperties(_ entity: StructDeclaration, variables: [InstanceVariable]) -> CodeBuilder {
         var builder = CodeBuilder()
         for variable in variables {
 
@@ -71,8 +70,7 @@ public struct Generator {
         return builder
     }
 
-
-    fileprivate func generateInit(_ entity: StructDeclaration, variables: [InstanceVariable]) -> CodeBuilder {
+    private func generateInit(_ entity: StructDeclaration, variables: [InstanceVariable]) -> CodeBuilder {
         var builder = CodeBuilder()
         builder += "\(entity.accessibility.sourceName) init(fromManagedObject object: \(getManagedObjectName(entity.name))) {"
         builder.nest {
@@ -90,8 +88,7 @@ public struct Generator {
         return builder
     }
 
-
-    fileprivate func generateUpdateManagedObject(_ entity: StructDeclaration, variables: [InstanceVariable]) -> CodeBuilder {
+    private func generateUpdateManagedObject(_ entity: StructDeclaration, variables: [InstanceVariable]) -> CodeBuilder {
         var builder = CodeBuilder()
         builder += "\(entity.accessibility.sourceName) mutating func torch_update(managedObject object: \(getManagedObjectName(entity.name)), database: Torch.Database) {"
         builder.nest {
@@ -109,8 +106,7 @@ public struct Generator {
         return builder
     }
 
-
-    fileprivate func generateDeleteValueTypeWrappers(_ entity: StructDeclaration, variables: [InstanceVariable]) -> CodeBuilder {
+    private func generateDeleteValueTypeWrappers(_ entity: StructDeclaration, variables: [InstanceVariable]) -> CodeBuilder {
         var builder = CodeBuilder()
         builder += "\(entity.accessibility.sourceName) static func torch_delete(managedObject object: \(getManagedObjectName(entity.name))" +
                     ", deleteFunction: (RealmSwift.Object) -> Void) {"
@@ -123,8 +119,7 @@ public struct Generator {
         return builder
     }
 
-
-    fileprivate func generateManagedObject(_ entity: StructDeclaration, variables: [InstanceVariable]) -> CodeBuilder {
+    private func generateManagedObject(_ entity: StructDeclaration, variables: [InstanceVariable]) -> CodeBuilder {
         var builder = CodeBuilder()
         let accessibility = entity.accessibility.sourceName
         builder += "\(accessibility) class \(getManagedObjectName(entity.name)): RealmSwift.Object, Torch.ManagedObject {"
@@ -167,8 +162,7 @@ public struct Generator {
         return builder
     }
 
-
-    fileprivate func generateWrappers(_ entity: StructDeclaration, variables: [InstanceVariable]) -> CodeBuilder {
+    private func generateWrappers(_ entity: StructDeclaration, variables: [InstanceVariable]) -> CodeBuilder {
         var builder = CodeBuilder()
         var first = true
         for variable in variables where isArrayWithValues(variable) || (isValueConvertible(variable) && variable.isArray) {
@@ -188,53 +182,43 @@ public struct Generator {
         return builder
     }
 
-
-    fileprivate func isTorchEntity(_ variable: InstanceVariable) -> Bool {
-        return allEntities.contains(variable.rawType)
+    private func isTorchEntity(_ variable: InstanceVariable) -> Bool {
+        return allEntities.contains(variable.rawType) || manualEntities.contains(variable.rawType)
     }
 
-
-    fileprivate func isId(_ variable: InstanceVariable) -> Bool {
+    private func isId(_ variable: InstanceVariable) -> Bool {
         return variable.name == "id"
     }
 
-
-    fileprivate func isArrayWithValues(_ variable: InstanceVariable) -> Bool {
+    private func isArrayWithValues(_ variable: InstanceVariable) -> Bool {
         return variable.isArray && !isTorchEntity(variable)
     }
 
-
-    fileprivate func isRealmOptional(_ variable: InstanceVariable) -> Bool {
+    private func isRealmOptional(_ variable: InstanceVariable) -> Bool {
         return variable.isOptional && Generator.RealmOptionalTypes.contains(variable.rawType)
     }
 
-
-    fileprivate func isValueConvertible(_ variable: InstanceVariable) -> Bool {
+    private func isValueConvertible(_ variable: InstanceVariable) -> Bool {
         return !Generator.ValueTypes.contains(variable.rawType) && !isTorchEntity(variable)
     }
 
-
-    fileprivate func getManagedObjectName(_ entityName: String) -> String {
+    private func getManagedObjectName(_ entityName: String) -> String {
         return "Torch_" + entityName
     }
 
-
-    fileprivate func getManagedObjectType(_ entityName: String) -> String {
+    private func getManagedObjectType(_ entityName: String) -> String {
         return entityName + ".ManagedObjectType"
     }
 
-
-    fileprivate func getWrapperName(_ entityName: String, _ variableName: String) -> String {
+    private func getWrapperName(_ entityName: String, _ variableName: String) -> String {
         return getManagedObjectName(entityName) + "_" + variableName
     }
 
-
-    fileprivate func getIsNilName(_ variableName: String) -> String {
+    private func getIsNilName(_ variableName: String) -> String {
         return getPrefixedPropertyName(variableName) + "_isNil"
     }
 
-
-    fileprivate func getPrefixedPropertyName(_ variableName: String) -> String {
+    private func getPrefixedPropertyName(_ variableName: String) -> String {
         return "torch_\(variableName)"
     }
 }

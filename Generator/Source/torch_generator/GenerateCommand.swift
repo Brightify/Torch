@@ -13,9 +13,9 @@ import FileKit
 import TorchGeneratorFramework
 import Foundation
 
-private func curry<P1, P2, P3, P4, P5, P6, P7, R>(_ f: @escaping (P1, P2, P3, P4, P5, P6, P7) -> R)
-    -> (P1) -> (P2) -> (P3) -> (P4) -> (P5) -> (P6) -> (P7) -> R {
-        return { p1 in { p2 in { p3 in { p4 in { p5 in { p6 in { p7 in f(p1, p2, p3, p4, p5, p6, p7) } } } } } } }
+private func curry<P1, P2, P3, P4, P5, P6, P7, P8, R>(_ f: @escaping (P1, P2, P3, P4, P5, P6, P7, P8) -> R)
+    -> (P1) -> (P2) -> (P3) -> (P4) -> (P5) -> (P6) -> (P7) -> (P8) -> R {
+        return { p1 in { p2 in { p3 in { p4 in { p5 in { p6 in { p7 in { p8 in f(p1, p2, p3, p4, p5, p6, p7, p8) } } } } } } } }
 }
 
 private func recursivelyExtractEntities(fromTokens tokens: [Token]) -> [StructDeclaration] {
@@ -35,7 +35,7 @@ public struct GenerateCommand: CommandProtocol {
         let inputFiles = getInputFiles(inputPath)
         let parsedFiles = inputFiles.map { Tokenizer(sourceFile: $0).tokenize() }.filter { $0.containsTorchEntity }
         let allEntities = recursivelyExtractEntities(fromTokens: parsedFiles.flatMap { $0.declarations })
-        let generator = Generator(allEntities: allEntities)
+        let generator = Generator(allEntities: allEntities, manualEntities: options.manualEntities)
         let filesContent = generateFilesContent(parsedFiles, generator: generator, options: options)
 
         let files = zip(parsedFiles.map(resultFileName(options)), filesContent).map { (name: $0, content: $1) }
@@ -98,6 +98,7 @@ public struct GenerateCommand: CommandProtocol {
         let output: String
         let noHeader: Bool
         let noTimestamp: Bool
+        let manualEntities: [String]
         let libraries: [String]
         let filePrefix: String
         let fileSuffix: String
@@ -106,6 +107,7 @@ public struct GenerateCommand: CommandProtocol {
         public init(output: String,
                     noHeader: Bool,
                     noTimestamp: Bool,
+                    manualEntities: String,
                     libraries: String,
                     filePrefix: String,
                     fileSuffix: String,
@@ -114,7 +116,8 @@ public struct GenerateCommand: CommandProtocol {
             self.output = output
             self.noHeader = noHeader
             self.noTimestamp = noTimestamp
-            self.libraries = libraries.characters.split { $0 == "," }.map(String.init)
+            self.manualEntities = manualEntities.split(separator: ",").map(String.init)
+            self.libraries = libraries.split(separator: ",").map(String.init)
             self.filePrefix = filePrefix
             self.fileSuffix = fileSuffix
             self.source = source
@@ -129,7 +132,10 @@ public struct GenerateCommand: CommandProtocol {
 
                 <*> m <| Option(key: "no-header", defaultValue: false, usage: "Do not generate file headers.")
                 <*> m <| Option(key: "no-timestamp", defaultValue: false, usage: "Do not generate timestamp.")
-
+                <*> m <| Option(
+                    key: "manual-entities",
+                    defaultValue: "",
+                    usage: "A comma separated list of known Torch entity types that are not in the supplied directory for scan (i.e. were generated previously or written manually).")
                 <*> m <| Option(
                     key: "libraries",
                     defaultValue: "",

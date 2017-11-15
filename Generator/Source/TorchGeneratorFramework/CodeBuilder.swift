@@ -51,7 +51,7 @@ public struct CodeBuilder {
     }
 
     public mutating func append(builder subbuilder: CodeBuilder) {
-        let lines = subbuilder.code.characters
+        let lines = subbuilder.code
             .split(omittingEmptySubsequences: false) { $0 == "\n" || $0 == "\r\n" }
             .map(String.init)
         append(lines: lines)

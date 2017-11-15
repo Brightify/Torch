@@ -23,11 +23,11 @@ public struct InstanceVariable: Token {
     public var rawType: String {
         var result = type
         if isOptional {
-            result.remove(at: result.characters.index(result.endIndex, offsetBy: -1))
+            result.remove(at: result.index(result.endIndex, offsetBy: -1))
         }
         if isArray {
             result.remove(at: result.startIndex)
-            result.remove(at: result.characters.index(result.endIndex, offsetBy: -1))
+            result.remove(at: result.index(result.endIndex, offsetBy: -1))
         }
         return result
     }
