@@ -13,12 +13,12 @@ public struct SortDescriptor<PARENT: TorchEntity> {
     fileprivate let sortDescriptors: [RealmSwift.SortDescriptor]
 
     init(property: String, ascending: Bool) {
-        sortDescriptors = [RealmSwift.SortDescriptor(property: property, ascending: ascending)]
+        sortDescriptors = [RealmSwift.SortDescriptor(keyPath: property, ascending: ascending)]
     }
     
-    init<P, T: PropertyType>(parentProperty: Property<PARENT, T>, sortDescriptor: SortDescriptor<P>) {
+    init<P, T>(parentProperty: Property<PARENT, T>, sortDescriptor: SortDescriptor<P>) {
         self.sortDescriptors = sortDescriptor.sortDescriptors.map {
-            RealmSwift.SortDescriptor(property: parentProperty.name + "." + $0.property, ascending: $0.ascending)
+            RealmSwift.SortDescriptor(keyPath: parentProperty.name + "." + $0.keyPath, ascending: $0.ascending)
         }
     }
     

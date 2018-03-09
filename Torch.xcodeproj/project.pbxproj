@@ -106,7 +106,7 @@
 		DC49D23B1D42B2BE00EECA2F /* PredicateTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PredicateTest.swift; sourceTree = "<group>"; };
 		DC4A784C1D5093F60096A817 /* ManagedObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManagedObject.swift; sourceTree = "<group>"; };
 		DC4A784E1D50D1540096A817 /* ValueTypeWrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ValueTypeWrapper.swift; sourceTree = "<group>"; };
-		DC5A3A5C1CF6F8D600F520E3 /* TorchORM.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = TorchORM.podspec; sourceTree = "<group>"; };
+		DC5A3A5C1CF6F8D600F520E3 /* TorchORM.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = TorchORM.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		DC8AB1A61D4BB67500A24A12 /* RealmPerformanceTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmPerformanceTest.swift; sourceTree = "<group>"; };
 		DC8AB1AB1D4E295800A24A12 /* SortDescriptor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SortDescriptor.swift; sourceTree = "<group>"; };
 		DC8AB1AD1D4E30C300A24A12 /* Predicate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Predicate.swift; sourceTree = "<group>"; };
@@ -690,6 +690,7 @@
 				SDKROOT = macosx;
 				SUPPORTED_PLATFORMS = "macosx iphonesimulator iphoneos";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALID_ARCHS = "i386 x86_64 armv7s armv7 arm64";
 				VERSIONING_SYSTEM = "apple-generic";
@@ -735,6 +736,7 @@
 				SDKROOT = macosx;
 				SUPPORTED_PLATFORMS = "macosx iphonesimulator iphoneos";
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 				VALID_ARCHS = "i386 x86_64 armv7s armv7 arm64";
@@ -766,7 +768,6 @@
 				PRODUCT_NAME = Torch;
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 3.0;
 				TVOS_DEPLOYMENT_TARGET = 9.0;
 			};
 			name = Debug;
@@ -793,7 +794,6 @@
 				PRODUCT_BUNDLE_IDENTIFIER = org.brightify.Torch;
 				PRODUCT_NAME = Torch;
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 3.0;
 				TVOS_DEPLOYMENT_TARGET = 9.0;
 			};
 			name = Release;
@@ -813,7 +813,6 @@
 				"MACOSX_DEPLOYMENT_TARGET[arch=*]" = 10.9;
 				PRODUCT_BUNDLE_IDENTIFIER = org.brightify.TorchTests;
 				PRODUCT_NAME = TorchTests;
-				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -831,7 +830,6 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				PRODUCT_BUNDLE_IDENTIFIER = org.brightify.TorchTests;
 				PRODUCT_NAME = TorchTests;
-				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};

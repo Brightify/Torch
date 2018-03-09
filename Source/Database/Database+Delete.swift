@@ -29,7 +29,7 @@ extension Database {
     }
 
     @discardableResult
-    public func delete<T: TorchEntity>(_ type: T.Type, where predicate: Predicate<T>) -> Database {
+    public func delete<T>(_ type: T.Type, where predicate: Predicate<T>) -> Database {
         ensureTransaction {
             let objects = realm.objects(T.ManagedObjectType.self).filter(predicate.toPredicate())
             objects.forEach { deleteValueTypeWrappers(T.self, managedObject: $0) }

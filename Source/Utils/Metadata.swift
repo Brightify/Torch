@@ -9,8 +9,11 @@
 import RealmSwift
 
 class Metadata: RealmSwift.Object {
-    
+
+    @objc
     dynamic var entityName: String = ""
+
+    @objc
     dynamic var lastAssignedId: Int = -1
     
     override static func primaryKey() -> String? {

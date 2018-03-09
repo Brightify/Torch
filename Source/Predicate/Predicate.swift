@@ -40,7 +40,7 @@ public struct Predicate<PARENT: TorchEntity> {
         return Predicate(predicateString: "!(\(predicate.predicateString))", predicateArguments: predicate.predicateArguments)
     }
     
-    static func parentPropertyPredicate<T: TorchEntity, P: PropertyType>(_ parentProperty: Property<T, P>, predicate: Predicate) -> Predicate<T> {
+    static func parentPropertyPredicate<T, P>(_ parentProperty: Property<T, P>, predicate: Predicate) -> Predicate<T> {
         let predicateString = predicate.predicateString.stringByReplacingParentPropertyToken(getPropertyName(parentProperty.name) + ".")
         return Predicate<T>(predicateString: predicateString, predicateArguments: predicate.predicateArguments)
     }
