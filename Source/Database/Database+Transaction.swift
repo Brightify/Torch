@@ -11,6 +11,14 @@ import Foundation
 extension Database {
     public typealias Rollback = () -> Void
 
+    public var transaction: TorchTransactionHelper {
+        return TorchTransactionHelper(
+            begin: realm.beginWrite,
+            commit: { self.commit(errorHandler: self.defaultOnWriteError) },
+            commitWithErrorHandler: commit(errorHandler:),
+            rollback: rollback)
+    }
+
     @discardableResult
     public func write(_ closure: (@escaping Rollback) -> Void) -> Database {
         return write(defaultOnWriteError, closure: closure)
@@ -22,12 +30,16 @@ extension Database {
         closure(rollback)
         // In case we rolled back
         guard realm.isInWriteTransaction else { return self }
+        commit(errorHandler: onWriteError)
+        return self
+    }
+
+    private func commit(errorHandler: OnWriteErrorListener) {
         do {
             try realm.commitWrite()
         } catch {
-            onWriteError(error)
+            errorHandler(error)
         }
-        return self
     }
 
     private func rollback() {

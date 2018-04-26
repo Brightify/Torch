@@ -9,8 +9,8 @@
 import XCTest
 
 extension XCTestCase {
-    var performanceMetrics: [String] {
-        return XCTestCase.defaultPerformanceMetrics()
+    var performanceMetrics: [XCTPerformanceMetric] {
+        return XCTestCase.defaultPerformanceMetrics
     }
     
     // TODO Use measureBlockWithSetup in Swift 3
