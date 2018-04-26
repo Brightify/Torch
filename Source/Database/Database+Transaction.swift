@@ -13,7 +13,7 @@ extension Database {
 
     public var transaction: TorchTransactionHelper {
         return TorchTransactionHelper(
-            begin: realm.beginWrite,
+            begin: begin,
             commit: { self.commit(errorHandler: self.defaultOnWriteError) },
             commitWithErrorHandler: commit(errorHandler:),
             rollback: rollback)
@@ -29,12 +29,17 @@ extension Database {
         realm.beginWrite()
         closure(rollback)
         // In case we rolled back
-        guard realm.isInWriteTransaction else { return self }
         commit(errorHandler: onWriteError)
         return self
     }
 
+    private func begin() {
+        guard !realm.isInWriteTransaction else { return }
+        realm.beginWrite()
+    }
+
     private func commit(errorHandler: OnWriteErrorListener) {
+        guard realm.isInWriteTransaction else { return }
         do {
             try realm.commitWrite()
         } catch {
@@ -43,6 +48,7 @@ extension Database {
     }
 
     private func rollback() {
+        guard realm.isInWriteTransaction else { return }
         realm.cancelWrite()
         metadata = [:]
     }
