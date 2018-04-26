@@ -12,7 +12,7 @@ extension Database {
     public typealias Rollback = () -> Void
 
     @discardableResult
-    public func write(_ closure: (@escaping Rollback) -> Void) -> Database {
+    public func write(_ closure: (@escaping Rollback) -> Void = { _ in }) -> Database {
         return write(defaultOnWriteError, closure: closure)
     }
 
@@ -30,7 +30,7 @@ extension Database {
         return self
     }
 
-    private func rollback() {
+    public func rollback() {
         realm.cancelWrite()
         metadata = [:]
     }
