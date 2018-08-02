@@ -10,6 +10,6 @@ public protocol ValueTypeWrapper: AnyObject {
     associatedtype ValueType
     
     init()
-    
+
     var value: ValueType { get set }
 }

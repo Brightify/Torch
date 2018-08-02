@@ -8,7 +8,7 @@ let package = Package(
         .library(name: "TorchGeneratorFramework", targets: ["TorchGeneratorFramework"])
     ],
     dependencies: [
-        .package(url: "https://github.com/jpsim/SourceKitten.git", from: "0.15.0"),
+        .package(url: "https://github.com/jpsim/SourceKitten.git", from: "0.20.0"),
         .package(url: "https://github.com/nvzqz/FileKit.git", from: "5.0.0"),
         .package(url: "https://github.com/Carthage/Commandant.git", from: "0.12.0"),
     ],

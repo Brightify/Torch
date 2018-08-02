@@ -14,29 +14,29 @@ public struct Tokenizer {
 
     public init(sourceFile: File) {
         self.file = sourceFile
-        
+
         source = sourceFile.contents
     }
-    
-    public func tokenize() -> FileRepresentation {
-        let structure = Structure(file: file)
-        
+
+    public func tokenize() throws -> FileRepresentation {
+        let structure = try Structure(file: file)
+
         let declarations = tokenize(structure.dictionary[Key.Substructure.rawValue] as? [SourceKitRepresentable] ?? [])
-        
+
         return FileRepresentation(sourceFile: file, declarations: declarations)
     }
-    
+
     fileprivate func tokenize(_ representables: [SourceKitRepresentable]) -> [Token] {
-        return representables.flatMap(tokenize)
+        return representables.compactMap(tokenize)
     }
-    
+
     fileprivate func tokenize(_ representable: SourceKitRepresentable) -> Token? {
         guard let dictionary = representable as? [String: SourceKitRepresentable] else { return nil }
-        
+
         let name = dictionary[Key.Name.rawValue] as? String ?? "name not set"
         let kind = dictionary[Key.Kind.rawValue] as? String ?? "unknown type"
         let accesibility = (dictionary[Key.Accessibility.rawValue] as? String).flatMap { Accessibility(rawValue: $0) }
-        
+
         switch kind {
         case Kinds.StructDeclaration.rawValue, Kinds.EnumDeclaration.rawValue:
             if accesibility == .Private {
@@ -45,9 +45,9 @@ public struct Tokenizer {
 
             print("Tokenizing structure \(name)")
             let children = tokenize(dictionary[Key.Substructure.rawValue] as? [SourceKitRepresentable] ?? [])
-            
+
             let inheritedTypes = dictionary[Key.InheritedTypes.rawValue] as? [SourceKitRepresentable] ?? []
-            let inheritedTypeNames = inheritedTypes.flatMap { $0 as? [String: SourceKitRepresentable] }.flatMap { $0[Key.Name.rawValue] as? String }
+            let inheritedTypeNames = inheritedTypes.compactMap { $0 as? [String: SourceKitRepresentable] }.compactMap { $0[Key.Name.rawValue] as? String }
             let structKind: StructKind
             if inheritedTypeNames.contains(StructKind.TorchEntity.rawValue) {
                 structKind = .TorchEntity
@@ -56,7 +56,7 @@ public struct Tokenizer {
             } else {
                 structKind = .Plain
             }
-            
+
             return StructDeclaration(
                 name: name,
                 accessibility: accesibility!,

@@ -36,7 +36,7 @@ public struct Generator {
     private func generate(_ entity: StructDeclaration) -> CodeBuilder {
         var builder = CodeBuilder()
         let variables = entity.children
-            .flatMap { $0 as? InstanceVariable }
+            .compactMap { $0 as? InstanceVariable }
             .filter { !($0.isReadOnly && allEntities.contains($0.rawType)) }
 
         builder += "\(entity.accessibility.sourceName) extension \(entity.name) {"

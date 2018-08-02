@@ -389,7 +389,6 @@
 				183D03F71C4691C600EBAEF3 /* Frameworks */,
 				183D03F81C4691C600EBAEF3 /* Headers */,
 				183D03F91C4691C600EBAEF3 /* Resources */,
-				91B6390C4D6B977677AFF787 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -410,7 +409,6 @@
 				183D04021C4691C600EBAEF3 /* Frameworks */,
 				183D04031C4691C600EBAEF3 /* Resources */,
 				9D2F23E9D8416B4DC592272C /* [CP] Embed Pods Frameworks */,
-				B5B34BC8B5963920FD7E397C /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -496,21 +494,6 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		91B6390C4D6B977677AFF787 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Torch/Pods-Torch-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		9D2F23E9D8416B4DC592272C /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -529,21 +512,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TorchTests/Pods-TorchTests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		B5B34BC8B5963920FD7E397C /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TorchTests/Pods-TorchTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		DC49D2401D42BF2800EECA2F /* Generate extensions */ = {

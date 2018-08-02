@@ -19,7 +19,7 @@ private func curry<P1, P2, P3, P4, P5, P6, P7, P8, R>(_ f: @escaping (P1, P2, P3
 }
 
 private func recursivelyExtractEntities(fromTokens tokens: [Token]) -> [StructDeclaration] {
-    return tokens.flatMap { $0 as? StructDeclaration }.filter { $0.isEntityToken }.flatMap {
+    return tokens.compactMap { $0 as? StructDeclaration }.filter { $0.isEntityToken }.flatMap {
         [$0] + recursivelyExtractEntities(fromTokens: $0.children)
     }
 }
@@ -33,7 +33,12 @@ public struct GenerateCommand: CommandProtocol {
         let inputPath = Path(options.source)
         let outputPath = Path(options.output)
         let inputFiles = getInputFiles(inputPath)
-        let parsedFiles = inputFiles.map { Tokenizer(sourceFile: $0).tokenize() }.filter { $0.containsTorchEntity }
+        let parsedFiles: [FileRepresentation]
+        do {
+            parsedFiles = try inputFiles.map { try Tokenizer(sourceFile: $0).tokenize() }.filter { $0.containsTorchEntity }
+        } catch {
+            return Result.failure(TorchGeneratorError.unknownError(error))
+        }
         let allEntities = recursivelyExtractEntities(fromTokens: parsedFiles.flatMap { $0.declarations })
         let generator = Generator(allEntities: allEntities, manualEntities: options.manualEntities)
         let filesContent = generateFilesContent(parsedFiles, generator: generator, options: options)
@@ -58,9 +63,9 @@ public struct GenerateCommand: CommandProtocol {
 
     fileprivate func getInputFiles(_ path: Path) -> [SourceKittenFramework.File] {
         if path.isDirectory {
-            return path.find { $0.pathExtension == "swift"}.map { File(path: $0.standardRawValue) }.flatMap { $0 }
+            return path.find { $0.pathExtension == "swift"}.map { File(path: $0.standardRawValue) }.compactMap { $0 }
         } else {
-            return [File(path: path.standardRawValue)].flatMap { $0 }
+            return [File(path: path.standardRawValue)].compactMap { $0 }
         }
     }
 
