@@ -27,7 +27,7 @@ open class Database {
 extension Database {
     
     // Intentionally left `internal` because it is used in Utils and Save.
-    internal func getManagedObject<T: TorchEntity>(_ entity: inout T) -> T.ManagedObjectType {
+    internal func getManagedObject<T: TorchEntity>(_ entity: inout T, assignId: (inout T) -> T.IdType) -> T.ManagedObjectType {
         if let id = entity.id, let managedObject = realm.object(ofType: T.ManagedObjectType.self, forPrimaryKey: id) {
             entity.torch_update(managedObject: managedObject, database: self)
             return managedObject
@@ -48,7 +48,7 @@ extension Database {
         }
     }
     
-    fileprivate func assignId<T: TorchEntity>(_ entity: inout T) -> Int {
+    internal func assignId<T: TorchEntity>(_ entity: inout T) -> Int where T.IdType == Int {
         let metadata = getMetadata(String(describing: T.self))
         if let id = entity.id {
             metadata.lastAssignedId = max(metadata.lastAssignedId, id)
@@ -56,6 +56,16 @@ extension Database {
         } else {
             let id = metadata.lastAssignedId + 1
             metadata.lastAssignedId = id
+            entity.id = id
+            return id
+        }
+    }
+
+    internal func assignId<T: TorchEntity>(_ entity: inout T) -> String where T.IdType == String {
+        if let id = entity.id {
+            return id
+        } else {
+            let id = UUID().uuidString
             entity.id = id
             return id
         }

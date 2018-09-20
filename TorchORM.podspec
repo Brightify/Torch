@@ -30,5 +30,5 @@ Pod::Spec.new do |s|
   s.ios.pod_target_xcconfig         = { 'ENABLE_BITCODE' => 'YES' }
   s.watchos.pod_target_xcconfig         = { 'ENABLE_BITCODE' => 'YES' }
   s.tvos.pod_target_xcconfig         = { 'ENABLE_BITCODE' => 'YES' }
-  s.dependency 'RealmSwift', '~> 2.0'
+  s.dependency 'RealmSwift', '~> 3.0'
 end

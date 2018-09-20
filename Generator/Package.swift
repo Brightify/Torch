@@ -1,18 +1,26 @@
-// swift-tools-version:3.1
+// swift-tools-version:4.2
 import PackageDescription
 
 let package = Package(
     name: "TorchGenerator",
-    targets: [
-        Target(name: "TorchGeneratorFramework"),
-        Target(name: "torch_generator", dependencies: [
-            .Target(name: "TorchGeneratorFramework")]),
-        ],
+    products: [
+        .executable(name: "torch_generator", targets: ["torch_generator"]),
+        .library(name: "TorchGeneratorFramework", targets: ["TorchGeneratorFramework"])
+    ],
     dependencies: [
-        .Package(url: "https://github.com/jpsim/SourceKitten.git", versions: Version(0, 15, 0)..<Version(0, 22, .max)),
-        .Package(url: "https://github.com/nvzqz/FileKit.git", Version(5, 0, 0)),
-        ],
-    exclude: [
-        "Tests"
-    ]
+        .package(url: "https://github.com/jpsim/SourceKitten.git", from: "0.20.0"),
+        .package(url: "https://github.com/nvzqz/FileKit.git", from: "5.0.0"),
+        .package(url: "https://github.com/Carthage/Commandant.git", from: "0.12.0"),
+    ],
+    targets: [
+        .target(name: "TorchGeneratorFramework", dependencies: [
+            "SourceKittenFramework",
+            "FileKit"
+        ]),
+        .target(name: "torch_generator", dependencies: [
+            "TorchGeneratorFramework",
+            "Commandant"
+        ]),
+    ],
+    swiftLanguageVersions: [.v4, .v4_2]
 )

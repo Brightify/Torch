@@ -15,12 +15,24 @@ extension Database {
      If you do want to continue using the same object without loading it from database you can use `create` instead.
      */
     @discardableResult
-    public func save<T: TorchEntity>(_ entities: T...) -> Database {
+    public func save<T: TorchEntity>(_ entities: T...) -> Database where T.IdType == Int {
         return save(entities)
     }
 
     @discardableResult
-    public func save<T: TorchEntity>(_ entities: [T]) -> Database {
+    public func save<T: TorchEntity>(_ entities: T...) -> Database where T.IdType == String {
+        return save(entities)
+    }
+
+    @discardableResult
+    public func save<T: TorchEntity>(_ entities: [T]) -> Database where T.IdType == Int {
+        var mutableEntities = entities
+        create(&mutableEntities)
+        return self
+    }
+
+    @discardableResult
+    public func save<T: TorchEntity>(_ entities: [T]) -> Database where T.IdType == String {
         var mutableEntities = entities
         create(&mutableEntities)
         return self
@@ -30,15 +42,33 @@ extension Database {
      Same as `save` except it is possible to set entity new id. This allows to use the same object after it was created. If object has id this method acts as `save`.
      */
     @discardableResult
-    public func create<T: TorchEntity>(_ entity: inout T) -> Database {
+    public func create<T: TorchEntity>(_ entity: inout T) -> Database where T.IdType == Int {
         ensureTransaction {
-            _ = getManagedObject(&entity)
+            _ = getManagedObject(&entity, assignId: self.assignId)
         }
         return self
     }
 
     @discardableResult
-    public func create<T: TorchEntity>(_ entities: inout [T]) -> Database {
+    public func create<T: TorchEntity>(_ entity: inout T) -> Database where T.IdType == String {
+        ensureTransaction {
+            _ = getManagedObject(&entity, assignId: self.assignId)
+        }
+        return self
+    }
+
+    @discardableResult
+    public func create<T: TorchEntity>(_ entities: inout [T]) -> Database where T.IdType == Int {
+        ensureTransaction {
+            for i in entities.indices {
+                create(&entities[i])
+            }
+        }
+        return self
+    }
+
+    @discardableResult
+    public func create<T: TorchEntity>(_ entities: inout [T]) -> Database where T.IdType == String {
         ensureTransaction {
             for i in entities.indices {
                 create(&entities[i])

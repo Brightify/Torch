@@ -172,6 +172,7 @@ class RealmPerformanceTest: XCTestCase {
         numbers[0].value = 1
         numbers[1].value = 1
         numbers[2].value = 2
+        
         data.torch_numbers = List(numbers)
     }
 }

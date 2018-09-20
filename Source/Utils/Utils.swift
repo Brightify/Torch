@@ -84,40 +84,56 @@ public struct Utils {
         }
     }
     
-    public static func updateManagedValue<T: PropertyValueType, V: ValueTypeWrapper>(_ managedValue: inout List<V>, _ value: [T]) where V.ValueType == T {
-        managedValue.first?.realm?.delete(managedValue)
-        managedValue.removeAll()
-        value.map {
-            let wrapper = V()
-            wrapper.value = $0
-            return wrapper
-        }.forEach { managedValue.append($0) }
-    }
-    
-    public static func updateManagedValue<T: PropertyValueTypeConvertible, V: ValueTypeWrapper>
-        (_ managedValue: inout List<V>, _ value: [T]) where V.ValueType == T.ValueType {
-        managedValue.first?.realm?.delete(managedValue)
-        managedValue.removeAll()
-        value.map {
-            let wrapper = V()
-            wrapper.value = $0.toValue()
-            return wrapper
-            }.forEach { managedValue.append($0) }
-    }
-    
-    public static func updateManagedValue<T: TorchEntity>(_ managedValue: inout T.ManagedObjectType?, _ value: inout T?, _ database: Database) {
+//    public static func updateManagedValue<T: PropertyValueType, V: ValueTypeWrapper>(_ managedValue: inout List<V>, _ value: [T]) where V.ValueType == T {
+//        managedValue.realm?.delete(managedValue)
+//        managedValue.removeAll()
+//        value.map {
+//            let wrapper = V()
+//            wrapper.value = $0
+//            return wrapper
+//        }.forEach { managedValue.append($0) }
+//    }
+//
+//    public static func updateManagedValue<T: PropertyValueTypeConvertible, V: ValueTypeWrapper>
+//        (_ managedValue: inout List<V>, _ value: [T]) where V.ValueType == T.ValueType {
+//        managedValue.realm?.delete(managedValue)
+//        managedValue.removeAll()
+//        value.map {
+//            let wrapper = V()
+//            wrapper.value = $0.toValue()
+//            return wrapper
+//            }.forEach { managedValue.append($0) }
+//    }
+//
+    public static func updateManagedValue<T: TorchEntity>(_ managedValue: inout T.ManagedObjectType?, _ value: inout T?, _ database: Database) where T.IdType == Int {
         if var unwrapedValue = value {
-            managedValue = database.getManagedObject(&unwrapedValue)
+            managedValue = database.getManagedObject(&unwrapedValue, assignId: database.assignId)
+            value = unwrapedValue
+        } else {
+            managedValue = nil
+        }
+    }
+
+    public static func updateManagedValue<T: TorchEntity>(_ managedValue: inout T.ManagedObjectType?, _ value: inout T?, _ database: Database) where T.IdType == String {
+        if var unwrapedValue = value {
+            managedValue = database.getManagedObject(&unwrapedValue, assignId: database.assignId)
             value = unwrapedValue
         } else {
             managedValue = nil
         }
     }
     
-    public static func updateManagedValue<T: TorchEntity>(_ managedValue: inout List<T.ManagedObjectType>, _ value: inout [T], _ database: Database) {
+    public static func updateManagedValue<T: TorchEntity>(_ managedValue: inout List<T.ManagedObjectType>, _ value: inout [T], _ database: Database) where T.IdType == Int {
         managedValue.removeAll()
         for i in value.indices {
-            managedValue.append(database.getManagedObject(&value[i]))
+            managedValue.append(database.getManagedObject(&value[i], assignId: database.assignId))
+        }
+    }
+
+    public static func updateManagedValue<T: TorchEntity>(_ managedValue: inout List<T.ManagedObjectType>, _ value: inout [T], _ database: Database) where T.IdType == String {
+        managedValue.removeAll()
+        for i in value.indices {
+            managedValue.append(database.getManagedObject(&value[i], assignId: database.assignId))
         }
     }
 }

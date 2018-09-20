@@ -52,11 +52,11 @@ public struct Generator {
         builder += "}"
         builder += ""
         builder += generateManagedObject(entity, variables: variables)
-        let wrappers = generateWrappers(entity, variables: variables)
-        if !wrappers.code.isEmpty {
-            builder += ""
-            builder += wrappers
-        }
+//        let wrappers = generateWrappers(entity, variables: variables)
+//        if !wrappers.code.isEmpty {
+//            builder += ""
+//            builder += wrappers
+//        }
         return builder
     }
 
@@ -162,25 +162,25 @@ public struct Generator {
         return builder
     }
 
-    private func generateWrappers(_ entity: StructDeclaration, variables: [InstanceVariable]) -> CodeBuilder {
-        var builder = CodeBuilder()
-        var first = true
-        for variable in variables where isArrayWithValues(variable) || (isValueConvertible(variable) && variable.isArray) {
-            if !first {
-                builder += ""
-            } else {
-                first = false
-            }
-            builder += "\(entity.accessibility.sourceName) class \(getWrapperName(entity.name, variable.name)): RealmSwift.Object, Torch.ValueTypeWrapper {"
-            if isValueConvertible(variable) {
-                builder.nest("@objc dynamic var value = \(variable.rawType).getDefaultValue().toValue()")
-            } else {
-                 builder.nest("@objc dynamic var value = \(variable.rawType)()")
-            }
-            builder += "}"
-        }
-        return builder
-    }
+//    private func generateWrappers(_ entity: StructDeclaration, variables: [InstanceVariable]) -> CodeBuilder {
+//        var builder = CodeBuilder()
+//        var first = true
+//        for variable in variables where isArrayWithValues(variable) || (isValueConvertible(variable) && variable.isArray) {
+//            if !first {
+//                builder += ""
+//            } else {
+//                first = false
+//            }
+//            builder += "\(entity.accessibility.sourceName) class \(getWrapperName(entity.name, variable.name)): RealmSwift.Object, Torch.ValueTypeWrapper {"
+//            if isValueConvertible(variable) {
+//                builder.nest("@objc dynamic var value = \(variable.rawType).getDefaultValue().toValue()")
+//            } else {
+//                 builder.nest("@objc dynamic var value = \(variable.rawType)()")
+//            }
+//            builder += "}"
+//        }
+//        return builder
+//    }
 
     private func isTorchEntity(_ variable: InstanceVariable) -> Bool {
         return allEntities.contains(variable.rawType) || manualEntities.contains(variable.rawType)

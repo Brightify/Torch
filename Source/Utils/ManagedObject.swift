@@ -7,6 +7,7 @@
 //
 
 public protocol ManagedObject: AnyObject {
-    
-    var id: Int { get set }
+    associatedtype IdType: TorchEntityId
+
+    var id: IdType { get set }
 }
