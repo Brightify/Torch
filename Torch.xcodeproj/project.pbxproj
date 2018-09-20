@@ -500,7 +500,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-TorchTests/Pods-TorchTests-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-TorchTests/Pods-TorchTests-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
 				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
 			);
@@ -511,7 +511,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TorchTests/Pods-TorchTests-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-TorchTests/Pods-TorchTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		DC49D2401D42BF2800EECA2F /* Generate extensions */ = {
