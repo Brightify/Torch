@@ -9,7 +9,7 @@ DEPENDENCIES:
   - RealmSwift (~> 2.0)
 
 SPEC REPOS:
-  https://github.com/cocoapods/specs.git:
+  https://github.com/CocoaPods/Specs.git:
     - Realm
     - RealmSwift
 
@@ -17,6 +17,6 @@ SPEC CHECKSUMS:
   Realm: 0ef72b837fb67e9f4b098bac771ddd72c7fdbb69
   RealmSwift: 07a9ae0505091eda6b2ee7c190c3786d6e90a7b0
 
-PODFILE CHECKSUM: d16086f0dc9b798a6c9a93682ef658141956d416
+PODFILE CHECKSUM: 7ef532fb90238b8e5fef8c892e531a3d1b5de82d
 
-COCOAPODS: 1.6.0.beta.1
+COCOAPODS: 1.10.0.beta.2

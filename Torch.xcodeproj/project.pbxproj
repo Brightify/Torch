@@ -445,6 +445,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 			);
 			mainGroup = 183D03F11C4691C600EBAEF3;
@@ -740,6 +741,7 @@
 				PRODUCT_NAME = Torch;
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
 				TVOS_DEPLOYMENT_TARGET = 9.0;
 			};
 			name = Debug;
@@ -766,6 +768,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = org.brightify.Torch;
 				PRODUCT_NAME = Torch;
 				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
 				TVOS_DEPLOYMENT_TARGET = 9.0;
 			};
 			name = Release;
@@ -785,6 +788,7 @@
 				"MACOSX_DEPLOYMENT_TARGET[arch=*]" = 10.9;
 				PRODUCT_BUNDLE_IDENTIFIER = org.brightify.TorchTests;
 				PRODUCT_NAME = TorchTests;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
@@ -802,6 +806,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				PRODUCT_BUNDLE_IDENTIFIER = org.brightify.TorchTests;
 				PRODUCT_NAME = TorchTests;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
 		};
