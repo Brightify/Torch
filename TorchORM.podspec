@@ -14,11 +14,11 @@ Pod::Spec.new do |s|
       :tag => s.version.to_s
   }
 
-  s.ios.deployment_target       = '8.0'
-  s.osx.deployment_target       = '10.9'
-  s.watchos.deployment_target   = '2.0'
-  s.tvos.deployment_target      = '9.0'
-  s.swift_version               = '4.0'
+  s.ios.deployment_target     = '9.0'
+  s.osx.deployment_target     = '10.9'
+  s.watchos.deployment_target = '2.0'
+  s.tvos.deployment_target    = '9.0'
+  s.swift_version               = '5.0'
   s.source_files                = ['Source/**/*.swift']
   s.preserve_paths              = ['Generator/**/*', 'run', 'build_generator']
   s.prepare_command             = <<-CMD
@@ -27,8 +27,9 @@ Pod::Spec.new do |s|
                                 CMD
   s.module_name                 = 'Torch'
   s.requires_arc                = true
-  s.ios.pod_target_xcconfig         = { 'ENABLE_BITCODE' => 'YES' }
-  s.watchos.pod_target_xcconfig         = { 'ENABLE_BITCODE' => 'YES' }
-  s.tvos.pod_target_xcconfig         = { 'ENABLE_BITCODE' => 'YES' }
+  s.pod_target_xcconfig = {
+    'ENABLE_BITCODE' => 'YES'
+  }
+  s.dependency 'Realm', '>= 2.0'
   s.dependency 'RealmSwift', '>= 2.0'
 end
