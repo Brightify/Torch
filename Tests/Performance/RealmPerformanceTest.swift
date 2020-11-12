@@ -134,7 +134,7 @@ class RealmPerformanceTest: XCTestCase {
             let data = Torch_OtherData()
             data.id = $0
             data.torch_text = String($0)
-            realm.add(data, update: update)
+            realm.add(data, update: update ? .error : .all)
         }
     }
     
@@ -172,6 +172,7 @@ class RealmPerformanceTest: XCTestCase {
         numbers[0].value = 1
         numbers[1].value = 1
         numbers[2].value = 2
-        data.torch_numbers = List(numbers)
+        data.torch_numbers = List()
+        data.torch_numbers.append(objectsIn: numbers)
     }
 }

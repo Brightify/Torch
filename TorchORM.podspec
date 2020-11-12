@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = "TorchORM"
-  s.version          = "0.3.1"
+  s.version          = "0.4.0"
   s.summary          = "Torch - Boilerplate-free CoreData bridge."
   s.description      = <<-DESC
                         Torch is an ORM library allowing you to use structs instead of classes for your models.
@@ -30,5 +30,5 @@ Pod::Spec.new do |s|
   s.ios.pod_target_xcconfig         = { 'ENABLE_BITCODE' => 'YES' }
   s.watchos.pod_target_xcconfig         = { 'ENABLE_BITCODE' => 'YES' }
   s.tvos.pod_target_xcconfig         = { 'ENABLE_BITCODE' => 'YES' }
-  s.dependency 'RealmSwift', '~> 2.0'
+  s.dependency 'RealmSwift', '>= 2.0'
 end

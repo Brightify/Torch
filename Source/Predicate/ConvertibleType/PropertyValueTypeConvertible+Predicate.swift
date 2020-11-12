@@ -8,11 +8,11 @@
 
 public extension Property where T: PropertyValueTypeConvertible {
     
-    public func equalTo(_ value: T) -> Predicate<PARENT> {
+    func equalTo(_ value: T) -> Predicate<PARENT> {
         return Predicate.singleValuePredicate(name, value: value.toValue().toAnyObject(), operatorString: "==")
     }
     
-    public func notEqualTo(_ value: T) -> Predicate<PARENT> {
+    func notEqualTo(_ value: T) -> Predicate<PARENT> {
         return Predicate.singleValuePredicate(name, value: value.toValue().toAnyObject(), operatorString: "!=")
     }
 }

@@ -8,7 +8,7 @@
 
 public extension Property where T: PropertyOptionalType, T.Wrapped: PropertyValueTypeConvertible, T.Wrapped.ValueType: PropertyComparableValueType {
     
-    public func lessThan(_ value: T) -> Predicate<PARENT> {
+    func lessThan(_ value: T) -> Predicate<PARENT> {
         if let value = value.value {
             return Predicate.singleValuePredicate(name, value: value.toValue().toAnyObject(), operatorString: "<")
         } else {
@@ -16,7 +16,7 @@ public extension Property where T: PropertyOptionalType, T.Wrapped: PropertyValu
         }
     }
     
-    public func lessThanOrEqualTo(_ value: T) -> Predicate<PARENT> {
+    func lessThanOrEqualTo(_ value: T) -> Predicate<PARENT> {
         if let value = value.value {
             return Predicate.singleValuePredicate(name, value: value.toValue().toAnyObject(), operatorString: "<=")
         } else {
@@ -24,7 +24,7 @@ public extension Property where T: PropertyOptionalType, T.Wrapped: PropertyValu
         }
     }
     
-    public func greaterThanOrEqualTo(_ value: T) -> Predicate<PARENT> {
+    func greaterThanOrEqualTo(_ value: T) -> Predicate<PARENT> {
         if let value = value.value {
             return Predicate.singleValuePredicate(name, value: value.toValue().toAnyObject(), operatorString: ">=")
         } else {
@@ -32,7 +32,7 @@ public extension Property where T: PropertyOptionalType, T.Wrapped: PropertyValu
         }
     }
     
-    public func greaterThan(_ value: T) -> Predicate<PARENT> {
+    func greaterThan(_ value: T) -> Predicate<PARENT> {
         if let value = value.value {
             return Predicate.singleValuePredicate(name, value: value.toValue().toAnyObject(), operatorString: ">")
         } else {

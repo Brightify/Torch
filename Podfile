@@ -1,9 +1,9 @@
-source 'https://github.com/CocoaPods/Specs.git'
+source 'https://cdn.cocoapods.org/'
 platform :osx, '10.9'
 use_frameworks!
 
 def realm
-	pod 'RealmSwift', '~> 2.0'
+	pod 'RealmSwift', '>= 3'
 end
 
 target "Torch" do

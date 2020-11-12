@@ -8,7 +8,7 @@
 
 public extension Property where T: PropertyOptionalType, T.Wrapped: PropertyValueTypeConvertible {
     
-    public func equalTo(_ value: T) -> Predicate<PARENT> {
+    func equalTo(_ value: T) -> Predicate<PARENT> {
         if let value = value.value {
             return Predicate.singleValuePredicate(name, value: value.toValue().toAnyObject(), operatorString: "==")
         } else {
@@ -16,7 +16,7 @@ public extension Property where T: PropertyOptionalType, T.Wrapped: PropertyValu
         }
     }
     
-    public func notEqualTo(_ value: T) -> Predicate<PARENT> {
+    func notEqualTo(_ value: T) -> Predicate<PARENT> {
         if let value = value.value {
             return Predicate.singleValuePredicate(name, value: value.toValue().toAnyObject(), operatorString: "!=")
         } else {

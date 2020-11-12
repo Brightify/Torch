@@ -8,19 +8,19 @@
 
 public extension Property where T: PropertyValueTypeConvertible, T.ValueType: PropertyComparableValueType {
     
-    public func lessThan(_ value: T) -> Predicate<PARENT> {
+    func lessThan(_ value: T) -> Predicate<PARENT> {
         return Predicate.singleValuePredicate(name, value: value.toValue().toAnyObject(), operatorString: "<")
     }
     
-    public func lessThanOrEqualTo(_ value: T) -> Predicate<PARENT> {
+    func lessThanOrEqualTo(_ value: T) -> Predicate<PARENT> {
         return Predicate.singleValuePredicate(name, value: value.toValue().toAnyObject(), operatorString: "<=")
     }
     
-    public func greaterThanOrEqualTo(_ value: T) -> Predicate<PARENT> {
+    func greaterThanOrEqualTo(_ value: T) -> Predicate<PARENT> {
         return Predicate.singleValuePredicate(name, value: value.toValue().toAnyObject(), operatorString: ">=")
     }
     
-    public func greaterThan(_ value: T) -> Predicate<PARENT> {
+    func greaterThan(_ value: T) -> Predicate<PARENT> {
         return Predicate.singleValuePredicate(name, value: value.toValue().toAnyObject(), operatorString: ">")
     }
 }

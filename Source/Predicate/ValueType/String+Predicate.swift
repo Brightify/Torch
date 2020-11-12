@@ -31,47 +31,47 @@
     }
 
     public extension Property where T == String {
-        public func hasPrefix(_ value: T, options: StringComparsionOptions = []) -> Predicate<PARENT> {
+        func hasPrefix(_ value: T, options: StringComparsionOptions = []) -> Predicate<PARENT> {
             return Predicate.singleValuePredicate(name, value: value.toAnyObject(), operatorString: "BEGINSWITH\(options)")
         }
 
-        public func hasSuffix(_ value: T, options: StringComparsionOptions = []) -> Predicate<PARENT> {
+        func hasSuffix(_ value: T, options: StringComparsionOptions = []) -> Predicate<PARENT> {
             return Predicate.singleValuePredicate(name, value: value.toAnyObject(), operatorString: "ENDSWITH\(options)")
         }
 
-        public func contains(_ value: T, options: StringComparsionOptions = []) -> Predicate<PARENT> {
+        func contains(_ value: T, options: StringComparsionOptions = []) -> Predicate<PARENT> {
             return Predicate.singleValuePredicate(name, value: value.toAnyObject(), operatorString: "CONTAINS\(options)")
         }
 
-        public func like(_ value: T, options: StringComparsionOptions = []) -> Predicate<PARENT> {
+        func like(_ value: T, options: StringComparsionOptions = []) -> Predicate<PARENT> {
             return Predicate.singleValuePredicate(name, value: value.toAnyObject(), operatorString: "LIKE\(options)")
         }
 
-        public func matches(regex: T, options: StringComparsionOptions = []) -> Predicate<PARENT> {
+        func matches(regex: T, options: StringComparsionOptions = []) -> Predicate<PARENT> {
             return Predicate.singleValuePredicate(name, value: regex.toAnyObject(), operatorString: "MATCHES\(options)")
         }
 
-        public func equalTo(_ value: T, options: StringComparsionOptions) -> Predicate<PARENT> {
+        func equalTo(_ value: T, options: StringComparsionOptions) -> Predicate<PARENT> {
             return Predicate.singleValuePredicate(name, value: value.toAnyObject(), operatorString: "==\(options)")
         }
 
-        public func notEqualTo(_ value: T, options: StringComparsionOptions) -> Predicate<PARENT> {
+        func notEqualTo(_ value: T, options: StringComparsionOptions) -> Predicate<PARENT> {
             return Predicate.singleValuePredicate(name, value: value.toAnyObject(), operatorString: "!=\(options)")
         }
 
-        public func lessThan(_ value: T, options: StringComparsionOptions) -> Predicate<PARENT> {
+        func lessThan(_ value: T, options: StringComparsionOptions) -> Predicate<PARENT> {
             return Predicate.singleValuePredicate(name, value: value.toAnyObject(), operatorString: "<\(options)")
         }
 
-        public func lessThanOrEqualTo(_ value: T, options: StringComparsionOptions) -> Predicate<PARENT> {
+        func lessThanOrEqualTo(_ value: T, options: StringComparsionOptions) -> Predicate<PARENT> {
             return Predicate.singleValuePredicate(name, value: value.toAnyObject(), operatorString: "<=\(options)")
         }
 
-        public func greaterThanOrEqualTo(_ value: T, options: StringComparsionOptions) -> Predicate<PARENT> {
+        func greaterThanOrEqualTo(_ value: T, options: StringComparsionOptions) -> Predicate<PARENT> {
             return Predicate.singleValuePredicate(name, value: value.toAnyObject(), operatorString: ">=\(options)")
         }
 
-        public func greaterThan(_ value: T, options: StringComparsionOptions) -> Predicate<PARENT> {
+        func greaterThan(_ value: T, options: StringComparsionOptions) -> Predicate<PARENT> {
             return Predicate.singleValuePredicate(name, value: value.toAnyObject(), operatorString: ">\(options)")
         }
     }

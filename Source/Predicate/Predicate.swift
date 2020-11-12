@@ -57,15 +57,15 @@ public struct Predicate<PARENT: TorchEntity> {
 
 public extension Predicate {
     
-    public func not() -> Predicate {
+    func not() -> Predicate {
         return Predicate.negatePredicate(self)
     }
     
-    public func or(_ other: Predicate) -> Predicate {
+    func or(_ other: Predicate) -> Predicate {
         return Predicate.compoundPredicate(self, second: other, operatorString: "||")
     }
     
-    public func and(_ other: Predicate) -> Predicate {
+    func and(_ other: Predicate) -> Predicate {
         return Predicate.compoundPredicate(self, second: other, operatorString: "&&")
     }
 }
